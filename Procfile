@@ -1,0 +1,1 @@
+web: gunicorn MyInsurance.wsgi --log-file -

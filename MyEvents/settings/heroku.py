@@ -1,6 +1,6 @@
 """
 Set this environment variable
-DJANGO_SETTINGS_MODULE=MyInsurance.settings.heroku
+DJANGO_SETTINGS_MODULE=MyEvents.settings.heroku
 """
 
 import dj_database_url
