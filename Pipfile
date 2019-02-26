@@ -10,6 +10,7 @@ django = "==2.1.7"
 djangorestframework = "==3.9.1"
 django-heroku = "*"
 flake8 = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
