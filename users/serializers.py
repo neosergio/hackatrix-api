@@ -1,5 +1,17 @@
 from rest_framework import serializers
 
+from .models import User
+
+
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta(object):
+        model = User
+        fields = ('id',
+                  'email',
+                  'is_staff',
+                  'is_active')
+
 
 class UserAuthenticationSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=100)

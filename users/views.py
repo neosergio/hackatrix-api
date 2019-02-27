@@ -5,6 +5,9 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
+from .models import User
+from .serializers import UserAuthenticationSerializer, UserSerializer
+
 
 class CustomAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
@@ -26,6 +29,21 @@ class CustomAuthToken(ObtainAuthToken):
                 'email': user.email,
             }]
         })
+
+
+@api_view(['POST', ])
+@permission_classes((permissions.AllowAny, ))
+def user_create(request):
+    """
+    Create user
+    """
+    serializer = UserAuthenticationSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        email = serializer.validated_data['email']
+        password = serializer.validated_data['password']
+        user = User.objects.create_user(email=email, password=password)
+        serializer = UserSerializer(user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(['POST', ])
