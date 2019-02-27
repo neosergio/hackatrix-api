@@ -34,9 +34,14 @@ DEFAULT_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
+    'import_export',
 ]
 
-INSTALLED_APPS = DEFAULT_APPS
+PROJECT_APPS = [
+    'users.apps.UsersConfig',
+]
+
+INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -68,6 +73,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'MyEvents.wsgi.application'
 
+# USER MODEL
+AUTH_USER_MODEL = "users.User"
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
