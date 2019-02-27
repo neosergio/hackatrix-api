@@ -1,5 +1,8 @@
+from django.contrib.auth import logout
+from rest_framework import permissions, status
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
 
@@ -23,3 +26,13 @@ class CustomAuthToken(ObtainAuthToken):
                 'email': user.email,
             }]
         })
+
+
+@api_view(['POST', ])
+@permission_classes((permissions.IsAuthenticated, ))
+def user_logout(request):
+    """
+    Logout current user
+    """
+    logout(request)
+    return Response(status=status.HTTP_202_ACCEPTED)
