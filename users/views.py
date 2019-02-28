@@ -29,6 +29,7 @@ class CustomAuthToken(ObtainAuthToken):
                 'token': token.key,
                 'user_id': user.pk,
                 'email': user.email,
+                'is_validated': user.is_validated,
             }]
         })
 
@@ -44,7 +45,7 @@ def user_create(request):
         email = serializer.validated_data['email']
         password = serializer.validated_data['password']
         user = User.objects.create_user(email=email, password=password)
-        user.validation_code()
+        user.generate_validation_code()
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
@@ -60,12 +61,14 @@ def user_logout(request):
 
 
 @api_view(['GET', ])
+@permission_classes((permissions.AllowAny, ))
 @renderer_classes((StaticHTMLRenderer,))
-def user_validated(request, user_uuid):
+def user_validation(request, user_uuid):
     """
     Confirms user creation
     """
     user = get_object_or_404(User, validation_code=user_uuid)
     user.is_validated = True
+    user.save()
     data = "<h1>Email validado, retorne a la aplicación.</h1>"
     return Response(data)

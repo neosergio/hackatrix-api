@@ -40,7 +40,8 @@ class UserCustomAdmin(ImportExportMixin, BaseUserAdmin):
                                     'user_permissions')}),
         ('Security options', {'fields': ('is_password_reset_required',
                                          'reset_password_code',
-                                         'temporary_password')}),
+                                         'temporary_password',
+                                         'validation_code')}),
         ('History', {'fields': ('date_joined', 'last_login')})
     )
     add_fieldsets = (
