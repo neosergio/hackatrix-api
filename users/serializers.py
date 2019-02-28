@@ -10,7 +10,8 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id',
                   'email',
                   'is_staff',
-                  'is_active')
+                  'is_active',
+                  'is_validated')
 
 
 class UserAuthenticationSerializer(serializers.Serializer):

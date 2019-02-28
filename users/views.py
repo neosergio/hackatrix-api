@@ -1,9 +1,11 @@
 from django.contrib.auth import logout
+from django.shortcuts import get_object_or_404
 from rest_framework import permissions, status
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, renderer_classes
 from rest_framework.response import Response
+from rest_framework.renderers import StaticHTMLRenderer
 
 from .models import User
 from .serializers import UserAuthenticationSerializer, UserSerializer
@@ -42,6 +44,7 @@ def user_create(request):
         email = serializer.validated_data['email']
         password = serializer.validated_data['password']
         user = User.objects.create_user(email=email, password=password)
+        user.validation_code()
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
@@ -54,3 +57,15 @@ def user_logout(request):
     """
     logout(request)
     return Response(status=status.HTTP_202_ACCEPTED)
+
+
+@api_view(['GET', ])
+@renderer_classes((StaticHTMLRenderer,))
+def user_validated(request, user_uuid):
+    """
+    Confirms user creation
+    """
+    user = get_object_or_404(User, validation_code=user_uuid)
+    user.is_validated = True
+    data = "<h1>Email validado, retorne a la aplicación.</h1>"
+    return Response(data)
