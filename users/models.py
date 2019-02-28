@@ -28,6 +28,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_password_reset_required = models.BooleanField(default=False)
     reset_password_code = models.UUIDField(default=None, blank=True, null=True)
     temporary_password = models.CharField(max_length=4, blank=True, null=True)
+    validation_code = models.UUIDField(default=None, blank=True, null=True)
 
     objects = UserManager()
 
@@ -54,6 +55,15 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.temporary_password = get_random_string(4, "hacktrx23456789")
         self.save()
         return self.reset_password_code
+
+    def generate_validation_code(self):
+        """
+        Returns UUID string to be sent by email when user account is created
+        """
+        uuid_code = uuid4()
+        self.validation_code = str(uuid_code)
+        self.save()
+        return self.validation_code
 
 
 @receiver(models.signals.post_save, sender=settings.AUTH_USER_MODEL)
