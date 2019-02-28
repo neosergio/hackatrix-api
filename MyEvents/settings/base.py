@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from utils.environment import env
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -140,3 +141,12 @@ REST_FRAMEWORK = {
     ),
     'PAGE_SIZE': 30
 }
+
+# Email
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = env('EMAIL_HOST', '')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', '')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', '')
+EMAIL_PORT = env('EMAIL_PORT', '')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', '')

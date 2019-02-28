@@ -4,6 +4,8 @@ from .views import CustomAuthToken, user_logout, user_create
 from .views import user_validation
 
 
+app_name = 'users'
+
 urlpatterns = [
     path('authenticate/', CustomAuthToken.as_view()),
     path('create/', user_create, name='user_create'),
