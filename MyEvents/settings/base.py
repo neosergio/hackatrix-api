@@ -40,6 +40,7 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'import_export',
+    'rest_framework_swagger',
 ]
 
 PROJECT_APPS = [
@@ -150,3 +151,17 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', '')
 EMAIL_HOST_USER = env('EMAIL_HOST_USER', '')
 EMAIL_PORT = env('EMAIL_PORT', '')
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', '')
+
+# Swagger settings
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'basic': {
+            'type': 'basic'
+        }
+    },
+    'JSON_EDITOR': True,
+    'OPERATIONS_SORTER': 'alpha',
+    'SHOW_REQUEST_HEADERS': True,
+    'LOGIN_URL': 'rest_framework:login',
+    'LOGOUT_URL': 'rest_framework:logout',
+}

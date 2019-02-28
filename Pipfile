@@ -12,6 +12,8 @@ django-heroku = "*"
 flake8 = "*"
 gunicorn = "*"
 django-import-export = "*"
+django-rest-swagger = "==2.2.0"
+pyyaml = "*"
 
 [requires]
 python_version = "3.7"

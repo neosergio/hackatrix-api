@@ -41,7 +41,7 @@ class CustomAuthToken(ObtainAuthToken):
 @permission_classes((permissions.AllowAny, ))
 def user_create(request):
     """
-    Create user
+    Creates a user account using email and password
     """
     serializer = UserAuthenticationSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):

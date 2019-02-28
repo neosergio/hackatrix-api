@@ -16,9 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include
 from django.urls import path
+from rest_framework_swagger.views import get_swagger_view
+
+
+schema_view = get_swagger_view(title='Hackatrix API')
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('swagger/', schema_view),
     path('users/', include('users.urls')),
 ]
