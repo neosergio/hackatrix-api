@@ -14,10 +14,6 @@ class UserSerializer(serializers.ModelSerializer):
                   'is_validated')
 
 
-class UserEmailSerializer(serializers.Serializer):
-    email = serializers.CharField(max_length=100)
-
-
 class UserAuthenticationSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=100)
     password = serializers.CharField(max_length=100)
@@ -26,3 +22,12 @@ class UserAuthenticationSerializer(serializers.Serializer):
 class UserAuthenticationResponseSerializer(serializers.Serializer):
     token = serializers.CharField(max_length=100)
     user_id = serializers.IntegerField()
+
+
+class UserEmailSerializer(serializers.Serializer):
+    email = serializers.CharField(max_length=100)
+
+
+class UserUpdatePasswordSerializer(serializers.Serializer):
+    current_password = serializers.CharField(max_length=100)
+    new_password = serializers.CharField(max_length=100)

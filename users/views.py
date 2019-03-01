@@ -7,11 +7,13 @@ from rest_framework import permissions, status
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.decorators import api_view, permission_classes, renderer_classes
+from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.renderers import StaticHTMLRenderer
 
 from .models import User
 from .serializers import UserAuthenticationSerializer, UserSerializer, UserEmailSerializer
+from .serializers import UserUpdatePasswordSerializer
 
 
 class CustomAuthToken(ObtainAuthToken):
@@ -84,6 +86,27 @@ def user_logout(request):
     return Response(status=status.HTTP_202_ACCEPTED)
 
 
+@api_view(['PATCH', ])
+@permission_classes((permissions.IsAuthenticated, ))
+def user_password_update(request):
+    """
+    Updates user password
+    """
+    serializer = UserUpdatePasswordSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        current_password = serializer.validated_data['current_password']
+        new_password = serializer.validated_data['new_password']
+        user = request.user
+        if user.check_password(current_password):
+            user.set_password(new_password)
+            user.is_password_reset_required = False
+            user.save()
+            serializer = UserSerializer(user)
+            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+        else:
+            return ValidationError('Password actual incorrecto.')
+
+
 @api_view(['POST', ])
 @permission_classes((permissions.AllowAny, ))
 def user_password_recovery_request(request):
@@ -91,7 +114,6 @@ def user_password_recovery_request(request):
     Request user password recovery
     """
     serializer = UserEmailSerializer(data=request.data)
-    print(serializer)
     if serializer.is_valid(raise_exception=True):
         email = serializer.validated_data['email']
         user = get_object_or_404(User, email=email)
