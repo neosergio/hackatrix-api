@@ -123,6 +123,24 @@ def user_password_recovery_request(request):
 @api_view(['GET', ])
 @permission_classes((permissions.AllowAny, ))
 @renderer_classes((StaticHTMLRenderer,))
+def user_password_recovery_request_confirmation(request, user_uuid):
+    """
+    Confirms password recovery action
+    """
+    if request.method == 'GET':
+        user = get_object_or_404(User, reset_password_code=user_uuid)
+        user.set_password(user.temporary_password)
+        user.reset_password_code = None
+        user.temporary_password = None
+        user.is_password_reset_required = True
+        user.save()
+        data = "<h1>Solicitud de reestablecimiento de password confirmada.</h1>"
+        return Response(data)
+
+
+@api_view(['GET', ])
+@permission_classes((permissions.AllowAny, ))
+@renderer_classes((StaticHTMLRenderer,))
 def user_validation(request, user_uuid):
     """
     Confirms user creation
