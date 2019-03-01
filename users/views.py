@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from rest_framework.renderers import StaticHTMLRenderer
 
 from .models import User
-from .serializers import UserAuthenticationSerializer, UserSerializer
+from .serializers import UserAuthenticationSerializer, UserSerializer, UserEmailSerializer
 
 
 class CustomAuthToken(ObtainAuthToken):
@@ -82,6 +82,42 @@ def user_logout(request):
     """
     logout(request)
     return Response(status=status.HTTP_202_ACCEPTED)
+
+
+@api_view(['POST', ])
+@permission_classes((permissions.AllowAny, ))
+def user_password_recovery_request(request):
+    """
+    Request user password recovery
+    """
+    serializer = UserEmailSerializer(data=request.data)
+    print(serializer)
+    if serializer.is_valid(raise_exception=True):
+        email = serializer.validated_data['email']
+        user = get_object_or_404(User, email=email)
+        user.generate_reset_password_code()
+
+        subject = "[Hackatrix] Password nuevo solicitado"
+        draft_message = """
+        Una solicitud de restablecimiento de password ha sido recibida.
+            Su password temporal es: %s
+            Confirme su solicitud dando clic en el siguiente enlace: %s
+        Si usted no solicito ningún restablecimiento, ignore este correo."""
+
+        current_site = Site.objects.get_current()
+        user_reset_confirmation_api = reverse("users:user_password_recovery_request")
+        reset_url = current_site.domain + user_reset_confirmation_api + user.reset_password_code
+        message = draft_message % (user.temporary_password, reset_url)
+
+        try:
+            send_email = EmailMessage(subject, message, to=[user.email])
+            send_email.send()
+        except Exception as e:
+            print(e)
+            content = {'detail: Problemas con el envio de correo electronico'}
+            return Response(content, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+
+        return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['GET', ])

@@ -14,6 +14,10 @@ class UserSerializer(serializers.ModelSerializer):
                   'is_validated')
 
 
+class UserEmailSerializer(serializers.Serializer):
+    email = serializers.CharField(max_length=100)
+
+
 class UserAuthenticationSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=100)
     password = serializers.CharField(max_length=100)
