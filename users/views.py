@@ -11,23 +11,24 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.renderers import StaticHTMLRenderer
 
-from .models import User
-from .serializers import UserAuthenticationSerializer, UserSerializer, UserEmailSerializer
-from .serializers import UserUpdatePasswordSerializer
+from .models import User, UserDevice
+from .serializers import UserAuthenticationSerializer, UserSerializer, UserEmailSerializer, UserLogoutSerializer
+from .serializers import UserCreationSerializer, UserUpdatePasswordSerializer
 
 
 class CustomAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         """
-        Authenticate user with provided credentials
-        ---
-        serializer: users.serializers.py.UserAuthenticationSerializer
-        response_serializer: users.serializers.py.UserAuthenticationResponseSerializer
+        Authenticate user with provided credentials and register user device
         """
-        serializer = self.serializer_class(data=request.data,
-                                           context={'request': request})
+        serializer = UserAuthenticationSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
+
+        device_code = serializer.validated_data['device_code']
+        device_os = serializer.validated_data['device_os']
+        UserDevice.objects.get_or_create(user=user, operating_system=device_os, code=device_code)
+
         token, created = Token.objects.get_or_create(user=user)
         return Response({
             "data": [{
@@ -45,7 +46,7 @@ def user_create(request):
     """
     Creates a user account using email and password
     """
-    serializer = UserAuthenticationSerializer(data=request.data)
+    serializer = UserCreationSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         email = serializer.validated_data['email']
         password = serializer.validated_data['password']
@@ -82,8 +83,13 @@ def user_logout(request):
     """
     Logout current user
     """
-    logout(request)
-    return Response(status=status.HTTP_202_ACCEPTED)
+    serializer = UserLogoutSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        code = serializer.validated_data['device_code']
+        device = UserDevice.objects.filter(code=code)
+        device.delete()
+        logout(request)
+        return Response(status=status.HTTP_202_ACCEPTED)
 
 
 @api_view(['PATCH', ])

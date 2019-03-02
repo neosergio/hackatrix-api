@@ -70,3 +70,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
+
+
+class UserDevice(models.Model):
+    user = models.ForeignKey(User, related_name='user_device', on_delete=models.CASCADE)
+    operating_system = models.CharField(max_length=10)
+    code = models.CharField(max_length=200, unique=True)
+
+    class Meta(object):
+        ordering = ['user']

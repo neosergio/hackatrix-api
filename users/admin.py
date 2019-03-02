@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from import_export.admin import ImportExportMixin
-from .models import User
+from .models import User, UserDevice
 
 
 class UserChangeForm(forms.ModelForm):
@@ -53,4 +53,9 @@ class UserCustomAdmin(ImportExportMixin, BaseUserAdmin):
     ordering = ('email',)
 
 
+class UserDeviceAdmin(admin.ModelAdmin):
+    list_display = ('user', 'operating_system', 'code')
+
+
 admin.site.register(User, UserCustomAdmin)
+admin.site.register(UserDevice, UserDeviceAdmin)
