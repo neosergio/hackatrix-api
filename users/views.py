@@ -77,6 +77,21 @@ def user_create(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
+@api_view(['GET', ])
+@permission_classes((permissions.IsAuthenticated, ))
+def user_profile(request):
+    """
+    Returns user detail
+    """
+    print(request.GET)
+    if request.GET.get('id'):
+        user = get_object_or_404(User, pk=request.GET.get('id'))
+    else:
+        user = request.user
+    serializer = UserSerializer(user)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 @api_view(['POST', ])
 @permission_classes((permissions.IsAuthenticated, ))
 def user_logout(request):
