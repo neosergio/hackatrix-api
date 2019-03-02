@@ -1,0 +1,26 @@
+[{
+	"model": "users.user",
+	"pk": 1,
+	"fields": {
+		"password": "pbkdf2_sha256$120000$II0L3VawyOTZ$59qpWu5UG8BeqqLDaCKDmeykmgMpIooybtOE1WuQquM=",
+		"last_login": "2019-03-02T15:14:59.561Z",
+		"is_superuser": true,
+		"email": "sinfante@belatrixsf.com",
+		"first_name": "",
+		"last_name": "",
+		"full_name": null,
+		"date_joined": "2019-02-28T02:57:20.663Z",
+		"is_staff": true,
+		"is_jury": false,
+		"is_moderator": false,
+		"is_active": true,
+		"is_blocked": false,
+		"is_validated": true,
+		"is_password_reset_required": false,
+		"reset_password_code": null,
+		"temporary_password": null,
+		"validation_code": "cb9464fb-6db6-4c85-a42d-7215ab4323a8",
+		"groups": [],
+		"user_permissions": []
+	}
+}]
