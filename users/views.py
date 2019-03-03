@@ -13,7 +13,7 @@ from rest_framework.renderers import StaticHTMLRenderer
 
 from .models import User, UserDevice
 from .serializers import UserAuthenticationSerializer, UserSerializer, UserEmailSerializer, UserLogoutSerializer
-from .serializers import UserCreationSerializer, UserUpdatePasswordSerializer
+from .serializers import UserCreationSerializer, UserUpdatePasswordSerializer, UserUpdateProfileSerialier
 
 
 class CustomAuthToken(ObtainAuthToken):
@@ -83,13 +83,28 @@ def user_profile(request):
     """
     Returns user detail
     """
-    print(request.GET)
     if request.GET.get('id'):
         user = get_object_or_404(User, pk=request.GET.get('id'))
     else:
         user = request.user
     serializer = UserSerializer(user)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['PATCH', ])
+@permission_classes((permissions.IsAuthenticated, ))
+def user_profile_update(request):
+    """
+    Updates user profile
+    """
+    user = request.user
+    serializer = UserUpdateProfileSerialier(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        full_name = serializer.validated_data['full_name']
+        user.full_name = full_name
+        user.save()
+        serializer = UserSerializer(user)
+        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
 
 @api_view(['POST', ])
