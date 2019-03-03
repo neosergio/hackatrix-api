@@ -31,12 +31,12 @@ class CustomAuthToken(ObtainAuthToken):
 
         token, created = Token.objects.get_or_create(user=user)
         return Response({
-            "data": [{
+            "data": {
                 'token': token.key,
                 'user_id': user.pk,
                 'email': user.email,
                 'is_validated': user.is_validated,
-            }]
+            }
         })
 
 
