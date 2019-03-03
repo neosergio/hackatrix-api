@@ -44,6 +44,7 @@ THIRD_PARTY_APPS = [
 ]
 
 PROJECT_APPS = [
+    'events.apps.EventsConfig',
     'users.apps.UsersConfig',
 ]
 
