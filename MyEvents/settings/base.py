@@ -165,3 +165,8 @@ SWAGGER_SETTINGS = {
     'LOGIN_URL': 'rest_framework:login',
     'LOGOUT_URL': 'rest_framework:logout',
 }
+
+# Firebase cloud messaging
+FIREBASE_SERVER_KEY = env('FIREBASE_SERVER_KEY', '')
+FIREBASE_API_URL = env('FIREBASE_API_URL', '')
+TITLE_PUSH_NOTIFICATION = env('TITLE_PUSH_NOTIFICATION', '')
