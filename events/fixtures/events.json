@@ -1,0 +1,64 @@
+[{
+	"model": "events.location",
+	"pk": 1,
+	"fields": {
+		"name": "Belatrix Lima",
+		"latitude": "-12.0999467",
+		"longitude": "-77.0189778"
+	}
+}, {
+	"model": "events.location",
+	"pk": 2,
+	"fields": {
+		"name": "UTEC Sede Barranco, Lima",
+		"latitude": "-12.1349806",
+		"longitude": "77.0264035"
+	}
+}, {
+	"model": "events.event",
+	"pk": 1,
+	"fields": {
+		"title": "Hackatrix Lima 2019",
+		"image": "https://pbs.twimg.com/profile_images/1065273205458378753/NqKHM2eH_400x400.jpg",
+		"dates": "Viernes 31 de Mayo, Sabado 1 de Junio",
+		"address": null,
+		"details": "Hackaton social de Belatrix Software",
+		"register_link": "http://belatrixsf.com",
+		"sharing_text": "Registrate y Participa de la Hackatrix Lima 2019",
+		"is_featured": true,
+		"is_upcoming": true,
+		"is_active": true
+	}
+}, {
+	"model": "events.track",
+	"pk": 1,
+	"fields": {
+		"event": 1,
+		"title": "Kick Off",
+		"image": "https://pbs.twimg.com/profile_images/1065273205458378753/NqKHM2eH_400x400.jpg",
+		"datetime": "2019-05-31T23:00:00Z",
+		"address": null,
+		"details": "Kick Off de la Hacktrix, para formar equipos y hacer p\u00fablica tus ideas.",
+		"register_link": null,
+		"sharing_text": null,
+		"location": 1,
+		"is_interaction_active": true,
+		"is_active": true
+	}
+}, {
+	"model": "events.track",
+	"pk": 2,
+	"fields": {
+		"event": 1,
+		"title": "Full Day",
+		"image": "https://pbs.twimg.com/profile_images/1065273205458378753/NqKHM2eH_400x400.jpg",
+		"datetime": "2019-06-01T14:00:00Z",
+		"address": null,
+		"details": "Full Day Hackatrix",
+		"register_link": null,
+		"sharing_text": null,
+		"location": 2,
+		"is_interaction_active": true,
+		"is_active": true
+	}
+}]
