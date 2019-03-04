@@ -16,9 +16,9 @@ urlpatterns = [
     path('reset/password/',
          user_password_recovery_request,
          name='user_password_recovery_request'),
-    path('reset/password/<user_uuid>/',
+    path('reset/password/<uuid:user_uuid>/',
          user_password_recovery_request_confirmation,
          name='user_password_recovery_request_confirmation'),
     path('update/password/', user_password_update, name='user_password_update'),
-    path('validate/<user_uuid>/', user_validation, name='user_validation'),
+    path('validate/<uuid:user_uuid>/', user_validation, name='user_validation'),
 ]
