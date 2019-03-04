@@ -22,15 +22,14 @@ class Command(BaseCommand):
 
         for registrant in registrants:
             message = draft_message % (registrant.code)
+            send_mail = EmailMessage(subject, message, to=[registrant.email])
 
             try:
-                send_mail = EmailMessage(subject, message, to=[registrant.email])
                 send_mail.send()
+                registrant.is_email_sent = True
+                registrant.save()
             except Exception as e:
                 print(e)
-
-            registrant.is_email_sent = True
-            registrant.save()
 
     def handle(self, *args, **options):
         event_id = options['event_id']
