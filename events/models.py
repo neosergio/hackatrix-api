@@ -49,3 +49,17 @@ class Track(models.Model):
     class Meta(object):
         ordering = ['-datetime']
         verbose_name_plural = 'event tracks'
+
+
+class Registrant(models.Model):
+    full_name = models.CharField(max_length=255)
+    email = models.EmailField(unique=True)
+    code = models.CharField(max_length=6)
+    is_email_sent = models.BooleanField(default=False)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+
+
+class Participant(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    user = models.ForeignKey('users.User', on_delete=models.CASCADE)
+    linked_datetime = models.DateTimeField(auto_now_add=True)
