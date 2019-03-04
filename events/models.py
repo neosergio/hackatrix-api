@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.crypto import get_random_string
 
 
 class Location(models.Model):
@@ -54,9 +55,17 @@ class Track(models.Model):
 class Registrant(models.Model):
     full_name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
-    code = models.CharField(max_length=6)
+    code = models.CharField(max_length=6, blank=True, null=True)
     is_email_sent = models.BooleanField(default=False)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+
+    def generate_code(self):
+        code = get_random_string(6, "abcdefghkmnpqrstuvwxyz023456789")
+        return code
+
+    def save(self, *args, **kwargs):
+        self.code = self.generate_code()
+        super(Registrant, self).save(*args, **kwargs)
 
 
 class Participant(models.Model):
