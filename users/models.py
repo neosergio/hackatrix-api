@@ -75,7 +75,7 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 class UserDevice(models.Model):
     user = models.ForeignKey(User, related_name='user_device', on_delete=models.CASCADE)
     operating_system = models.CharField(max_length=10)
-    code = models.CharField(max_length=200, unique=True)
+    code = models.CharField(max_length=200)
 
     class Meta(object):
         ordering = ['user']
