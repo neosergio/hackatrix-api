@@ -140,7 +140,7 @@ def user_password_update(request):
             serializer = UserSerializer(user)
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
         else:
-            return ValidationError('Password actual incorrecto.')
+            raise ValidationError('Password actual incorrecto.')
 
 
 @api_view(['POST', ])
