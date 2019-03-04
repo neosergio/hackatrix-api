@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Event, Track
+from .models import Event, Track, Participant
 
 
 class TrackSerializer(serializers.ModelSerializer):
@@ -15,4 +15,11 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta(object):
         model = Event
+        fields = "__all__"
+
+
+class ParticipantSerializer(serializers.ModelSerializer):
+
+    class Meta(object):
+        model = Participant
         fields = "__all__"

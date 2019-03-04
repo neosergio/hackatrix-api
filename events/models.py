@@ -56,6 +56,7 @@ class Registrant(models.Model):
     full_name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     code = models.CharField(max_length=6, blank=True, null=True)
+    is_code_used = models.BooleanField(default=False)
     is_email_sent = models.BooleanField(default=False)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
 
@@ -64,7 +65,8 @@ class Registrant(models.Model):
         return code
 
     def save(self, *args, **kwargs):
-        self.code = self.generate_code()
+        if self.code is None:
+            self.code = self.generate_code()
         super(Registrant, self).save(*args, **kwargs)
 
 

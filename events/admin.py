@@ -17,7 +17,7 @@ class TrackAdmin(admin.ModelAdmin):
 
 
 class RegistrantAdmin(ImportExportMixin, admin.ModelAdmin):
-    list_display = ('full_name', 'email', 'code', 'is_email_sent', 'event')
+    list_display = ('full_name', 'email', 'code', 'is_code_used', 'is_email_sent', 'event')
     search_fields = ['email', 'full_name']
 
 
