@@ -73,4 +73,5 @@ class Registrant(models.Model):
 class Participant(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     user = models.ForeignKey('users.User', on_delete=models.CASCADE)
+    code_used = models.CharField(max_length=6, blank=True, null=True)
     linked_datetime = models.DateTimeField(auto_now_add=True)

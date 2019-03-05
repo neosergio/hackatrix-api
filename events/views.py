@@ -57,6 +57,8 @@ def event_register_participant(request, code):
         raise ValidationError("El código ya fue usado.")
     else:
         participant = Participant.objects.create(event=registrant.event, user=user)
+        participant.code_used = registrant.code
+        participant.save()
         registrant.is_code_used = True
         registrant.save()
         serializer = ParticipantSerializer(participant)

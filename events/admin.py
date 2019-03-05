@@ -18,12 +18,12 @@ class TrackAdmin(admin.ModelAdmin):
 
 class RegistrantAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('full_name', 'email', 'code', 'is_code_used', 'is_email_sent', 'event')
-    search_fields = ['email', 'full_name']
+    search_fields = ['email', 'full_name', 'code']
 
 
 class ParticipantAdmin(admin.ModelAdmin):
-    list_display = ('user', 'event', 'linked_datetime')
-    search_fields = ['user']
+    list_display = ('user', 'event', 'linked_datetime', 'code_used')
+    search_fields = ['user', 'code_used']
 
 
 admin.site.register(Location, LocationAdmin)
