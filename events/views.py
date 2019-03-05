@@ -10,6 +10,24 @@ from .serializers import EventSerializer, ParticipantSerializer
 
 
 @api_view(['GET', ])
+@permission_classes((permissions.IsAuthenticated, ))
+def event_detail(request, event_id):
+    """
+    Returns event detail by user
+    """
+    response = dict()
+    event = get_object_or_404(Event, pk=event_id)
+    serializer = EventSerializer(event)
+    response.update(serializer.data)
+    participants = Participant.objects.filter(event=event, user=request.user)
+    if len(participants) > 0:
+        response.update({'is_participant': True})
+    else:
+        response.update({'is_participant': False})
+    return Response(response, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', ])
 @permission_classes((permissions.AllowAny, ))
 def event_featured_list(request):
     """
