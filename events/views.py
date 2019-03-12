@@ -28,7 +28,7 @@ def event_detail(request, event_id):
 
 
 @api_view(['GET', ])
-@permission_classes((permissions.AllowAny, ))
+@permission_classes((permissions.IsAuthenticated, ))
 def event_featured_list(request):
     """
     Returns event featured list
