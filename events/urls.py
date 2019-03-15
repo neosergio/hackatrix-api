@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import event_featured_list, event_register_participant, event_detail, event_featured
+from .views import event_register_participant, event_featured
 
 app_name = 'events'
 

@@ -1,9 +1,17 @@
 from rest_framework import serializers
 
-from .models import Event, Track, Participant
+from .models import Event, Track, Participant, Location
+
+
+class LocationSerializer(serializers.ModelSerializer):
+
+    class Meta(object):
+        model = Location
+        fields = "__all__"
 
 
 class TrackSerializer(serializers.ModelSerializer):
+    location = LocationSerializer()
 
     class Meta(object):
         model = Track
@@ -15,7 +23,7 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta(object):
         model = Event
-        fields = "__all__"
+        fields = ('id', 'title', 'image', 'dates', 'address', 'register_link', 'is_featured', 'event_track')
 
 
 class ParticipantSerializer(serializers.ModelSerializer):
