@@ -4,6 +4,7 @@ from django.utils.crypto import get_random_string
 
 class Location(models.Model):
     name = models.CharField(max_length=100)
+    address = models.CharField(max_length=255, blank=True, null=True)
     latitude = models.CharField(max_length=11)
     longitude = models.CharField(max_length=11)
 

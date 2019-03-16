@@ -3,6 +3,7 @@
 	"pk": 1,
 	"fields": {
 		"name": "Belatrix Lima",
+		"address": "Av. Rep\u00fablica de Panama 3591. Piso 20. San Isidro",
 		"latitude": "-12.0999467",
 		"longitude": "-77.0189778"
 	}
@@ -11,6 +12,7 @@
 	"pk": 2,
 	"fields": {
 		"name": "UTEC Sede Barranco, Lima",
+		"address": "Jr, Silva 165, Barranco",
 		"latitude": "-12.1349806",
 		"longitude": "77.0264035"
 	}
