@@ -46,7 +46,7 @@ THIRD_PARTY_APPS = [
 PROJECT_APPS = [
     'events.apps.EventsConfig',
     'users.apps.UsersConfig',
-    'interactions.apps.InteractionsConfig',
+    'ideas.apps.IdeasConfig',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
