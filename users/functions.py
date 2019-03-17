@@ -7,8 +7,9 @@ from .models import User
 
 def generate_user_qr_code(user):
     code_base = str(int(time.time()))
-    user_qr_code = code_base + str(user.id)
-    return user_qr_code
+    user.one_time_use_code = code_base + str(user.id)
+    user.save()
+    return user.one_time_use_code
 
 
 def validate_user_qr_code(code, user):

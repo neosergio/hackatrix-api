@@ -86,8 +86,7 @@ def user_identity(request):
     Returns one time use code to generate QR
     """
     user = request.user
-    user.one_time_use_code = generate_user_qr_code(user)
-    return Response({'user_qr_code': user.one_time_use_code}, status.HTTP_200_OK)
+    return Response({'user_qr_code': generate_user_qr_code(user)}, status.HTTP_200_OK)
 
 
 @api_view(['POST', ])
@@ -104,7 +103,7 @@ def user_identity_validation(request):
         if validate_user_qr_code(code_to_validate, user):
             return Response(status=status.HTTP_200_OK)
         else:
-            return ValidationError("Invalid code.")
+            raise ValidationError("Invalid code.")
 
 
 @api_view(['GET', ])
