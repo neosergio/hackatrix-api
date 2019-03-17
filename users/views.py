@@ -11,9 +11,11 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.renderers import StaticHTMLRenderer
 
+from .functions import generate_user_qr_code, validate_user_qr_code
 from .models import User, UserDevice
 from .serializers import UserAuthenticationSerializer, UserSerializer, UserEmailSerializer, UserLogoutSerializer
 from .serializers import UserCreationSerializer, UserUpdatePasswordSerializer, UserUpdateProfileSerialier
+from .serializers import UserIdentitySerializer
 
 
 class CustomAuthToken(ObtainAuthToken):
@@ -75,6 +77,34 @@ def user_create(request):
 
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET', ])
+@permission_classes((permissions.IsAuthenticated, ))
+def user_identity(request):
+    """
+    Returns one time use code to generate QR
+    """
+    user = request.user
+    user.one_time_use_code = generate_user_qr_code(user)
+    return Response({'user_qr_code': user.one_time_use_code}, status.HTTP_200_OK)
+
+
+@api_view(['POST', ])
+@permission_classes((permissions.IsAuthenticated, ))
+def user_identity_validation(request):
+    """
+    Validates user identity code
+    """
+    serializer = UserIdentitySerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        code_to_validate = serializer.validated_data['user_qr_code']
+        user = get_object_or_404(User, pk=code_to_validate[10:])
+
+        if validate_user_qr_code(code_to_validate, user):
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return ValidationError("Invalid code.")
 
 
 @api_view(['GET', ])

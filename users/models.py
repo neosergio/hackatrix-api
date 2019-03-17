@@ -29,6 +29,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     reset_password_code = models.UUIDField(default=None, blank=True, null=True)
     temporary_password = models.CharField(max_length=4, blank=True, null=True)
     validation_code = models.UUIDField(default=None, blank=True, null=True)
+    one_time_use_code = models.CharField(max_length=20, blank=True, null=True)
 
     objects = UserManager()
 

@@ -35,6 +35,10 @@ class UserCreationSerializer(serializers.Serializer):
     password = serializers.CharField(max_length=100)
 
 
+class UserIdentitySerializer(serializers.Serializer):
+    user_qr_code = serializers.CharField(max_length=20)
+
+
 class UserEmailSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=100)
 
