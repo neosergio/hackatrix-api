@@ -1,0 +1,23 @@
+[{
+	"model": "ideas.idea",
+	"pk": 1,
+	"fields": {
+		"title": "Agro IoT",
+		"description": "Sistema en arduino para ver cultivos en tiempo real",
+		"author": 1,
+		"event": 1,
+		"is_valid": true,
+		"max_number_of_participants": 8
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 2,
+	"fields": {
+		"title": "Ahorro Redondo",
+		"description": "Generar ahorro a trav\u00e9s del redondeo de c\u00e9ntimos o soles de los pagos. Cada vez que hagamos un pago mediante la aplicaci\u00f3n esta aplicar\u00e1 un redondeo (a un monto mayor) y este redondeo se ir\u00e1 a otra cuenta de ahorros para ahorrar sin darnos cuenta.",
+		"author": 1,
+		"event": 1,
+		"is_valid": true,
+		"max_number_of_participants": 8
+	}
+}]
