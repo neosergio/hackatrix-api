@@ -44,7 +44,7 @@ class UserEmailSerializer(serializers.Serializer):
 
 
 class UserLogoutSerializer(serializers.Serializer):
-    device_code = serializers.CharField(max_length=100)
+    device_code = serializers.CharField(max_length=200)
 
 
 class UserUpdatePasswordSerializer(serializers.Serializer):
