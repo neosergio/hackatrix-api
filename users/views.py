@@ -55,28 +55,19 @@ def user_create(request):
         user = User.objects.create_user(email=email, password=password)
         user.generate_validation_code()
 
-        subject = "[Hackatrix] Valide su usuario para la Hackatrix"
+        device_code = serializer.validated_data['device_code']
+        device_os = serializer.validated_data['device_os']
+        UserDevice.objects.get_or_create(user=user, operating_system=device_os, code=device_code)
 
-        draft_message = """
-                Una cuenta en la aplicación Hackatrix ha sido creada con su email.
-                    Confirme esta creación dando clic en el siguiente enlace: %s
-                Si usted no creo ningún usuario, ignore este mensaje."""
-
-        current_site = Site.objects.get_current()
-        user_validation_api = reverse("users:user_validation", kwargs={'user_uuid': user.validation_code})
-        validation_url = current_site.domain + user_validation_api
-        message = draft_message % (validation_url)
-
-        try:
-            send_mail = EmailMessage(subject, message, to=[user.email])
-            send_mail.send()
-        except Exception as e:
-            print(e)
-            content = {'detail': 'Problemas con el envio de emails'}
-            return Response(content, status=status.HTTP_503_SERVICE_UNAVAILABLE)
-
-        serializer = UserSerializer(user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            "data": {
+                'token': token.key,
+                'user_id': user.pk,
+                'email': user.email,
+                'is_validated': user.is_validated,
+            }
+        })
 
 
 @api_view(['GET', ])

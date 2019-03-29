@@ -33,6 +33,8 @@ class UserAuthenticationResponseSerializer(serializers.Serializer):
 class UserCreationSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=100)
     password = serializers.CharField(max_length=100)
+    device_code = serializers.CharField(max_length=200)
+    device_os = serializers.CharField(max_length=10)
 
 
 class UserIdentitySerializer(serializers.Serializer):
