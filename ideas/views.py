@@ -46,3 +46,16 @@ def idea_list_complete(request):
     else:
         serializer = IdeaSerializer(ideas, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['PATCH', ])
+@permission_classes((IsModerator, ))
+def idea_validation_switch(request, idea_id):
+    idea = get_object_or_404(Idea, pk=idea_id)
+    if idea.is_valid:
+        idea.is_valid = False
+    else:
+        idea.is_valid = True
+    idea.save()
+    serializer = IdeaSerializer(idea)
+    return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
