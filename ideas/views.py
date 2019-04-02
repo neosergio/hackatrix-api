@@ -7,6 +7,8 @@ from .models import Idea
 from .serializers import IdeaSerializer, IdeaCreationSerializer
 from events.models import Event
 from events.permissions import IsParticipant
+from users.permissions import IsModerator
+from utils.pagination import StandardResultsSetPagination
 
 
 @api_view(['POST', ])
@@ -29,3 +31,18 @@ def idea_detail(request, idea_id):
     idea = get_object_or_404(Idea, pk=idea_id)
     serializer = IdeaSerializer(idea)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', ])
+@permission_classes((IsModerator, ))
+def idea_list_complete(request):
+    event = Event.objects.filter(is_active=True, is_featured=True).first()
+    ideas = Idea.objects.filter(event=event)
+    if request.GET.get('page') or request.GET.get('per_page'):
+        paginator = StandardResultsSetPagination()
+        results = paginator.paginate_queryset(ideas, request)
+        serializer = IdeaSerializer(results, many=True)
+        return paginator.get_paginated_response(serializer.data)
+    else:
+        serializer = IdeaSerializer(ideas, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
