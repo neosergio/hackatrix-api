@@ -1,3 +1,4 @@
+from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404
 from rest_framework import permissions, status
 from rest_framework.decorators import api_view, permission_classes
@@ -78,3 +79,35 @@ def event_register_participant(request, code):
         registrant.save()
         serializer = ParticipantSerializer(participant)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
+
+@api_view(['POST', ])
+@permission_classes((permissions.IsAdminUser, ))
+def event_sent_participant_codes(request):
+    """
+    Send email with participant code to registrants
+    """
+    event = Event.objects.filter(is_active=True, is_featured=True).first()
+    if request.GET.get('all') and (request.GET.get('all') == "true"):
+        registrants = Registrant.objects.filter(event=event)
+    else:
+        registrants = Registrant.objects.filter(event=event, is_email_sent=False)
+
+    subject = "[%s] Su código de participante" % (event.title)
+
+    draft_message = """
+                            Puede registrarse en la aplicación usando el codigo: %s.
+                            Si usted no se registró, ignore este mensaje."""
+
+    for registrant in registrants:
+        message = draft_message % (registrant.code)
+        send_mail = EmailMessage(subject, message, to=[registrant.email])
+
+        try:
+            send_mail.send()
+            registrant.is_email_sent = True
+            registrant.save()
+        except Exception as e:
+            raise ValidationError(e)
+
+    return Response(status=status.HTTP_200_OK)
