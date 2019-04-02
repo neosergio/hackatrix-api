@@ -111,3 +111,15 @@ def event_sent_participant_codes(request):
             raise ValidationError(e)
 
     return Response(status=status.HTTP_200_OK)
+
+
+@api_view(['DELETE', ])
+@permission_classes((permissions.IsAdminUser, ))
+def event_featured_reset_participants(request):
+    event = Event.objects.filter(is_active=True, is_featured=True).first()
+    participants = Participant.objects.filter(event=event)
+
+    for participant in participants:
+        participant.delete()
+
+    return Response(status.HTTP_202_ACCEPTED)
