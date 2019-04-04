@@ -77,14 +77,11 @@ def event_featured_send_notification(request):
             user_devices = UserDevice.objects.filter(user=participant.user)
             for user_device in user_devices:
                 if user_device.operating_system == 'android':
-                    status_code = send_message_android(user_device.code, message)
+                    send_message_android(user_device.code, message)
                 elif user_device.operating_system == 'ios':
-                    status_code = send_message_ios(user_device.code, message)
+                    send_message_ios(user_device.code, message)
                 else:
                     return ValidationError('SO sin identificar')
-
-                if int(status_code) < 200 or int(status_code) > 300:
-                    UserDevice.objects.get(code=user_device.code).delete()
 
         return Response(status=status.HTTP_200_OK)
 
