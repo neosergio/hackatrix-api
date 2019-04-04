@@ -5,9 +5,11 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from utils.pagination import StandardResultsSetPagination
+from utils.send_push_notification import send_message_android, send_message_ios
 
 from .models import Event, Participant, Registrant
-from .serializers import EventSerializer, ParticipantSerializer
+from .serializers import EventSerializer, ParticipantSerializer, EventFeaturedNotificationSerializer
+from users.models import UserDevice
 
 
 @api_view(['GET', ])
@@ -61,6 +63,33 @@ def event_featured_list(request):
 
 
 @api_view(['POST', ])
+@permission_classes((permissions.IsAdminUser, ))
+def event_featured_send_notification(request):
+    """
+    Send notification to participants at event featured.
+    """
+    event = Event.objects.filter(is_active=True, is_featured=True).first()
+    participants = Participant.objects.filter(event=event)
+    serializer = EventFeaturedNotificationSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        message = serializer.validated_data['message']
+        for participant in participants:
+            user_devices = UserDevice.objects.filter(user=participant.user)
+            for user_device in user_devices:
+                if user_device.operating_system == 'android':
+                    status_code = send_message_android(user_device.code, message)
+                elif user_device.operating_system == 'ios':
+                    status_code = send_message_ios(user_device.code, message)
+                else:
+                    return ValidationError('SO sin identificar')
+
+                if int(status_code) < 200 or int(status_code) > 300:
+                    UserDevice.objects.get(code=user_device.code).delete()
+
+        return Response(status=status.HTTP_200_OK)
+
+
+@api_view(['POST', ])
 @permission_classes((permissions.IsAuthenticated, ))
 def event_register_participant(request, code):
     """
@@ -83,7 +112,7 @@ def event_register_participant(request, code):
 
 @api_view(['POST', ])
 @permission_classes((permissions.IsAdminUser, ))
-def event_sent_participant_codes(request):
+def event_send_participant_codes(request):
     """
     Send email with participant code to registrants
     """

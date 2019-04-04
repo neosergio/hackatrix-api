@@ -27,7 +27,8 @@ def send_message_android(destination, message):
         json=payload,
         headers=headers
     )
-    print(request.text)
+    print(request.status_code)
+    return request.status_code
 
 
 def send_message_ios(destination, message):
@@ -50,7 +51,8 @@ def send_message_ios(destination, message):
         json=payload,
         headers=headers
     )
-    print(request.text)
+    print(request.status_code)
+    return request.status_code
 
 
 def send_push_notification_to_devices_list(devices, message):

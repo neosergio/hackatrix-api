@@ -31,3 +31,7 @@ class ParticipantSerializer(serializers.ModelSerializer):
     class Meta(object):
         model = Participant
         fields = "__all__"
+
+
+class EventFeaturedNotificationSerializer(serializers.Serializer):
+    message = serializers.CharField()
