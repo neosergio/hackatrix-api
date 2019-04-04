@@ -48,6 +48,21 @@ def idea_list_complete(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@api_view(['GET', ])
+@permission_classes((IsParticipant, ))
+def idea_list_validated(request):
+    event = Event.objects.filter(is_active=True, is_featured=True).first()
+    ideas = Idea.objects.filter(event=event, is_valid=True)
+    if request.GET.get('page') or request.GET.get('per_page'):
+        paginator = StandardResultsSetPagination()
+        results = paginator.paginate_queryset(ideas, request)
+        serializer = IdeaSerializer(results, many=True)
+        return paginator.get_paginated_response(results, many=True)
+    else:
+        serializer = IdeaSerializer(ideas, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 @api_view(['PATCH', ])
 @permission_classes((IsModerator, ))
 def idea_validation_switch(request, idea_id):
