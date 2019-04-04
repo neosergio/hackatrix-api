@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import event_register_participant, event_featured
+from .views import event_register_participant, event_featured, registrant_list
 from .views import event_send_participant_codes, event_featured_reset_participants
 from .views import event_featured_send_notification
 
@@ -14,4 +14,5 @@ urlpatterns = [
          name='event_featured_send_notification'),
     path('featured/participant/reset/', event_featured_reset_participants, name='event_featured_reset_participants'),
     path('register/participant/<str:code>', event_register_participant, name='event_register_participant'),
+    path('registrant/list/', registrant_list, name='registrant_list'),
 ]

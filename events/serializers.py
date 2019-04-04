@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Event, Track, Participant, Location
+from .models import Event, Track, Participant, Location, Registrant
 
 
 class LocationSerializer(serializers.ModelSerializer):
@@ -35,3 +35,10 @@ class ParticipantSerializer(serializers.ModelSerializer):
 
 class EventFeaturedNotificationSerializer(serializers.Serializer):
     message = serializers.CharField()
+
+
+class RegistrantSerializer(serializers.ModelSerializer):
+
+    class Meta(object):
+        model = Registrant
+        fields = "__all__"

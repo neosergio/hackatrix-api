@@ -9,6 +9,7 @@ from utils.send_push_notification import send_message_android, send_message_ios
 
 from .models import Event, Participant, Registrant
 from .serializers import EventSerializer, ParticipantSerializer, EventFeaturedNotificationSerializer
+from .serializers import RegistrantSerializer
 from users.models import UserDevice
 
 
@@ -149,3 +150,11 @@ def event_featured_reset_participants(request):
         participant.delete()
 
     return Response(status.HTTP_202_ACCEPTED)
+
+
+@api_view(['GET', ])
+@permission_classes((permissions.IsAdminUser, ))
+def registrant_list(request):
+    registrants = Registrant.objects.all()
+    serializer = RegistrantSerializer(registrants, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
