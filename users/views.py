@@ -16,6 +16,7 @@ from .models import User, UserDevice
 from .serializers import UserAuthenticationSerializer, UserSerializer, UserEmailSerializer, UserLogoutSerializer
 from .serializers import UserCreationSerializer, UserUpdatePasswordSerializer, UserUpdateProfileSerialier
 from .serializers import UserIdentitySerializer
+from ideas.models import Idea
 
 
 class CustomAuthToken(ObtainAuthToken):
@@ -31,6 +32,12 @@ class CustomAuthToken(ObtainAuthToken):
         device_os = serializer.validated_data['device_os']
         UserDevice.objects.get_or_create(user=user, operating_system=device_os, code=device_code)
 
+        user_ideas = len(Idea.objects.filter(author=user))
+        if user_ideas == 0:
+            can_submit_ideas = True
+        else:
+            can_submit_ideas = False
+
         token, created = Token.objects.get_or_create(user=user)
         return Response({
             "data": {
@@ -38,6 +45,7 @@ class CustomAuthToken(ObtainAuthToken):
                 'user_id': user.pk,
                 'email': user.email,
                 'is_validated': user.is_validated,
+                'can_submit_ideas': can_submit_ideas
             }
         })
 
@@ -59,6 +67,12 @@ def user_create(request):
         device_os = serializer.validated_data['device_os']
         UserDevice.objects.get_or_create(user=user, operating_system=device_os, code=device_code)
 
+        user_ideas = len(Idea.objects.filter(author=user))
+        if user_ideas == 0:
+            can_submit_ideas = True
+        else:
+            can_submit_ideas = False
+
         token, created = Token.objects.get_or_create(user=user)
         return Response({
             "data": {
@@ -66,6 +80,7 @@ def user_create(request):
                 'user_id': user.pk,
                 'email': user.email,
                 'is_validated': user.is_validated,
+                'can_submit_ideas': can_submit_ideas
             }
         })
 
