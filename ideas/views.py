@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from constance import config
 from rest_framework import permissions, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.exceptions import ValidationError
@@ -25,12 +26,15 @@ def idea_add_team_member(request, idea_id):
         user = get_object_or_404(User, pk=code_to_validate[10:])
 
         if validate_user_qr_code(code_to_validate, user):
-            try:
-                IdeaTeamMember.objects.create(idea=idea, member=user)
-            except Exception as e:
-                raise ValidationError(e)
-            serializer = IdeaSerializer(idea)
-            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+            if len(IdeaTeamMember.objects.filter(idea=idea)) < idea.max_number_of_participants:
+                try:
+                    IdeaTeamMember.objects.create(idea=idea, member=user)
+                except Exception as e:
+                    raise ValidationError(e)
+                serializer = IdeaSerializer(idea)
+                return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+            else:
+                raise ValidationError(config.TEAM_MAX_SIZE_MESSAGE)
         else:
             raise ValidationError("Invalid code.")
 
