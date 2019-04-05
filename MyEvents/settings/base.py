@@ -41,6 +41,7 @@ THIRD_PARTY_APPS = [
     'rest_framework.authtoken',
     'import_export',
     'rest_framework_swagger',
+    'constance',
 ]
 
 PROJECT_APPS = [
@@ -175,3 +176,14 @@ TITLE_PUSH_NOTIFICATIONS = env('TITLE_PUSH_NOTIFICATIONS', '')
 
 # User validation code settings
 SECONDS_TO_REFRESH_IDENTITY = 300
+
+# Constance
+CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+CONSTANCE_CONFIG = {
+    'TEAM_MIN_SIZE': (5, 'Mininum number of team members.', int),
+    'TEAM_MAX_SIZE': (8, 'Maximum number of team members.', int),
+    'TEAM_MAX_SIZE_MESSAGE': ('Se alcanzó el número máximo de participantes por idea o ya está completo.',
+                              'Team max size reached', str),
+    'TEAM_MIN_SIZE_MESSAGE': ('No se tiene el número mínimo de integrantes.',
+                              'Team min size not reached', str),
+}
