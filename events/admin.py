@@ -1,6 +1,6 @@
 from django.contrib import admin
 from import_export.admin import ImportExportMixin
-from .models import Location, Event, Track
+from .models import Location, Event, Track, TrackItemAgenda
 from .models import Participant, Registrant
 
 
@@ -16,6 +16,10 @@ class TrackAdmin(admin.ModelAdmin):
     list_display = ('event', 'title', 'datetime', 'details', 'location', 'is_interaction_active', 'is_active')
 
 
+class TrackItemAgendaAdmin(admin.ModelAdmin):
+    list_display = ('track', 'time', 'text')
+
+
 class RegistrantAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('full_name', 'email', 'code', 'is_code_used', 'is_email_sent', 'event')
     search_fields = ['email', 'full_name', 'code']
@@ -29,5 +33,6 @@ class ParticipantAdmin(admin.ModelAdmin):
 admin.site.register(Location, LocationAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Track, TrackAdmin)
+admin.site.register(TrackItemAgenda, TrackItemAgendaAdmin)
 admin.site.register(Registrant, RegistrantAdmin)
 admin.site.register(Participant, ParticipantAdmin)

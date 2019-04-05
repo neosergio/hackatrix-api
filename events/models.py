@@ -53,6 +53,17 @@ class Track(models.Model):
         verbose_name_plural = 'event tracks'
 
 
+class TrackItemAgenda(models.Model):
+    track = models.ForeignKey(Track, related_name='track_item', on_delete=models.CASCADE)
+    time = models.CharField(max_length=8)
+    text = models.CharField(max_length=255)
+
+    class Meta(object):
+        ordering = ['time']
+        verbose_name = 'Agenda item'
+        verbose_name_plural = 'Agenda items'
+
+
 class Registrant(models.Model):
     full_name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
