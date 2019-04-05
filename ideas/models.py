@@ -12,10 +12,13 @@ class Idea(models.Model):
     class Meta(object):
         ordering = ['title']
 
+    def __str__(self):
+        return self.title
+
 
 class IdeaTeamMember(models.Model):
     idea = models.ForeignKey(Idea, related_name='idea_team_member', on_delete=models.CASCADE)
-    member = models.ForeignKey('users.User', related_name='member_idea', on_delete=models.CASCADE)
+    member = models.ForeignKey('users.User', related_name='member_idea', on_delete=models.CASCADE, unique=True)
 
     class Meta(object):
         ordering = ['idea']
