@@ -4,12 +4,35 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
-from .models import Idea
+from .models import Idea, IdeaTeamMember
 from .serializers import IdeaSerializer, IdeaCreationSerializer
 from events.models import Event
 from events.permissions import IsParticipant
+from users.functions import validate_user_qr_code
+from users.models import User
 from users.permissions import IsModerator
+from users.serializers import UserIdentitySerializer
 from utils.pagination import StandardResultsSetPagination
+
+
+@api_view(['POST', ])
+@permission_classes((IsParticipant, ))
+def idea_add_team_member(request, idea_id):
+    idea = Idea.objects.get(pk=idea_id)
+    serializer = UserIdentitySerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        code_to_validate = serializer.validated_data['user_qr_code']
+        user = get_object_or_404(User, pk=code_to_validate[10:])
+
+        if validate_user_qr_code(code_to_validate, user):
+            try:
+                IdeaTeamMember.objects.create(idea=idea, member=user)
+            except Exception as e:
+                raise ValidationError(e)
+            serializer = IdeaSerializer(idea)
+            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+        else:
+            raise ValidationError("Invalid code.")
 
 
 @api_view(['POST', ])
