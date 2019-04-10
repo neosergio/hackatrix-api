@@ -1,4 +1,5 @@
 from django.contrib.auth import logout
+from django.contrib.auth.password_validation import validate_password
 from django.contrib.sites.models import Site
 from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404
@@ -60,29 +61,33 @@ def user_create(request):
     if serializer.is_valid(raise_exception=True):
         email = serializer.validated_data['email']
         password = serializer.validated_data['password']
-        user = User.objects.create_user(email=email, password=password)
-        user.generate_validation_code()
+        try:
+            validate_password(password)
+            user = User.objects.create_user(email=email, password=password)
+            user.generate_validation_code()
 
-        device_code = serializer.validated_data['device_code']
-        device_os = serializer.validated_data['device_os']
-        UserDevice.objects.get_or_create(user=user, operating_system=device_os, code=device_code)
+            device_code = serializer.validated_data['device_code']
+            device_os = serializer.validated_data['device_os']
+            UserDevice.objects.get_or_create(user=user, operating_system=device_os, code=device_code)
 
-        user_ideas = len(Idea.objects.filter(author=user))
-        if user_ideas == 0:
-            can_submit_ideas = True
-        else:
-            can_submit_ideas = False
+            user_ideas = len(Idea.objects.filter(author=user))
+            if user_ideas == 0:
+                can_submit_ideas = True
+            else:
+                can_submit_ideas = False
 
-        token, created = Token.objects.get_or_create(user=user)
-        return Response({
-            "data": {
-                'token': token.key,
-                'user_id': user.pk,
-                'email': user.email,
-                'is_validated': user.is_validated,
-                'can_submit_ideas': can_submit_ideas
-            }
-        })
+            token, created = Token.objects.get_or_create(user=user)
+            return Response({
+                "data": {
+                    'token': token.key,
+                    'user_id': user.pk,
+                    'email': user.email,
+                    'is_validated': user.is_validated,
+                    'can_submit_ideas': can_submit_ideas
+                }
+            })
+        except Exception as e:
+            raise ValidationError(e)
 
 
 @api_view(['GET', ])

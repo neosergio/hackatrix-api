@@ -187,3 +187,15 @@ CONSTANCE_CONFIG = {
     'TEAM_MIN_SIZE_MESSAGE': ('No se tiene el número mínimo de integrantes.',
                               'Team min size not reached', str),
 }
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 4,
+        }
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
