@@ -13,6 +13,7 @@ class IdeaTeamMember(serializers.ModelSerializer):
 
 
 class IdeaSerializer(serializers.ModelSerializer):
+    author = UserSerializer()
     idea_team_member = IdeaTeamMember(many=True)
 
     class Meta(object):
