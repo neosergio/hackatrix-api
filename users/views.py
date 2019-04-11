@@ -91,6 +91,17 @@ def user_create(request):
 
 
 @api_view(['GET', ])
+@permission_classes((permissions.IsAdminUser, ))
+def user_list(request):
+    """
+    Returns user list
+    """
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', ])
 @permission_classes((permissions.IsAuthenticated, ))
 def user_identity(request):
     """
