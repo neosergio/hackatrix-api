@@ -121,9 +121,10 @@ def user_identity_validation(request):
     if serializer.is_valid(raise_exception=True):
         code_to_validate = serializer.validated_data['user_qr_code']
         user = get_object_or_404(User, pk=code_to_validate[10:])
+        serializer = UserSerializer(user)
 
         if validate_user_qr_code(code_to_validate, user):
-            return Response(status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             raise ValidationError("Invalid code.")
 
