@@ -10,7 +10,7 @@ from utils.send_push_notification import send_message_android, send_message_ios
 from .models import Event, Registrant
 from .serializers import EventSerializer, EventFeaturedNotificationSerializer
 from .serializers import RegistrantSerializer
-from users.models import UserDevice
+from users.models import UserDevice, User
 
 
 @api_view(['GET', ])
@@ -69,13 +69,12 @@ def event_featured_send_notification(request):
     """
     Send notification to participants at event featured.
     """
-    event = Event.objects.filter(is_active=True, is_featured=True).first()
-    participants = []
+    users = User.objects.all()
     serializer = EventFeaturedNotificationSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         message = serializer.validated_data['message']
-        for participant in participants:
-            user_devices = UserDevice.objects.filter(user=participant.user)
+        for user in users:
+            user_devices = UserDevice.objects.filter(user=user)
             for user_device in user_devices:
                 if user_device.operating_system == 'android':
                     send_message_android(user_device.code, message)
