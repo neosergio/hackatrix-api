@@ -73,17 +73,10 @@ class Registrant(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
 
     def generate_code(self):
-        code = get_random_string(6, "abcdefghkmnpqrstuvwxyz023456789")
+        code = get_random_string(8, "abcdefghkmnpqrstuvwxyz023456789")
         return code
 
     def save(self, *args, **kwargs):
         if self.code is None:
             self.code = self.generate_code()
         super(Registrant, self).save(*args, **kwargs)
-
-
-class Participant(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    user = models.ForeignKey('users.User', on_delete=models.CASCADE)
-    code_used = models.CharField(max_length=6, blank=True, null=True)
-    linked_datetime = models.DateTimeField(auto_now_add=True)

@@ -2,7 +2,7 @@
 	"model": "sites.site",
 	"pk": 1,
 	"fields": {
-		"domain": "https://bxevents.herokuapp.com",
-		"name": "bxevents"
+		"domain": "https://myeventsbx.herokuapp.com",
+		"name": "myeventsbx"
 	}
 }]

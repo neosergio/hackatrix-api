@@ -1,0 +1,12 @@
+[{
+	"model": "events.registrant",
+	"pk": 1,
+	"fields": {
+		"full_name": "Alfred Pennyworth",
+		"email": "apennyworth@waynecorp.com",
+		"code": "sytvksqt",
+		"is_code_used": false,
+		"is_email_sent": false,
+		"event": 1
+	}
+}]

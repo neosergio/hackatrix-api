@@ -7,8 +7,8 @@ from rest_framework.response import Response
 from utils.pagination import StandardResultsSetPagination
 from utils.send_push_notification import send_message_android, send_message_ios
 
-from .models import Event, Participant, Registrant
-from .serializers import EventSerializer, ParticipantSerializer, EventFeaturedNotificationSerializer
+from .models import Event, Registrant
+from .serializers import EventSerializer, EventFeaturedNotificationSerializer
 from .serializers import RegistrantSerializer
 from users.models import UserDevice
 
@@ -23,7 +23,7 @@ def event_detail(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     serializer = EventSerializer(event)
     response.update(serializer.data)
-    participants = Participant.objects.filter(event=event, user=request.user)
+    participants = []
     if len(participants) > 0:
         response.update({'is_participant': True})
     else:
@@ -38,7 +38,7 @@ def event_featured(request):
     event = Event.objects.filter(is_active=True, is_featured=True).first()
     serializer = EventSerializer(event)
     response.update(serializer.data)
-    participants = Participant.objects.filter(event=event, user=request.user)
+    participants = []
     if len(participants) > 0:
         response.update({'is_participant': True})
     else:
@@ -70,7 +70,7 @@ def event_featured_send_notification(request):
     Send notification to participants at event featured.
     """
     event = Event.objects.filter(is_active=True, is_featured=True).first()
-    participants = Participant.objects.filter(event=event)
+    participants = []
     serializer = EventFeaturedNotificationSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         message = serializer.validated_data['message']
@@ -85,27 +85,6 @@ def event_featured_send_notification(request):
                     return ValidationError('SO sin identificar')
 
         return Response(status=status.HTTP_200_OK)
-
-
-@api_view(['POST', ])
-@permission_classes((permissions.IsAuthenticated, ))
-def event_register_participant(request, code):
-    """
-    Registers a user as a participant using a code
-    """
-    user = request.user
-    registrant = get_object_or_404(Registrant, code=code)
-
-    if registrant.is_code_used:
-        raise ValidationError("El código ya fue usado.")
-    else:
-        participant = Participant.objects.create(event=registrant.event, user=user)
-        participant.code_used = registrant.code
-        participant.save()
-        registrant.is_code_used = True
-        registrant.save()
-        serializer = ParticipantSerializer(participant)
-        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
 
 @api_view(['POST', ])
@@ -138,18 +117,6 @@ def event_send_participant_codes(request):
             raise ValidationError(e)
 
     return Response(status=status.HTTP_200_OK)
-
-
-@api_view(['DELETE', ])
-@permission_classes((permissions.IsAdminUser, ))
-def event_featured_reset_participants(request):
-    event = Event.objects.filter(is_active=True, is_featured=True).first()
-    participants = Participant.objects.filter(event=event)
-
-    for participant in participants:
-        participant.delete()
-
-    return Response(status.HTTP_202_ACCEPTED)
 
 
 @api_view(['GET', ])

@@ -1,5 +1,4 @@
 from rest_framework import permissions
-from .models import Participant
 
 
 class IsParticipant(permissions.BasePermission):
@@ -9,7 +8,7 @@ class IsParticipant(permissions.BasePermission):
         if user.is_anonymous:
             return False
         else:
-            participants = Participant.objects.filter(user=user)
+            participants = []
             if len(participants) > 0:
                 participant = True
             else:

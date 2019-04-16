@@ -1,7 +1,7 @@
 from django.contrib import admin
 from import_export.admin import ImportExportMixin
 from .models import Location, Event, Track, TrackItemAgenda
-from .models import Participant, Registrant
+from .models import Registrant
 
 
 class LocationAdmin(admin.ModelAdmin):
@@ -25,14 +25,8 @@ class RegistrantAdmin(ImportExportMixin, admin.ModelAdmin):
     search_fields = ['email', 'full_name', 'code']
 
 
-class ParticipantAdmin(admin.ModelAdmin):
-    list_display = ('user', 'event', 'linked_datetime', 'code_used')
-    search_fields = ['user', 'code_used']
-
-
 admin.site.register(Location, LocationAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Track, TrackAdmin)
 admin.site.register(TrackItemAgenda, TrackItemAgendaAdmin)
 admin.site.register(Registrant, RegistrantAdmin)
-admin.site.register(Participant, ParticipantAdmin)

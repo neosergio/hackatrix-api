@@ -4,7 +4,11 @@ from django.db import models
 class Idea(models.Model):
     title = models.CharField(max_length=255, unique=True)
     description = models.TextField()
-    author = models.ForeignKey('users.User', related_name='author_idea', on_delete=models.CASCADE)
+    author = models.ForeignKey('events.Registrant',
+                               related_name='author_idea',
+                               on_delete=models.CASCADE,
+                               blank=True,
+                               null=True)
     event = models.ForeignKey('events.Event', related_name='event_idea', on_delete=models.CASCADE)
     is_valid = models.BooleanField(default=False)
     max_number_of_participants = models.PositiveIntegerField(default=8)
@@ -18,7 +22,7 @@ class Idea(models.Model):
 
 class IdeaTeamMember(models.Model):
     idea = models.ForeignKey(Idea, related_name='idea_team_member', on_delete=models.CASCADE)
-    member = models.ForeignKey('users.User', related_name='member_idea', on_delete=models.CASCADE, unique=True)
+    member = models.OneToOneField('events.Registrant', related_name='member_idea', on_delete=models.CASCADE)
 
     class Meta(object):
         ordering = ['idea']
