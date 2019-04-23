@@ -1,8 +1,10 @@
+from django.conf import settings
 from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404
 from rest_framework import permissions, status
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, renderer_classes
 from rest_framework.exceptions import ValidationError
+from rest_framework.renderers import StaticHTMLRenderer
 from rest_framework.response import Response
 from utils.pagination import StandardResultsSetPagination
 from utils.send_push_notification import send_message_android, send_message_ios
@@ -124,3 +126,13 @@ def registrant_list(request):
     registrants = Registrant.objects.all()
     serializer = RegistrantSerializer(registrants, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', ])
+@permission_classes((permissions.AllowAny, ))
+@renderer_classes((StaticHTMLRenderer,))
+def registrant_qr_code(request, email):
+    registrant = get_object_or_404(Registrant, email=email)
+    qr_code_url = "{}?data={}".format(settings.QR_CODE_CREATE_API_URL, registrant.code)
+    data = "<img src='{}'>".format(qr_code_url)
+    return Response(data)

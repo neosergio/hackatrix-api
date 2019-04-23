@@ -202,3 +202,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# QR code API
+QR_CODE_CREATE_API_URL = env('QR_CODE_CREATE_API_URL', '')
