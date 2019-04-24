@@ -187,7 +187,7 @@ CONSTANCE_CONFIG = {
     'TEAM_MIN_SIZE_MESSAGE': ('No se tiene el número mínimo de integrantes.',
                               'Team min size not reached', str),
     'USER_EMAIL_DOMAIN_RESTRICTION_FLAG': (False, 'user email domain restriction flag', bool),
-    'USER_EMAIL_DOMAIN_RESTRICTION': ('belatrixsf.com', 'user email domain restriction separate with commas', str),
+    'USER_EMAIL_DOMAIN_RESTRICTION': ('belatrixsf.com', 'user email domain restriction separated with commas', str),
 }
 
 # Passwords validators

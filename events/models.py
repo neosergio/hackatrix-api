@@ -80,3 +80,6 @@ class Registrant(models.Model):
         if self.code is None:
             self.code = self.generate_code()
         super(Registrant, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.email
