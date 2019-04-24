@@ -8,7 +8,6 @@ from rest_framework.response import Response
 from .models import Idea, IdeaTeamMember
 from .serializers import IdeaSerializer, IdeaCreationSerializer
 from events.models import Event
-from events.permissions import IsParticipant
 from users.functions import validate_user_qr_code
 from users.models import User
 from users.permissions import IsModerator
@@ -17,7 +16,7 @@ from utils.pagination import StandardResultsSetPagination
 
 
 @api_view(['POST', ])
-@permission_classes((IsParticipant, ))
+@permission_classes((permissions.IsAuthenticated, ))
 def idea_add_team_member(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)
     serializer = UserIdentitySerializer(data=request.data)
@@ -40,7 +39,7 @@ def idea_add_team_member(request, idea_id):
 
 
 @api_view(['POST', ])
-@permission_classes((permissions.IsAuthenticated, IsParticipant))
+@permission_classes((permissions.IsAuthenticated, ))
 def idea_creation(request):
     serializer = IdeaCreationSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
@@ -61,7 +60,7 @@ def idea_creation(request):
 
 
 @api_view(['GET', ])
-@permission_classes((permissions.IsAuthenticated, IsParticipant))
+@permission_classes((permissions.IsAuthenticated, ))
 def idea_detail(request, idea_id):
     idea = get_object_or_404(Idea, pk=idea_id)
     serializer = IdeaSerializer(idea)
@@ -84,7 +83,7 @@ def idea_list_complete(request):
 
 
 @api_view(['GET', ])
-@permission_classes((IsParticipant, ))
+@permission_classes((permissions.IsAuthenticated, ))
 def idea_list_validated(request):
     event = Event.objects.filter(is_active=True, is_featured=True).first()
     ideas = Idea.objects.filter(event=event, is_valid=True)
