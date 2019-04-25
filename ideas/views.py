@@ -64,7 +64,7 @@ def idea_detail(request, idea_id):
 
 
 @api_view(['GET', ])
-@permission_classes((IsModerator, ))
+@permission_classes((permissions.IsAuthenticated, ))
 def idea_list_complete(request):
     event = Event.objects.filter(is_active=True, is_featured=True).first()
     ideas = Idea.objects.filter(event=event)
