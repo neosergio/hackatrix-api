@@ -9,6 +9,11 @@ class Idea(models.Model):
                                on_delete=models.CASCADE,
                                blank=True,
                                null=True)
+    written_by = models.ForeignKey('users.User',
+                                   related_name='written_idea',
+                                   on_delete=models.CASCADE,
+                                   blank=True,
+                                   null=True)
     event = models.ForeignKey('events.Event', related_name='event_idea', on_delete=models.CASCADE)
     is_valid = models.BooleanField(default=False)
     max_number_of_participants = models.PositiveIntegerField(default=8)
