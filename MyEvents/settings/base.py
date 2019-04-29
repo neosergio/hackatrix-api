@@ -42,6 +42,7 @@ THIRD_PARTY_APPS = [
     'import_export',
     'rest_framework_swagger',
     'constance',
+    'constance.backends.database',
 ]
 
 PROJECT_APPS = [
