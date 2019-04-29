@@ -43,3 +43,7 @@ class RegistrantSerializer(serializers.ModelSerializer):
     class Meta(object):
         model = Registrant
         fields = "__all__"
+
+
+class RegistrantIdentitySerializer(serializers.Serializer):
+    registrant_qr_code = serializers.CharField(max_length=20)

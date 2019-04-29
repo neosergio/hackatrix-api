@@ -22,7 +22,7 @@ def idea_creation(request):
     if serializer.is_valid(raise_exception=True):
         title = serializer.validated_data['title']
         description = serializer.validated_data['description']
-        author = get_object_or_404(Registrant, code=serializer.validated_data['author_code'])
+        author = get_object_or_404(Registrant, pk=serializer.validated_data['author_id'])
         event = Event.objects.filter(is_featured=True).first()
         try:
             idea = Idea.objects.create(title=title,

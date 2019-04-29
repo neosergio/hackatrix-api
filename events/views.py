@@ -11,7 +11,7 @@ from utils.send_push_notification import send_message_android, send_message_ios
 
 from .models import Event, Registrant
 from .serializers import EventSerializer, EventFeaturedNotificationSerializer
-from .serializers import RegistrantSerializer
+from .serializers import RegistrantSerializer, RegistrantIdentitySerializer
 from users.models import UserDevice, User
 
 
@@ -135,3 +135,17 @@ def registrant_qr_code(request, email):
     qr_code_url = "{}?data={}".format(settings.QR_CODE_CREATE_API_URL, registrant.code)
     data = "<img src='{}'>".format(qr_code_url)
     return Response(data)
+
+
+@api_view(['POST', ])
+@permission_classes((permissions.IsAuthenticated, ))
+def registrant_identity_validation(request):
+    """
+    Validates registrant identity QR code
+    """
+    serializer = RegistrantIdentitySerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        code_to_validate = serializer.validated_data['registrant_qr_code']
+        registrant = get_object_or_404(Registrant, code=code_to_validate)
+        serializer = RegistrantSerializer(registrant)
+        return Response(serializer.data, status=status.HTTP_200_OK)

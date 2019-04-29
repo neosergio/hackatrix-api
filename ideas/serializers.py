@@ -24,4 +24,4 @@ class IdeaSerializer(serializers.ModelSerializer):
 class IdeaCreationSerializer(serializers.Serializer):
     title = serializers.CharField(max_length=255)
     description = serializers.CharField(max_length=255)
-    author_code = serializers.CharField()
+    author_id = serializers.CharField()
