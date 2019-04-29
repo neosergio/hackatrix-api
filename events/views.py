@@ -114,10 +114,16 @@ def event_send_participant_codes(request):
 
 
 @api_view(['GET', ])
-@permission_classes((permissions.IsAdminUser, ))
+@permission_classes((permissions.IsAuthenticated, ))
 def registrant_list(request):
     registrants = Registrant.objects.all()
-    serializer = RegistrantSerializer(registrants, many=True)
+    if request.GET.get('page') or request.GET.get('per_page'):
+        paginator = StandardResultsSetPagination()
+        results = paginator.paginate_queryset(registrants, request)
+        serializer = RegistrantSerializer(results, many=True)
+        return paginator.get_paginated_response(serializer.data)
+    else:
+        serializer = RegistrantSerializer(registrants, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
