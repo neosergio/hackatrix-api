@@ -36,16 +36,9 @@ def event_detail(request, event_id):
 @api_view(['GET', ])
 @permission_classes((permissions.IsAuthenticated, ))
 def event_featured(request):
-    response = dict()
     event = Event.objects.filter(is_active=True, is_featured=True).first()
     serializer = EventSerializer(event)
-    response.update(serializer.data)
-    participants = []
-    if len(participants) > 0:
-        response.update({'is_participant': True})
-    else:
-        response.update({'is_participant': False})
-    return Response(response, status=status.HTTP_200_OK)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(['GET', ])
