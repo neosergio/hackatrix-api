@@ -7,12 +7,33 @@ from rest_framework.response import Response
 
 from .models import Idea, IdeaTeamMember
 from .serializers import IdeaSerializer, IdeaCreationSerializer
-from events.models import Event
+from events.models import Event, Registrant
 from users.functions import validate_user_qr_code
 from users.models import User
 from users.permissions import IsModerator
 from users.serializers import UserIdentitySerializer
 from utils.pagination import StandardResultsSetPagination
+
+
+@api_view(['POST', ])
+@permission_classes((permissions.IsAuthenticated, ))
+def idea_creation(request):
+    serializer = IdeaCreationSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        title = serializer.validated_data['title']
+        description = serializer.validated_data['description']
+        author = get_object_or_404(Registrant, code=serializer.validated_data['author_code'])
+        event = Event.objects.filter(is_featured=True).first()
+        try:
+            idea = Idea.objects.create(title=title,
+                                       description=description,
+                                       author=author,
+                                       written_by=request.user,
+                                       event=event)
+        except Exception as e:
+            raise ValidationError(e)
+        serializer = IdeaSerializer(idea)
+        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
 
 @api_view(['POST', ])
@@ -36,23 +57,6 @@ def idea_add_team_member(request, idea_id):
                 raise ValidationError(config.TEAM_MAX_SIZE_MESSAGE)
         else:
             raise ValidationError("Invalid code.")
-
-
-@api_view(['POST', ])
-@permission_classes((permissions.IsAuthenticated, ))
-def idea_creation(request):
-    serializer = IdeaCreationSerializer(data=request.data)
-    if serializer.is_valid(raise_exception=True):
-        title = serializer.validated_data['title']
-        description = serializer.validated_data['description']
-        event = Event.objects.filter(is_featured=True).first()
-        try:
-            idea = Idea.objects.create(title=title, description=description, written_by=request.user, event=event)
-        except Exception as e:
-            raise ValidationError(e)
-        serializer = IdeaSerializer(idea)
-        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
-
 
 
 @api_view(['GET', ])

@@ -1,11 +1,11 @@
 from rest_framework import serializers
 
 from .models import Idea, IdeaTeamMember
-from users.serializers import UserSerializer
+from events.serializers import RegistrantSerializer
 
 
 class IdeaTeamMember(serializers.ModelSerializer):
-    member = UserSerializer()
+    member = RegistrantSerializer()
 
     class Meta(object):
         model = IdeaTeamMember
@@ -13,8 +13,8 @@ class IdeaTeamMember(serializers.ModelSerializer):
 
 
 class IdeaSerializer(serializers.ModelSerializer):
-    author = UserSerializer()
-    idea_team_member = IdeaTeamMember(many=True)
+    author = RegistrantSerializer()
+    idea_team_member = RegistrantSerializer(many=True)
 
     class Meta(object):
         model = Idea
@@ -23,4 +23,5 @@ class IdeaSerializer(serializers.ModelSerializer):
 
 class IdeaCreationSerializer(serializers.Serializer):
     title = serializers.CharField(max_length=255)
-    description = serializers.CharField()
+    description = serializers.CharField(max_length=255)
+    author_code = serializers.CharField()
