@@ -8,11 +8,11 @@ from rest_framework import permissions, status
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.decorators import api_view, permission_classes, renderer_classes
-from rest_framework.exceptions import ValidationError
+from rest_framework.exceptions import ValidationError, PermissionDenied
 from rest_framework.response import Response
 from rest_framework.renderers import StaticHTMLRenderer
 
-from .functions import generate_user_qr_code, validate_user_qr_code
+from .functions import generate_user_qr_code, validate_user_qr_code, validate_user_email
 from .models import User, UserDevice
 from .serializers import UserAuthenticationSerializer, UserSerializer, UserEmailSerializer, UserLogoutSerializer
 from .serializers import UserCreationSerializer, UserUpdatePasswordSerializer, UserUpdateProfileSerialier
@@ -55,22 +55,25 @@ def user_create(request):
         password = serializer.validated_data['password']
         try:
             validate_password(password)
-            user = User.objects.create_user(email=email, password=password)
-            user.generate_validation_code()
+            if validate_user_email(email):
+                user = User.objects.create_user(email=email, password=password)
+                user.generate_validation_code()
 
-            device_code = serializer.validated_data['device_code']
-            device_os = serializer.validated_data['device_os']
-            UserDevice.objects.get_or_create(user=user, operating_system=device_os, code=device_code)
+                device_code = serializer.validated_data['device_code']
+                device_os = serializer.validated_data['device_os']
+                UserDevice.objects.get_or_create(user=user, operating_system=device_os, code=device_code)
 
-            token, created = Token.objects.get_or_create(user=user)
-            return Response({
-                "data": {
-                    'token': token.key,
-                    'user_id': user.pk,
-                    'email': user.email,
-                    'is_validated': user.is_validated
-                }
-            })
+                token, created = Token.objects.get_or_create(user=user)
+                return Response({
+                    "data": {
+                        'token': token.key,
+                        'user_id': user.pk,
+                        'email': user.email,
+                        'is_validated': user.is_validated
+                    }
+                })
+            else:
+                raise PermissionDenied('Invalid email.')
         except Exception as e:
             raise ValidationError(e)
 

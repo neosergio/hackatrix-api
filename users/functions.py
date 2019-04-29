@@ -1,4 +1,5 @@
 import time
+from constance import config
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 
@@ -23,3 +24,15 @@ def validate_user_qr_code(code, user):
             return False
     else:
         return False
+
+
+def validate_user_email(email):
+    if config.USER_EMAIL_DOMAIN_RESTRICTION_FLAG:
+        domains = [c.strip() for c in config.USER_EMAIL_DOMAIN_RESTRICTION.split(',')]
+        email_domain = email.split('@')[1]
+        if email_domain in domains:
+            return True
+        else:
+            return False
+    else:
+        return True
