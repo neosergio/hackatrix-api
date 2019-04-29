@@ -77,7 +77,7 @@ class Registrant(models.Model):
         return code
 
     def save(self, *args, **kwargs):
-        if self.code is None:
+        if (self.code is None) or (self.code == ""):
             self.code = self.generate_code()
         super(Registrant, self).save(*args, **kwargs)
 
