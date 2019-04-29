@@ -8,10 +8,8 @@ from rest_framework.response import Response
 from .models import Idea, IdeaTeamMember
 from .serializers import IdeaSerializer, IdeaCreationSerializer
 from events.models import Event, Registrant
-from users.functions import validate_user_qr_code
-from users.models import User
+from events.serializers import RegistrantIdentitySerializer
 from users.permissions import IsModerator
-from users.serializers import UserIdentitySerializer
 from utils.pagination import StandardResultsSetPagination
 
 
@@ -39,24 +37,26 @@ def idea_creation(request):
 @api_view(['POST', ])
 @permission_classes((permissions.IsAuthenticated, ))
 def idea_add_team_member(request, idea_id):
+    """
+    Add team member to a project / idea.
+    """
     idea = Idea.objects.get(pk=idea_id)
-    serializer = UserIdentitySerializer(data=request.data)
+    serializer = RegistrantIdentitySerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        code_to_validate = serializer.validated_data['user_qr_code']
-        user = get_object_or_404(User, pk=code_to_validate[10:])
+        code_to_validate = serializer.validated_data['registrant_qr_code']
+        registrant = get_object_or_404(Registrant, code=code_to_validate)
 
-        if validate_user_qr_code(code_to_validate, user):
-            if len(IdeaTeamMember.objects.filter(idea=idea)) < idea.max_number_of_participants:
-                try:
-                    IdeaTeamMember.objects.create(idea=idea, member=user)
-                except Exception as e:
-                    raise ValidationError(e)
-                serializer = IdeaSerializer(idea)
-                return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
-            else:
-                raise ValidationError(config.TEAM_MAX_SIZE_MESSAGE)
+        if len(IdeaTeamMember.objects.filter(idea=idea)) < idea.max_number_of_participants:
+            try:
+                IdeaTeamMember.objects.create(idea=idea, member=registrant)
+            except Exception as e:
+                raise ValidationError(e)
+            serializer = IdeaSerializer(idea)
+            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
         else:
-            raise ValidationError("Invalid code.")
+            raise ValidationError(config.TEAM_MAX_SIZE_MESSAGE)
+    else:
+        raise ValidationError("Invalid code.")
 
 
 @api_view(['GET', ])

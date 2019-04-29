@@ -14,7 +14,7 @@ class IdeaTeamMember(serializers.ModelSerializer):
 
 class IdeaSerializer(serializers.ModelSerializer):
     author = RegistrantSerializer()
-    idea_team_member = RegistrantSerializer(many=True)
+    # todo: show team members (idea_team_member = RegistrantSerializer(many=True))
 
     class Meta(object):
         model = Idea
