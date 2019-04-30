@@ -2,9 +2,64 @@
 	"model": "events.registrant",
 	"pk": 1,
 	"fields": {
-		"full_name": "Alfred Pennyworth",
-		"email": "apennyworth@waynecorp.com",
-		"code": "v378eqg3sm",
+		"full_name": "Sergio Infante Montero",
+		"email": "sinfante@belatrixsf.com",
+		"code": "cbd794un7d",
+		"is_code_used": false,
+		"is_email_sent": false,
+		"event": 1
+	}
+}, {
+	"model": "events.registrant",
+	"pk": 2,
+	"fields": {
+		"full_name": "Luis Talavera",
+		"email": "ltalavera@belatrixsf.com",
+		"code": "6gxzu4ext4",
+		"is_code_used": false,
+		"is_email_sent": false,
+		"event": 1
+	}
+}, {
+	"model": "events.registrant",
+	"pk": 3,
+	"fields": {
+		"full_name": "Javier Siancas",
+		"email": "jsiancas@belatrixsf.com",
+		"code": "5vak8ay4q5",
+		"is_code_used": false,
+		"is_email_sent": false,
+		"event": 1
+	}
+}, {
+	"model": "events.registrant",
+	"pk": 4,
+	"fields": {
+		"full_name": "Fiorella Vercelli",
+		"email": "fvercelli@belatrixsf.com",
+		"code": "um63960fvg",
+		"is_code_used": false,
+		"is_email_sent": false,
+		"event": 1
+	}
+}, {
+	"model": "events.registrant",
+	"pk": 5,
+	"fields": {
+		"full_name": "Cesar Paredes",
+		"email": "cparedes@belatrixsf.com",
+		"code": "zuzxs8tpgt",
+		"is_code_used": false,
+		"is_email_sent": false,
+		"event": 1
+	}
+}, {
+	"model": "events.registrant",
+	"pk": 6,
+	"fields": {
+		"full_name": "Francesca Haro",
+		"email": "fharo@belatrixsf.com",
+		"code": "a63smr88uh",
 		"is_code_used": false,
 		"is_email_sent": false,
 		"event": 1
