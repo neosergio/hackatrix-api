@@ -22,12 +22,14 @@ def idea_creation(request):
         description = serializer.validated_data['description']
         author = get_object_or_404(Registrant, pk=serializer.validated_data['author_id'])
         event = Event.objects.filter(is_featured=True).first()
+        is_valid = serializer.validated_data['is_valid']
         try:
             idea = Idea.objects.create(title=title,
                                        description=description,
                                        author=author,
                                        written_by=request.user,
-                                       event=event)
+                                       event=event,
+                                       is_valid=is_valid)
         except Exception as e:
             raise ValidationError(e)
         serializer = IdeaSerializer(idea)

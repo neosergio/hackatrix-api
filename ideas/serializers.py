@@ -25,3 +25,4 @@ class IdeaCreationSerializer(serializers.Serializer):
     title = serializers.CharField(max_length=255)
     description = serializers.CharField(max_length=255)
     author_id = serializers.CharField()
+    is_valid = serializers.BooleanField()
