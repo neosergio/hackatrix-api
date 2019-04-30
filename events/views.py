@@ -1,6 +1,8 @@
 from django.conf import settings
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, send_mail
 from django.shortcuts import get_object_or_404
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from rest_framework import permissions, status
 from rest_framework.decorators import api_view, permission_classes, renderer_classes
 from rest_framework.exceptions import ValidationError
@@ -149,3 +151,21 @@ def registrant_identity_validation(request):
         registrant = get_object_or_404(Registrant, code=code_to_validate)
         serializer = RegistrantSerializer(registrant)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['POST', ])
+@permission_classes((permissions.IsAdminUser, ))
+def registrant_send_qr_code(request):
+    registrants_without_email = Registrant.objects.filter(is_email_sent=False)
+
+    for registrant in registrants_without_email:
+        subject = "[{}] Conserva tu código QR para el evento".format(registrant.event.title)
+        html_message = render_to_string('mail_template.html', {'context': 'values'})
+        plain_message = strip_tags(html_message)
+        from_email = "From <{}>".format(settings.EMAIL_HOST_USER)
+        to = registrant.email
+        try:
+            send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+            return Response(status.HTTP_200_OK)
+        except Exception as e:
+            raise ValidationError(e)
