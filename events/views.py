@@ -161,7 +161,8 @@ def registrant_send_qr_code(request):
     for registrant in registrants_without_email:
         subject = "[{}] Conserva tu código QR para el evento".format(registrant.event.title)
         context = {'qr_code_create_api_url': settings.QR_CODE_CREATE_API_URL,
-                   'registrant_qr_code': registrant.email}
+                   'registrant_full_name': registrant.full_name,
+                   'registrant_qr_code': registrant.code}
         html_message = render_to_string('mail_template.html', context)
         plain_message = strip_tags(html_message)
         from_email = "{} <{}>".format(registrant.event.title, settings.EMAIL_HOST_USER)
