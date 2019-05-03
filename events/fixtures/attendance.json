@@ -53,4 +53,15 @@
 		"due_date": null,
 		"available_from": null
 	}
+}, {
+	"model": "events.attendance",
+	"pk": 6,
+	"fields": {
+		"title": "Regalos",
+		"icon": "https://i.imgur.com/QnoT8Tj.png",
+		"track": 2,
+		"is_active": true,
+		"due_date": null,
+		"available_from": null
+	}
 }]
