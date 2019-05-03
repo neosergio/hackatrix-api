@@ -88,7 +88,7 @@ class Registrant(models.Model):
 class Attendance(models.Model):
     title = models.CharField(max_length=100)
     icon = models.URLField()
-    track = models.ForeignKey(Track, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
     due_date = models.DateTimeField(blank=True, null=True)
     available_from = models.DateTimeField(blank=True, null=True)
