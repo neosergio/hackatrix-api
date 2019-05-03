@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from utils.pagination import StandardResultsSetPagination
 from utils.send_push_notification import send_message_android, send_message_ios
 
-from .models import Event, Registrant, Attendance
+from .models import Event, Registrant, Attendance, RegistrantAttendance
 from .serializers import EventSerializer, EventFeaturedNotificationSerializer
 from .serializers import RegistrantSerializer, RegistrantIdentitySerializer, AttendaceSerializer
 from users.models import UserDevice, User
@@ -191,3 +191,16 @@ def event_attendance_list(request):
     else:
         serializer = AttendaceSerializer(attendances, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['POST', ])
+@permission_classes((permissions.IsAuthenticated, ))
+def event_attendance_register(request, attendance_id):
+    attendance = get_object_or_404(Attendance, pk=attendance_id)
+    current_user = request.user
+    serializer = RegistrantIdentitySerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        registrant_qr_code = serializer.validated_data['registrant_qr_code']
+        registrant = get_object_or_404(Registrant, code=registrant_qr_code)
+        RegistrantAttendance.objects.create(registrant=registrant, attendance=attendance, registered_by=current_user)
+        return Response(status=status.HTTP_202_ACCEPTED)
