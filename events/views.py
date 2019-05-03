@@ -150,8 +150,8 @@ def registrant_identity_validation(request):
         code_to_validate = serializer.validated_data['registrant_qr_code']
         registrant = get_object_or_404(Registrant, code=code_to_validate)
         serializer = RegistrantSerializer(registrant)
-        if request.GET.get('data') and (request.GET.get('data')=='true'):
-            response = {"data":serializer.data}
+        if request.GET.get('data') and (request.GET.get('data') == 'true'):
+            response = {"data": serializer.data}
             return Response(response, status=status.HTTP_200_OK)
         else:
             return Response(serializer.data, status=status.HTTP_200_OK)
