@@ -83,3 +83,26 @@ class Registrant(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class Attendance(models.Model):
+    title = models.CharField(max_length=100)
+    icon = models.URLField()
+    track = models.ForeignKey(Track, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
+    due_date = models.DateTimeField(blank=True, null=True)
+    available_from = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+
+class RegistrantAttendance(models.Model):
+    registrant = models.ForeignKey(Registrant, on_delete=models.CASCADE)
+    attendance = models.ForeignKey(Attendance, on_delete=models.CASCADE)
+    registered_by = models.ForeignKey('users.User', on_delete=models.CASCADE)
+    registered_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta(object):
+        ordering = ['attendance']
+        unique_together = ('registrant', 'attendance')

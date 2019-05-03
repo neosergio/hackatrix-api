@@ -1,0 +1,56 @@
+[{
+	"model": "events.attendance",
+	"pk": 1,
+	"fields": {
+		"title": "Asistencia a Kick Off",
+		"icon": "https://i.imgur.com/1Kzp2wJ.png",
+		"track": 1,
+		"is_active": true,
+		"due_date": "2019-05-31T22:00:00Z",
+		"available_from": null
+	}
+}, {
+	"model": "events.attendance",
+	"pk": 2,
+	"fields": {
+		"title": "Desayuno",
+		"icon": "https://i.imgur.com/ETq5IQ2.png",
+		"track": 2,
+		"is_active": true,
+		"due_date": "2019-06-01T12:00:00Z",
+		"available_from": null
+	}
+}, {
+	"model": "events.attendance",
+	"pk": 3,
+	"fields": {
+		"title": "Asistencia a Full Day",
+		"icon": "https://i.imgur.com/1Kzp2wJ.png",
+		"track": 2,
+		"is_active": true,
+		"due_date": "2019-06-01T12:00:00Z",
+		"available_from": null
+	}
+}, {
+	"model": "events.attendance",
+	"pk": 4,
+	"fields": {
+		"title": "Almuerzo",
+		"icon": "https://i.imgur.com/ASr5Ixo.png",
+		"track": 2,
+		"is_active": true,
+		"due_date": "2019-06-01T16:00:00Z",
+		"available_from": null
+	}
+}, {
+	"model": "events.attendance",
+	"pk": 5,
+	"fields": {
+		"title": "Cena",
+		"icon": "https://i.imgur.com/vrI2rbQ.png",
+		"track": 2,
+		"is_active": true,
+		"due_date": null,
+		"available_from": null
+	}
+}]

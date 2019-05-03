@@ -2,6 +2,7 @@ from django.contrib import admin
 from import_export.admin import ImportExportMixin
 from .models import Location, Event, Track, TrackItemAgenda
 from .models import Registrant
+from .models import Attendance, RegistrantAttendance
 
 
 class LocationAdmin(admin.ModelAdmin):
@@ -25,8 +26,18 @@ class RegistrantAdmin(ImportExportMixin, admin.ModelAdmin):
     search_fields = ['email', 'full_name', 'code']
 
 
+class AttendanceAdmin(admin.ModelAdmin):
+    list_display = ('title', 'track', 'available_from', 'due_date', 'is_active')
+
+
+class RegistrantAttendanceAdmin(admin.ModelAdmin):
+    list_display = ('attendance', 'registrant', 'registered_by', 'registered_at')
+
+
 admin.site.register(Location, LocationAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Track, TrackAdmin)
 admin.site.register(TrackItemAgenda, TrackItemAgendaAdmin)
 admin.site.register(Registrant, RegistrantAdmin)
+admin.site.register(Attendance, AttendanceAdmin)
+admin.site.register(RegistrantAttendance, RegistrantAttendanceAdmin)
