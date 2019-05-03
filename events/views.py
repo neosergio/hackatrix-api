@@ -11,9 +11,9 @@ from rest_framework.response import Response
 from utils.pagination import StandardResultsSetPagination
 from utils.send_push_notification import send_message_android, send_message_ios
 
-from .models import Event, Registrant
+from .models import Event, Registrant, Attendance
 from .serializers import EventSerializer, EventFeaturedNotificationSerializer
-from .serializers import RegistrantSerializer, RegistrantIdentitySerializer
+from .serializers import RegistrantSerializer, RegistrantIdentitySerializer, AttendaceSerializer
 from users.models import UserDevice, User
 
 
@@ -176,3 +176,18 @@ def registrant_send_qr_code(request):
         except Exception as e:
             raise ValidationError(e)
     return Response(status.HTTP_200_OK)
+
+
+@api_view(['GET', ])
+@permission_classes((permissions.IsAuthenticated, ))
+def event_attendance_list(request):
+    event = Event.objects.filter(is_active=True, is_featured=True).first()
+    attendances = Attendance.objects.filter(event=event)
+    if request.GET.get('page') or request.GET.get('per_page'):
+        paginator = StandardResultsSetPagination()
+        results = paginator.paginate_queryset(attendances, request)
+        serializer = AttendaceSerializer(results, many=True)
+        return paginator.get_paginated_response(serializer.data)
+    else:
+        serializer = AttendaceSerializer(attendances, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Event, Track, TrackItemAgenda, Location, Registrant
+from .models import Event, Track, TrackItemAgenda, Location, Registrant, Attendance
 
 
 class LocationSerializer(serializers.ModelSerializer):
@@ -47,3 +47,10 @@ class RegistrantSerializer(serializers.ModelSerializer):
 
 class RegistrantIdentitySerializer(serializers.Serializer):
     registrant_qr_code = serializers.CharField(max_length=20)
+
+
+class AttendaceSerializer(serializers.ModelSerializer):
+
+    class Meta(object):
+        model = Attendance
+        fields = "__all__"
