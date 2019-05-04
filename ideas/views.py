@@ -61,6 +61,22 @@ def idea_add_team_member(request, idea_id):
         raise ValidationError("Invalid code.")
 
 
+@api_view(['DELETE', ])
+@permission_classes((IsModerator, ))
+def idea_remove_team_member(request, idea_id):
+    """
+    Removes team member from a project/idea
+    """
+    idea = Idea.objects.get(pk=idea_id)
+    serializer = RegistrantIdentitySerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        code_to_validate = serializer.validated_data['registrant_qr_code']
+        registrant = get_object_or_404(Registrant, code=code_to_validate)
+        IdeaTeamMember.objects.get(idea=idea, member=registrant).delete()
+        serializer = IdeaSerializer(idea)
+        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
+
 @api_view(['POST', ])
 @permission_classes((permissions.IsAuthenticated, ))
 def idea_add_team_member_list(request, idea_id):
