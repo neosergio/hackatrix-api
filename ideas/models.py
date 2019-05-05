@@ -36,7 +36,7 @@ class IdeaTeamMember(models.Model):
         verbose_name_plural = 'Groups'
 
 
-class JuryAssessments(models.Model):
+class JuryAssessment(models.Model):
     title = models.CharField(max_length=100)
     icon = models.URLField()
     description = models.CharField(max_length=255, blank=True, default=True)
@@ -52,7 +52,7 @@ class JuryAssessmentIdea(models.Model):
     value = models.PositiveIntegerField(default=0)
 
 
-class ModeratorAssesssment(models.Model):
+class ModeratorAssessment(models.Model):
     title = models.CharField(max_length=100)
     icon = models.URLField()
     description = models.CharField(max_length=255, blank=True, default=True)
