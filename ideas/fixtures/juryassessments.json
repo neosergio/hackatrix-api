@@ -1,0 +1,46 @@
+[{
+	"model": "ideas.juryassessment",
+	"pk": 1,
+	"fields": {
+		"title": "Presentaci\u00f3n",
+		"icon": "https://i.imgur.com/1Kzp2wJ.png",
+		"description": null,
+		"weight": 5
+	}
+}, {
+	"model": "ideas.juryassessment",
+	"pk": 2,
+	"fields": {
+		"title": "Factibilidad",
+		"icon": "https://i.imgur.com/1Kzp2wJ.png",
+		"description": null,
+		"weight": 20
+	}
+}, {
+	"model": "ideas.juryassessment",
+	"pk": 3,
+	"fields": {
+		"title": "Innovaci\u00f3n",
+		"icon": "https://i.imgur.com/1Kzp2wJ.png",
+		"description": null,
+		"weight": 35
+	}
+}, {
+	"model": "ideas.juryassessment",
+	"pk": 4,
+	"fields": {
+		"title": "Impacto Social",
+		"icon": "https://i.imgur.com/1Kzp2wJ.png",
+		"description": null,
+		"weight": 20
+	}
+}, {
+	"model": "ideas.juryassessment",
+	"pk": 5,
+	"fields": {
+		"title": "Usabilidad",
+		"icon": "https://i.imgur.com/1Kzp2wJ.png",
+		"description": null,
+		"weight": 20
+	}
+}]

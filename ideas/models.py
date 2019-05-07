@@ -39,8 +39,11 @@ class IdeaTeamMember(models.Model):
 class JuryAssessment(models.Model):
     title = models.CharField(max_length=100)
     icon = models.URLField()
-    description = models.CharField(max_length=255, blank=True, default=True)
+    description = models.CharField(max_length=255, blank=True, null=True)
     weight = models.PositiveIntegerField(default=1)
+
+    class Meta(object):
+        ordering = ['title']
 
     def __str__(self):
         return self.title
