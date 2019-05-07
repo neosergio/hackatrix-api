@@ -9,8 +9,8 @@ app_name = 'ideas'
 
 urlpatterns = [
     path('create/', idea_creation, name='idea_creation'),
-    path('<int:idea_id>/add/team/', idea_add_team_member, name='idea_add_team_member'),
-    path('<int:idea_id>/remove/team/', idea_remove_team_member, name='idea_remove_team_member'),
+    path('<int:idea_id>/add/team/member/', idea_add_team_member, name='idea_add_team_member'),
+    path('<int:idea_id>/remove/team/member/', idea_remove_team_member, name='idea_remove_team_member'),
     path('<int:idea_id>/add/team/list/', idea_add_team_member_list, name='idea_add_team_member_list'),
     path('<int:idea_id>/detail/', idea_detail, name='idea_detail'),
     path('<int:idea_id>/validation/switch/', idea_validation_switch, name='idea_validation_switch'),
