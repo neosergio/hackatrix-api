@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import Idea, IdeaTeamMember
-from .models import JuryAssessment, JuryAssessmentIdea, ModeratorAssessment, ModeratorAssessmentIdea
+from .models import JuryAssessment, JuryAssessmentIdea
 
 
 class IdeaAdmin(admin.ModelAdmin):
@@ -20,17 +20,7 @@ class JuryAssessmentIdeaAdmin(admin.ModelAdmin):
     list_display = ('idea', 'jury', 'value')
 
 
-class ModeratorAssessmentAdmin(admin.ModelAdmin):
-    list_display = ('title', 'weight')
-
-
-class ModeratorAssessmentIdeaAdmin(admin.ModelAdmin):
-    list_display = ('idea', 'moderator', 'value')
-
-
 admin.site.register(Idea, IdeaAdmin)
 admin.site.register(IdeaTeamMember, IdeaTeamMemberAdmin)
 admin.site.register(JuryAssessment, JuryAssessmentAdmin)
 admin.site.register(JuryAssessmentIdea, JuryAssessmentIdeaAdmin)
-admin.site.register(ModeratorAssessment, ModeratorAssessmentAdmin)
-admin.site.register(ModeratorAssessmentIdea, ModeratorAssessmentIdeaAdmin)

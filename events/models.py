@@ -106,19 +106,3 @@ class RegistrantAttendance(models.Model):
     class Meta(object):
         ordering = ['attendance']
         unique_together = ('registrant', 'attendance')
-
-
-class HRAssessment(models.Model):
-    title = models.CharField(max_length=100)
-    icon = models.URLField()
-    description = models.CharField(max_length=255, blank=True, default=True)
-    weight = models.PositiveIntegerField(default=1)
-
-    def __str__(self):
-        return self.title
-
-
-class HRAssessmentRegistrant(models.Model):
-    registrant = models.ForeignKey(Registrant, on_delete=models.CASCADE)
-    evaluator = models.ForeignKey('users.User', on_delete=models.CASCADE)
-    value = models.PositiveIntegerField(default=0)

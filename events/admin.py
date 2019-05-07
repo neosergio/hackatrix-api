@@ -3,7 +3,6 @@ from import_export.admin import ImportExportMixin
 from .models import Location, Event, Track, TrackItemAgenda
 from .models import Registrant
 from .models import Attendance, RegistrantAttendance
-from .models import HRAssessment, HRAssessmentRegistrant
 
 
 class LocationAdmin(admin.ModelAdmin):
@@ -35,14 +34,6 @@ class RegistrantAttendanceAdmin(admin.ModelAdmin):
     list_display = ('attendance', 'registrant', 'registered_by', 'registered_at')
 
 
-class HRAssessmentAdmin(admin.ModelAdmin):
-    list_display = ('title', 'weight')
-
-
-class HRAssessmentRegistrantAdmin(admin.ModelAdmin):
-    list_display = ('registrant', 'evaluator', 'value')
-
-
 admin.site.register(Location, LocationAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Track, TrackAdmin)
@@ -50,5 +41,3 @@ admin.site.register(TrackItemAgenda, TrackItemAgendaAdmin)
 admin.site.register(Registrant, RegistrantAdmin)
 admin.site.register(Attendance, AttendanceAdmin)
 admin.site.register(RegistrantAttendance, RegistrantAttendanceAdmin)
-admin.site.register(HRAssessment, HRAssessmentAdmin)
-admin.site.register(HRAssessmentRegistrant, HRAssessmentRegistrantAdmin)
