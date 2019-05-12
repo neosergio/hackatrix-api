@@ -17,9 +17,11 @@ class Idea(models.Model):
     event = models.ForeignKey('events.Event', related_name='event_idea', on_delete=models.CASCADE)
     is_valid = models.BooleanField(default=False)
     max_number_of_participants = models.PositiveIntegerField(default=8)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
 
     class Meta(object):
-        ordering = ['title']
+        ordering = ['-created_at', '-id']
 
     def __str__(self):
         return self.title
