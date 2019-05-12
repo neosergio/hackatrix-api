@@ -16,7 +16,7 @@ class Idea(models.Model):
                                    null=True)
     event = models.ForeignKey('events.Event', related_name='event_idea', on_delete=models.CASCADE)
     is_valid = models.BooleanField(default=False)
-    max_number_of_participants = models.PositiveIntegerField(default=8)
+    max_number_of_participants = models.PositiveIntegerField(default=7)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
