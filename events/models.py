@@ -92,6 +92,7 @@ class Attendance(models.Model):
     is_active = models.BooleanField(default=True)
     due_date = models.DateTimeField(blank=True, null=True)
     available_from = models.DateTimeField(blank=True, null=True)
+    max_capacity = models.PositiveIntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.title

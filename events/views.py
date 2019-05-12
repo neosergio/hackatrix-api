@@ -197,10 +197,19 @@ def event_attendance_list(request):
 @permission_classes((permissions.IsAuthenticated, ))
 def event_attendance_register(request, attendance_id):
     attendance = get_object_or_404(Attendance, pk=attendance_id)
+
+    attendance_counter = len(RegistrantAttendance.objects.filter(attendance=attendance))
+    if attendance_counter >= attendance.max_capacity:
+        raise ValidationError('Capacidad máxima alcanzada')
+
     current_user = request.user
     serializer = RegistrantIdentitySerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         registrant_qr_code = serializer.validated_data['registrant_qr_code']
         registrant = get_object_or_404(Registrant, code=registrant_qr_code)
         RegistrantAttendance.objects.create(registrant=registrant, attendance=attendance, registered_by=current_user)
-        return Response(status=status.HTTP_202_ACCEPTED)
+        attendance_counter = len(RegistrantAttendance.objects.filter(attendance=attendance))
+        response = {'registrant_name': registrant.full_name,
+                    'max_capacity': attendance.max_capacity,
+                    'counter': attendance_counter}
+        return Response(response, status=status.HTTP_202_ACCEPTED)
