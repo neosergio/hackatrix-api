@@ -209,7 +209,10 @@ def event_attendance_register(request, attendance_id):
         registrant_qr_code = serializer.validated_data['registrant_qr_code']
         registrant = get_object_or_404(Registrant, code=registrant_qr_code)
         try:
-            RegistrantAttendance.objects.create(registrant=registrant, attendance=attendance, registered_by=current_user)
+            RegistrantAttendance.objects.create(
+                registrant=registrant,
+                attendance=attendance,
+                registered_by=current_user)
         except Exception as e:
             raise ValidationError("Participante ya registrado - {}".format(e))
         attendance_counter = len(RegistrantAttendance.objects.filter(attendance=attendance))
