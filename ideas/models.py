@@ -4,11 +4,11 @@ from django.db import models
 class Idea(models.Model):
     title = models.CharField(max_length=255, unique=True)
     description = models.TextField()
-    author = models.ForeignKey('events.Registrant',
-                               related_name='author_idea',
-                               on_delete=models.CASCADE,
-                               blank=True,
-                               null=True)
+    author = models.OneToOneField('events.Registrant',
+                                  related_name='author_idea',
+                                  on_delete=models.CASCADE,
+                                  blank=True,
+                                  null=True)
     written_by = models.ForeignKey('users.User',
                                    related_name='written_idea',
                                    on_delete=models.CASCADE,
