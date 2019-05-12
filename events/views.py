@@ -199,15 +199,19 @@ def event_attendance_register(request, attendance_id):
     attendance = get_object_or_404(Attendance, pk=attendance_id)
 
     attendance_counter = len(RegistrantAttendance.objects.filter(attendance=attendance))
-    if attendance_counter >= attendance.max_capacity:
-        raise ValidationError('Capacidad máxima alcanzada')
+    if attendance.max_capacity is not None:
+        if attendance_counter >= attendance.max_capacity:
+            raise ValidationError('Capacidad máxima alcanzada')
 
     current_user = request.user
     serializer = RegistrantIdentitySerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         registrant_qr_code = serializer.validated_data['registrant_qr_code']
         registrant = get_object_or_404(Registrant, code=registrant_qr_code)
-        RegistrantAttendance.objects.create(registrant=registrant, attendance=attendance, registered_by=current_user)
+        try:
+            RegistrantAttendance.objects.create(registrant=registrant, attendance=attendance, registered_by=current_user)
+        except Exception as e:
+            raise ValidationError("Participante ya registrado - {}".format(e))
         attendance_counter = len(RegistrantAttendance.objects.filter(attendance=attendance))
         response = {'registrant_name': registrant.full_name,
                     'max_capacity': attendance.max_capacity,
