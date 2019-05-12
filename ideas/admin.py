@@ -4,7 +4,7 @@ from .models import Idea, IdeaTeamMember
 
 
 class IdeaAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'event', 'is_valid', 'max_number_of_participants')
+    list_display = ('title', 'author', 'event', 'is_valid', 'max_number_of_participants', 'created_at', 'modified_at')
 
 
 class IdeaTeamMemberAdmin(admin.ModelAdmin):
