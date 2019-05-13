@@ -45,7 +45,7 @@ def idea_add_team_member(request, idea_id):
     """
     Add team member to a project / idea.
     """
-    idea = Idea.objects.get(pk=idea_id, is_valid=True)
+    idea = get_object_or_404(Idea, pk=idea_id, is_valid=True)
     serializer = RegistrantIdentitySerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         code_to_validate = serializer.validated_data['registrant_qr_code']
@@ -73,7 +73,7 @@ def idea_add_team_member_list(request, idea_id):
     """
     Add team members list to a project / idea
     """
-    idea = Idea.objects.get(pk=idea_id, is_valid=True)
+    idea = get_object_or_404(Idea, pk=idea_id, is_valid=True)
     serializer = IdeaTeamMemberBulkSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         idea_team_members = serializer.validated_data['idea_team_members']
@@ -101,7 +101,7 @@ def idea_remove_team_member(request, idea_id):
     """
     Removes team member from a project/idea
     """
-    idea = Idea.objects.get(pk=idea_id)
+    idea = get_object_or_404(Idea, pk=idea_id)
     serializer = RegistrantIdentitySerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         code_to_validate = serializer.validated_data['registrant_qr_code']
@@ -117,7 +117,7 @@ def idea_remove_team_member_list(request, idea_id):
     """
     Removes team members list to a project / idea
     """
-    idea = Idea.objects.get(pk=idea_id, is_valid=True)
+    idea = get_object_or_404(Idea, pk=idea_id, is_valid=True)
     serializer = IdeaTeamMemberBulkSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         idea_team_members = serializer.validated_data['idea_team_members']
