@@ -36,22 +36,3 @@ class IdeaTeamMember(models.Model):
         unique_together = ('idea', 'member')
         verbose_name = 'Team Member'
         verbose_name_plural = 'Groups'
-
-
-class JuryAssessment(models.Model):
-    title = models.CharField(max_length=100)
-    icon = models.URLField()
-    description = models.CharField(max_length=255, blank=True, null=True)
-    weight = models.PositiveIntegerField(default=1)
-
-    class Meta(object):
-        ordering = ['title']
-
-    def __str__(self):
-        return self.title
-
-
-class JuryAssessmentIdea(models.Model):
-    idea = models.ForeignKey(Idea, on_delete=models.CASCADE)
-    jury = models.ForeignKey('users.User', on_delete=models.CASCADE)
-    value = models.PositiveIntegerField(default=0)
