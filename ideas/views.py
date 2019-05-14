@@ -195,3 +195,15 @@ def idea_validation_switch(request, idea_id):
     idea.save()
     serializer = IdeaSerializer(idea)
     return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
+
+@api_view(['GET', ])
+@permission_classes((permissions.IsAuthenticated, ))
+def author_idea_list(request, registrant_id):
+    """
+    Returns author ideas
+    """
+    registrant = get_object_or_404(Registrant, pk=registrant_id)
+    ideas = Idea.objects.filter(author=registrant)
+    serializer = IdeaSerializer(ideas, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
