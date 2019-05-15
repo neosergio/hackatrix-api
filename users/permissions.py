@@ -11,3 +11,21 @@ class IsStaff(permissions.BasePermission):
 
     def has_permission(self, request, view):
         return request.user and request.user.is_staff
+
+
+class IsJury(permissions.BasePermission):
+
+    def has_permission(self, request, view):
+        return request.user and request.user.is_jury
+
+
+class IsFromHR(permissions.BasePermission):
+
+    def has_permission(self, request, view):
+        return request.user and request.user.is_from_HR
+
+
+class IsFromEvaluationCommittee(permissions.BasePermission):
+
+    def has_permission(self, request, view):
+        return request.user and request.user.is_from_evaluation_committee

@@ -19,11 +19,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_('date_joined'), auto_now_add=True)
 
     is_staff = models.BooleanField(_('is_staff'), default=False)
-    is_jury = models.BooleanField(default=False)
     is_moderator = models.BooleanField(default=False)
     is_active = models.BooleanField(_('is_active'), default=True)
     is_blocked = models.BooleanField(default=False)
     is_validated = models.BooleanField(default=False)
+
+    is_jury = models.BooleanField(default=False)
+    is_from_HR = models.BooleanField(default=False)
+    is_from_evaluation_committee = models.BooleanField(default=False)
 
     is_password_reset_required = models.BooleanField(default=False)
     reset_password_code = models.UUIDField(default=None, blank=True, null=True)
