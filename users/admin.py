@@ -22,7 +22,13 @@ class UserChangeForm(forms.ModelForm):
 
 class UserCustomAdmin(ImportExportMixin, BaseUserAdmin):
     form = UserChangeForm
-    list_display = ("email", "full_name", "is_staff", "is_moderator", "is_jury", "is_from_HR", "is_from_committee")
+    list_display = ("email",
+                    "full_name",
+                    "is_staff",
+                    "is_moderator",
+                    "is_jury",
+                    "is_from_HR",
+                    "is_from_evaluation_committee")
     search_fields = ['email', 'full_name']
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
@@ -39,7 +45,7 @@ class UserCustomAdmin(ImportExportMixin, BaseUserAdmin):
                                     'user_permissions')}),
         ('Evaluator', {'fields': ('is_jury',
                                   'is_from_HR',
-                                  'is_from_committee')}),
+                                  'is_from_evaluation_committee')}),
         ('Security options', {'fields': ('is_password_reset_required',
                                          'reset_password_code',
                                          'temporary_password',
