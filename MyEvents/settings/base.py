@@ -49,6 +49,7 @@ PROJECT_APPS = [
     'events.apps.EventsConfig',
     'users.apps.UsersConfig',
     'ideas.apps.IdeasConfig',
+    'assessments.apps.AssessmentsConfig',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
