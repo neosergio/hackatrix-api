@@ -29,3 +29,9 @@ class IsFromEvaluationCommittee(permissions.BasePermission):
 
     def has_permission(self, request, view):
         return request.user and request.user.is_from_evaluation_committee
+
+
+class IsProjectEvaluator(permissions.BasePermission):
+
+    def has_permission(self, request, view):
+        return request.user and (request.user.is_from_evaluation_committee or request.user.is_jury)

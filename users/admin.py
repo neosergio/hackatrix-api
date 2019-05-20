@@ -26,10 +26,10 @@ class UserCustomAdmin(ImportExportMixin, BaseUserAdmin):
                     "full_name",
                     "is_staff",
                     "is_moderator",
+                    "is_team_leader",
                     "is_jury",
                     "is_from_HR",
-                    "is_from_evaluation_committee",
-                    "is_team_leader")
+                    "is_from_evaluation_committee")
     search_fields = ['email', 'full_name']
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
@@ -39,6 +39,7 @@ class UserCustomAdmin(ImportExportMixin, BaseUserAdmin):
         ('Permissions', {'fields': ('is_superuser',
                                     'is_staff',
                                     'is_moderator',
+                                    'is_team_leader',
                                     'is_active',
                                     'is_blocked',
                                     'is_validated',
