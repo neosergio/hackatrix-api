@@ -28,7 +28,8 @@ class UserCustomAdmin(ImportExportMixin, BaseUserAdmin):
                     "is_moderator",
                     "is_jury",
                     "is_from_HR",
-                    "is_from_evaluation_committee")
+                    "is_from_evaluation_committee",
+                    "is_team_leader")
     search_fields = ['email', 'full_name']
     fieldsets = (
         (None, {'fields': ('email', 'password')}),

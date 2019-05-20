@@ -27,6 +27,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_jury = models.BooleanField(default=False)
     is_from_HR = models.BooleanField(default=False)
     is_from_evaluation_committee = models.BooleanField(default=False)
+    is_team_leader = models.BooleanField(default=False)
 
     is_password_reset_required = models.BooleanField(default=False)
     reset_password_code = models.UUIDField(default=None, blank=True, null=True)

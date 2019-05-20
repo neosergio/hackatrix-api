@@ -17,6 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
                   'is_jury',
                   'is_from_HR',
                   'is_from_evaluation_committee',
+                  'is_team_leader',
                   'is_moderator',
                   'is_blocked',
                   'is_password_reset_required')
