@@ -15,5 +15,10 @@ class ScoreSerializer(serializers.Serializer):
     value = serializers.IntegerField()
 
 
+class AssessmentResultSerializer(serializers.Serializer):
+    assessment = AssessmentSerializer()
+    value = serializers.IntegerField()
+
+
 class ScoreBulkSerializer(serializers.Serializer):
     score_list = ScoreSerializer(many=True)
