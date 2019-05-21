@@ -4,10 +4,11 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
-from .models import Assessment, ProjectAssessment
+from .models import Assessment, ProjectAssessment, RegistrantAssessment
 from .serializers import AssessmentSerializer, ScoreBulkSerializer, AssessmentResultSerializer
+from events.models import Registrant
 from ideas.models import Idea
-from users.permissions import IsProjectEvaluator
+from users.permissions import IsFromHR, IsProjectEvaluator
 
 
 @api_view(['GET', ])
@@ -64,5 +65,53 @@ def project_assessment_result(request, idea_id):
     idea = get_object_or_404(Idea, pk=idea_id)
     evaluator = request.user
     results = ProjectAssessment.objects.filter(idea=idea, evaluator=evaluator)
+    serializer = AssessmentResultSerializer(results, many=True)
+    return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
+
+@api_view(['GET', ])
+@permission_classes((IsFromHR, ))
+def registrant_assessment_list(request):
+    """
+    Returns assessment list by user
+    """
+    user = request.user
+
+    if user.is_from_HR:
+        assessments = Assessment.objects.filter(is_for_HR=True)
+        serializer = AssessmentSerializer(assessments, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['POST', ])
+@permission_classes((IsFromHR, ))
+def registrant_assessment(request, registrant_id):
+    registrant = get_object_or_404(Registrant, pk=registrant_id)
+    evaluator = request.user
+    serializer = ScoreBulkSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        score_list = serializer.validated_data['score_list']
+        for score in score_list:
+            try:
+                assessment = Assessment.objects.get(pk=score['assessment_id'])
+                RegistrantAssessment.objects.create(
+                    assessment=assessment,
+                    registrant=registrant,
+                    evaluator=evaluator,
+                    value=score['value'])
+            except Exception as e:
+                print(e)
+        return Response(status=status.HTTP_202_ACCEPTED)
+
+
+@api_view(['GET', ])
+@permission_classes((IsProjectEvaluator, ))
+def registrant_assessment_result(request, registrant_id):
+    """
+    Returns project scores
+    """
+    registrant = get_object_or_404(Registrant, pk=registrant_id)
+    evaluator = request.user
+    results = RegistrantAssessment.objects.filter(registrant=registrant, evaluator=evaluator)
     serializer = AssessmentResultSerializer(results, many=True)
     return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
