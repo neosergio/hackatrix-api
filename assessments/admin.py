@@ -15,6 +15,7 @@ class ProjectAssessmentAdmin(admin.ModelAdmin):
     list_display = ('assessment',
                     'idea',
                     'evaluator',
+                    'value',
                     'created_at',
                     'modified_at')
 
@@ -23,6 +24,7 @@ class RegistrantAssessmentAdmin(admin.ModelAdmin):
     list_display = ('assessment',
                     'registrant',
                     'evaluator',
+                    'value',
                     'created_at',
                     'modified_at')
 

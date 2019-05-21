@@ -19,6 +19,10 @@ class ProjectAssessment(models.Model):
     evaluator = models.ForeignKey('users.User', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+    value = models.PositiveIntegerField(default=0)
+
+    class Meta(object):
+        unique_together = ('assessment', 'idea', 'evaluator')
 
 
 class RegistrantAssessment(models.Model):
@@ -27,6 +31,10 @@ class RegistrantAssessment(models.Model):
     evaluator = models.ForeignKey('users.User', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+    value = models.PositiveIntegerField(default=0)
+
+    class Meta(object):
+        unique_together = ('assessment', 'registrant', 'evaluator')
 
 
 class RegistrantComment(models.Model):
@@ -35,3 +43,6 @@ class RegistrantComment(models.Model):
     registrant = models.ForeignKey('events.Registrant', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+
+    class Meta(object):
+        unique_together = ('registrant', 'comment_by')
