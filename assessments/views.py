@@ -1,10 +1,12 @@
+from django.shortcuts import get_object_or_404
 from itertools import chain
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
-from .models import Assessment
-from .serializers import AssessmentSerializer
+from .models import Assessment, ProjectAssessment
+from .serializers import AssessmentSerializer, ScoreSerializer, ScoreBulkSerializer
+from ideas.models import Idea
 from users.permissions import IsProjectEvaluator
 
 
@@ -27,3 +29,23 @@ def project_assessment_list(request):
 
     serializer = AssessmentSerializer(return_list, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['POST', ])
+@permission_classes((IsProjectEvaluator, ))
+def project_assessment(request, idea_id):
+    """
+    Assigns score to a project assessment criteria
+    """
+    idea = get_object_or_404(Idea, pk=idea_id)
+    evaluator = request.user
+    serializer = ScoreBulkSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        score_list = serializer.validated_data['score_list']
+        for score in score_list:
+            try:
+                assessment = Assessment.objects.get(pk=score['assessment_id'])
+                ProjectAssessment.objects.create(assessment=assessment, idea=idea, evaluator=evaluator, value=score['value'])
+            except Exception as e:
+                print(e)
+        return Response(status=status.HTTP_202_ACCEPTED)
