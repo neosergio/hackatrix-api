@@ -7,6 +7,7 @@ from rest_framework.response import Response
 
 from .models import Idea, IdeaTeamMember
 from .serializers import IdeaSerializer, IdeaCreationSerializer, IdeaTeamMemberBulkSerializer
+from assessments.models import ProjectAssessment
 from events.models import Event, Registrant
 from events.serializers import RegistrantIdentitySerializer
 from users.permissions import IsModerator
@@ -140,9 +141,17 @@ def idea_detail(request, idea_id):
     """
     Returns an idea detail
     """
+    response = dict()
     idea = get_object_or_404(Idea, pk=idea_id)
     serializer = IdeaSerializer(idea)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    response.update(serializer.data)
+    user = request.user
+    assessments = ProjectAssessment.objects.filter(evaluator=user, idea=idea)
+    if len(assessments) > 0:
+        response.update({'has_been_assessed': True})
+    else:
+        response.update({'has_been_assessed': False})
+    return Response(response, status=status.HTTP_200_OK)
 
 
 @api_view(['GET', ])
