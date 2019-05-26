@@ -1,0 +1,155 @@
+[{
+	"model": "assessments.assessment",
+	"pk": 1,
+	"fields": {
+		"title": "Innovaci\u00f3n",
+		"weight": 1,
+		"is_for_jury": true,
+		"is_for_evaluation_committee": true,
+		"is_for_HR": false,
+		"is_for_team_leader": false
+	}
+}, {
+	"model": "assessments.assessment",
+	"pk": 2,
+	"fields": {
+		"title": "Completitud",
+		"weight": 1,
+		"is_for_jury": false,
+		"is_for_evaluation_committee": true,
+		"is_for_HR": false,
+		"is_for_team_leader": false
+	}
+}, {
+	"model": "assessments.assessment",
+	"pk": 3,
+	"fields": {
+		"title": "Complejidad",
+		"weight": 1,
+		"is_for_jury": false,
+		"is_for_evaluation_committee": true,
+		"is_for_HR": false,
+		"is_for_team_leader": false
+	}
+}, {
+	"model": "assessments.assessment",
+	"pk": 4,
+	"fields": {
+		"title": "Repositorio",
+		"weight": 1,
+		"is_for_jury": false,
+		"is_for_evaluation_committee": true,
+		"is_for_HR": false,
+		"is_for_team_leader": false
+	}
+}, {
+	"model": "assessments.assessment",
+	"pk": 5,
+	"fields": {
+		"title": "Organizaci\u00f3n",
+		"weight": 1,
+		"is_for_jury": false,
+		"is_for_evaluation_committee": true,
+		"is_for_HR": true,
+		"is_for_team_leader": false
+	}
+}, {
+	"model": "assessments.assessment",
+	"pk": 6,
+	"fields": {
+		"title": "Presentaci\u00f3n",
+		"weight": 1,
+		"is_for_jury": true,
+		"is_for_evaluation_committee": false,
+		"is_for_HR": false,
+		"is_for_team_leader": false
+	}
+}, {
+	"model": "assessments.assessment",
+	"pk": 7,
+	"fields": {
+		"title": "Factibilidad",
+		"weight": 1,
+		"is_for_jury": true,
+		"is_for_evaluation_committee": false,
+		"is_for_HR": false,
+		"is_for_team_leader": false
+	}
+}, {
+	"model": "assessments.assessment",
+	"pk": 8,
+	"fields": {
+		"title": "Impacto social",
+		"weight": 1,
+		"is_for_jury": true,
+		"is_for_evaluation_committee": false,
+		"is_for_HR": false,
+		"is_for_team_leader": false
+	}
+}, {
+	"model": "assessments.assessment",
+	"pk": 9,
+	"fields": {
+		"title": "Usabilidad",
+		"weight": 1,
+		"is_for_jury": true,
+		"is_for_evaluation_committee": false,
+		"is_for_HR": false,
+		"is_for_team_leader": false
+	}
+}, {
+	"model": "assessments.assessment",
+	"pk": 10,
+	"fields": {
+		"title": "Trabajo en equipo",
+		"weight": 1,
+		"is_for_jury": false,
+		"is_for_evaluation_committee": false,
+		"is_for_HR": true,
+		"is_for_team_leader": false
+	}
+}, {
+	"model": "assessments.assessment",
+	"pk": 11,
+	"fields": {
+		"title": "Liderazgo y empoderamiento",
+		"weight": 1,
+		"is_for_jury": false,
+		"is_for_evaluation_committee": false,
+		"is_for_HR": true,
+		"is_for_team_leader": false
+	}
+}, {
+	"model": "assessments.assessment",
+	"pk": 12,
+	"fields": {
+		"title": "Compromiso",
+		"weight": 1,
+		"is_for_jury": false,
+		"is_for_evaluation_committee": false,
+		"is_for_HR": true,
+		"is_for_team_leader": false
+	}
+}, {
+	"model": "assessments.assessment",
+	"pk": 13,
+	"fields": {
+		"title": "Comunicaci\u00f3n",
+		"weight": 1,
+		"is_for_jury": false,
+		"is_for_evaluation_committee": false,
+		"is_for_HR": true,
+		"is_for_team_leader": false
+	}
+}, {
+	"model": "assessments.assessment",
+	"pk": 14,
+	"fields": {
+		"title": "T\u00e9cnica y calidad",
+		"weight": 1,
+		"is_for_jury": false,
+		"is_for_evaluation_committee": false,
+		"is_for_HR": true,
+		"is_for_team_leader": false
+	}
+}]
