@@ -19,6 +19,7 @@ class Idea(models.Model):
     max_number_of_participants = models.PositiveIntegerField(default=7)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=True)
 
     class Meta(object):
         ordering = ['-created_at', '-id']

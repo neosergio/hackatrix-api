@@ -152,7 +152,7 @@ def idea_list_complete(request):
     Returns full idea list
     """
     event = Event.objects.filter(is_active=True, is_featured=True).first()
-    ideas = Idea.objects.filter(event=event)
+    ideas = Idea.objects.filter(event=event, is_active=True)
     if request.GET.get('page') or request.GET.get('per_page'):
         paginator = StandardResultsSetPagination()
         results = paginator.paginate_queryset(ideas, request)
@@ -170,7 +170,7 @@ def idea_list_validated(request):
     Returns full idea validated list
     """
     event = Event.objects.filter(is_active=True, is_featured=True).first()
-    ideas = Idea.objects.filter(event=event, is_valid=True)
+    ideas = Idea.objects.filter(event=event, is_valid=True, is_active=True)
     if request.GET.get('page') or request.GET.get('per_page'):
         paginator = StandardResultsSetPagination()
         results = paginator.paginate_queryset(ideas, request)
