@@ -1,3 +1,4 @@
+from constance import config
 from django.conf import settings
 from django.core.mail import EmailMessage, send_mail
 from django.shortcuts import get_object_or_404
@@ -160,7 +161,10 @@ def registrant_identity_validation(request):
 @api_view(['POST', ])
 @permission_classes((permissions.IsAdminUser, ))
 def registrant_send_qr_code(request):
-    registrants_without_email = Registrant.objects.filter(is_email_sent=False)
+    """
+    Sends QR code to registrants emails
+    """
+    registrants_without_email = Registrant.objects.filter(is_email_sent=False)[:config.BULK_EMAIL_QUOTE]
 
     for registrant in registrants_without_email:
         subject = "[{}] Conserva tu código QR para el evento".format(registrant.event.title)
@@ -174,9 +178,24 @@ def registrant_send_qr_code(request):
         to = registrant.email
         try:
             send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+            registrant.is_email_sent = True
+            registrant.save()
         except Exception as e:
             raise ValidationError(e)
     return Response(status.HTTP_200_OK)
+
+
+@api_view(['PATCH', ])
+@permission_classes((permissions.IsAdminUser, ))
+def registrant_email_sent_flag_to_false(request):
+    """
+    Changes to false is_email_sent flag for entire registrant list.
+    """
+    registrants = Registrant.objects.all()
+    for registrant in registrants:
+        registrant.is_email_sent = False
+        registrant.save()
+    return Response(status.HTTP_202_ACCEPTED)
 
 
 @api_view(['GET', ])

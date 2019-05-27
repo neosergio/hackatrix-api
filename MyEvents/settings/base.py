@@ -190,6 +190,7 @@ CONSTANCE_CONFIG = {
                               'Team min size not reached', str),
     'USER_EMAIL_DOMAIN_RESTRICTION_FLAG': (False, 'user email domain restriction flag', bool),
     'USER_EMAIL_DOMAIN_RESTRICTION': ('belatrixsf.com', 'user email domain restriction separated with commas', str),
+    'BULK_EMAIL_QUOTE': (20, 'Number of emails per quote.', int),
 }
 
 # Passwords validators
