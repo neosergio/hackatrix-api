@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+    <table border="1">
+        <tr>
+            <th>#</th>
+            <th>Registrant Name</th>
+            <th>Registrant Email</th>
+            <th>Attendance</th>
+            <th>Registered by</th>
+            <th>Registered at</th>
+        </tr>
+        {% for record in attendances %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ record.registrant.full_name }}</a></td>
+            <td>{{ record.registrant.email }}</td>
+            <td>{{ record.attendance.title }}</td>
+            <td>{{ record.registered_by }}</td>
+            <td>{{ record.registered_at }}</td>
+        </tr>
+    {% empty %}
+        <tr><td>no content.</td></tr>
+    {% endfor %}
+    </table>
+    <p><a href="{% url 'reports:index' %}">Back</a></p>
+{% endblock content %}

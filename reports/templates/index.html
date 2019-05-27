@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Reports</h1>
+<div>
+    <h2>Featured Event</h2>
+    <p>
+    </p>
+</div>
+<div>
+    <h2>Ideas</h2>
+    <p>
+    </p>
+</div>
+<div>
+    <h2>Participants</h2>
+    <p>
+    <li><a href="{% url 'reports:attendance_list' %}">Attendance reports</a></li>
+    </p>
+</div>
+{% endblock content %}
