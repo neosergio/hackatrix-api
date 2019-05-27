@@ -30,4 +30,5 @@ urlpatterns = [
     path('ideas/', include('ideas.urls')),
     path('swagger/', schema_view),
     path('users/', include('users.urls')),
+    path('reports/', include('reports.urls')),
 ]
