@@ -1,9 +1,10 @@
 from django.contrib import admin
+from import_export.admin import ImportExportMixin
 
 from .models import Idea, IdeaTeamMember
 
 
-class IdeaAdmin(admin.ModelAdmin):
+class IdeaAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('title',
                     'author',
                     'event',
