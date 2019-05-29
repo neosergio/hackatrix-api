@@ -15,7 +15,7 @@ class IdeaAdmin(ImportExportMixin, admin.ModelAdmin):
                     'modified_at')
 
 
-class IdeaTeamMemberAdmin(admin.ModelAdmin):
+class IdeaTeamMemberAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('idea', 'member')
 
 
