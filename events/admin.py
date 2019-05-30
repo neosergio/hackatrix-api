@@ -27,7 +27,7 @@ class RegistrantAdmin(ImportExportMixin, admin.ModelAdmin):
 
 
 class AttendanceAdmin(ImportExportMixin, admin.ModelAdmin):
-    list_display = ('title', 'event', 'available_from', 'due_date', 'is_active')
+    list_display = ('title', 'event', 'available_from', 'due_date', 'is_active', 'max_capacity')
 
 
 class RegistrantAttendanceAdmin(admin.ModelAdmin):

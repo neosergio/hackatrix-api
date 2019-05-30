@@ -1,4 +1,5 @@
 from constance import config
+from datetime import datetime, timezone
 from django.conf import settings
 from django.core.mail import EmailMessage, send_mail
 from django.shortcuts import get_object_or_404
@@ -202,7 +203,11 @@ def registrant_email_sent_flag_to_false(request):
 @permission_classes((permissions.IsAuthenticated, ))
 def event_attendance_list(request):
     event = Event.objects.filter(is_active=True, is_featured=True).first()
-    attendances = Attendance.objects.filter(event=event)
+
+    attendances = Attendance.objects.filter(event=event, is_active=True)
+    attendances = attendances.filter(available_from__lte=datetime.now(timezone.utc),
+                                     due_date__gte=datetime.now(timezone.utc))
+
     if request.GET.get('page') or request.GET.get('per_page'):
         paginator = StandardResultsSetPagination()
         results = paginator.paginate_queryset(attendances, request)
