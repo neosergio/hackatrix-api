@@ -63,4 +63,156 @@
 		"is_interaction_active": true,
 		"is_active": true
 	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 1,
+	"fields": {
+		"track": 1,
+		"time": "18:30 a 19:00",
+		"text": "Llegada \u2013 registro."
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 2,
+	"fields": {
+		"track": 1,
+		"time": "19:00 a 19:15",
+		"text": "Bienvenida y presentaci\u00f3n."
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 3,
+	"fields": {
+		"track": 1,
+		"time": "19:15 a 20:00",
+		"text": "Inicio de integraci\u00f3n de equipos (micro abierto)."
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 4,
+	"fields": {
+		"track": 1,
+		"time": "20:00 a 21:00",
+		"text": "Registro de equipos e ideas."
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 5,
+	"fields": {
+		"track": 1,
+		"time": "21:00 a 21:30",
+		"text": "Coffee Break."
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 6,
+	"fields": {
+		"track": 2,
+		"time": "07:00 a 08:00",
+		"text": "Llegada \u2013 registro."
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 7,
+	"fields": {
+		"track": 2,
+		"time": "08:00 a 08:30",
+		"text": "Ingreso y desayuno."
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 8,
+	"fields": {
+		"track": 2,
+		"time": "08:45 a 09:00",
+		"text": "Bienvenida y presentaci\u00f3n del evento."
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 9,
+	"fields": {
+		"track": 2,
+		"time": "09:00 a 12:00",
+		"text": "Primera etapa de programaci\u00f3n."
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 10,
+	"fields": {
+		"track": 2,
+		"time": "10:30 a 11:00",
+		"text": "Coffee Break - Servido en mesas"
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 11,
+	"fields": {
+		"track": 2,
+		"time": "12:00 a 12:30",
+		"text": "1era. tanda de almuerzo."
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 12,
+	"fields": {
+		"track": 2,
+		"time": "12:30 a 13:00",
+		"text": "2da. tanda de almuerzo."
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 13,
+	"fields": {
+		"track": 2,
+		"time": "13:00 a 13:30",
+		"text": "3era. tanda de almuerzo."
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 14,
+	"fields": {
+		"track": 2,
+		"time": "13:30 a 17:00",
+		"text": "Segunda etapa de programaci\u00f3n."
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 15,
+	"fields": {
+		"track": 2,
+		"time": "15:30 a 16:00",
+		"text": "Coffee Break."
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 16,
+	"fields": {
+		"track": 2,
+		"time": "17:00 a 18:00",
+		"text": "Pre-evaluaci\u00f3n de equipos a cargo del Comit\u00e9 Evaluador y anuncio de equipos finalistas."
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 17,
+	"fields": {
+		"track": 2,
+		"time": "18:00 a 19:00",
+		"text": "Preparaci\u00f3n de proyectos de los equipos finalistas. (Cena solamente para los finalistas)"
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 18,
+	"fields": {
+		"track": 2,
+		"time": "19:00 a 20:00",
+		"text": "Presentaci\u00f3n de equipos finalistas."
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 19,
+	"fields": {
+		"track": 2,
+		"time": "20:00 a 20:30",
+		"text": "Premiaci\u00f3n, sorteos y cierre del evento."
+	}
 }]
