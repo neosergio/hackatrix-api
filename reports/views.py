@@ -1,3 +1,4 @@
+from constance import config
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
@@ -12,20 +13,29 @@ def index(request):
 
 @login_required()
 def attendance_list(request):
-    attendances = RegistrantAttendance.objects.all()
-    context = {'attendances': attendances}
+    if config.DISPLAY_REPORTS:
+        attendances = RegistrantAttendance.objects.all()
+        context = {'attendances': attendances}
+    else:
+        context = dict()
     return render(request, 'attendance_list.html', context)
 
 
 @login_required()
 def project_assessment(request):
-    assessments = ProjectAssessment.objects.all()
-    context = {'assessments': assessments}
+    if config.DISPLAY_REPORTS and config.DISPLAY_PROJECT_REPORTS:
+        assessments = ProjectAssessment.objects.all()
+        context = {'assessments': assessments}
+    else:
+        context = dict()
     return render(request, 'project_assessment.html', context)
 
 
 @login_required()
 def registrant_assessment(request):
-    assessments = RegistrantAssessment.objects.all()
-    context = {'assessments': assessments}
+    if config.DISPLAY_REPORTS and config.DISPLAY_REGISTRANT_REPORTS:
+        assessments = RegistrantAssessment.objects.all()
+        context = {'assessments': assessments}
+    else:
+        context = dict()
     return render(request, 'registrant_assessment.html', context)

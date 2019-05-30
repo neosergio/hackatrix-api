@@ -195,6 +195,9 @@ CONSTANCE_CONFIG = {
     'USER_EMAIL_DOMAIN_RESTRICTION_FLAG': (False, 'user email domain restriction flag', bool),
     'USER_EMAIL_DOMAIN_RESTRICTION': ('belatrixsf.com', 'user email domain restriction separated with commas', str),
     'BULK_EMAIL_QUOTE': (20, 'Number of emails per quote.', int),
+    'DISPLAY_REPORTS': (True, 'Display reports.', bool),
+    'DISPLAY_PROJECT_REPORTS': (True, 'Display project reports.', bool),
+    'DISPLAY_REGISTRANT_REPORTS': (True, 'Display registrant reports.', bool),
 }
 
 # Passwords validators
