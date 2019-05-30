@@ -55,7 +55,7 @@ class Track(models.Model):
 
 class TrackItemAgenda(models.Model):
     track = models.ForeignKey(Track, related_name='track_item', on_delete=models.CASCADE)
-    time = models.CharField(max_length=8)
+    time = models.CharField(max_length=25)
     text = models.CharField(max_length=255)
 
     class Meta(object):
