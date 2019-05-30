@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
-from assessments.models import ProjectAssessment
+from assessments.models import ProjectAssessment, RegistrantAssessment
 from events.models import RegistrantAttendance
 
 
@@ -22,3 +22,10 @@ def project_assessment(request):
     assessments = ProjectAssessment.objects.all()
     context = {'assessments': assessments}
     return render(request, 'project_assessment.html', context)
+
+
+@login_required()
+def registrant_assessment(request):
+    assessments = RegistrantAssessment.objects.all()
+    context = {'assessments': assessments}
+    return render(request, 'registrant_assessment.html', context)
