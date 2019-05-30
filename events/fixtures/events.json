@@ -14,7 +14,7 @@
 		"name": "UTEC Sede Barranco, Lima",
 		"address": "Jr, Silva 165, Barranco",
 		"latitude": "-12.1349806",
-		"longitude": "77.0264035"
+		"longitude": "-77.0264035"
 	}
 }, {
 	"model": "events.event",

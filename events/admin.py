@@ -17,7 +17,7 @@ class TrackAdmin(admin.ModelAdmin):
     list_display = ('event', 'title', 'datetime', 'details', 'location', 'is_interaction_active', 'is_active')
 
 
-class TrackItemAgendaAdmin(admin.ModelAdmin):
+class TrackItemAgendaAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('track', 'time', 'text')
 
 
@@ -26,7 +26,7 @@ class RegistrantAdmin(ImportExportMixin, admin.ModelAdmin):
     search_fields = ['email', 'full_name', 'code']
 
 
-class AttendanceAdmin(admin.ModelAdmin):
+class AttendanceAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('title', 'event', 'available_from', 'due_date', 'is_active')
 
 
