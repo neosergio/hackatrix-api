@@ -1,8 +1,9 @@
 from django.contrib import admin
+from import_export.admin import ImportExportMixin
 from .models import Assessment, ProjectAssessment, RegistrantAssessment, RegistrantComment
 
 
-class AssessmentAdmin(admin.ModelAdmin):
+class AssessmentAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('title',
                     'weight',
                     'is_for_jury',
