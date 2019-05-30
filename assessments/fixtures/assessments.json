@@ -2,9 +2,9 @@
 	"model": "assessments.assessment",
 	"pk": 1,
 	"fields": {
-		"title": "Innovaci\u00f3n",
-		"weight": 1,
-		"is_for_jury": true,
+		"title": "Innovaci\u00f3n - Comit\u00e9 Evaluador",
+		"weight": 20,
+		"is_for_jury": false,
 		"is_for_evaluation_committee": true,
 		"is_for_HR": false,
 		"is_for_team_leader": false
@@ -14,7 +14,7 @@
 	"pk": 2,
 	"fields": {
 		"title": "Completitud",
-		"weight": 1,
+		"weight": 55,
 		"is_for_jury": false,
 		"is_for_evaluation_committee": true,
 		"is_for_HR": false,
@@ -25,7 +25,7 @@
 	"pk": 3,
 	"fields": {
 		"title": "Complejidad",
-		"weight": 1,
+		"weight": 15,
 		"is_for_jury": false,
 		"is_for_evaluation_committee": true,
 		"is_for_HR": false,
@@ -36,7 +36,7 @@
 	"pk": 4,
 	"fields": {
 		"title": "Repositorio",
-		"weight": 1,
+		"weight": 5,
 		"is_for_jury": false,
 		"is_for_evaluation_committee": true,
 		"is_for_HR": false,
@@ -47,10 +47,10 @@
 	"pk": 5,
 	"fields": {
 		"title": "Organizaci\u00f3n",
-		"weight": 1,
+		"weight": 5,
 		"is_for_jury": false,
 		"is_for_evaluation_committee": true,
-		"is_for_HR": true,
+		"is_for_HR": false,
 		"is_for_team_leader": false
 	}
 }, {
@@ -58,7 +58,7 @@
 	"pk": 6,
 	"fields": {
 		"title": "Presentaci\u00f3n",
-		"weight": 1,
+		"weight": 5,
 		"is_for_jury": true,
 		"is_for_evaluation_committee": false,
 		"is_for_HR": false,
@@ -69,7 +69,7 @@
 	"pk": 7,
 	"fields": {
 		"title": "Factibilidad",
-		"weight": 1,
+		"weight": 20,
 		"is_for_jury": true,
 		"is_for_evaluation_committee": false,
 		"is_for_HR": false,
@@ -80,7 +80,7 @@
 	"pk": 8,
 	"fields": {
 		"title": "Impacto social",
-		"weight": 1,
+		"weight": 20,
 		"is_for_jury": true,
 		"is_for_evaluation_committee": false,
 		"is_for_HR": false,
@@ -91,7 +91,7 @@
 	"pk": 9,
 	"fields": {
 		"title": "Usabilidad",
-		"weight": 1,
+		"weight": 20,
 		"is_for_jury": true,
 		"is_for_evaluation_committee": false,
 		"is_for_HR": false,
@@ -102,7 +102,7 @@
 	"pk": 10,
 	"fields": {
 		"title": "Trabajo en equipo",
-		"weight": 1,
+		"weight": 10,
 		"is_for_jury": false,
 		"is_for_evaluation_committee": false,
 		"is_for_HR": true,
@@ -113,7 +113,7 @@
 	"pk": 11,
 	"fields": {
 		"title": "Liderazgo y empoderamiento",
-		"weight": 1,
+		"weight": 10,
 		"is_for_jury": false,
 		"is_for_evaluation_committee": false,
 		"is_for_HR": true,
@@ -124,7 +124,7 @@
 	"pk": 12,
 	"fields": {
 		"title": "Compromiso",
-		"weight": 1,
+		"weight": 10,
 		"is_for_jury": false,
 		"is_for_evaluation_committee": false,
 		"is_for_HR": true,
@@ -135,7 +135,7 @@
 	"pk": 13,
 	"fields": {
 		"title": "Comunicaci\u00f3n",
-		"weight": 1,
+		"weight": 10,
 		"is_for_jury": false,
 		"is_for_evaluation_committee": false,
 		"is_for_HR": true,
@@ -146,10 +146,32 @@
 	"pk": 14,
 	"fields": {
 		"title": "T\u00e9cnica y calidad",
-		"weight": 1,
+		"weight": 50,
 		"is_for_jury": false,
 		"is_for_evaluation_committee": false,
 		"is_for_HR": true,
+		"is_for_team_leader": false
+	}
+}, {
+	"model": "assessments.assessment",
+	"pk": 15,
+	"fields": {
+		"title": "Organizacion - HR",
+		"weight": 10,
+		"is_for_jury": false,
+		"is_for_evaluation_committee": false,
+		"is_for_HR": false,
+		"is_for_team_leader": false
+	}
+}, {
+	"model": "assessments.assessment",
+	"pk": 16,
+	"fields": {
+		"title": "Innovaci\u00f3n",
+		"weight": 35,
+		"is_for_jury": true,
+		"is_for_evaluation_committee": false,
+		"is_for_HR": false,
 		"is_for_team_leader": false
 	}
 }]
