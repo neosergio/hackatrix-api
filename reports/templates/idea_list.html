@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+    <table border="1">
+        <tr>
+            <th>#</th>
+            <th>Idea</th>
+            <th>Description</th>
+            <th>Author</th>
+            <th>Written by</th>
+            <th>Valid</th>
+            <th>Created at</th>
+            <th>Modified at</th>
+            <th>Active</th>
+        </tr>
+        {% for record in ideas %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ record.title }}</a></td>
+            <td>{{ record.description }}</td>
+            <td>{{ record.author.full_name }}</td>
+            <td>{{ record.written_by }}</td>
+            <td>{{ record.is_valid }}</td>
+            <td>{{ record.created_at }}</td>
+            <td>{{ record.modified_at }}</td>
+            <td>{{ record.is_active }}</td>
+        </tr>
+    {% empty %}
+        <tr><td>no content.</td></tr>
+    {% endfor %}
+    </table>
+    <p><a href="{% url 'reports:index' %}">Back</a></p>
+{% endblock content %}
