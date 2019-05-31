@@ -15,6 +15,7 @@ django-import-export = "*"
 django-rest-swagger = "==2.2.0"
 pyyaml = "*"
 django-constance = {extras = ["database"],version = "*"}
+django-mathfilters = "*"
 
 [requires]
 python_version = "3.7.3"

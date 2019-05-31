@@ -43,6 +43,7 @@ THIRD_PARTY_APPS = [
     'rest_framework_swagger',
     'constance',
     'constance.backends.database',
+    'mathfilters',
 ]
 
 PROJECT_APPS = [

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load mathfilters %}
 {% block content %}
     <table border="1">
         <tr>
@@ -7,6 +8,7 @@
             <th>Assessments</th>
             <th>Assessments weight</th>
             <th>Value</th>
+            <th>Total</th>
             <th>Evaluator email</th>
             <th>Created at</th>
         </tr>
@@ -17,6 +19,7 @@
             <td>{{ record.assessment.title }}</td>
             <td>{{ record.assessment.weight }}</td>
             <td>{{ record.value }}</td>
+            <td>{{ record.value|mul:record.assessment.weight }}</td>
             <td>{{ record.evaluator.email }}</td>
             <td>{{ record.created_at }}</td>
         </tr>
