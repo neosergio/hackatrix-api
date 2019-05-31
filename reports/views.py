@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from assessments.models import ProjectAssessment, RegistrantAssessment
 from events.models import RegistrantAttendance
+from ideas.models import IdeaTeamMember
 
 
 @login_required()
@@ -49,3 +50,13 @@ def registrant_assessment(request):
     else:
         context = dict()
     return render(request, 'registrant_assessment.html', context)
+
+
+@login_required()
+def registrant_list_by_project(request):
+    if config.DISPLAY_REPORTS and config.DISPLAY_PROJECT_REPORTS:
+        teams = IdeaTeamMember.objects.all()
+        context = {'teams': teams}
+    else:
+        context = dict()
+    return render(request, 'registrant_list_by_project.html', context)
