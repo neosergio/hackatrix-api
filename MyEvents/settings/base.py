@@ -198,6 +198,7 @@ CONSTANCE_CONFIG = {
     'BULK_EMAIL_QUOTE': (20, 'Number of emails per quote.', int),
     'DISPLAY_REPORTS': (True, 'Display reports.', bool),
     'DISPLAY_PROJECT_REPORTS': (True, 'Display project reports.', bool),
+    'DISPLAY_JURY_REPORTS': (True, 'Display jury reports', bool),
     'DISPLAY_REGISTRANT_REPORTS': (True, 'Display registrant reports.', bool),
 }
 

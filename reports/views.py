@@ -22,9 +22,19 @@ def attendance_list(request):
 
 
 @login_required()
-def project_assessment(request):
+def project_assessment_by_evaluation_committee(request):
     if config.DISPLAY_REPORTS and config.DISPLAY_PROJECT_REPORTS:
         assessments = ProjectAssessment.objects.all()
+        context = {'assessments': assessments}
+    else:
+        context = dict()
+    return render(request, 'project_assessment.html', context)
+
+
+@login_required()
+def project_assessment_by_jury(request):
+    if config.DISPLAY_REPORTS and config.DISPLAY_JURY_REPORTS:
+        assessments = ProjectAssessment.objects.filter(assessment__is_for_jury=True)
         context = {'assessments': assessments}
     else:
         context = dict()
