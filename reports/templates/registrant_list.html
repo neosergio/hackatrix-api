@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+    <table border="1">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+        {% for record in registrants %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ record.full_name }}</a></td>
+            <td><a href="{% url 'events:registrant_qr_code' email=record.email %}">{{ record.email }}</a></td>
+        </tr>
+    {% empty %}
+        <tr><td>no content.</td></tr>
+    {% endfor %}
+    </table>
+    <p><a href="{% url 'reports:index' %}">Back</a></p>
+{% endblock content %}

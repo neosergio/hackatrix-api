@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 from assessments.models import ProjectAssessment, RegistrantAssessment
-from events.models import RegistrantAttendance
+from events.models import Registrant, RegistrantAttendance
 from ideas.models import IdeaTeamMember, Idea
 
 
@@ -60,6 +60,16 @@ def registrant_assessment(request):
     else:
         context = dict()
     return render(request, 'registrant_assessment.html', context)
+
+
+@login_required()
+def registrant_list(request):
+    if config.DISPLAY_REPORTS and config.DISPLAY_REGISTRANT_REPORTS:
+        registrants = Registrant.objects.all()
+        context = {'registrants': registrants}
+    else:
+        context = dict()
+    return render(request, 'registrant_list.html', context)
 
 
 @login_required()
