@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+    <table border="1">
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Event</th>
+            <th>Max Capacity</th>
+        </tr>
+        {% for record in attendances %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td><a href="{% url 'reports:attendance_list_by_id' attendance_id=record.pk %}">{{ record.title }}</a></td>
+            <td>{{ record.event }}</td>
+            <td>{{ record.max_capacity }}</td>
+        </tr>
+    {% empty %}
+        <tr><td>no content.</td></tr>
+    {% endfor %}
+    </table>
+    <p><a href="{% url 'reports:index' %}">Back</a></p>
+{% endblock content %}
