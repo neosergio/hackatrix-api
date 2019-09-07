@@ -2,15 +2,16 @@
 	"model": "ideas.idea",
 	"pk": 1,
 	"fields": {
-		"title": "Agro IoT",
-		"description": "Sistema en arduino para ver cultivos en tiempo real",
+		"title": "Aprendiendo +",
+		"description": "\"Es un proyecto social que tiene como nombre \"\" Learning + \"\" , este consiste en brindar educaci\u00f3n variada a publico en generar sin distinci\u00f3n alguna, las clases que se dicten  son temas que los usuarios elijen que tema desearian aprender y nosotros preparamos las clases y lo sistematizamos por partes y para que todo el publico pueda aprender, (por ejemplo como funciona  el internet ),   unavez elejido el tema lo pasamos a un formato de edu-entretenimiento y dictamos las clases, lo interesante que estas clases pueden darse en un lugar o ser trasladada. esto genera una comunidad ( es aqui donde generamos un foro y comunidad, fomentada por calificacion y hacer  \"\"networking\"\") este proyecto es viable ya que la materia prima seran los estudiantes de ultimos ciclos ,segun el tema a dar. a cambio de hroas de practicas y obviamente pasaria con nuestros filtros y apoyos para sintetizar mejor las clases, no obtante se busca generar mas relaciones para poder contar con empositores propios de empresas.\n\nrecalco el formato de edu-entretenimiento y utilizamos la neurociencia para incrementar  lo aprendido,no aplicamos una malla curricular estricta. \n el \"\" alumno\"\" sea dicho , asiste a las clases y amplia sus conocimientos, ayudamos a los jovenes a conocer las carreras que existen y en que consiste e incluso a ser emprendedores. no obstante cabe mencionar que se obtiene sponsor para  ayudar economicamente al proyecto.\n\"",
 		"author": null,
-		"event": 1,
+		"written_by": null,
+		"event": null,
 		"is_valid": true,
-		"max_number_of_participants": 8,
-		"created_at": "2019-09-07T14:11:41.817Z",
-		"modified_at": "2019-09-07T14:11:41.817Z",
-		"is_active": true
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:01:00Z",
+		"modified_at": "2019-09-07T14:25:54.079Z",
+		"is_active": false
 	}
 }, {
 	"model": "ideas.idea",
@@ -19,11 +20,657 @@
 		"title": "Ahorro Redondo",
 		"description": "Generar ahorro a trav\u00e9s del redondeo de c\u00e9ntimos o soles de los pagos. Cada vez que hagamos un pago mediante la aplicaci\u00f3n esta aplicar\u00e1 un redondeo (a un monto mayor) y este redondeo se ir\u00e1 a otra cuenta de ahorros para ahorrar sin darnos cuenta.",
 		"author": null,
-		"event": 1,
+		"written_by": null,
+		"event": null,
 		"is_valid": true,
 		"max_number_of_participants": 8,
 		"created_at": "2019-09-07T14:11:41.817Z",
-		"modified_at": "2019-09-07T14:11:41.817Z",
+		"modified_at": "2019-09-07T14:26:23.753Z",
+		"is_active": true
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 55,
+	"fields": {
+		"title": "QODE",
+		"description": "Buscador de servicios que implementan pol\u00edticas inclusivas con el fin de prevenir casos de discriminaci\u00f3n, proveyendo a las personas acceso a espacios justos e igualitarios que cubran sus necesidades.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.075Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 56,
+	"fields": {
+		"title": "Coditec",
+		"description": "Red social de micro crowdfunding para peque\u00f1os/medianos proyectos sociales. Su objetivo es facilitar la b\u00fasqueda de financiamiento para obras sociales que deseemos iniciar, solucionando alg\u00fan problema social como educaci\u00f3n, alimentaci\u00f3n, animales en abandono, etc.\nEl beneficio es la creaci\u00f3n de una comunidad de apoyo mutuo que no se limita por la falta de dinero para poder apoyar una obra social debido a la facilidad de poder realizar donaciones con solo un clic y poseen las herramientas para promocionar dichas iniciativas pues muchas de las campa\u00f1as buscaran mediante gamification que se compartan y obtengan as\u00ed una mayor exposici\u00f3n.\nDato: Todas las donaciones ser\u00e1n transparentes, lo recaudado sera canjeado por productos y no retirado en dinero, documentacion fotogr\u00e1fica por parte del iniciador para constatar a sus apoyadores que se realizo la obra social y que los primeros donadores sean conocidos directos del iniciador de la campa\u00f1a y personas relativas de los conocidos.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.072Z",
+		"is_active": true
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 57,
+	"fields": {
+		"title": "CodeHunters Lab",
+		"description": "Desarrollo de una plataforma (web + app) basada en geolocalizaci\u00f3n para el monitoreo y prevenci\u00f3n de delitos utilizando geoestad\u00edstica e inteligencia artificial. Los usuarios podr\u00e1n registrar incidentes delictivos, ver en tiempo real el nivel de riesgo de la zona donde se ubican y reportarlo a las autoridades mediante la aplicaci\u00f3n. Las autoridades podr\u00e1n acceder a una plataforma para el monitoreo de los reportes en tiempo real y toma de decisiones.\nTecnolog\u00eda base para el desarrollo del prototipo \nFlutter para el desarrollo de la aplicaci\u00f3n m\u00f3vil \nFirebase para el modelamiento y despliegue de la base de datos \nPython/Django para el desarrollo backend de la plataforma \nPygeostat y Scikit para el an\u00e1lisis geoestad\u00edstico espacio-tiempo y la construcci\u00f3n de modelos predictivos",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.069Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 58,
+	"fields": {
+		"title": "Eco-Team",
+		"description": "App de Gesti\u00f3n de Reciclaje \nSeremos un sistema integrado que conectar\u00e1 a los centros de acopio (chatarrerias) y a la poblaci\u00f3n mediante el uso de la geolocalizaci\u00f3n. Adem\u00e1s, trabajaremos con un sistema de beneficios que permitir\u00e1 intercambiar materiales reciclables por productos y servicios. \n\nObjetivo: Promover y facilitar el reciclaje en la poblaci\u00f3n, brindando soluciones tecnol\u00f3gicas que simplifiquen el proceso. \n\nBeneficio a la sociedad: Crear una cultura de reciclaje, que conllevar\u00e1 a futuro a disminuir la contaminaci\u00f3n en el medio ambiente.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": false,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.066Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 59,
+	"fields": {
+		"title": "Shield",
+		"description": "Creaci\u00f3n de una aplicaci\u00f3n m\u00f3vil que permita a los usuarios (poblaci\u00f3n vulnerable) compartir sus comentarios, fotos, v\u00eddeos e incluso dar un puntaje sobre lugares p\u00fablicos y privados donde hayan asistido o quieran asistir, con el objetivo de generar un directorio que les provea un alcance de las condiciones del local (infraestructura, calidad de atenci\u00f3n) y si esta cumple con las comodidades m\u00ednimas para las personas con alg\u00fan tipo de discapacidad f\u00edsica.\n\nEl aplicativo contar\u00e1 con un panel con los lugares recomendados cerca a la ubicaci\u00f3n geogr\u00e1fica del usuario, tambi\u00e9n contar\u00e1 con un buscador de lugares por categor\u00edas, mejor puntaje, y comentarios.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.063Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 60,
+	"fields": {
+		"title": "First Step",
+		"description": "Herramienta de aprovechamiento de recursos con\nideas innovadoras para que los pobladores puedan\nimpulsar el mercado de la agricultura, apalanc\u00e1ndose\nde las Tecnolog\u00edas de la Informaci\u00f3n. Crear un m\u00f3dulo de gesti\u00f3n de usuarios, como el registro, actualizaci\u00f3n y visualizaci\u00f3n, ya sea tanto para estudiantes como para especialistas en agronom\u00eda, \nagr\u00f3nomos, ingenieros agr\u00f3nomos y asistentes administrativos.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.060Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 61,
+	"fields": {
+		"title": "Elitpro",
+		"description": "Crear una aplicacion web y mobile para ayudar a personas sin conocimiento profesional a buscar trabajos segun su ubicaci\u00f3n y sus habilidades, ayudando a personas sin trabajo a encontrarlo de una manera m\u00e1s r\u00e1pida.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.057Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 62,
+	"fields": {
+		"title": "Team Reactivo",
+		"description": "Nombre de idea: Reorganic\nDescripci\u00f3n: Aplicaci\u00f3n movil que permite reciclar residuos organicos del hogar, obteniendo beneficios, estos ser\u00edan productos agr\u00edcolas (Frutas, verduras, etc) de estaci\u00f3n de acuerdo al peso del reciclaje entregado.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.054Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 63,
+	"fields": {
+		"title": "OmniCC",
+		"description": "Generar una plataforma de expresividad ciudadana sobre servicios ciudadanos, como \"falta de sem\u00e1foros o sem\u00e1foros malogrados\", carreteras en mal estado, mala gesti\u00f3n de tachos de basura o centros de reciclaje, centros de serenazgo y otros servicios mas. Objetivo: Generar data publica sobre puntos localizados que reporten mayor demanda de fiscalizaci\u00f3n de servicios, que pueda ser usada por diferentes entidades como municipios o universidades, para mejorar la gesti\u00f3n de recursos del estado. Beneficio Social: Crear una comunidad de fiscalizaci\u00f3n de servicios.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.051Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 64,
+	"fields": {
+		"title": "Yo Soy Root",
+		"description": "SAM: Servicios y Actividades para el Adulto Mayor\n\nEn el Per\u00fa de 32 millones de habitantes el 11,9% de la poblaci\u00f3n son mayores a 60 a\u00f1os, actualmente es poco eficiente la informaci\u00f3n de actividades recreativas y servicios para ellos.\n\nSAM es una plataforma web (marketplace) de actividades y servicios para al Adulto Mayor. \n\nCuenta con un buscador por intereses y ubicaci\u00f3n donde los adultos mayores o familiares encontraran actividades gratuitas de las ONG\u00b4S, municipales o del sector privado.\n\nEl resultado es divulgar el mayor cat\u00e1logo de actividades y servicios para el adulto mayor y brindarles una alegr\u00eda para las familias.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.048Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 65,
+	"fields": {
+		"title": "Alerta Social",
+		"description": "Alerta Ciudadano: Proteger a tu familia y estar protegidos en comunidad.\n- Env\u00eda inmediatamente alertas a todas las personas/grupos. \n- Tomar fotopapeletas por parte del ciudadano y seran deribadas a su municipalidad para procesarlas.\n- Crear grupos conformados familiar/amigos/vecinos para reportar alguna incidencia y mandar imagenes/video.\n- Llama a las autoridades locales o al n\u00famero Nacional de Emergencias.\n- Muro de Noticias donde saldr\u00e1n todas los reportes m\u00e1s recientes.\nObjetivo: Reducir la delincuencia, mantenernos alertas frente a cualquier hecho delictivo\nBeneficio: Unir a una gran variedad de personas para combatir, reportar informaci\u00f3n.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.044Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 66,
+	"fields": {
+		"title": "Yachasun",
+		"description": "Nuestro proyecto se basa en la creaci\u00f3n de un aplicativo web, en la que se realizaran cursos de alfabetizaci\u00f3n y cursos para las personas que desean terminar su primaria o secundaria completa. En nuestro aplicativo tendran las indicaciones y el proceso a seguir, para que puedan obtener el certificado de primaria o secundaria a nombre del Ministerio de Educaci\u00f3n, que valide con notas aprobatorias. De esta manera disminuir el analfabetismo en el Per\u00fa. Tambi\u00e9n para que las personas puedan continuar con estudios superiores o tengan trabajos estables bajo planilla y todos los beneficios de la ley.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.041Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 67,
+	"fields": {
+		"title": "Dracarys",
+		"description": "Un asistente virtual (App) para docentes que diagnostica el desempe\u00f1o de cada estudiante mediante pruebas aplicando gamificaci\u00f3n. Ayudando al docente a evaluar y personalizar el material educativo de acuerdo a sus resultados. Con la finalidad de potenciar las habilidades m\u00faltiples de los estudiantes para una educaci\u00f3n igualitaria.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.038Z",
+		"is_active": true
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 68,
+	"fields": {
+		"title": "The seven deadly sins",
+		"description": "El app va a mostrar las ciclov\u00edas m\u00e1s importantes de la ciudad y los lugares donde parquearla.\n\nPara incentivar el uso de bicicletas en la ciudad mostraremos cu\u00e1ntos kil\u00f3metros recorre el usuario y cuantos kilogramos de co2 ayuda a reducir por cada viaje que hace(integraci\u00f3n con apps tipo strava, fitbit u otra para sacar los km del usuario por motivo de la hackathon solo se usar\u00e1 strava).\nSe le mostrara su personal best(mayor cantidad de km y tiempo recorrido).\nSe le propondr\u00e1n metas(150km felicidades hiciste un viajr a huacho y contribuiste en x cantidad de co2).",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.035Z",
+		"is_active": true
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 69,
+	"fields": {
+		"title": "Maker's",
+		"description": "App para ayudar a personas sordomudas a interactuar con su entorno de manera r\u00e1pida y amigable, promoviendo la inclusi\u00f3n social . Mediante tecnolog\u00eda de IBM Watson(visual recognition, speach to text, text to speach) y recopilaci\u00f3n del Alfabeto Gallaudet se lograr\u00e1 crear la soluci\u00f3n.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.032Z",
+		"is_active": true
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 70,
+	"fields": {
+		"title": "Unity",
+		"description": "\u00a1Queremos cambiar el mundo!, el proyecto se trata de un juego que tiene como misi\u00f3n eliminar las barreras de estereotipos con los que ya hemos crecido muchos y que a la larga genera inseguridad y muchas veces violencia, el juego integra busca integrar a la familia, padres con hijos, alumnos y profesores, la idea es cambiar el estado de un monstruo generado por los estereotipos, de este modo el padre ense\u00f1a al ni\u00f1o como se combate con un lenguaje empatico y asertivo (en cuanto aprovecha el tiempo con su hijo usando la tecnolog\u00eda de la mejor manera) estos mounstruos, tienen una historia que sirve como lectura previa al juego, la idea esta validada buscaremos desarrollarla mas precisa para la hackatrix, el objetivo es crear una mejor sociedad empezando por los ni\u00f1os a trav\u00e9s de la gamificaci\u00f3n, la sociedad aprende sobre igualdad ganaremos una sociedad con mas sentido com\u00fan, crearemos y viralizaremos el uso del app con reconocimientos por cada fase ganada.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.029Z",
+		"is_active": true
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 71,
+	"fields": {
+		"title": "Second Chance",
+		"description": "Los reclusos de Maranguita al cumplir su condena salen sin antecedentes penales pero aun as\u00ed es dif\u00edcil en algunos casos que se reincorporen a la sociedad. Dentro del reformatorio brindan talleres para los j\u00f3venes en los que aprenden de programaci\u00f3n, joyer\u00eda, carpinter\u00eda, entre otros. Queremos crear una plataforma web donde los reclusos del reformatorio puedan ofrecer sus productos, esto a parte de ayudarlos a reincorporarse nuevamente a la sociedad, los ayuda gener\u00e1ndoles ingresos ya sea para cubrir las reparaciones civiles que deben pagar, ayudar a sus familiares, entre otros.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.026Z",
+		"is_active": true
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 72,
+	"fields": {
+		"title": "MakerHack",
+		"description": "Un aplicativo que permite mostrar a los turistas; \nLugares de comida 100% tradicional , muchos turistas no conocen la comida tradicional por eso mostraremos cuales son y donde venden de acuerdo al precio y localizaci\u00f3n donde se encuentre apoyando al comercio local. \nHospedajes. mostremos los hospedajes que se ubican en la comunidades para apoyar su comercio. (precio y localizaci\u00f3n) \nGu\u00edas locales. Apoyamos a mostrar los servicios de personas locales que trabajan como gu\u00edas por su amplio conocimiento en su localidad. \nLugares tur\u00edsticos. Queremos mostrar lugares tur\u00edsticos reconocidos y los lugares tur\u00edsticos no tan visibles por los turistas extranjeros pero si los locales para apoyar el comercio local. \n\nCon este aplicativo y sus funciones aparte de fomentar el turismo de nuestro pa\u00eds , queremos apoyar a los comercios de las comunidades para puedan mostrarse y tener un mayor ingresos que beneficie a las familias que viven con esto y no tienen mucho conocimiento de como darse a conocer. \nCon el tiempo y con la informaci\u00f3n que podamos tener como recomendaciones , podemos ayudarlos a hacer crecer su negocios.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.023Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 73,
+	"fields": {
+		"title": "E-space",
+		"description": "Desarrollar un sistema Web enfocado a la ayuda de personas con alguna discapacidad motora en nuestro pa\u00eds, con el objetivo de darle un espacio virtual en el cual puedan encontrar temas de inter\u00e9s(gu\u00edas audiovisuales, textos, etc) lo cual se har\u00e1 realidad construyendo una comunidad de personas que quieran ser parte de esta ayuda (psic\u00f3logos, clouns, doctores, docentes, etc) quienes se registrar\u00e1n y as\u00ed podr\u00e1n contribuir en este proyecto, Beneficiando as\u00ed a la inclusi\u00f3n de las personas con alguna discapacidad motora a nuestra sociedad",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.020Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 74,
+	"fields": {
+		"title": "ChacalSoft",
+		"description": "YO TE ALIMENTO \nA trav\u00e9s del portal web los restaurantes y/o beneficiarios que se acercan al final de su jornada laboral y posean comida sobrante ofertaran los platos a un precio popular y/o gratuito favoreciendo a las personas de bajos recursos y/o necesitadas.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.017Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 75,
+	"fields": {
+		"title": "Ecolec",
+		"description": "\"Ecolec\" es una herramienta tecnol\u00f3gica de apoyo para al reciclaje de material inorg\u00e1nico. \nUna aplicaci\u00f3n m\u00f3vil para la familia que le permite afiliarse al programa de reciclaje vecinal adem\u00e1s de notificar \ncuando ya cuenta con material inorg\u00e1nico listo para ser recogido. \nUna aplicaci\u00f3n m\u00f3vil para el reciclador que le permite visualizar la ubicaci\u00f3n de las familias y si estas ya cuentan \ncon material inorg\u00e1nico para ser recogido. \n\nTecnolog\u00edas utilizadas: \n- Geolocalizaci\u00f3n \n- Realidad Aumentada \n- RealTime \n\n#Objetivo y beneficio a la sociedad: \nPromover el reciclaje de desperdicios inorg\u00e1nicos con el apoyo del municipio y los vecinos. \nUtilizar el programa de Bono verde que promueve el Ministerio del Ambiente para con los municipios y gobiernos regionales como \nincentivo para el reciclaje en el vecindario.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.014Z",
+		"is_active": true
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 76,
+	"fields": {
+		"title": "HackingCode",
+		"description": "Se propone desarrollar una plataforma que permita a las empresas ser parte de los B Corporations (empresas comprometidas con el desarrollo social y ambiental). El objetivo de la plataforma es poder conectar a los diversos sectores industriales y comerciales con grupos de personas (sectores comunales), para realizar ciertos trabajos como parte de sus procesos productivos de menor escala, beneficiando de esta manera, tanto a las empresas (siendo el primer paso para conseguir una certificaci\u00f3n por responsabilidad social; lo cual los convertir\u00eda en buenos prospecto para futuras negociaciones con empresas m\u00e1s grandes) y a la comunidad (ofreci\u00e9ndoles trabajo por el servicio que se realizar\u00e1; adem\u00e1s de las capacitaciones que se les brindar\u00e1 para su buen desempe\u00f1o).",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.011Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 77,
+	"fields": {
+		"title": "AdaThink Lab",
+		"description": "Alexa assistant es el asistente ideal de clases \"la mano derecha del profesor\" el cual te motiva a seguir estudiando, haciendo m\u00e1s divertido las tareas en casa, esta desarrollado con la tecnolog\u00eda de IBM, Google home, phyton, adobe y realidad aumentada en unity.El p\u00fablico objetivo son personas de todas las edades, que tenga las ganas de aprender, el asistente va a responder de manera did\u00e1ctica saciando todas las inquietudes.\nhttps://www.youtube.com/watch?v=ss2437a0maY&feature=youtu.be",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.007Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 78,
+	"fields": {
+		"title": "Laboratorianhackers",
+		"description": "Reporte de problemas en el distrito. Es importante comunicar los problemas en tiempo real, en esta aplicaci\u00f3n permitiremos al vecino reportar y visualizar, las incidencias que se generan dentro del distrito. \nPara que as\u00ed el municipio se informe a tiempo y pueda tomar acci\u00f3n.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.004Z",
+		"is_active": true
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 79,
+	"fields": {
+		"title": "Access Denied",
+		"description": "Segunda Oportunidad\nExiste un gran problema de contaminaci\u00f3n a nivel global y nosotros podemos ser los h\u00e9roes que salven el planeta, es hora de ponernos a trabajar y comenzar a darle un segundo uso a las cosas que no necesitamos o desechamos.\nNuestra propuesta busca cambiar los h\u00e1bitos relacionadas al desecho de objetos propiciando una cultura de reciclaje y donaci\u00f3n a las personas m\u00e1s necesitadas contribuyendo de esta manera a reducir a la contaminaci\u00f3n de nuestro planeta y disminuir la pobreza.\nNuestro sistema permitir\u00e1 a personas y empresas registrar los bienes que deseen obsequiar para que otra persona lo pueda usar, luego de registrado el producto se puede seleccionar a las instituciones o personas beneficiarias. Asimismo, se podr\u00e1 identificar y conocer un poco m\u00e1s a las personas que han sido apoyadas gracias a las contribuciones voluntarias con el fin de sensibilizar y crear lazos, existir\u00e1n, premios, descuentos y niveles entre nuestros h\u00e9roes para que todos nos podamos enterar de su ayuda.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:54.001Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 80,
+	"fields": {
+		"title": "Jobber ON",
+		"description": "Jobber On\n\nEl aplicativo Jobber On es un aplicativo que busca un gran impacto social en los j\u00f3venes entre 18 y 32 a\u00f1os, el cual se ocupa de buscar trabajo a las personas, en un tiempo libre, este aplicativo multiplataforma.\nEl cual reducir\u00e1 la tasa de desempleos en un gran porcentaje\n\nC\u00f3mo funciona:\n+ El usuario coloca su CV en el aplicativo multiplataforma y Jobber On se encarga de hacer el match respectivo\n+ Jobber On recolectar\u00e1 los datos de las empresas\n\nBeneficios:\n+ Usando Jobber On tu no buscas trabajo, el aplicativo multiplataforma lo hace por ti\n+ Jobber On te ofrecer\u00e1 cursos de capacitaci\u00f3n totalmente gratis dentro de la plataforma\n\nBeneficio para Estudiantes:\n+ Empezar a realizar tus primeras pr\u00e1cticas profesionales",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-05-28T14:42:00Z",
+		"modified_at": "2019-09-07T14:25:53.998Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 83,
+	"fields": {
+		"title": "Smart trash tributario",
+		"description": "Reciclaje de botellas de pl\u00e1stico con el objetivo de obtener puntos para descuentos por papeletas de tr\u00e1nsito e impuesto tributario.\nEl objetivo principal es enfocarnos en demostrarla comunicaci\u00f3n entre los tachos recolectores y un sistema principal.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-06-01T00:48:00Z",
+		"modified_at": "2019-09-07T14:25:53.995Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 84,
+	"fields": {
+		"title": "Cuidana",
+		"description": "App que permita armar una red de personas interesadas en controlar los horarios y dosis de las medicinas que toman amigos y familiares",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-06-01T01:00:00Z",
+		"modified_at": "2019-09-07T14:25:53.992Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 86,
+	"fields": {
+		"title": "Donalo.Pe",
+		"description": "Plataforma we que contacta donantes de ropa ortopedia juguetes etc con instituciones ongs",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-06-01T01:02:00Z",
+		"modified_at": "2019-09-07T14:25:53.989Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 87,
+	"fields": {
+		"title": "EcoPer\u00fa",
+		"description": "Realizar una comunidad que trabajando colaborativamente se aporte en el aplicativo a realizar. El aplicativo consiste en identificar y geolocalizar la basura que se encuentran acumuladas en determinados lugares, por medio de reportes que realiza cada una de las personas de la comunidad, as\u00ed como visualizar un mapa de mayor concentraciones de basura. Por otra parte, concientizar a las personas al reciclaje. Los datos recopilados de este aplicativo podr\u00e1 servir para mejoras que necesiten las municipalidades. Con el objetivo de reducir la cantidad de basuras acumuladas en las calles como facilitar su gesti\u00f3n as\u00ed mismo concientizar a las personas de la consecuencias de tirar la basura y tener claro las ventajas de reciclarlas.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-06-01T01:29:00Z",
+		"modified_at": "2019-09-07T14:25:53.985Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 88,
+	"fields": {
+		"title": "WeCheck",
+		"description": "Sistema de generaci\u00f3n de certificados de trabajo y otros documentos autenticados por las empresas para evitar el fraude de documentos. Se conectaria con Sunat o entidades estatales para la verificaci\u00f3n de las empresas",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-06-01T01:31:00Z",
+		"modified_at": "2019-09-07T14:25:53.982Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 89,
+	"fields": {
+		"title": "ADES",
+		"description": "\"Uno de los problemas sociales m\u00e1s grandes que los activistas por los derechos de los animales deben enfrentar es la superpoblaci\u00f3n de animales dom\u00e9sticos (perros y gatos) y la triste realidad que pasan estos en las calles.\nDebido a esta situaci\u00f3n, nuestra idea es una aplicaci\u00f3n animalista, no s\u00f3lo dise\u00f1ada para ayudar y promover las adopciones de estos, sino tambi\u00e9n para ayudar a organizaciones que se encargan de cuidarlos y protejerlos.\n\nFunciones como: Control y proceso de adopciones m\u00e1s seguro, alerta de eventos de vacunaci\u00f3n y esterilizaci\u00f3n organizados por la municipalidad, recaudaci\u00f3n de donativos para animales y/u organizaciones ayudar\u00edan a reducir el n\u00famero de animales abandonados en las calles mediante el cuidado de su salud y una manera m\u00e1s f\u00e1cil y segura de conectar mascotas con posibles adoptantes.\n\nTambi\u00e9n se tiene como objetivo el cuidado de tu mascota mediante herramientas como: Blog de consejos veterinarios, \u00bfSe perdi\u00f3 tu mascota o encontraste una perdida? Manda una notificacion a todos los users con la descripci\u00f3n de la mascota, foto y locaci\u00f3n.en el caso de accidente, muestra todas las cl\u00ednicas veterinarias cercanas abiertas. As\u00ed mismo, contar\u00eda con facilidades para el User como: mostrar restaurantes pet Friendly, tiendas online de comida y juguetes, entrenadores y paseadores en tu zona o alrededores, etc.\"",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-06-01T01:37:00Z",
+		"modified_at": "2019-09-07T14:25:53.978Z",
+		"is_active": true
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 90,
+	"fields": {
+		"title": "Menos calle, m\u00e1s educaci\u00f3n",
+		"description": "Agrupar el n\u00famero de incidencias de ni\u00f1os abandonados usando facebook para recolecci\u00f3n de datos, clasificarlos y mostrarlos en una p\u00e1gina web para luego ser reenviados a la entidad p\u00fablica (ministerio de educaci\u00f3n)",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-06-01T01:37:00Z",
+		"modified_at": "2019-09-07T14:25:53.974Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 94,
+	"fields": {
+		"title": "botel",
+		"description": "Crear una aplicaci\u00f3n m\u00f3vil que promueva la competencia y el cuidado del medio ambiente mediante de un juego que interaccione con el entorno.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-06-01T01:43:00Z",
+		"modified_at": "2019-09-07T14:25:53.971Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 95,
+	"fields": {
+		"title": "e-salud private",
+		"description": "Brindar una aplicaci\u00f3n m\u00f3vil que ofrezca el top 10 de servicios de salud y emergencias seg\u00fan ubicaci\u00f3n geogr\u00e1fica m\u00e1s cercana.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-06-01T01:44:00Z",
+		"modified_at": "2019-09-07T14:25:53.968Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 98,
+	"fields": {
+		"title": "OURACADEMY",
+		"description": "Aplicaci\u00f3n para encontrar personas perdidas a traves de reconocimiento facial y barrido de datos e imagenes de las redes sociales twitter fb",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-06-01T01:50:00Z",
+		"modified_at": "2019-09-07T14:25:53.964Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 99,
+	"fields": {
+		"title": "CentinelBot",
+		"description": "Chatbot messenger facebook para seguridad ciudadana. Pide datos personales del usuario y datos de la alerta y se comunica autom\u00e1ticamente a los contactos de confianza y centrales de emergencia",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-06-01T01:52:00Z",
+		"modified_at": "2019-09-07T14:25:53.961Z",
+		"is_active": true
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 100,
+	"fields": {
+		"title": "Hospedar",
+		"description": "Aplicaci\u00f3n web enfocada en ayudar a las personas de bajos recursos de provincias, a realizar sus terapias en hospitales de Lima. Es similar a un airbnb para personas de escasos recursos econ\u00f3micos.",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-06-01T02:10:00Z",
+		"modified_at": "2019-09-07T14:25:53.958Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 101,
+	"fields": {
+		"title": "Ideen",
+		"description": "Walkie talkie para seguridad ciudadana",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": true,
+		"max_number_of_participants": 7,
+		"created_at": "2019-06-01T16:27:00Z",
+		"modified_at": "2019-09-07T14:25:53.955Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 102,
+	"fields": {
+		"title": "CoE",
+		"description": "Test",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": false,
+		"max_number_of_participants": 7,
+		"created_at": "2019-06-01T16:46:00Z",
+		"modified_at": "2019-09-07T14:25:53.951Z",
+		"is_active": false
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 103,
+	"fields": {
+		"title": "holaaa",
+		"description": "Instance of 'Idea'.description",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": false,
+		"max_number_of_participants": 7,
+		"created_at": "2019-06-04T15:00:00Z",
+		"modified_at": "2019-09-07T14:25:53.948Z",
+		"is_active": true
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 104,
+	"fields": {
+		"title": "otra idea",
+		"description": "Instance of 'Idea'.description",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": false,
+		"max_number_of_participants": 7,
+		"created_at": "2019-06-04T16:08:00Z",
+		"modified_at": "2019-09-07T14:25:53.944Z",
+		"is_active": true
+	}
+}, {
+	"model": "ideas.idea",
+	"pk": 105,
+	"fields": {
+		"title": "Agro IoT",
+		"description": "Sistema en arduino para ver cultivos en tiempo real",
+		"author": null,
+		"written_by": null,
+		"event": null,
+		"is_valid": false,
+		"max_number_of_participants": 7,
+		"created_at": "2019-09-07T14:27:54.904Z",
+		"modified_at": "2019-09-07T14:27:54.904Z",
 		"is_active": true
 	}
 }]
