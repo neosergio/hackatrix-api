@@ -14,7 +14,11 @@ class Idea(models.Model):
                                    on_delete=models.CASCADE,
                                    blank=True,
                                    null=True)
-    event = models.ForeignKey('events.Event', related_name='event_idea', on_delete=models.CASCADE)
+    event = models.ForeignKey('events.Event',
+                              related_name='event_idea',
+                              on_delete=models.CASCADE,
+                              blank=True,
+                              null=True)
     is_valid = models.BooleanField(default=False)
     max_number_of_participants = models.PositiveIntegerField(default=7)
     created_at = models.DateTimeField(auto_now_add=True)
