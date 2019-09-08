@@ -55,6 +55,18 @@ def idea_update(request, idea_id):
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
 
+@api_view(['PATCH', ])
+@permission_classes((IsModerator, ))
+def idea_deactivate(request, idea_id):
+    """
+    Deactivates idea
+    """
+    idea = get_object_or_404(Idea, pk=idea_id)
+    idea.is_active = False
+    idea.save()
+    return Response(status=status.HTTP_202_ACCEPTED)
+
+
 @api_view(['POST', ])
 @permission_classes((permissions.IsAuthenticated, ))
 def idea_add_team_member(request, idea_id):
