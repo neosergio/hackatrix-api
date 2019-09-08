@@ -38,6 +38,23 @@ def idea_creation(request):
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
 
+@api_view(['PATCH', ])
+@permission_classes((IsModerator, ))
+def idea_update(request, idea_id):
+    """
+    Updates idea title, description and is_valid attribute
+    """
+    serializer = IdeaCreationSerializer(data=request.data)
+    idea = get_object_or_404(Idea, pk=idea_id)
+    if serializer.is_valid(raise_exception=True):
+        idea.title = serializer.validated_data['title']
+        idea.description = serializer.validated_data['description']
+        idea.is_valid = serializer.validated_data['is_valid']
+        idea.save()
+        serializer = IdeaSerializer(idea)
+        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
+
 @api_view(['POST', ])
 @permission_classes((permissions.IsAuthenticated, ))
 def idea_add_team_member(request, idea_id):
