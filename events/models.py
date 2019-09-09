@@ -107,3 +107,30 @@ class RegistrantAttendance(models.Model):
     class Meta(object):
         ordering = ['attendance']
         unique_together = ('registrant', 'attendance')
+
+
+class Team(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    participants = models.PositiveIntegerField(default=2)
+    is_active = models.BooleanField(default=True)
+    is_valid = models.BooleanField(default=True)
+
+    class Meta(object):
+        ordering = ['-pk']
+
+    def __str__(self):
+        return self.name
+
+
+class TeamMember(models.Model):
+    full_name = models.CharField(max_length=200)
+    email = models.EmailField(unique=True)
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
+
+    class Meta(object):
+        ordering = ['email']
+
+    def __str__(self):
+        return self.full_name

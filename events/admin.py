@@ -3,6 +3,7 @@ from import_export.admin import ImportExportMixin
 from .models import Location, Event, Track, TrackItemAgenda
 from .models import Registrant
 from .models import Attendance, RegistrantAttendance
+from .models import Team, TeamMember
 
 
 class LocationAdmin(admin.ModelAdmin):
@@ -34,6 +35,16 @@ class RegistrantAttendanceAdmin(admin.ModelAdmin):
     list_display = ('attendance', 'registrant', 'registered_by', 'registered_at')
 
 
+class TeamAdmin(ImportExportMixin, admin.ModelAdmin):
+    list_display = ('name', 'participants', 'is_valid', 'is_active')
+    search_fields = ['name']
+
+
+class TeamMemberAdmin(ImportExportMixin, admin.ModelAdmin):
+    list_display = ('full_name', 'email', 'is_active', 'team')
+    search_fields = ['full_name', 'email', 'team__name']
+
+
 admin.site.register(Location, LocationAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Track, TrackAdmin)
@@ -41,3 +52,5 @@ admin.site.register(TrackItemAgenda, TrackItemAgendaAdmin)
 admin.site.register(Registrant, RegistrantAdmin)
 admin.site.register(Attendance, AttendanceAdmin)
 admin.site.register(RegistrantAttendance, RegistrantAttendanceAdmin)
+admin.site.register(Team, TeamAdmin)
+admin.site.register(TeamMember, TeamMemberAdmin)
