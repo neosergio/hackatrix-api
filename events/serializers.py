@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Event, Track, TrackItemAgenda, Location, Registrant, Attendance
+from .models import Event, Track, TrackItemAgenda, Location, Registrant, Attendance, Team
 
 
 class LocationSerializer(serializers.ModelSerializer):
@@ -53,4 +53,11 @@ class AttendaceSerializer(serializers.ModelSerializer):
 
     class Meta(object):
         model = Attendance
+        fields = "__all__"
+
+
+class TeamSerializer(serializers.ModelSerializer):
+
+    class Meta(object):
+        model = Team
         fields = "__all__"

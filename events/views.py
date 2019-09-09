@@ -13,9 +13,10 @@ from rest_framework.response import Response
 from utils.pagination import StandardResultsSetPagination
 from utils.send_push_notification import send_message_android, send_message_ios
 
-from .models import Event, Registrant, Attendance, RegistrantAttendance
+from .models import Event, Registrant, Attendance, RegistrantAttendance, Team
 from .serializers import EventSerializer, EventFeaturedNotificationSerializer
 from .serializers import RegistrantSerializer, RegistrantIdentitySerializer, AttendaceSerializer
+from .serializers import TeamSerializer
 from users.models import UserDevice, User
 
 
@@ -245,3 +246,27 @@ def event_attendance_register(request, attendance_id):
                     'max_capacity': attendance.max_capacity,
                     'counter': attendance_counter}
         return Response(response, status=status.HTTP_202_ACCEPTED)
+
+
+@api_view(['GET', ])
+@permission_classes((permissions.IsAuthenticated, ))
+def team_detail(requeest, team_id):
+    team = get_object_or_404(Team, pk=team_id)
+    serializer = TeamSerializer(team)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', ])
+@permission_classes((permissions.IsAuthenticated, ))
+def team_list_event_featured(request):
+    event = Event.objects.filter(is_active=True, is_featured=True).first()
+    teams = Team.objects.filter(is_active=True, event=event, is_valid=True)
+
+    if request.GET.get('page') or request.GET.get('per_page'):
+        paginator = StandardResultsSetPagination()
+        results = paginator.paginate_queryset(teams, request)
+        serializer = TeamSerializer(results, many=True)
+        return paginator.get_paginated_response(serializer.data)
+    else:
+        serializer = TeamSerializer(teams, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)

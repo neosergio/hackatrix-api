@@ -17,6 +17,15 @@
 		"longitude": "-77.0264035"
 	}
 }, {
+	"model": "events.location",
+	"pk": 3,
+	"fields": {
+		"name": "Globant, Bogota",
+		"address": "Av. El Dorado #69b-45, Bogot\u00e1",
+		"latitude": "4.6593556",
+		"longitude": "-74.1082054"
+	}
+}, {
 	"model": "events.event",
 	"pk": 1,
 	"fields": {
@@ -27,6 +36,21 @@
 		"details": "Hackaton social de Belatrix Software",
 		"register_link": "http://belatrixsf.com",
 		"sharing_text": "Registrate y Participa de la Hackatrix Lima 2019",
+		"is_featured": false,
+		"is_upcoming": false,
+		"is_active": false
+	}
+}, {
+	"model": "events.event",
+	"pk": 2,
+	"fields": {
+		"title": "Hackatrix Bogota 2019",
+		"image": "https://www.belatrixsf.com/hackatrix/2019_bogota/images/banner-main-image.png",
+		"dates": "S\u00e1bado 28 de Septiembre, 8:00am - 8:00pm",
+		"address": "Av. El Dorado #69b-45, Bogot\u00e1",
+		"details": "Participa en la Hackatrix, un evento que busca impulsar el desarrollo de ideas sociales e innovadoras en un ambiente lleno de diversi\u00f3n y adrenalina pura.\r\n\r\nDurante esta hackathon te enfrentar\u00e1s al reto de realizar una app o aplicativo web que solucione y agregue valor a la comunidad de manera positiva.",
+		"register_link": "https://www.belatrixsf.com/hackatrix/2019_bogota/",
+		"sharing_text": "https://www.belatrixsf.com/hackatrix/2019_bogota/",
 		"is_featured": true,
 		"is_upcoming": true,
 		"is_active": true
@@ -60,6 +84,22 @@
 		"register_link": null,
 		"sharing_text": null,
 		"location": 2,
+		"is_interaction_active": true,
+		"is_active": true
+	}
+}, {
+	"model": "events.track",
+	"pk": 3,
+	"fields": {
+		"event": 2,
+		"title": "Full Day - Hackatrix Bogota 2019",
+		"image": "https://pbs.twimg.com/profile_images/1065273205458378753/NqKHM2eH_400x400.jpg",
+		"datetime": "2019-09-28T13:00:00Z",
+		"address": null,
+		"details": "Full Day Hackatrix",
+		"register_link": null,
+		"sharing_text": null,
+		"location": 3,
 		"is_interaction_active": true,
 		"is_active": true
 	}
@@ -214,5 +254,183 @@
 		"track": 2,
 		"time": "20:00 a 20:30",
 		"text": "Premiaci\u00f3n, sorteos y cierre del evento."
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 20,
+	"fields": {
+		"track": 3,
+		"time": "08:00 a 09:00",
+		"text": "Ingreso"
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 21,
+	"fields": {
+		"track": 3,
+		"time": "09:00 a 12:00",
+		"text": "Primera etapa de programaci\u00f3n."
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 22,
+	"fields": {
+		"track": 3,
+		"time": "12:00 a 13:00",
+		"text": "Almuerzo"
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 23,
+	"fields": {
+		"track": 3,
+		"time": "14:00 a 19:00",
+		"text": "Segunda etapa de programaci\u00f3n."
+	}
+}, {
+	"model": "events.trackitemagenda",
+	"pk": 24,
+	"fields": {
+		"track": 3,
+		"time": "19:00 a 20:00",
+		"text": "Cena y Cierre de Evento"
+	}
+}, {
+	"model": "events.registrant",
+	"pk": 1,
+	"fields": {
+		"full_name": "Sergio Infante Montero",
+		"email": "sinfante@belatrixsf.com",
+		"code": "cbd794un7d",
+		"is_code_used": false,
+		"is_email_sent": false,
+		"event": 1
+	}
+}, {
+	"model": "events.registrant",
+	"pk": 2,
+	"fields": {
+		"full_name": "Luis Talavera",
+		"email": "ltalavera@belatrixsf.com",
+		"code": "6gxzu4ext4",
+		"is_code_used": false,
+		"is_email_sent": false,
+		"event": 1
+	}
+}, {
+	"model": "events.registrant",
+	"pk": 3,
+	"fields": {
+		"full_name": "Javier Siancas",
+		"email": "jsiancas@belatrixsf.com",
+		"code": "5vak8ay4q5",
+		"is_code_used": false,
+		"is_email_sent": false,
+		"event": 1
+	}
+}, {
+	"model": "events.registrant",
+	"pk": 4,
+	"fields": {
+		"full_name": "Fiorella Vercelli",
+		"email": "fvercelli@belatrixsf.com",
+		"code": "um63960fvg",
+		"is_code_used": false,
+		"is_email_sent": false,
+		"event": 1
+	}
+}, {
+	"model": "events.registrant",
+	"pk": 5,
+	"fields": {
+		"full_name": "Cesar Paredes",
+		"email": "cparedes@belatrixsf.com",
+		"code": "zuzxs8tpgt",
+		"is_code_used": false,
+		"is_email_sent": false,
+		"event": 1
+	}
+}, {
+	"model": "events.registrant",
+	"pk": 6,
+	"fields": {
+		"full_name": "Francesca Haro",
+		"email": "fharo@belatrixsf.com",
+		"code": "a63smr88uh",
+		"is_code_used": false,
+		"is_email_sent": false,
+		"event": 1
+	}
+}, {
+	"model": "events.attendance",
+	"pk": 1,
+	"fields": {
+		"title": "Asistencia a Kick Off",
+		"icon": "https://i.imgur.com/1Kzp2wJ.png",
+		"event": 1,
+		"is_active": true,
+		"due_date": "2019-05-31T22:00:00Z",
+		"available_from": null,
+		"max_capacity": null
+	}
+}, {
+	"model": "events.attendance",
+	"pk": 2,
+	"fields": {
+		"title": "Desayuno",
+		"icon": "https://i.imgur.com/ETq5IQ2.png",
+		"event": 1,
+		"is_active": true,
+		"due_date": "2019-06-01T12:00:00Z",
+		"available_from": null,
+		"max_capacity": null
+	}
+}, {
+	"model": "events.attendance",
+	"pk": 3,
+	"fields": {
+		"title": "Asistencia a Full Day",
+		"icon": "https://i.imgur.com/1Kzp2wJ.png",
+		"event": 1,
+		"is_active": true,
+		"due_date": "2019-06-01T12:00:00Z",
+		"available_from": null,
+		"max_capacity": null
+	}
+}, {
+	"model": "events.attendance",
+	"pk": 4,
+	"fields": {
+		"title": "Almuerzo",
+		"icon": "https://i.imgur.com/ASr5Ixo.png",
+		"event": 1,
+		"is_active": true,
+		"due_date": "2019-06-01T16:00:00Z",
+		"available_from": null,
+		"max_capacity": null
+	}
+}, {
+	"model": "events.attendance",
+	"pk": 5,
+	"fields": {
+		"title": "Cena",
+		"icon": "https://i.imgur.com/vrI2rbQ.png",
+		"event": 1,
+		"is_active": true,
+		"due_date": null,
+		"available_from": null,
+		"max_capacity": null
+	}
+}, {
+	"model": "events.attendance",
+	"pk": 6,
+	"fields": {
+		"title": "Regalos",
+		"icon": "https://i.imgur.com/QnoT8Tj.png",
+		"event": 1,
+		"is_active": true,
+		"due_date": null,
+		"available_from": null,
+		"max_capacity": null
 	}
 }]

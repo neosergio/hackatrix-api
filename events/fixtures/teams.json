@@ -1,0 +1,271 @@
+[{
+	"model": "events.team",
+	"pk": 1,
+	"fields": {
+		"name": "Cyborg Pibes",
+		"event": 2,
+		"participants": 4,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 2,
+	"fields": {
+		"name": "intermix",
+		"event": 2,
+		"participants": 4,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 3,
+	"fields": {
+		"name": "Amalgama",
+		"event": 2,
+		"participants": 4,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 4,
+	"fields": {
+		"name": "Blinded",
+		"event": 2,
+		"participants": 4,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 5,
+	"fields": {
+		"name": "Despe",
+		"event": 2,
+		"participants": 4,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 6,
+	"fields": {
+		"name": "sarasa",
+		"event": 2,
+		"participants": 4,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 7,
+	"fields": {
+		"name": "2D65",
+		"event": 2,
+		"participants": 5,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 8,
+	"fields": {
+		"name": "StinkyRoot",
+		"event": 2,
+		"participants": 5,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 9,
+	"fields": {
+		"name": "Los technoboys",
+		"event": 2,
+		"participants": 5,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 10,
+	"fields": {
+		"name": "Traceback",
+		"event": 2,
+		"participants": 5,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 11,
+	"fields": {
+		"name": "Prueba",
+		"event": 2,
+		"participants": 5,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 12,
+	"fields": {
+		"name": "Los cubitos",
+		"event": 2,
+		"participants": 5,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 13,
+	"fields": {
+		"name": "Casi hackers",
+		"event": 2,
+		"participants": 4,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 14,
+	"fields": {
+		"name": "Tim A",
+		"event": 2,
+		"participants": 4,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 15,
+	"fields": {
+		"name": "Onboarding",
+		"event": 2,
+		"participants": 4,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 16,
+	"fields": {
+		"name": "Chicas programadoras",
+		"event": 2,
+		"participants": 4,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 17,
+	"fields": {
+		"name": "Equipo verde",
+		"event": 2,
+		"participants": 4,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 18,
+	"fields": {
+		"name": "LAB4TB",
+		"event": 2,
+		"participants": 4,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 19,
+	"fields": {
+		"name": "Brainstorm",
+		"event": 2,
+		"participants": 4,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 20,
+	"fields": {
+		"name": "NormDevs",
+		"event": 2,
+		"participants": 4,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 21,
+	"fields": {
+		"name": "Hexar",
+		"event": 2,
+		"participants": 5,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 22,
+	"fields": {
+		"name": "Zetech",
+		"event": 2,
+		"participants": 5,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 23,
+	"fields": {
+		"name": "Uno",
+		"event": 2,
+		"participants": 6,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 24,
+	"fields": {
+		"name": "kp@s",
+		"event": 2,
+		"participants": 6,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 25,
+	"fields": {
+		"name": "Le remacho la soretera",
+		"event": 2,
+		"participants": 6,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 26,
+	"fields": {
+		"name": "Javacitos",
+		"event": 2,
+		"participants": 6,
+		"is_active": true,
+		"is_valid": true
+	}
+}, {
+	"model": "events.team",
+	"pk": 27,
+	"fields": {
+		"name": "Argibytes",
+		"event": 2,
+		"participants": 6,
+		"is_active": true,
+		"is_valid": true
+	}
+}]
