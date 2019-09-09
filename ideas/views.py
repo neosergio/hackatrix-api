@@ -183,9 +183,21 @@ def idea_detail(request, idea_id):
 
 @api_view(['GET', ])
 @permission_classes((permissions.IsAuthenticated, ))
+def idea_list(request):
+    """
+    Returns idea list
+    """
+    event = Event.objects.filter(is_active=True, is_featured=True).first()
+    ideas = Idea.objects.filter(event=event, is_active=True)
+    serializer = IdeaSerializer(ideas, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', ])
+@permission_classes((permissions.IsAuthenticated, ))
 def idea_list_complete(request):
     """
-    Returns full idea list
+    Returns full active idea list
     """
     event = Event.objects.filter(is_active=True, is_featured=True).first()
     ideas = Idea.objects.filter(event=event, is_active=True)

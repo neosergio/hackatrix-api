@@ -3,7 +3,7 @@ from django.urls import path
 from .views import idea_creation
 from .views import idea_add_team_member, idea_add_team_member_list
 from .views import idea_remove_team_member, idea_remove_team_member_list
-from .views import idea_detail, idea_list_complete, idea_list_validated
+from .views import idea_detail, idea_list_complete, idea_list_validated, idea_list
 from .views import idea_validation_switch, idea_update, idea_deactivate
 from .views import author_idea_list
 
@@ -20,6 +20,7 @@ urlpatterns = [
     path('<int:idea_id>/deactivate/', idea_deactivate, name='idea_deactivate'),
     path('<int:idea_id>/update/', idea_update, name='idea_update'),
     path('<int:idea_id>/validation/switch/', idea_validation_switch, name='idea_validation_switch'),
+    path('list/', idea_list, name='idea_list'),
     path('list/complete/', idea_list_complete, name='idea_list_complete'),
     path('list/validated/', idea_list_validated, name='idea_list_validated'),
 ]
