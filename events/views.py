@@ -17,6 +17,7 @@ from .models import Event, Registrant, Attendance, RegistrantAttendance, Team
 from .serializers import EventSerializer, EventFeaturedNotificationSerializer
 from .serializers import RegistrantSerializer, RegistrantIdentitySerializer, AttendaceSerializer
 from .serializers import TeamSerializer
+from assessments.models import TeamAssessment
 from users.models import UserDevice, User
 
 
@@ -259,14 +260,23 @@ def team_detail(requeest, team_id):
 @api_view(['GET', ])
 @permission_classes((permissions.IsAuthenticated, ))
 def team_list_event_featured(request):
+    teams_response = list()
     event = Event.objects.filter(is_active=True, is_featured=True).first()
     teams = Team.objects.filter(is_active=True, event=event, is_valid=True)
 
+    for team in teams:
+        team_assessment = TeamAssessment.objects.filter(team=team, evaluator=request.user).first()
+        if team_assessment:
+            is_evaluated = team_assessment.is_evaluated
+        else:
+            is_evaluated = False
+        teams_response.append({'id': team.id,
+                               'name': team.name,
+                               'is_evaluated': is_evaluated})
+
     if request.GET.get('page') or request.GET.get('per_page'):
         paginator = StandardResultsSetPagination()
-        results = paginator.paginate_queryset(teams, request)
-        serializer = TeamSerializer(results, many=True)
-        return paginator.get_paginated_response(serializer.data)
+        results = paginator.paginate_queryset(teams_response, request)
+        return paginator.get_paginated_response(results)
     else:
-        serializer = TeamSerializer(teams, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(teams_response, status=status.HTTP_200_OK)

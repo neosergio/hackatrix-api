@@ -46,3 +46,9 @@ class RegistrantComment(models.Model):
 
     class Meta(object):
         unique_together = ('registrant', 'comment_by')
+
+
+class TeamAssessment(models.Model):
+    team = models.ForeignKey('events.Team', on_delete=models.CASCADE)
+    evaluator = models.ForeignKey('users.User', on_delete=models.CASCADE)
+    is_evaluated = models.BooleanField(default=False)
