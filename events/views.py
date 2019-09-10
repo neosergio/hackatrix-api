@@ -299,3 +299,12 @@ def team_update(request, team_id):
         team.save()
         serializer = TeamSerializer(team)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
+
+@api_view(['PATCH', ])
+@permission_classes((IsModerator, ))
+def team_deactivate(request, team_id):
+    team = get_object_or_404(Team, pk=team_id)
+    team.is_active = False
+    team.save()
+    return Response(status=status.HTTP_202_ACCEPTED)
