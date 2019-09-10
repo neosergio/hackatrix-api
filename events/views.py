@@ -272,6 +272,11 @@ def team_list_event_featured(request):
             is_evaluated = False
         teams_response.append({'id': team.id,
                                'name': team.name,
+                               'event': team.event.id,
+                               'description': team.description,
+                               'help_to': team.help_to,
+                               'is_active': team.is_active,
+                               'is_valid': team.is_valid,
                                'is_evaluated': is_evaluated})
 
     if request.GET.get('page') or request.GET.get('per_page'):

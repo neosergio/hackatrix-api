@@ -36,13 +36,13 @@ class RegistrantAttendanceAdmin(admin.ModelAdmin):
 
 
 class TeamAdmin(ImportExportMixin, admin.ModelAdmin):
-    list_display = ('name', 'participants', 'is_valid', 'is_active')
+    list_display = ('name', 'event', 'description', 'help_to', 'is_valid', 'is_active')
     search_fields = ['name']
 
 
 class TeamMemberAdmin(ImportExportMixin, admin.ModelAdmin):
-    list_display = ('full_name', 'email', 'is_active', 'team')
-    search_fields = ['full_name', 'email', 'team__name']
+    list_display = ('full_name', 'is_active', 'team')
+    search_fields = ['full_name', 'team__name']
 
 
 admin.site.register(Location, LocationAdmin)

@@ -110,9 +110,10 @@ class RegistrantAttendance(models.Model):
 
 
 class Team(models.Model):
-    name = models.CharField(max_length=200, unique=True)
+    name = models.CharField(max_length=200)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    participants = models.PositiveIntegerField(default=2)
+    description = models.TextField(null=True, blank=True)
+    help_to = models.CharField(max_length=255, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_valid = models.BooleanField(default=True)
 
@@ -125,12 +126,11 @@ class Team(models.Model):
 
 class TeamMember(models.Model):
     full_name = models.CharField(max_length=200)
-    email = models.EmailField(unique=True)
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
 
     class Meta(object):
-        ordering = ['email']
+        ordering = ['full_name']
 
     def __str__(self):
         return self.full_name
