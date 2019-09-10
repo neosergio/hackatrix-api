@@ -4,9 +4,9 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
-from .models import Assessment, ProjectAssessment, RegistrantAssessment
+from .models import Assessment, ProjectAssessment, RegistrantAssessment, TeamAssessmentResults, TeamAssessment
 from .serializers import AssessmentSerializer, ScoreBulkSerializer, AssessmentResultSerializer
-from events.models import Registrant
+from events.models import Registrant, Team
 from ideas.models import Idea
 from users.permissions import IsFromHR, IsProjectEvaluator
 
@@ -115,3 +115,41 @@ def registrant_assessment_result(request, registrant_id):
     results = RegistrantAssessment.objects.filter(registrant=registrant, evaluator=evaluator)
     serializer = AssessmentResultSerializer(results, many=True)
     return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
+
+@api_view(['GET', ])
+@permission_classes((IsProjectEvaluator, ))
+def team_assessment(request, team_id):
+    """
+    Assigns score to a team assessment criteria
+    """
+    team = get_object_or_404(Team, pk=team_id)
+    evaluator = request.user
+    serializer = ScoreBulkSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        score_list = serializer.validated_data['score_list']
+        for score in score_list:
+            try:
+                assessment = Assessment.objects.get(pk=score['assessment_id'])
+                TeamAssessmentResults.objects.create(
+                    assessment=assessment,
+                    team=team,
+                    evaluator=evaluator,
+                    value=score['value'])
+            except Exception as e:
+                print(e)
+        return Response(status=status.HTTP_202_ACCEPTED)
+
+
+@api_view(['PATCH', ])
+@permission_classes((IsProjectEvaluator, ))
+def team_assessment_complete(request, team_id):
+    """
+    Marks as assessment team complete
+    """
+    team = get_object_or_404(Team, pk=team_id)
+    evaluator = request.user
+    assessment = get_object_or_404(TeamAssessment, team=team, evaluator=evaluator)
+    assessment.is_evaluated = True
+    assessment.save()
+    return Response(status=status.HTTP_202_ACCEPTED)
