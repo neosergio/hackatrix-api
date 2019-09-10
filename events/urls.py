@@ -3,7 +3,7 @@ from django.urls import path
 from .views import event_featured, event_attendance_list, event_attendance_register
 from .views import registrant_list, registrant_qr_code, registrant_identity_validation
 from .views import registrant_send_qr_code, registrant_email_sent_flag_to_false
-from .views import team_detail, team_list_event_featured
+from .views import team_detail, team_list_event_featured, team_update
 
 
 app_name = 'events'
@@ -23,4 +23,5 @@ urlpatterns = [
          registrant_email_sent_flag_to_false,
          name='registrant_email_sent_flag_to_false'),
     path('team/<int:team_id>/', team_detail, name='team_detail'),
+    path('team/<int:team_id>/update/', team_update, name='team_update'),
 ]

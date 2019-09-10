@@ -16,9 +16,10 @@ from utils.send_push_notification import send_message_android, send_message_ios
 from .models import Event, Registrant, Attendance, RegistrantAttendance, Team
 from .serializers import EventSerializer, EventFeaturedNotificationSerializer
 from .serializers import RegistrantSerializer, RegistrantIdentitySerializer, AttendaceSerializer
-from .serializers import TeamSerializer
+from .serializers import TeamSerializer, TeamUpdateSerializer
 from assessments.models import TeamAssessment
 from users.models import UserDevice, User
+from users.permissions import IsModerator
 
 
 @api_view(['GET', ])
@@ -285,3 +286,16 @@ def team_list_event_featured(request):
         return paginator.get_paginated_response(results)
     else:
         return Response(teams_response, status=status.HTTP_200_OK)
+
+
+@api_view(['PATCH', ])
+@permission_classes((IsModerator, ))
+def team_update(request, team_id):
+    team = get_object_or_404(Team, pk=team_id)
+    serializer = TeamUpdateSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        team.name = serializer.validated_data['name']
+        team.description = serializer.validated_data['description']
+        team.save()
+        serializer = TeamSerializer(team)
+        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)

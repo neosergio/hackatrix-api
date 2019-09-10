@@ -61,3 +61,8 @@ class TeamSerializer(serializers.ModelSerializer):
     class Meta(object):
         model = Team
         fields = "__all__"
+
+
+class TeamUpdateSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    description = serializers.CharField()
