@@ -52,3 +52,17 @@ class TeamAssessment(models.Model):
     team = models.ForeignKey('events.Team', on_delete=models.CASCADE)
     evaluator = models.ForeignKey('users.User', on_delete=models.CASCADE)
     is_evaluated = models.BooleanField(default=False)
+
+
+class TeamAssessmentResults(models.Model):
+    assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE)
+    team = models.ForeignKey('events.Team', on_delete=models.CASCADE)
+    evaluator = models.ForeignKey('users.User', on_delete=models.CASCADE)
+    value = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    class Meta(object):
+        ordering = ['-pk']
+        unique_together = ['assessment', 'team', 'evaluator']
+        verbose_name_plural = 'team assessment results'

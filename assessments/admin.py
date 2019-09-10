@@ -1,7 +1,7 @@
 from django.contrib import admin
 from import_export.admin import ImportExportMixin
 from .models import Assessment, ProjectAssessment, RegistrantAssessment, RegistrantComment
-from .models import TeamAssessment
+from .models import TeamAssessment, TeamAssessmentResults
 
 
 class AssessmentAdmin(ImportExportMixin, admin.ModelAdmin):
@@ -39,8 +39,13 @@ class TeamAssessmentAdmin(admin.ModelAdmin):
     list_display = ('team', 'evaluator', 'is_evaluated')
 
 
+class TeamAssessmentResultsAdmin(admin.ModelAdmin):
+    list_display = ('assessment', 'team', 'evaluator', 'value', 'created_at', 'modified_at')
+
+
 admin.site.register(Assessment, AssessmentAdmin)
 admin.site.register(ProjectAssessment, ProjectAssessmentAdmin)
 admin.site.register(RegistrantAssessment, RegistrantAssessmentAdmin)
 admin.site.register(RegistrantComment, RegistrantCommentAdmin)
 admin.site.register(TeamAssessment, TeamAssessmentAdmin)
+admin.site.register(TeamAssessmentResults, TeamAssessmentResultsAdmin)
