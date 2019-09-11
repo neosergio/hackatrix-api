@@ -4,7 +4,6 @@
 	"fields": {
 		"name": "Cyborg Pibes",
 		"event": 2,
-		"participants": 4,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -14,7 +13,6 @@
 	"fields": {
 		"name": "intermix",
 		"event": 2,
-		"participants": 4,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -24,7 +22,6 @@
 	"fields": {
 		"name": "Amalgama",
 		"event": 2,
-		"participants": 4,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -34,7 +31,6 @@
 	"fields": {
 		"name": "Blinded",
 		"event": 2,
-		"participants": 4,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -44,7 +40,6 @@
 	"fields": {
 		"name": "Despe",
 		"event": 2,
-		"participants": 4,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -54,7 +49,6 @@
 	"fields": {
 		"name": "sarasa",
 		"event": 2,
-		"participants": 4,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -64,7 +58,6 @@
 	"fields": {
 		"name": "2D65",
 		"event": 2,
-		"participants": 5,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -74,7 +67,6 @@
 	"fields": {
 		"name": "StinkyRoot",
 		"event": 2,
-		"participants": 5,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -84,7 +76,6 @@
 	"fields": {
 		"name": "Los technoboys",
 		"event": 2,
-		"participants": 5,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -94,7 +85,6 @@
 	"fields": {
 		"name": "Traceback",
 		"event": 2,
-		"participants": 5,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -104,7 +94,6 @@
 	"fields": {
 		"name": "Prueba",
 		"event": 2,
-		"participants": 5,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -114,7 +103,6 @@
 	"fields": {
 		"name": "Los cubitos",
 		"event": 2,
-		"participants": 5,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -124,7 +112,6 @@
 	"fields": {
 		"name": "Casi hackers",
 		"event": 2,
-		"participants": 4,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -134,7 +121,6 @@
 	"fields": {
 		"name": "Tim A",
 		"event": 2,
-		"participants": 4,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -144,7 +130,6 @@
 	"fields": {
 		"name": "Onboarding",
 		"event": 2,
-		"participants": 4,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -154,7 +139,6 @@
 	"fields": {
 		"name": "Chicas programadoras",
 		"event": 2,
-		"participants": 4,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -164,7 +148,6 @@
 	"fields": {
 		"name": "Equipo verde",
 		"event": 2,
-		"participants": 4,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -174,7 +157,6 @@
 	"fields": {
 		"name": "LAB4TB",
 		"event": 2,
-		"participants": 4,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -184,7 +166,6 @@
 	"fields": {
 		"name": "Brainstorm",
 		"event": 2,
-		"participants": 4,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -194,7 +175,6 @@
 	"fields": {
 		"name": "NormDevs",
 		"event": 2,
-		"participants": 4,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -204,7 +184,6 @@
 	"fields": {
 		"name": "Hexar",
 		"event": 2,
-		"participants": 5,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -214,7 +193,6 @@
 	"fields": {
 		"name": "Zetech",
 		"event": 2,
-		"participants": 5,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -224,7 +202,6 @@
 	"fields": {
 		"name": "Uno",
 		"event": 2,
-		"participants": 6,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -234,7 +211,6 @@
 	"fields": {
 		"name": "kp@s",
 		"event": 2,
-		"participants": 6,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -244,7 +220,6 @@
 	"fields": {
 		"name": "Le remacho la soretera",
 		"event": 2,
-		"participants": 6,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -254,7 +229,6 @@
 	"fields": {
 		"name": "Javacitos",
 		"event": 2,
-		"participants": 6,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -264,7 +238,6 @@
 	"fields": {
 		"name": "Argibytes",
 		"event": 2,
-		"participants": 6,
 		"is_active": true,
 		"is_valid": true
 	}
