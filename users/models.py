@@ -81,7 +81,7 @@ class User(AbstractBaseUser, PermissionsMixin):
             evaluator_role_counter += 1
         if self.is_from_evaluation_committee:
             evaluator_role_counter += 1
-        if evaluator_role_counter > 1:
+        if evaluator_role_counter > 1 or self.is_moderator:
             self.is_jury = False
             self.is_from_HR = False
             self.is_from_evaluation_committee = False
