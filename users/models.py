@@ -20,6 +20,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     is_staff = models.BooleanField(_('is_staff'), default=False)
     is_moderator = models.BooleanField(default=False)
+    is_team_leader = models.BooleanField(default=False)
     is_active = models.BooleanField(_('is_active'), default=True)
     is_blocked = models.BooleanField(default=False)
     is_validated = models.BooleanField(default=False)
@@ -27,7 +28,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_jury = models.BooleanField(default=False)
     is_from_HR = models.BooleanField(default=False)
     is_from_evaluation_committee = models.BooleanField(default=False)
-    is_team_leader = models.BooleanField(default=False)
 
     is_password_reset_required = models.BooleanField(default=False)
     reset_password_code = models.UUIDField(default=None, blank=True, null=True)
@@ -69,6 +69,26 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.validation_code = str(uuid_code)
         self.save()
         return self.validation_code
+
+    def normalize_user_evaluator_role(self):
+        """
+        Avoids to have multiple roles at the same time: is_jury, is_from_HR, is_from_evaluation_committee
+        """
+        evaluator_role_counter = 0
+        if self.is_jury:
+            evaluator_role_counter += 1
+        if self.is_from_HR:
+            evaluator_role_counter += 1
+        if self.is_from_evaluation_committee:
+            evaluator_role_counter += 1
+        if evaluator_role_counter > 1:
+            self.is_jury = False
+            self.is_from_HR = False
+            self.is_from_evaluation_committee = False
+
+    def save(self, *args, **kwargs):
+        self.normalize_user_evaluator_role()
+        super().save(*args, **kwargs)
 
 
 @receiver(models.signals.post_save, sender=settings.AUTH_USER_MODEL)
