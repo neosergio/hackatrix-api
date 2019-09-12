@@ -64,5 +64,5 @@ class TeamSerializer(serializers.ModelSerializer):
 
 
 class TeamUpdateSerializer(serializers.Serializer):
-    name = serializers.CharField()
+    title = serializers.CharField()
     description = serializers.CharField()

@@ -110,7 +110,7 @@ class RegistrantAttendance(models.Model):
 
 
 class Team(models.Model):
-    name = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     description = models.TextField(null=True, blank=True)
     help_to = models.CharField(max_length=255, null=True, blank=True)
@@ -121,7 +121,7 @@ class Team(models.Model):
         ordering = ['-pk']
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class TeamMember(models.Model):

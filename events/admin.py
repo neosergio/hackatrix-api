@@ -36,8 +36,8 @@ class RegistrantAttendanceAdmin(admin.ModelAdmin):
 
 
 class TeamAdmin(ImportExportMixin, admin.ModelAdmin):
-    list_display = ('name', 'event', 'description', 'help_to', 'is_valid', 'is_active')
-    search_fields = ['name']
+    list_display = ('title', 'event', 'description', 'help_to', 'is_valid', 'is_active')
+    search_fields = ['title']
 
 
 class TeamMemberAdmin(ImportExportMixin, admin.ModelAdmin):

@@ -2,7 +2,7 @@
 	"model": "events.team",
 	"pk": 1,
 	"fields": {
-		"name": "Cyborg Pibes",
+		"title": "Cyborg Pibes",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -11,7 +11,7 @@
 	"model": "events.team",
 	"pk": 2,
 	"fields": {
-		"name": "intermix",
+		"title": "intermix",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -20,7 +20,7 @@
 	"model": "events.team",
 	"pk": 3,
 	"fields": {
-		"name": "Amalgama",
+		"title": "Amalgama",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -29,7 +29,7 @@
 	"model": "events.team",
 	"pk": 4,
 	"fields": {
-		"name": "Blinded",
+		"title": "Blinded",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -38,7 +38,7 @@
 	"model": "events.team",
 	"pk": 5,
 	"fields": {
-		"name": "Despe",
+		"title": "Despe",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -47,7 +47,7 @@
 	"model": "events.team",
 	"pk": 6,
 	"fields": {
-		"name": "sarasa",
+		"title": "sarasa",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -56,7 +56,7 @@
 	"model": "events.team",
 	"pk": 7,
 	"fields": {
-		"name": "2D65",
+		"title": "2D65",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -65,7 +65,7 @@
 	"model": "events.team",
 	"pk": 8,
 	"fields": {
-		"name": "StinkyRoot",
+		"title": "StinkyRoot",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -74,7 +74,7 @@
 	"model": "events.team",
 	"pk": 9,
 	"fields": {
-		"name": "Los technoboys",
+		"title": "Los technoboys",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -83,7 +83,7 @@
 	"model": "events.team",
 	"pk": 10,
 	"fields": {
-		"name": "Traceback",
+		"title": "Traceback",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -92,7 +92,7 @@
 	"model": "events.team",
 	"pk": 11,
 	"fields": {
-		"name": "Prueba",
+		"title": "Prueba",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -101,7 +101,7 @@
 	"model": "events.team",
 	"pk": 12,
 	"fields": {
-		"name": "Los cubitos",
+		"title": "Los cubitos",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -110,7 +110,7 @@
 	"model": "events.team",
 	"pk": 13,
 	"fields": {
-		"name": "Casi hackers",
+		"title": "Casi hackers",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -119,7 +119,7 @@
 	"model": "events.team",
 	"pk": 14,
 	"fields": {
-		"name": "Tim A",
+		"title": "Tim A",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -128,7 +128,7 @@
 	"model": "events.team",
 	"pk": 15,
 	"fields": {
-		"name": "Onboarding",
+		"title": "Onboarding",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -137,7 +137,7 @@
 	"model": "events.team",
 	"pk": 16,
 	"fields": {
-		"name": "Chicas programadoras",
+		"title": "Chicas programadoras",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -146,7 +146,7 @@
 	"model": "events.team",
 	"pk": 17,
 	"fields": {
-		"name": "Equipo verde",
+		"title": "Equipo verde",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -155,7 +155,7 @@
 	"model": "events.team",
 	"pk": 18,
 	"fields": {
-		"name": "LAB4TB",
+		"title": "LAB4TB",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -164,7 +164,7 @@
 	"model": "events.team",
 	"pk": 19,
 	"fields": {
-		"name": "Brainstorm",
+		"title": "Brainstorm",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -173,7 +173,7 @@
 	"model": "events.team",
 	"pk": 20,
 	"fields": {
-		"name": "NormDevs",
+		"title": "NormDevs",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -182,7 +182,7 @@
 	"model": "events.team",
 	"pk": 21,
 	"fields": {
-		"name": "Hexar",
+		"title": "Hexar",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -191,7 +191,7 @@
 	"model": "events.team",
 	"pk": 22,
 	"fields": {
-		"name": "Zetech",
+		"title": "Zetech",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -200,7 +200,7 @@
 	"model": "events.team",
 	"pk": 23,
 	"fields": {
-		"name": "Uno",
+		"title": "Uno",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -209,7 +209,7 @@
 	"model": "events.team",
 	"pk": 24,
 	"fields": {
-		"name": "kp@s",
+		"title": "kp@s",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -218,7 +218,7 @@
 	"model": "events.team",
 	"pk": 25,
 	"fields": {
-		"name": "Le remacho la soretera",
+		"title": "Le remacho la soretera",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -227,7 +227,7 @@
 	"model": "events.team",
 	"pk": 26,
 	"fields": {
-		"name": "Javacitos",
+		"title": "Javacitos",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true
@@ -236,7 +236,7 @@
 	"model": "events.team",
 	"pk": 27,
 	"fields": {
-		"name": "Argibytes",
+		"title": "Argibytes",
 		"event": 2,
 		"is_active": true,
 		"is_valid": true

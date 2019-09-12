@@ -272,7 +272,7 @@ def team_list_event_featured(request):
         else:
             is_evaluated = False
         teams_response.append({'id': team.id,
-                               'name': team.name,
+                               'title': team.title,
                                'event': team.event.id,
                                'description': team.description,
                                'help_to': team.help_to,
@@ -294,7 +294,7 @@ def team_update(request, team_id):
     team = get_object_or_404(Team, pk=team_id)
     serializer = TeamUpdateSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        team.name = serializer.validated_data['name']
+        team.title = serializer.validated_data['title']
         team.description = serializer.validated_data['description']
         team.save()
         serializer = TeamSerializer(team)
