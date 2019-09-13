@@ -36,7 +36,7 @@ class RegistrantCommentAdmin(admin.ModelAdmin):
 
 
 class TeamAssessmentAdmin(admin.ModelAdmin):
-    list_display = ('team', 'evaluator', 'is_evaluated')
+    list_display = ('team', 'evaluator', 'has_been_assessed')
 
 
 class TeamAssessmentResultsAdmin(admin.ModelAdmin):

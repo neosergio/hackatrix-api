@@ -150,6 +150,6 @@ def team_assessment_complete(request, team_id):
     team = get_object_or_404(Team, pk=team_id)
     evaluator = request.user
     assessment = get_object_or_404(TeamAssessment, team=team, evaluator=evaluator)
-    assessment.is_evaluated = True
+    assessment.has_been_assessed = True
     assessment.save()
     return Response(status=status.HTTP_202_ACCEPTED)

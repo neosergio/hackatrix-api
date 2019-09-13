@@ -51,7 +51,7 @@ class RegistrantComment(models.Model):
 class TeamAssessment(models.Model):
     team = models.ForeignKey('events.Team', on_delete=models.CASCADE)
     evaluator = models.ForeignKey('users.User', on_delete=models.CASCADE)
-    is_evaluated = models.BooleanField(default=False)
+    has_been_assessed = models.BooleanField(default=False)
 
 
 class TeamAssessmentResults(models.Model):

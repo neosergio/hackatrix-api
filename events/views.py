@@ -268,9 +268,9 @@ def team_list_event_featured(request):
     for team in teams:
         team_assessment = TeamAssessment.objects.filter(team=team, evaluator=request.user).first()
         if team_assessment:
-            is_evaluated = team_assessment.is_evaluated
+            has_been_assessed = team_assessment.has_been_assessed
         else:
-            is_evaluated = False
+            has_been_assessed = False
         teams_response.append({'id': team.id,
                                'title': team.title,
                                'event': team.event.id,
@@ -278,7 +278,7 @@ def team_list_event_featured(request):
                                'help_to': team.help_to,
                                'is_active': team.is_active,
                                'is_valid': team.is_valid,
-                               'is_evaluated': is_evaluated})
+                               'has_been_assessed': has_been_assessed})
 
     if request.GET.get('page') or request.GET.get('per_page'):
         paginator = StandardResultsSetPagination()
