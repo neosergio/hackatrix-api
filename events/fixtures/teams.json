@@ -4,6 +4,8 @@
 	"fields": {
 		"title": "Cyborg Pibes",
 		"event": 2,
+		"description": "Viderer hendrerit sit eu, an odio intellegebat nec, in augue audire consetetur sea. Vis no illud constituam. Mea ea nostrud utroque tacimates, no quodsi diceret feugiat vix, eam ea congue veniam facilisis. Quo ad tantas altera partiendo.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -13,6 +15,8 @@
 	"fields": {
 		"title": "intermix",
 		"event": 2,
+		"description": "Id saepe inermis vel, no ius interpretaris concludaturque. Vel ut munere euismod dolorem, idque",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -22,6 +26,8 @@
 	"fields": {
 		"title": "Amalgama",
 		"event": 2,
+		"description": "Id saepe inermis vel, no ius interpretaris concludaturque. Vel ut munere euismod dolorem, idque conceptam qui et, enim unum quidam pro at. Nemore vocibus nec ei, duis labitur id vix, quaeque elaboraret intellegebat nec ut. Te est tantas percipitur instructior, eu eum mazim percipit repudiare. Ex eripuit molestie nec, sit in tale facilis suscipiantur. Ut moderatius dissentias per, id aliquam qualisque abhorreant qui.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -31,6 +37,8 @@
 	"fields": {
 		"title": "Blinded",
 		"event": 2,
+		"description": "Viderer hendrerit sit eu, an odio intellegebat nec, in augue audire consetetur sea. Vis no illud constituam. Mea ea nostrud utroque tacimates, no quodsi diceret feugiat vix, eam ea congue veniam facilisis. Quo ad tantas altera partiendo.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -40,15 +48,8 @@
 	"fields": {
 		"title": "Despe",
 		"event": 2,
-		"is_active": true,
-		"is_valid": true
-	}
-}, {
-	"model": "events.team",
-	"pk": 6,
-	"fields": {
-		"title": "sarasa",
-		"event": 2,
+		"description": "Viderer hendrerit sit eu, an odio intellegebat nec, in augue audire consetetur sea. Vis no illud constituam. Mea ea nostrud utroque tacimates, no quodsi diceret feugiat vix, eam ea congue veniam facilisis. Quo ad tantas altera partiendo.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -58,6 +59,8 @@
 	"fields": {
 		"title": "2D65",
 		"event": 2,
+		"description": "Id saepe inermis vel, no ius interpretaris concludaturque. Vel ut munere euismod dolorem, idque conceptam qui et, enim unum quidam pro at. Nemore vocibus nec ei, duis labitur id vix, quaeque elaboraret intellegebat nec ut. Te est tantas percipitur instructior, eu eum mazim percipit repudiare. Ex eripuit molestie nec, sit in tale facilis suscipiantur. Ut moderatius dissentias per, id aliquam qualisque abhorreant qui.\r\n\r\nId saepe inermis vel, no ius interpretaris concludaturque. Vel ut munere euismod dolorem, idque conceptam qui et, enim unum quidam pro at. Nemore vocibus nec ei, duis labitur id vix, quaeque elaboraret intellegebat nec ut. Te est tantas percipitur instructior, eu eum mazim percipit repudiare. Ex eripuit molestie nec, sit in tale facilis suscipiantur. Ut moderatius dissentias per, id aliquam qualisque abhorreant qui.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -67,6 +70,8 @@
 	"fields": {
 		"title": "StinkyRoot",
 		"event": 2,
+		"description": "Id saepe inermis vel, no ius interpretaris concludaturque. Vel ut munere euismod dolorem, idque conceptam qui et, enim unum quidam pro at. Nemore vocibus nec ei, duis labitur id vix, quaeque elaboraret intellegebat nec ut. Te est tantas percipitur instructior, eu eum mazim percipit repudiare. Ex eripuit molestie nec, sit in tale facilis suscipiantur. Ut moderatius dissentias per, id aliquam qualisque abhorreant qui.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -76,6 +81,8 @@
 	"fields": {
 		"title": "Los technoboys",
 		"event": 2,
+		"description": "Id saepe inermis vel, no ius interpretaris concludaturque. Vel ut munere euismod dolorem, idque conceptam qui et, enim unum quidam pro at. Nemore vocibus nec ei, duis labitur id vix, quaeque elaboraret intellegebat nec ut. Te est tantas percipitur instructior, eu eum mazim percipit repudiare. Ex eripuit molestie nec, sit in tale facilis suscipiantur. Ut moderatius dissentias per, id aliquam qualisque abhorreant qui.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -85,6 +92,8 @@
 	"fields": {
 		"title": "Traceback",
 		"event": 2,
+		"description": "Id saepe inermis vel, no ius interpretaris concludaturque. Vel ut munere euismod dolorem, idque conceptam qui et, enim unum quidam pro at. Nemore vocibus nec ei, duis labitur id vix, quaeque elaboraret intellegebat nec ut. Te est tantas percipitur instructior, eu eum mazim percipit repudiare. Ex eripuit molestie nec, sit in tale facilis suscipiantur. Ut moderatius dissentias per, id aliquam qualisque abhorreant qui.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -94,6 +103,8 @@
 	"fields": {
 		"title": "Prueba",
 		"event": 2,
+		"description": "Id saepe inermis vel, no ius interpretaris concludaturque. Vel ut munere euismod dolorem, idque conceptam qui et, enim unum quidam pro at. Nemore vocibus nec ei, duis labitur id vix, quaeque elaboraret intellegebat nec ut. Te est tantas percipitur instructior, eu eum mazim percipit repudiare. Ex eripuit molestie nec, sit in tale facilis suscipiantur. Ut moderatius dissentias per, id aliquam qualisque abhorreant qui.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -103,6 +114,8 @@
 	"fields": {
 		"title": "Los cubitos",
 		"event": 2,
+		"description": "Id saepe inermis vel, no ius interpretaris concludaturque. Vel ut munere euismod dolorem, idque conceptam qui et, enim unum quidam pro at. Nemore vocibus nec ei, duis labitur id vix, quaeque elaboraret intellegebat nec ut. Te est tantas percipitur instructior, eu eum mazim percipit repudiare. Ex eripuit molestie nec, sit in tale facilis suscipiantur. Ut moderatius dissentias per, id aliquam qualisque abhorreant qui.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -112,6 +125,8 @@
 	"fields": {
 		"title": "Casi hackers",
 		"event": 2,
+		"description": "Id saepe inermis vel, no ius interpretaris concludaturque. Vel ut munere euismod dolorem, idque conceptam qui et, enim unum quidam pro at. Nemore vocibus nec ei, duis labitur id vix, quaeque elaboraret intellegebat nec ut. Te est tantas percipitur instructior, eu eum mazim percipit repudiare. Ex eripuit molestie nec, sit in tale facilis suscipiantur. Ut moderatius dissentias per, id aliquam qualisque abhorreant qui.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -121,6 +136,8 @@
 	"fields": {
 		"title": "Tim A",
 		"event": 2,
+		"description": "Id saepe inermis vel, no ius interpretaris concludaturque. Vel ut munere euismod dolorem, idque conceptam qui et, enim unum quidam pro at. Nemore vocibus nec ei, duis labitur id vix, quaeque elaboraret intellegebat nec ut. Te est tantas percipitur instructior, eu eum mazim percipit repudiare. Ex eripuit molestie nec, sit in tale facilis suscipiantur. Ut moderatius dissentias per, id aliquam qualisque abhorreant qui.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -130,6 +147,8 @@
 	"fields": {
 		"title": "Onboarding",
 		"event": 2,
+		"description": "Id saepe inermis vel, no ius interpretaris concludaturque. Vel ut munere euismod dolorem, idque conceptam qui et, enim unum quidam pro at. Nemore vocibus nec ei, duis labitur id vix, quaeque elaboraret intellegebat nec ut. Te est tantas percipitur instructior, eu eum mazim percipit repudiare. Ex eripuit molestie nec, sit in tale facilis suscipiantur. Ut moderatius dissentias per, id aliquam qualisque abhorreant qui.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -139,6 +158,8 @@
 	"fields": {
 		"title": "Chicas programadoras",
 		"event": 2,
+		"description": "Id saepe inermis vel, no ius interpretaris concludaturque. Vel ut munere euismod dolorem, idque conceptam qui et, enim unum quidam pro at. Nemore vocibus nec ei, duis labitur id vix, quaeque elaboraret intellegebat nec ut. Te est tantas percipitur instructior, eu eum mazim percipit repudiare. Ex eripuit molestie nec, sit in tale facilis suscipiantur. Ut moderatius dissentias per, id aliquam qualisque abhorreant qui.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -148,6 +169,8 @@
 	"fields": {
 		"title": "Equipo verde",
 		"event": 2,
+		"description": "Id saepe inermis vel, no ius interpretaris concludaturque. Vel ut munere euismod dolorem, idque conceptam qui et, enim unum quidam pro at. Nemore vocibus nec ei, duis labitur id vix, quaeque elaboraret intellegebat nec ut. Te est tantas percipitur instructior, eu eum mazim percipit repudiare. Ex eripuit molestie nec, sit in tale facilis suscipiantur. Ut moderatius dissentias per, id aliquam qualisque abhorreant qui.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -157,6 +180,8 @@
 	"fields": {
 		"title": "LAB4TB",
 		"event": 2,
+		"description": "Viderer hendrerit sit eu, an odio intellegebat nec, in augue audire consetetur sea. Vis no illud constituam. Mea ea nostrud utroque tacimates, no quodsi diceret feugiat vix, eam ea congue veniam facilisis. Quo ad tantas altera partiendo.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -166,6 +191,8 @@
 	"fields": {
 		"title": "Brainstorm",
 		"event": 2,
+		"description": "In sea adhuc timeam, ea iisque explicari ius. Eruditi intellegat ne sed, everti feugiat mea te. Duo error euripidis dissentias id, quo dicant mediocritatem id. Ad eirmod abhorreant nam, et mel principes disputationi.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -175,6 +202,8 @@
 	"fields": {
 		"title": "NormDevs",
 		"event": 2,
+		"description": "In sea adhuc timeam, ea iisque explicari ius. Eruditi intellegat ne sed, everti feugiat mea te. Duo error euripidis dissentias id, quo dicant mediocritatem id. Ad eirmod abhorreant nam, et mel principes disputationi.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -184,6 +213,8 @@
 	"fields": {
 		"title": "Hexar",
 		"event": 2,
+		"description": "In sea adhuc timeam, ea iisque explicari ius. Eruditi intellegat ne sed, everti feugiat mea te. Duo error euripidis dissentias id, quo dicant mediocritatem id. Ad eirmod abhorreant nam, et mel principes disputationi.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -193,6 +224,8 @@
 	"fields": {
 		"title": "Zetech",
 		"event": 2,
+		"description": "Lorem ipsum dolor sit amet, eu discere partiendo pri, ne convenire erroribus laboramus mei. Feugiat reprimique duo ei, euismod vocibus temporibus eu has. Tamquam iudicabit usu ad, an nonumes forensibus vim, ut consul officiis pri. Id ius audiam aperiam splendide.\r\n\r\nId saepe inermis vel, no ius interpretaris concludaturque. Vel ut munere euismod dolorem, idque conceptam qui et, enim unum quidam pro at. Nemore vocibus nec ei, duis labitur id vix, quaeque elaboraret intellegebat nec ut. Te est tantas percipitur instructior, eu eum mazim percipit repudiare. Ex eripuit molestie nec, sit in tale facilis suscipiantur. Ut moderatius dissentias per, id aliquam qualisque abhorreant qui.\r\n\r\nCu legere prodesset pri, pri no autem partem. Aeterno constituto accommodare id eum, nam agam reprehendunt ea. Affert graeci assueverit pri ex. Vim an verear adversarium, decore altera ea mea. Mei doming vivendo periculis an, per eu abhorreant constituto, eos eu putant nonumes. Vel democritum dissentias an, sit verterem partiendo consetetur et, in affert diceret civibus eos. Impedit accumsan gubergren pri id, repudiare constituto vis te.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -202,6 +235,8 @@
 	"fields": {
 		"title": "Uno",
 		"event": 2,
+		"description": "Up am intention on dependent questions oh elsewhere september. No betrayed pleasure possible jointure we in throwing. And can event rapid any shall woman green. Hope they dear who its bred. Smiling nothing affixed he carried it clothes calling he no. Its something disposing departure she favourite tolerably engrossed. Truth short folly court why she their balls. Excellence put unaffected reasonable mrs introduced conviction she. Nay particular delightful but unpleasant for uncommonly who. \r\n\r\nAffronting everything discretion men now own did. Still round match we to. Frankness pronounce daughters remainder extensive has but. Happiness cordially one determine concluded fat. Plenty season beyond by hardly giving of. Consulted or acuteness dejection an smallness if. Outward general passage another as it. Very his are come man walk one next. Delighted prevailed supported too not remainder perpetual who furnished. Nay affronting bed projection compliment instrument.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -211,15 +246,8 @@
 	"fields": {
 		"title": "kp@s",
 		"event": 2,
-		"is_active": true,
-		"is_valid": true
-	}
-}, {
-	"model": "events.team",
-	"pk": 25,
-	"fields": {
-		"title": "Le remacho la soretera",
-		"event": 2,
+		"description": "As absolute is by amounted repeated entirely ye returned. These ready timed enjoy might sir yet one since. Years drift never if could forty being no. On estimable dependent as suffering on my. Rank it long have sure in room what as he. Possession travelling sufficient yet our. Talked vanity looked in to. Gay perceive led believed endeavor. Rapturous no of estimable oh therefore direction up. Sons the ever not fine like eyes all sure. \r\n\r\nKept in sent gave feel will oh it we. Has pleasure procured men laughing shutters nay. Old insipidity motionless continuing law shy partiality. Depending acuteness dependent eat use dejection. Unpleasing astonished discovered not nor shy. Morning hearted now met yet beloved evening. Has and upon his last here must. \r\n\r\nSilent sir say desire fat him letter. Whatever settling goodness too and honoured she building answered her. Strongly thoughts remember mr to do consider debating. Spirits musical behaved on we he farther letters. Repulsive he he as deficient newspaper dashwoods we. Discovered her his pianoforte insipidity entreaties. Began he at terms meant as fancy. Breakfast arranging he if furniture we described on. Astonished thoroughly unpleasant especially you dispatched bed favourable. \r\n\r\nShe travelling acceptance men unpleasant her especially entreaties law. Law forth but end any arise chief arose. Old her say learn these large. Joy fond many ham high seen this. Few preferred continual sir led incommode neglected. Discovered too old insensible collecting unpleasant but invitation.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -229,6 +257,8 @@
 	"fields": {
 		"title": "Javacitos",
 		"event": 2,
+		"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat odio facilisis mauris sit. Ipsum nunc aliquet bibendum enim facilisis. Euismod in pellentesque massa placerat. Arcu cursus euismod quis viverra nibh cras pulvinar. Semper eget duis at tellus at urna condimentum. Sollicitudin ac orci phasellus egestas. Diam maecenas ultricies mi eget mauris pharetra et ultrices. Lobortis mattis aliquam faucibus purus in. Eget dolor morbi non arcu risus quis varius quam. Porttitor lacus luctus accumsan tortor posuere ac. Vitae suscipit tellus mauris a diam maecenas. Tempus iaculis urna id volutpat. Nisl nunc mi ipsum faucibus vitae aliquet nec. Pulvinar elementum integer enim neque volutpat ac tincidunt.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}
@@ -238,6 +268,8 @@
 	"fields": {
 		"title": "Argibytes",
 		"event": 2,
+		"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+		"help_to": null,
 		"is_active": true,
 		"is_valid": true
 	}

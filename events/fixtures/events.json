@@ -38,7 +38,7 @@
 		"sharing_text": "Registrate y Participa de la Hackatrix Lima 2019",
 		"is_featured": false,
 		"is_upcoming": false,
-		"is_active": false
+		"is_active": true
 	}
 }, {
 	"model": "events.event",
@@ -47,7 +47,7 @@
 		"title": "Hackatrix Bogota 2019",
 		"image": "https://www.belatrixsf.com/hackatrix/2019_bogota/images/banner-main-image.png",
 		"dates": "S\u00e1bado 28 de Septiembre, 8:00am - 8:00pm",
-		"address": "Av. El Dorado #69b-45, Bogot\u00e1",
+		"address": "Carrera 13a # 97 - 35.  Edificio 14-97 Park.",
 		"details": "Participa en la Hackatrix, un evento que busca impulsar el desarrollo de ideas sociales e innovadoras en un ambiente lleno de diversi\u00f3n y adrenalina pura.\r\n\r\nDurante esta hackathon te enfrentar\u00e1s al reto de realizar una app o aplicativo web que solucione y agregue valor a la comunidad de manera positiva.",
 		"register_link": "https://www.belatrixsf.com/hackatrix/2019_bogota/",
 		"sharing_text": "https://www.belatrixsf.com/hackatrix/2019_bogota/",
@@ -68,8 +68,8 @@
 		"register_link": null,
 		"sharing_text": null,
 		"location": 1,
-		"is_interaction_active": true,
-		"is_active": true
+		"is_interaction_active": false,
+		"is_active": false
 	}
 }, {
 	"model": "events.track",
@@ -84,8 +84,8 @@
 		"register_link": null,
 		"sharing_text": null,
 		"location": 2,
-		"is_interaction_active": true,
-		"is_active": true
+		"is_interaction_active": false,
+		"is_active": false
 	}
 }, {
 	"model": "events.track",
@@ -294,72 +294,6 @@
 		"track": 3,
 		"time": "19:00 a 20:00",
 		"text": "Cena y Cierre de Evento"
-	}
-}, {
-	"model": "events.registrant",
-	"pk": 1,
-	"fields": {
-		"full_name": "Sergio Infante Montero",
-		"email": "sinfante@belatrixsf.com",
-		"code": "cbd794un7d",
-		"is_code_used": false,
-		"is_email_sent": false,
-		"event": 1
-	}
-}, {
-	"model": "events.registrant",
-	"pk": 2,
-	"fields": {
-		"full_name": "Luis Talavera",
-		"email": "ltalavera@belatrixsf.com",
-		"code": "6gxzu4ext4",
-		"is_code_used": false,
-		"is_email_sent": false,
-		"event": 1
-	}
-}, {
-	"model": "events.registrant",
-	"pk": 3,
-	"fields": {
-		"full_name": "Javier Siancas",
-		"email": "jsiancas@belatrixsf.com",
-		"code": "5vak8ay4q5",
-		"is_code_used": false,
-		"is_email_sent": false,
-		"event": 1
-	}
-}, {
-	"model": "events.registrant",
-	"pk": 4,
-	"fields": {
-		"full_name": "Fiorella Vercelli",
-		"email": "fvercelli@belatrixsf.com",
-		"code": "um63960fvg",
-		"is_code_used": false,
-		"is_email_sent": false,
-		"event": 1
-	}
-}, {
-	"model": "events.registrant",
-	"pk": 5,
-	"fields": {
-		"full_name": "Cesar Paredes",
-		"email": "cparedes@belatrixsf.com",
-		"code": "zuzxs8tpgt",
-		"is_code_used": false,
-		"is_email_sent": false,
-		"event": 1
-	}
-}, {
-	"model": "events.registrant",
-	"pk": 6,
-	"fields": {
-		"full_name": "Francesca Haro",
-		"email": "fharo@belatrixsf.com",
-		"code": "a63smr88uh",
-		"is_code_used": false,
-		"is_email_sent": false,
-		"event": 1
 	}
 }, {
 	"model": "events.attendance",
