@@ -1,14 +1,16 @@
+from django.db.models import Sum
 from django.shortcuts import get_object_or_404
 from itertools import chain
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
-from .models import Assessment, ProjectAssessment, RegistrantAssessment, TeamAssessmentResults, TeamAssessment
+from .models import Assessment, ProjectAssessment, RegistrantAssessment
+from .models import TeamAssessmentResults, TeamAssessment, FinalResult
 from .serializers import AssessmentSerializer, ScoreBulkSerializer, AssessmentResultSerializer
-from events.models import Registrant, Team
+from events.models import Registrant, Team, Event
 from ideas.models import Idea
-from users.permissions import IsFromHR, IsProjectEvaluator
+from users.permissions import IsFromHR, IsProjectEvaluator, IsModerator
 
 
 @api_view(['GET', ])
@@ -153,3 +155,39 @@ def team_assessment_complete(request, team_id):
     assessment.has_been_assessed = True
     assessment.save()
     return Response(status=status.HTTP_202_ACCEPTED)
+
+
+@api_view(['GET', ])
+@permission_classes((IsModerator, ))
+def team_assessment_results_calculate(request):
+    """
+    Returns team assessments results
+    """
+    teams_response = list()
+    type = ''
+    event = Event.objects.filter(is_active=True, is_featured='True').first()
+    teams = Team.objects.filter(event=event, is_active=True, is_valid=True)
+    FinalResult.objects.all().delete()
+
+    for team in teams:
+        if request.GET.get('role'):
+            if request.GET.get('role') == 'committee':
+                assessments_total_sum = TeamAssessmentResults.objects.filter(
+                    team=team,
+                    assessment__is_for_evaluation_committee=True).aggregate(Sum('value'))
+                type = 'committee'
+            elif request.GET.get('role') == 'jury':
+                assessments_total_sum = TeamAssessmentResults.objects.filter(
+                    team=team,
+                    assessment__is_for_jury=True).aggregate(Sum('value'))
+                type = 'jury'
+        else:
+            assessments_total_sum = TeamAssessmentResults.objects.filter(team=team).aggregate(Sum('value'))
+            type = 'general'
+        teams_response.append({'id': team.pk,
+                               'title': team.title,
+                               'score': assessments_total_sum['value__sum'],
+                               'type': type})
+        FinalResult.objects.create(team=team, score=assessments_total_sum['value__sum'], type=type)
+
+    return Response(teams_response, status=status.HTTP_202_ACCEPTED)
