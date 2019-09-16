@@ -171,7 +171,7 @@ def registrant_send_qr_code(request):
     registrants_without_email = Registrant.objects.filter(is_email_sent=False)[:config.BULK_EMAIL_QUOTE]
 
     for registrant in registrants_without_email:
-        subject = "[{}] Conserva tu código QR para el evento".format(registrant.event.title)
+        subject = "[{}] Tu código QR para la HACKATRIX".format(registrant.event.title)
         context = {'qr_code_create_api_url': settings.QR_CODE_CREATE_API_URL,
                    'registrant_event_title': registrant.event.title,
                    'registrant_full_name': registrant.full_name,
