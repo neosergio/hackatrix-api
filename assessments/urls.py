@@ -2,7 +2,8 @@ from django.urls import path
 
 from .views import project_assessment_list, project_assessment, project_assessment_result
 from .views import registrant_assessment_list, registrant_assessment, registrant_assessment_result
-from .views import team_assessment, team_assessment_complete, team_assessment_results_calculate
+from .views import team_assessment, team_assessment_complete
+from .views import team_assessment_results_calculate, team_assessments_result
 
 app_name = 'assessments'
 
@@ -16,4 +17,5 @@ urlpatterns = [
     path('team/<int:team_id>/score/', team_assessment, name='team_assessment'),
     path('team/<int:team_id>/score/complete/', team_assessment_complete, name='team_assessment_complete'),
     path('team/result/calculate/', team_assessment_results_calculate, name='team_assessment_results_calculate'),
+    path('team/result/', team_assessments_result, name='team_assessments_result'),
 ]

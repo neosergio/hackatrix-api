@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from .models import Assessment, ProjectAssessment, RegistrantAssessment
 from .models import TeamAssessmentResults, TeamAssessment, FinalResult
 from .serializers import AssessmentSerializer, ScoreBulkSerializer, AssessmentResultSerializer
+from .serializers import FinalResultSerializer
 from events.models import Registrant, Team, Event
 from ideas.models import Idea
 from users.permissions import IsFromHR, IsProjectEvaluator, IsModerator
@@ -157,7 +158,7 @@ def team_assessment_complete(request, team_id):
     return Response(status=status.HTTP_202_ACCEPTED)
 
 
-@api_view(['GET', ])
+@api_view(['POST', ])
 @permission_classes((IsModerator, ))
 def team_assessment_results_calculate(request):
     """
@@ -191,3 +192,22 @@ def team_assessment_results_calculate(request):
         FinalResult.objects.create(team=team, score=assessments_total_sum['value__sum'], type=type)
 
     return Response(teams_response, status=status.HTTP_202_ACCEPTED)
+
+
+@api_view(['GET', ])
+@permission_classes((IsModerator, ))
+def team_assessments_result(request):
+    """
+    Returns team assessments final results
+    """
+    if request.GET.get('type') and request.GET.get('type') == 'committee':
+        results = FinalResult.objects.filter(type='committee')
+        serializer = FinalResultSerializer(results, many=True)
+    elif request.GET.get('type') and request.GET.get('type') == 'jury':
+        result = FinalResult.objects.filter(type='jury').latest('score')
+        serializer = FinalResultSerializer(result)
+    else:
+        results = FinalResult.objects.all()
+        serializer = FinalResultSerializer(results, many=True)
+
+    return Response(serializer.data, status=status.HTTP_200_OK)
