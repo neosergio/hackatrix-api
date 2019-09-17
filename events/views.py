@@ -300,6 +300,7 @@ def team_update(request, team_id):
     if serializer.is_valid(raise_exception=True):
         team.title = serializer.validated_data['title']
         team.description = serializer.validated_data['description']
+        team.table = serializer.validated_data['table']
         team.save()
         serializer = TeamSerializer(team)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
