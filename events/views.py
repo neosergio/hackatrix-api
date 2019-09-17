@@ -255,7 +255,7 @@ def event_attendance_register(request, attendance_id):
 
 @api_view(['GET', ])
 @permission_classes((permissions.IsAuthenticated, ))
-def team_detail(requeest, team_id):
+def team_detail(request, team_id):
     team = get_object_or_404(Team, pk=team_id)
     serializer = TeamSerializer(team)
     return Response(serializer.data, status=status.HTTP_200_OK)

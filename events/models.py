@@ -128,7 +128,7 @@ class Team(models.Model):
 
 class TeamMember(models.Model):
     full_name = models.CharField(max_length=200)
-    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    team = models.ForeignKey(Team, related_name='team_member', on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
 
     class Meta(object):
