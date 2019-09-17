@@ -120,7 +120,7 @@ def registrant_assessment_result(request, registrant_id):
     return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
 
-@api_view(['GET', ])
+@api_view(['POST', ])
 @permission_classes((IsProjectEvaluator, ))
 def team_assessment(request, team_id):
     """
