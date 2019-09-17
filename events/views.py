@@ -1,3 +1,5 @@
+import os
+from ast import literal_eval
 from constance import config
 from datetime import datetime, timezone
 from django.conf import settings
@@ -10,10 +12,11 @@ from rest_framework.decorators import api_view, permission_classes, renderer_cla
 from rest_framework.exceptions import ValidationError
 from rest_framework.renderers import StaticHTMLRenderer
 from rest_framework.response import Response
+from urllib.request import Request, urlopen
 from utils.pagination import StandardResultsSetPagination
 from utils.send_push_notification import send_message_android, send_message_ios
 
-from .models import Event, Registrant, Attendance, RegistrantAttendance, Team
+from .models import Event, Registrant, Attendance, RegistrantAttendance, Team, TeamMember
 from .serializers import EventSerializer, EventFeaturedNotificationSerializer
 from .serializers import RegistrantSerializer, RegistrantIdentitySerializer, AttendaceSerializer
 from .serializers import TeamSerializer, TeamUpdateSerializer
@@ -275,6 +278,7 @@ def team_list_event_featured(request):
                                'title': team.title,
                                'event': team.event.id,
                                'description': team.description,
+                               'table': team.table,
                                'help_to': team.help_to,
                                'is_active': team.is_active,
                                'is_valid': team.is_valid,
@@ -308,3 +312,35 @@ def team_deactivate(request, team_id):
     team.is_active = False
     team.save()
     return Response(status=status.HTTP_202_ACCEPTED)
+
+
+@api_view(['GET', ])
+@permission_classes((IsModerator, ))
+def team_data_from_surveymonkey(request):
+    request_data = Request('https://api.surveymonkey.com/v3/surveys/188401653/responses/bulk')
+    AUTHORIZATION_SURVEYMONKEY_KEY = os.environ.get("AUTHORIZATION_SURVEYMONKEY_KEY") or "no-authorization-key"
+    request_data.add_header('Authorization', AUTHORIZATION_SURVEYMONKEY_KEY)
+    raw_content = urlopen(request_data).read()
+    content = literal_eval(raw_content.decode('utf-8'))
+    event = Event.objects.filter(is_active=True, is_featured=True).first()
+
+    for item in content['data']:
+        team_raw_data = item['pages'][0]['questions']
+        table = team_raw_data[0]['answers'][0]['text']
+        title = team_raw_data[1]['answers'][0]['text']
+        description = team_raw_data[3]['answers'][0]['text']
+        try:
+            team = Team.objects.create(title=title, event=event, description=description, table=table)
+            participants = team_raw_data[2]['answers']
+            for participant in participants:
+                participant_name = participant['text']
+                try:
+                    TeamMember.objects.create(full_name=participant_name, team=team)
+                except Exception as e:
+                    print(e)
+                    pass
+        except Exception as e:
+            print(e)
+            pass
+
+    return Response(status=status.HTTP_200_OK)
