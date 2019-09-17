@@ -256,9 +256,18 @@ def event_attendance_register(request, attendance_id):
 @api_view(['GET', ])
 @permission_classes((permissions.IsAuthenticated, ))
 def team_detail(request, team_id):
+    response = dict()
     team = get_object_or_404(Team, pk=team_id)
     serializer = TeamSerializer(team)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    response.update(serializer.data)
+
+    has_been_assessed = False
+    team_assessment = TeamAssessment.objects.filter(team=team, evaluator=request.user).first()
+    if team_assessment:
+        has_been_assessed = team_assessment.has_been_assessed
+    response.update({"has_been_assessed": has_been_assessed})
+
+    return Response(response, status=status.HTTP_200_OK)
 
 
 @api_view(['GET', ])
