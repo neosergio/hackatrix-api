@@ -114,11 +114,13 @@ class Team(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     description = models.TextField(null=True, blank=True)
     help_to = models.CharField(max_length=255, null=True, blank=True)
+    table = models.CharField(max_length=20, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_valid = models.BooleanField(default=True)
 
     class Meta(object):
         ordering = ['-pk']
+        unique_together = ('title', 'description')
 
     def __str__(self):
         return self.title
