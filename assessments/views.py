@@ -141,6 +141,7 @@ def team_assessment(request, team_id):
                     value=score['value'])
             except Exception as e:
                 print(e)
+        TeamAssessment.objects.create(team=team, evaluator=evaluator, has_been_assessed=True)
         return Response(status=status.HTTP_202_ACCEPTED)
 
 
