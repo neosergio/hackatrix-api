@@ -10,7 +10,7 @@ from django.utils.html import strip_tags
 from rest_framework import permissions, status
 from rest_framework.decorators import api_view, permission_classes, renderer_classes
 from rest_framework.exceptions import ValidationError
-from rest_framework.renderers import StaticHTMLRenderer
+from rest_framework.renderers import StaticHTMLRenderer, JSONRenderer
 from rest_framework.response import Response
 from urllib.request import Request, urlopen
 from utils.pagination import StandardResultsSetPagination
@@ -326,6 +326,7 @@ def team_deactivate(request, team_id):
 
 @api_view(['GET', ])
 @permission_classes((IsModerator, ))
+@renderer_classes((JSONRenderer,))
 def team_data_from_surveymonkey(request):
     request_data = Request('https://api.surveymonkey.com/v3/surveys/188401653/responses/bulk')
     AUTHORIZATION_SURVEYMONKEY_KEY = os.environ.get("AUTHORIZATION_SURVEYMONKEY_KEY") or "no-authorization-key"
@@ -353,4 +354,4 @@ def team_data_from_surveymonkey(request):
             print(e)
             pass
 
-    return Response(status=status.HTTP_200_OK)
+    return Response({'message': 'successfull'}, status=status.HTTP_200_OK)
