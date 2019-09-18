@@ -1,4 +1,4 @@
-from django.db.models import Sum
+from django.db.models import Sum, Q
 from django.shortcuts import get_object_or_404
 from itertools import chain
 from rest_framework import status
@@ -11,6 +11,7 @@ from .serializers import AssessmentSerializer, ScoreBulkSerializer, AssessmentRe
 from .serializers import FinalResultSerializer
 from events.models import Registrant, Team, Event
 from ideas.models import Idea
+from users.models import User
 from users.permissions import IsFromHR, IsProjectEvaluator, IsModerator
 
 
@@ -170,6 +171,7 @@ def team_assessment_results_calculate(request):
     event = Event.objects.filter(is_active=True, is_featured='True').first()
     teams = Team.objects.filter(event=event, is_active=True, is_valid=True)
     FinalResult.objects.all().delete()
+    is_completed = False
 
     for team in teams:
         if request.GET.get('role'):
@@ -192,7 +194,36 @@ def team_assessment_results_calculate(request):
                                'type': type})
         FinalResult.objects.create(team=team, score=assessments_total_sum['value__sum'], type=type)
 
-    return Response(teams_response, status=status.HTTP_202_ACCEPTED)
+    # Check if assessments are completed.
+    teams_count = len(Team.objects.filter(is_active=True, is_valid=True, event=event))
+
+    if request.GET.get('role') and request.GET.get('role') == 'committee':
+        assessment_criterias = Assessment.objects.filter(is_for_evaluation_committee=True)
+        evaluators = User.objects.filter(is_active=True, is_from_evaluation_committee=True)
+        assessments = TeamAssessmentResults.objects.filter(assessment__is_for_evaluation_committee=True)
+    elif request.GET.get('role') and request.GET.get('role') == 'jury':
+        assessment_criterias = Assessment.objects.filter(is_for_jury=True)
+        evaluators = User.objects.filter(is_active=True, is_jury=True)
+        assessments = TeamAssessmentResults.objects.filter(assessment__is_for_jury=True)
+    else:
+        assessment_criterias = Assessment.objects.all()
+        evaluators = User.objects.filter(Q(is_jury=True) | Q(is_from_evaluation_committee=True))
+        assessments = TeamAssessmentResults.objects.all()
+
+    assessment_criterias_count = len(assessment_criterias)
+    evaluators_count = len(evaluators)
+    assessments_count = len(assessments)
+    total_expected_assessments = teams_count * assessment_criterias_count * evaluators_count
+
+    if assessments_count == total_expected_assessments:
+        is_completed = True
+    else:
+        is_completed = False
+
+    response = {'is_completed': is_completed,
+                'teams': teams_response}
+
+    return Response(response, status=status.HTTP_202_ACCEPTED)
 
 
 @api_view(['GET', ])
