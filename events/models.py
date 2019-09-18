@@ -66,11 +66,14 @@ class TrackItemAgenda(models.Model):
 
 class Registrant(models.Model):
     full_name = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)
+    email = models.EmailField()
     code = models.CharField(max_length=10, blank=True, null=True)
     is_code_used = models.BooleanField(default=False)
     is_email_sent = models.BooleanField(default=False)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+
+    class Meta(object):
+        unique_together = ('email', 'event')
 
     def generate_code(self):
         code = get_random_string(10, "abcdefghkmnpqrstuvwxyz023456789")
