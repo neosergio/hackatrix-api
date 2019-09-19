@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 from .forms import EmailForm
-from assessments.models import ProjectAssessment, RegistrantAssessment, TeamAssessmentResults
+from assessments.models import ProjectAssessment, RegistrantAssessment, TeamAssessmentResults, FinalResult
 from events.models import Attendance, Registrant, RegistrantAttendance, Event, Team, TeamMember
 from ideas.models import IdeaTeamMember, Idea
 
@@ -160,3 +160,18 @@ def team_assessment(request):
             assessments = TeamAssessmentResults.objects.filter(team__event=event)
         context = {'assessments': assessments}
     return render(request, 'team_assessment.html', context)
+
+
+@login_required()
+def final_results(request):
+    context = dict()
+    if config.DISPLAY_REPORTS and config.DISPLAY_JURY_REPORTS:
+        event = Event.objects.filter(is_active=True, is_featured=True).first()
+        if request.GET.get('role') and request.GET.get('role') == 'committee':
+            results = FinalResult.objects.filter(type='committee', team__event=event)
+        elif request.GET.get('role') and request.GET.get('role') == 'jury':
+            results = FinalResult.objects.filter(type='jury', team__event=event)
+        else:
+            results = FinalResult.objects.filter(type='general', team__event=event)
+        context = {'results': results}
+    return render(request, 'final_results.html', context)

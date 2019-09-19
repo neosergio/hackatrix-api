@@ -174,11 +174,11 @@ def team_assessment_results_calculate(request):
 
     if request.GET.get('role'):
         if request.GET.get('role') == 'committee':
-            FinalResult.objects.filter(type='committee').delete()
+            FinalResult.objects.filter(type='committee', team__event=event).delete()
         elif request.GET.get('role') == 'jury':
-            FinalResult.objects.filter(type='jury').delete()
+            FinalResult.objects.filter(type='jury', team__event=event).delete()
     else:
-        FinalResult.objects.filter(type='general').delete()
+        FinalResult.objects.filter(type='general', team__event=event).delete()
 
     for team in teams:
         if request.GET.get('role'):

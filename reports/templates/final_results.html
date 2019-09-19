@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <table border="1">
+        <tr>
+            <th>#</th>
+            <th>Team</th>
+            <th>Score</th>
+            <th>Type</th>
+            <th>Event</th>
+        </tr>
+        {% for record in results %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ record.team.title }}</a></td>
+            <td>{{ record.score }}</td>
+            <td>{{ record.type }}</td>
+            <td>{{ record.team.event }}</td>
+        </tr>
+    {% empty %}
+        <tr><td>no content.</td></tr>
+    {% endfor %}
+    </table>
+    <p><a href="{% url 'reports:index' %}">Back</a></p>
+{% endblock content %}
