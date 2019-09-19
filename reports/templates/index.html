@@ -25,9 +25,9 @@
 <div>
     <h2>Assessments</h2>
     <p>
-    <li><a href="{% url 'reports:project_assessment_by_evaluation_committee' %}">Project Assessments by Evaluation Committee report</a></li>
-    <li><a href="{% url 'reports:project_assessment_by_jury' %}">Project Assessments by Jury report</a></li>
-    <li><a href="{% url 'reports:registrant_assessment' %}">Registrant Assessments report</a></li>
+    <li><a href="{% url 'reports:team_assessment' %}?role=committee">Team Assessments by Evaluation Committee report</a></li>
+    <li><a href="{% url 'reports:team_assessment' %}?role=jury">Team Assessments by Jury report</a></li>
+    <li><a href="{% url 'reports:team_assessment' %}">Team Assessments report - All roles</a></li>
     </p>
 </div>
 <div>

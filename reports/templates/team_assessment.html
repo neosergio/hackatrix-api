@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load mathfilters %}
+{% block content %}
+    <table border="1">
+        <tr>
+            <th>#</th>
+            <th>Team</th>
+            <th>Assessments</th>
+            <th>Assessments weight</th>
+            <th>Value</th>
+            <th>Total</th>
+            <th>Evaluator email</th>
+            <th>Created at</th>
+        </tr>
+        {% for record in assessments %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ record.team.title }}</a></td>
+            <td>{{ record.assessment.title }}</td>
+            <td>{{ record.assessment.weight }}</td>
+            <td>{{ record.value }}</td>
+            <td>{{ record.value|mul:record.assessment.weight }}</td>
+            <td>{{ record.evaluator.email }}</td>
+            <td>{{ record.created_at }}</td>
+        </tr>
+    {% empty %}
+        <tr><td>no content.</td></tr>
+    {% endfor %}
+    </table>
+    <p><a href="{% url 'reports:index' %}">Back</a></p>
+{% endblock content %}

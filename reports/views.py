@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 from .forms import EmailForm
-from assessments.models import ProjectAssessment, RegistrantAssessment
+from assessments.models import ProjectAssessment, RegistrantAssessment, TeamAssessmentResults
 from events.models import Attendance, Registrant, RegistrantAttendance, Event, Team, TeamMember
 from ideas.models import IdeaTeamMember, Idea
 
@@ -141,3 +141,22 @@ def team_member_list(request):
         team_members = TeamMember.objects.filter(team__event=event, is_active=True)
         context = {'team_members': team_members}
     return render(request, 'team_member_list.html', context)
+
+
+@login_required()
+def team_assessment(request):
+    context = dict()
+    if config.DISPLAY_REPORTS and config.DISPLAY_JURY_REPORTS:
+        event = Event.objects.filter(is_active=True, is_featured=True).first()
+        if request.GET.get('role') and request.GET.get('role') == 'committee':
+            assessments = TeamAssessmentResults.objects.filter(
+                assessment__is_for_evaluation_committee=True,
+                team__event=event)
+        elif request.GET.get('role') and request.GET.get('role') == 'jury':
+            assessments = TeamAssessmentResults.objects.filter(
+                assessment__is_for_jury=True,
+                team__event=event)
+        else:
+            assessments = TeamAssessmentResults.objects.filter(team__event=event)
+        context = {'assessments': assessments}
+    return render(request, 'team_assessment.html', context)

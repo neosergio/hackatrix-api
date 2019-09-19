@@ -4,6 +4,7 @@ from .views import index, attendance_list, attendance_list_by_id, attendance_ite
 from .views import project_assessment_by_jury, project_assessment_by_evaluation_committee, idea_list
 from .views import registrant_list_by_project, registrant_assessment, registrant_list
 from .views import team_list, team_member_list
+from .views import team_assessment
 from .views import get_QR_code_by_email
 
 
@@ -23,6 +24,7 @@ urlpatterns = [
     path('assessment/project/',
          project_assessment_by_evaluation_committee,
          name='project_assessment_by_evaluation_committee'),
+    path('assessment/team/', team_assessment, name='team_assessment'),
     path('assessment/project/by/jury', project_assessment_by_jury, name='project_assessment_by_jury'),
     path('assessment/registrant/', registrant_assessment, name='registrant_assessment'),
 ]
