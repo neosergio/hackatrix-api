@@ -16,10 +16,15 @@
     </p>
 </div>
 <div>
-    <h2>Participants</h2>
+    <h2>Attendance</h2>
     <p>
     <li><a href="{% url 'reports:get_QR_code_by_email' %}">Get QR Code by email</a></li>
     <li><a href="{% url 'reports:attendance_items' %}">Attendances report</a></li>
+    </p>
+</div>
+<div>
+    <h2>Assessments</h2>
+    <p>
     <li><a href="{% url 'reports:project_assessment_by_evaluation_committee' %}">Project Assessments by Evaluation Committee report</a></li>
     <li><a href="{% url 'reports:project_assessment_by_jury' %}">Project Assessments by Jury report</a></li>
     <li><a href="{% url 'reports:registrant_assessment' %}">Registrant Assessments report</a></li>

@@ -17,7 +17,8 @@ def index(request):
 @login_required()
 def attendance_items(request):
     if config.DISPLAY_REPORTS:
-        attendances = Attendance.objects.all()
+        event = Event.objects.filter(is_active=True, is_featured=True).first()
+        attendances = Attendance.objects.filter(event=event)
         context = {'attendances': attendances}
     else:
         context = dict()
