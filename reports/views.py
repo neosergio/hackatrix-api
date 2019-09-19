@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import EmailForm
 from assessments.models import ProjectAssessment, RegistrantAssessment
-from events.models import Attendance, Registrant, RegistrantAttendance, Event, Team
+from events.models import Attendance, Registrant, RegistrantAttendance, Event, Team, TeamMember
 from ideas.models import IdeaTeamMember, Idea
 
 
@@ -130,3 +130,13 @@ def team_list(request):
         teams = Team.objects.filter(event=event)
         context = {'teams': teams}
     return render(request, 'team_list.html', context)
+
+
+@login_required()
+def team_member_list(request):
+    context = dict()
+    if config.DISPLAY_REPORTS and config.DISPLAY_PROJECT_REPORTS:
+        event = Event.objects.filter(is_active=True, is_featured=True).first()
+        team_members = TeamMember.objects.filter(team__event=event, is_active=True)
+        context = {'team_members': team_members}
+    return render(request, 'team_member_list.html', context)
