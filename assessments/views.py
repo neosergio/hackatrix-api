@@ -170,8 +170,15 @@ def team_assessment_results_calculate(request):
     assessment_type = ''
     event = Event.objects.filter(is_active=True, is_featured=True).first()
     teams = Team.objects.filter(event=event, is_active=True, is_valid=True)
-    FinalResult.objects.all().delete()
     is_completed = False
+
+    if request.GET.get('role'):
+        if request.GET.get('role') == 'committee':
+            FinalResult.objects.filter(type='committee').delete()
+        elif request.GET.get('role') == 'jury':
+            FinalResult.objects.filter(type='jury').delete()
+    else:
+        FinalResult.objects.filter(type='general').delete()
 
     for team in teams:
         if request.GET.get('role'):
@@ -180,6 +187,7 @@ def team_assessment_results_calculate(request):
                     team=team,
                     assessment__is_for_evaluation_committee=True).aggregate(Sum('value'))
                 assessment_type = 'committee'
+
             elif request.GET.get('role') == 'jury':
                 assessments_total_sum = TeamAssessmentResults.objects.filter(
                     team=team,
@@ -192,7 +200,7 @@ def team_assessment_results_calculate(request):
                                'title': team.title,
                                'score': assessments_total_sum['value__sum'],
                                'type': assessment_type})
-        FinalResult.objects.create(team=team, score=assessments_total_sum['value__sum'], type=type)
+        FinalResult.objects.create(team=team, score=assessments_total_sum['value__sum'], type=assessment_type)
 
     # Check if assessments are completed.
     teams_count = len(Team.objects.filter(is_active=True, is_valid=True, event=event))
