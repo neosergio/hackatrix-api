@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import EmailForm
 from assessments.models import ProjectAssessment, RegistrantAssessment
-from events.models import Attendance, Registrant, RegistrantAttendance
+from events.models import Attendance, Registrant, RegistrantAttendance, Event
 from ideas.models import IdeaTeamMember, Idea
 
 
@@ -104,7 +104,8 @@ def registrant_assessment(request):
 @login_required()
 def registrant_list(request):
     if config.DISPLAY_REPORTS and config.DISPLAY_REGISTRANT_REPORTS:
-        registrants = Registrant.objects.all()
+        event = Event.objects.filter(is_active=True, is_featured=True).first()
+        registrants = Registrant.objects.filter(event=event)
         context = {'registrants': registrants}
     else:
         context = dict()
