@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <table border="1">
+        <tr>
+            <th>#</th>
+            <th>Team</th>
+            <th>Description</th>
+            <th>Valid</th>
+            <th>Active</th>
+        </tr>
+        {% for record in teams %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ record.title }}</a></td>
+            <td>{{ record.description }}</td>
+            <td>{{ record.is_valid }}</td>
+            <td>{{ record.is_active }}</td>
+        </tr>
+    {% empty %}
+        <tr><td>no content.</td></tr>
+    {% endfor %}
+    </table>
+    <p><a href="{% url 'reports:index' %}">Back</a></p>
+{% endblock content %}
