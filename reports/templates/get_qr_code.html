@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="{% url 'reports:get_QR_code_by_email' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p><input type="submit" value="Submit"></p>
+    <p>
+        <a href="{% url 'reports:get_QR_code_by_email' %}">
+            <input type="button" value="Reload form">
+        </a>
+    </p>
+
+</form>
+
+{% if registrant_code %}
+    <p><img src="{{ qr_code_create_api_url }}?data={{ registrant_code }}"></p>
+{% endif %}
+
+{% endblock content %}

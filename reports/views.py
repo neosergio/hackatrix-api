@@ -1,7 +1,9 @@
 from constance import config
+from django.conf import settings
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
+from .forms import EmailForm
 from assessments.models import ProjectAssessment, RegistrantAssessment
 from events.models import Attendance, Registrant, RegistrantAttendance
 from ideas.models import IdeaTeamMember, Idea
@@ -41,6 +43,22 @@ def attendance_list_by_id(request, attendance_id):
     else:
         context = dict()
     return render(request, 'attendance_list.html', context)
+
+
+@login_required()
+def get_QR_code_by_email(request):
+    if request.method == 'POST':
+        form = EmailForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            registrant = get_object_or_404(Registrant, email=email)
+            context = {'form': form,
+                       'registrant_code': registrant.code,
+                       'qr_code_create_api_url': settings.QR_CODE_CREATE_API_URL}
+    else:
+        form = EmailForm()
+        context = {'form': form}
+    return render(request, 'get_qr_code.html', context)
 
 
 @login_required()
