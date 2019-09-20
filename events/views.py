@@ -178,7 +178,8 @@ def registrant_send_qr_code(request):
         context = {'qr_code_create_api_url': settings.QR_CODE_CREATE_API_URL,
                    'registrant_event_title': registrant.event.title,
                    'registrant_full_name': registrant.full_name,
-                   'registrant_qr_code': registrant.code}
+                   'registrant_qr_code': registrant.code,
+                   'days_left_to_event': config.DAYS_LEFT_TO_EVENT}
         html_message = render_to_string('mail_template.html', context)
         plain_message = strip_tags(html_message)
         from_email = "{} <{}>".format(registrant.event.title, settings.EMAIL_HOST_USER)

@@ -200,6 +200,7 @@ CONSTANCE_CONFIG = {
     'DISPLAY_PROJECT_REPORTS': (True, 'Display project reports.', bool),
     'DISPLAY_JURY_REPORTS': (True, 'Display jury reports', bool),
     'DISPLAY_REGISTRANT_REPORTS': (True, 'Display registrant reports.', bool),
+    'DAYS_LEFT_TO_EVENT': (10, 'Number of days left to event', int),
 }
 
 # Passwords validators
