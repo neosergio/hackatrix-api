@@ -18,8 +18,8 @@
             <td>{{ record.idea.title }}</a></td>
             <td>{{ record.assessment.title }}</td>
             <td>{{ record.assessment.weight }}</td>
+            <td>{{ record.value|div:record.assessment.weight }}</td>
             <td>{{ record.value }}</td>
-            <td>{{ record.value|mul:record.assessment.weight }}</td>
             <td>{{ record.evaluator.email }}</td>
             <td>{{ record.created_at }}</td>
         </tr>
