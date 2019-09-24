@@ -7,7 +7,6 @@
             <th>Team</th>
             <th>Assessments</th>
             <th>Assessments weight</th>
-            <th>Value</th>
             <th>Total</th>
             <th>Evaluator email</th>
             <th>Created at</th>
@@ -18,7 +17,6 @@
             <td>{{ record.idea.title }}</a></td>
             <td>{{ record.assessment.title }}</td>
             <td>{{ record.assessment.weight }}</td>
-            <td>{{ record.value|div:record.assessment.weight }}</td>
             <td>{{ record.value }}</td>
             <td>{{ record.evaluator.email }}</td>
             <td>{{ record.created_at }}</td>
