@@ -329,7 +329,7 @@ def team_deactivate(request, team_id):
 @permission_classes((IsModerator, ))
 @renderer_classes((JSONRenderer,))
 def team_data_from_surveymonkey(request):
-    request_data = Request('https://api.surveymonkey.com/v3/surveys/188401653/responses/bulk')
+    request_data = Request('https://api.surveymonkey.com/v3/surveys/188401653/responses/bulk?per_page=100')
     AUTHORIZATION_SURVEYMONKEY_KEY = os.environ.get("AUTHORIZATION_SURVEYMONKEY_KEY") or "no-authorization-key"
     request_data.add_header('Authorization', AUTHORIZATION_SURVEYMONKEY_KEY)
     raw_content = urlopen(request_data).read()
@@ -340,7 +340,11 @@ def team_data_from_surveymonkey(request):
         team_raw_data = item['pages'][0]['questions']
         table = team_raw_data[0]['answers'][0]['text']
         title = team_raw_data[1]['answers'][0]['text']
-        description = team_raw_data[3]['answers'][0]['text']
+        try:
+            description = team_raw_data[3]['answers'][0]['text']
+        except Exception as e:
+            print(e)
+            pass
         try:
             team = Team.objects.create(title=title, event=event, description=description, table=table)
             participants = team_raw_data[2]['answers']
