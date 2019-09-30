@@ -337,14 +337,16 @@ def team_data_from_surveymonkey(request):
     event = Event.objects.filter(is_active=True, is_featured=True).first()
 
     for item in content['data']:
-        team_raw_data = item['pages'][0]['questions']
-        table = team_raw_data[0]['answers'][0]['text']
-        title = team_raw_data[1]['answers'][0]['text']
+
         try:
+            team_raw_data = item['pages'][0]['questions']
+            table = team_raw_data[0]['answers'][0]['text']
+            title = team_raw_data[1]['answers'][0]['text']
             description = team_raw_data[3]['answers'][0]['text']
         except Exception as e:
             print(e)
             pass
+
         try:
             team = Team.objects.create(title=title, event=event, description=description, table=table)
             participants = team_raw_data[2]['answers']
