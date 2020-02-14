@@ -6,15 +6,15 @@ from .models import Attendance, RegistrantAttendance
 from .models import Team, TeamMember
 
 
-class LocationAdmin(admin.ModelAdmin):
+class LocationAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('name', 'latitude', 'longitude')
 
 
-class EventAdmin(admin.ModelAdmin):
+class EventAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('title', 'image', 'dates', 'details', 'is_featured', 'is_upcoming', 'is_active')
 
 
-class TrackAdmin(admin.ModelAdmin):
+class TrackAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('event', 'title', 'datetime', 'details', 'location', 'is_interaction_active', 'is_active')
 
 
@@ -31,7 +31,7 @@ class AttendanceAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('title', 'event', 'available_from', 'due_date', 'is_active', 'max_capacity')
 
 
-class RegistrantAttendanceAdmin(admin.ModelAdmin):
+class RegistrantAttendanceAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('attendance', 'registrant', 'registered_by', 'registered_at')
 
 

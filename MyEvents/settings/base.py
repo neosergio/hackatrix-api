@@ -194,7 +194,7 @@ CONSTANCE_CONFIG = {
     'TEAM_MIN_SIZE_MESSAGE': ('No se tiene el número mínimo de integrantes.',
                               'Team min size not reached', str),
     'USER_EMAIL_DOMAIN_RESTRICTION_FLAG': (False, 'user email domain restriction flag', bool),
-    'USER_EMAIL_DOMAIN_RESTRICTION': ('belatrixsf.com', 'user email domain restriction separated with commas', str),
+    'USER_EMAIL_DOMAIN_RESTRICTION': ('belatrixsf.com, globant.com', 'user email domain restriction separated with commas', str),
     'BULK_EMAIL_QUOTE': (20, 'Number of emails per quote.', int),
     'DISPLAY_REPORTS': (True, 'Display reports.', bool),
     'DISPLAY_PROJECT_REPORTS': (True, 'Display project reports.', bool),

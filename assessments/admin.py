@@ -13,7 +13,7 @@ class AssessmentAdmin(ImportExportMixin, admin.ModelAdmin):
                     'is_for_team_leader')
 
 
-class ProjectAssessmentAdmin(admin.ModelAdmin):
+class ProjectAssessmentAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('assessment',
                     'idea',
                     'evaluator',
@@ -22,7 +22,7 @@ class ProjectAssessmentAdmin(admin.ModelAdmin):
                     'modified_at')
 
 
-class RegistrantAssessmentAdmin(admin.ModelAdmin):
+class RegistrantAssessmentAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('assessment',
                     'registrant',
                     'evaluator',
@@ -31,19 +31,19 @@ class RegistrantAssessmentAdmin(admin.ModelAdmin):
                     'modified_at')
 
 
-class RegistrantCommentAdmin(admin.ModelAdmin):
+class RegistrantCommentAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('registrant', 'comment', 'comment_by', 'created_at', 'modified_at')
 
 
-class TeamAssessmentAdmin(admin.ModelAdmin):
+class TeamAssessmentAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('team', 'evaluator', 'has_been_assessed')
 
 
-class TeamAssessmentResultsAdmin(admin.ModelAdmin):
+class TeamAssessmentResultsAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('assessment', 'team', 'evaluator', 'value', 'created_at', 'modified_at')
 
 
-class FinalResultAdmin(admin.ModelAdmin):
+class FinalResultAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('team', 'score', 'type')
     search_fields = ['team__name']
 
