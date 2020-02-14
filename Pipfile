@@ -18,4 +18,4 @@ django-constance = {extras = ["database"],version = "*"}
 django-mathfilters = "*"
 
 [requires]
-python_version = "3.7.3"
+python_version = "3.7.6"
