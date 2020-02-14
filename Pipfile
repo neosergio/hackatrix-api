@@ -6,8 +6,8 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-django = "==2.1.7"
-djangorestframework = "==3.9.1"
+django = "==3.0.3"
+djangorestframework = "==3.11.0"
 django-heroku = "*"
 flake8 = "*"
 gunicorn = "*"
