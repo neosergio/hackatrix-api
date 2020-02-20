@@ -124,7 +124,7 @@ def event_send_participant_codes(request):
 
 
 @api_view(['GET', ])
-@permission_classes((permissions.IsAuthenticated, ))
+@permission_classes((permissions.IsAuthenticatedOrReadOnly, ))
 def registrant_list(request):
     registrants = Registrant.objects.all()
     if request.GET.get('page') or request.GET.get('per_page'):
