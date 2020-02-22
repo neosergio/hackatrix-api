@@ -71,6 +71,7 @@ class Registrant(models.Model):
     is_code_used = models.BooleanField(default=False)
     is_email_sent = models.BooleanField(default=False)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    type = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta(object):
         unique_together = ('email', 'event')
