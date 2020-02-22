@@ -26,7 +26,6 @@ class UserCustomAdmin(ImportExportMixin, BaseUserAdmin):
                     "full_name",
                     "is_staff",
                     "is_moderator",
-                    "is_team_leader",
                     "is_jury",
                     "is_from_HR",
                     "is_from_evaluation_committee")
