@@ -31,7 +31,7 @@
 	"model": "users.user",
 	"pk": 2,
 	"fields": {
-		"password": "pbkdf2_sha256$180000$KgWEwuGGqKjS$I+XY21yQFFkkknz+OjLEgVvWH472axi5Z+/9ZZlbkMg=",
+		"password": "pbkdf2_sha256$180000$vn4DIkBUeaNZ$P2CDfHEEqPrbwB8yTOTkVGlfuRRMKYoSsyomzh2vlXk=",
 		"last_login": null,
 		"is_superuser": false,
 		"email": "moderator01@hackatrix.com",
@@ -60,7 +60,7 @@
 	"model": "users.user",
 	"pk": 3,
 	"fields": {
-		"password": "pbkdf2_sha256$180000$q2aym8GX2jwy$lkjt0TG1uqCyN/dOJxy8TzadWQc/yS21EHUINsKRVpI=",
+		"password": "pbkdf2_sha256$180000$vn4DIkBUeaNZ$P2CDfHEEqPrbwB8yTOTkVGlfuRRMKYoSsyomzh2vlXk=",
 		"last_login": null,
 		"is_superuser": true,
 		"email": "moderator02@hackatrix.com",
@@ -89,7 +89,7 @@
 	"model": "users.user",
 	"pk": 4,
 	"fields": {
-		"password": "pbkdf2_sha256$180000$s1Pjot3VAQqT$UaZB9wdWe/1qojoZS+xBX21eiilUQ/0y+ErpK06eyW0=",
+		"password": "pbkdf2_sha256$180000$vn4DIkBUeaNZ$P2CDfHEEqPrbwB8yTOTkVGlfuRRMKYoSsyomzh2vlXk=",
 		"last_login": null,
 		"is_superuser": false,
 		"email": "hr01@hackatrix.com",
@@ -118,7 +118,7 @@
 	"model": "users.user",
 	"pk": 5,
 	"fields": {
-		"password": "pbkdf2_sha256$180000$DVuNDswHSHUo$5FqnPEaJ0Wf+pPeS02LhK16zbkiQJQ2Bp9QD9Zl9R68=",
+		"password": "pbkdf2_sha256$180000$vn4DIkBUeaNZ$P2CDfHEEqPrbwB8yTOTkVGlfuRRMKYoSsyomzh2vlXk=",
 		"last_login": null,
 		"is_superuser": false,
 		"email": "hr02@hackatrix.com",
@@ -147,7 +147,7 @@
 	"model": "users.user",
 	"pk": 6,
 	"fields": {
-		"password": "pbkdf2_sha256$180000$RQSghV8AiPsU$YHczIElSTTGmBu/kdChFOi+JXQTKSlpFyFAXeRwUfBo=",
+		"password": "pbkdf2_sha256$180000$vn4DIkBUeaNZ$P2CDfHEEqPrbwB8yTOTkVGlfuRRMKYoSsyomzh2vlXk=",
 		"last_login": null,
 		"is_superuser": false,
 		"email": "jury01@hackatrix.com",
@@ -176,7 +176,7 @@
 	"model": "users.user",
 	"pk": 7,
 	"fields": {
-		"password": "pbkdf2_sha256$180000$9FuYNxqtKHbK$iszjV51bCLAEXnAWJ8g7TQiX6GN2ruKaoFQkUv1jZjA=",
+		"password": "pbkdf2_sha256$180000$vn4DIkBUeaNZ$P2CDfHEEqPrbwB8yTOTkVGlfuRRMKYoSsyomzh2vlXk=",
 		"last_login": null,
 		"is_superuser": false,
 		"email": "jury02@hackatrix.com",
@@ -205,7 +205,7 @@
 	"model": "users.user",
 	"pk": 8,
 	"fields": {
-		"password": "pbkdf2_sha256$180000$I4NyjuRjzdX7$2obDUNLHzzMkfD+9DQ0+v1iteiL7857+lIpYrLd5d/E=",
+		"password": "pbkdf2_sha256$180000$vn4DIkBUeaNZ$P2CDfHEEqPrbwB8yTOTkVGlfuRRMKYoSsyomzh2vlXk=",
 		"last_login": null,
 		"is_superuser": false,
 		"email": "evaluator01@hackatrix.com",
@@ -234,7 +234,7 @@
 	"model": "users.user",
 	"pk": 9,
 	"fields": {
-		"password": "pbkdf2_sha256$180000$cZ1pyMuuzUQw$D/iSvbpqOalVcantNiKClwlXIrbadB2olOY328FDx7s=",
+		"password": "pbkdf2_sha256$180000$vn4DIkBUeaNZ$P2CDfHEEqPrbwB8yTOTkVGlfuRRMKYoSsyomzh2vlXk=",
 		"last_login": null,
 		"is_superuser": false,
 		"email": "evaluator02@hackatrix.com",
@@ -263,7 +263,7 @@
 	"model": "users.user",
 	"pk": 10,
 	"fields": {
-		"password": "pbkdf2_sha256$180000$XUDiM1oPGk1N$EBCZwhw6hPbBmG10AaRIxp4oInyrUTDrjC7/T9HzqgE=",
+		"password": "pbkdf2_sha256$180000$vn4DIkBUeaNZ$P2CDfHEEqPrbwB8yTOTkVGlfuRRMKYoSsyomzh2vlXk=",
 		"last_login": null,
 		"is_superuser": true,
 		"email": "admin01@hackatrix.com",
@@ -292,7 +292,7 @@
 	"model": "users.user",
 	"pk": 11,
 	"fields": {
-		"password": "pbkdf2_sha256$180000$foQcZ0YjpIGJ$9z0naLfB+qdLXdo2yv6x4A8Fj/Np1mZfYa7fqDg8jkU=",
+		"password": "pbkdf2_sha256$180000$vn4DIkBUeaNZ$P2CDfHEEqPrbwB8yTOTkVGlfuRRMKYoSsyomzh2vlXk=",
 		"last_login": null,
 		"is_superuser": true,
 		"email": "admin02@hackatrix.com",
