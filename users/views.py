@@ -39,8 +39,7 @@ class CustomAuthToken(ObtainAuthToken):
             "data": {
                 'token': token.key,
                 'user_id': user.pk,
-                'email': user.email,
-                'is_validated': user.is_validated
+                'email': user.email
             }
         })
 
