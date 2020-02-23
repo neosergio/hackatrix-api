@@ -8,6 +8,9 @@
             <th>Attendance</th>
             <th>Registered by</th>
             <th>Registered at</th>
+            <th>Is Staff</th>
+            <th>Is Supplier</th>
+            <th>Is Participant</th>
         </tr>
         {% for record in attendances %}
         <tr>
@@ -17,6 +20,9 @@
             <td>{{ record.attendance.title }}</td>
             <td>{{ record.registered_by }}</td>
             <td>{{ record.registered_at }}</td>
+            <td>{{ record.registrant.is_staff }}</td>
+            <td>{{ record.registrant.is_supplier }}</td>
+            <td>{{ record.registrant.is_participant }}</td>
         </tr>
     {% empty %}
         <tr><td>no content.</td></tr>
