@@ -23,7 +23,7 @@ class TrackItemAgendaAdmin(ImportExportMixin, admin.ModelAdmin):
 
 
 class RegistrantAdmin(ImportExportMixin, admin.ModelAdmin):
-    list_display = ('full_name', 'email', 'code', 'is_email_sent', 'event', 'is_staff', 'is_supplier', 'is_participant')
+    list_display = ('full_name', 'email', 'code', 'event', 'is_staff', 'is_supplier', 'is_participant')
     search_fields = ['email', 'full_name', 'code', 'type']
 
 

@@ -256,6 +256,31 @@ def event_attendance_register(request, attendance_id):
 
 @api_view(['GET', ])
 @permission_classes((permissions.IsAuthenticated, ))
+def event_attendance_summary(request, attendance_id):
+    attendance = get_object_or_404(Attendance, pk=attendance_id)
+    event = attendance.event
+
+    event_registrants = Registrant.objects.filter(event=event)
+    total_participants = len(event_registrants.filter(is_participant=True))
+    total_staff = len(event_registrants.filter(is_staff=True))
+    total_supplier = len(event_registrants.filter(is_supplier=True))
+
+    registrant_attendance = RegistrantAttendance.objects.filter(attendance=attendance)
+    total_participants_attendance = len(registrant_attendance.filter(registrant__is_participant=True))
+    total_staff_attendance = len(registrant_attendance.filter(registrant__is_staff=True))
+    total_supplier_attendance = len(registrant_attendance.filter(registrant__is_supplier=True))
+
+    response = {'total_participants': total_participants,
+                'total_participants_attendance': total_participants_attendance,
+                'total_staff': total_staff,
+                'total_staff_attendance': total_staff_attendance,
+                'total_supplier': total_supplier,
+                'total_supplier_attendance': total_supplier_attendance}
+    return Response(response, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', ])
+@permission_classes((permissions.IsAuthenticated, ))
 def team_detail(request, team_id):
     response = dict()
     team = get_object_or_404(Team, pk=team_id)
