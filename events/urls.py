@@ -3,7 +3,7 @@ from django.urls import path
 from .views import event_featured, event_attendance_list, event_attendance_register, event_attendance_summary
 from .views import registrant_list, registrant_qr_code, registrant_identity_validation
 from .views import registrant_send_qr_code, registrant_email_sent_flag_to_false
-from .views import team_detail, team_list_event_featured, team_update, team_deactivate
+from .views import team_detail, team_list_event_featured, team_update, team_deactivate, team_member_list
 from .views import team_data_from_surveymonkey
 
 
@@ -29,5 +29,6 @@ urlpatterns = [
     path('team/<int:team_id>/', team_detail, name='team_detail'),
     path('team/<int:team_id>/update/', team_update, name='team_update'),
     path('team/<int:team_id>/deactivate/', team_deactivate, name='team_deactivate'),
+    path('team/member/list/', team_member_list, name='team_member_list'),
     path('team/from/surveymonkey/', team_data_from_surveymonkey, name='team_data_from_surveymonkey'),
 ]
