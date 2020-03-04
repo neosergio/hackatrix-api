@@ -73,5 +73,6 @@ class TeamSerializer(serializers.ModelSerializer):
 
 class TeamUpdateSerializer(serializers.Serializer):
     title = serializers.CharField()
+    summary = serializers.CharField()
     description = serializers.CharField()
     table = serializers.CharField()

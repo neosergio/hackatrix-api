@@ -119,6 +119,7 @@ class RegistrantAttendance(models.Model):
 class Team(models.Model):
     title = models.CharField(max_length=200)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    summary = models.CharField(max_length=200, blank=True, null=True)
     description = models.TextField(null=True, blank=True)
     help_to = models.CharField(max_length=255, null=True, blank=True)
     table = models.CharField(max_length=20, null=True, blank=True)

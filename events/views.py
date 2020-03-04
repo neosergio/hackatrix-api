@@ -312,6 +312,7 @@ def team_list_event_featured(request):
         teams_response.append({'id': team.id,
                                'title': team.title,
                                'event': team.event.id,
+                               'summary': team.summary,
                                'description': team.description,
                                'table': team.table,
                                'help_to': team.help_to,
@@ -342,6 +343,7 @@ def team_update(request, team_id):
     serializer = TeamUpdateSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         team.title = serializer.validated_data['title']
+        team.summary = serializer.validated_data['summary']
         team.description = serializer.validated_data['description']
         team.table = serializer.validated_data['table']
         team.save()
@@ -375,13 +377,14 @@ def team_data_from_surveymonkey(request):
             team_raw_data = item['pages'][0]['questions']
             table = team_raw_data[0]['answers'][0]['text']
             title = team_raw_data[1]['answers'][0]['text']
+            summary = team_raw_data[3]['answers'][0]['text']
             description = team_raw_data[3]['answers'][0]['text']
         except Exception as e:
             print(e)
             pass
 
         try:
-            team = Team.objects.create(title=title, event=event, description=description, table=table)
+            team = Team.objects.create(title=title, event=event, summary=summary, description=description, table=table)
             participants = team_raw_data[2]['answers']
             for participant in participants:
                 participant_name = participant['text']
