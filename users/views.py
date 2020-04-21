@@ -64,8 +64,12 @@ def user_create(request):
                 user = User.objects.create_user(email=email, password=password)
                 user.generate_validation_code()
 
-                device_code = serializer.validated_data['device_code']
-                device_os = serializer.validated_data['device_os']
+                try:
+                    device_code = serializer.validated_data['device_code']
+                    device_os = serializer.validated_data['device_os']
+                except Exception as e:
+                    print(e)
+                    device_code = device_os = 'unknown'
                 UserDevice.objects.get_or_create(user=user, operating_system=device_os, code=device_code)
 
                 token, created = Token.objects.get_or_create(user=user)
