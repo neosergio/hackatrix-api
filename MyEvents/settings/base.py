@@ -217,3 +217,25 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # QR code API
 QR_CODE_CREATE_API_URL = env('QR_CODE_CREATE_API_URL', '')
+
+# CORS
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = ('DELETE',
+                      'GET',
+                      'OPTIONS',
+                      'PATCH',
+                      'POST',
+                      'PUT',)
+CORS_ALLOW_HEADERS = ('accept',
+                      'accept-encoding',
+                      'accept-language',
+                      'authorization',
+                      'content-type',
+                      'dnt',
+                      'origin',
+                      'user-agent',
+                      'x-csrftoken',
+                      'x-requested-with',)
+CORS_EXPOSE_HEADERS = ('Access-Control-Allow-Origin',
+                       'Access-Control-Allow-Headers')
