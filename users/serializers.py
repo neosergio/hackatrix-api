@@ -24,8 +24,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserAuthenticationSerializer(AuthTokenSerializer):
-    device_code = serializers.CharField(max_length=200)
-    device_os = serializers.CharField(max_length=10)
+    device_code = serializers.CharField(max_length=200, required=False)
+    device_os = serializers.CharField(max_length=10, required=False)
 
 
 class UserAuthenticationResponseSerializer(serializers.Serializer):
