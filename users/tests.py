@@ -7,6 +7,7 @@ from .models import User
 from .models import UserDevice
 from .serializers import UserAuthenticationSerializer
 from .serializers import UserCreationSerializer
+from .serializers import UserUpdateProfileSerialier
 
 
 class RegistrationTestCase(APITestCase):
@@ -63,7 +64,7 @@ class UserTestCase(APITestCase):
 
         serializer = UserAuthenticationSerializer(data=data)
         if serializer.is_valid():
-            response = self.client.post(self.authentication_url, serializer.data)
+            response = self.client.post(self.authentication_url, serializer.validated_data)
 
         self.assertEqual(serializer.is_valid(raise_exception=True), True)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -74,7 +75,7 @@ class UserTestCase(APITestCase):
 
         serializer = UserAuthenticationSerializer(data=data)
         if serializer.is_valid():
-            response = self.client.post(self.authentication_url, serializer.data)
+            response = self.client.post(self.authentication_url, serializer.validated_data)
 
         self.assertEqual(serializer.is_valid(raise_exception=True), True)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -83,6 +84,21 @@ class UserTestCase(APITestCase):
         list_url = reverse("users:user_list")
         response = self.client.get(list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_user_profile(self):
+        profile_url = reverse("users:user_profile")
+        response = self.client.get(profile_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_user_profile_update(self):
+        profile_update_url = reverse("users:user_profile_update")
+        data = {"full_name": "First Name Last Name"}
+        serializer = UserUpdateProfileSerialier(data=data)
+        if serializer.is_valid():
+            response = self.client.patch(profile_update_url, serializer.validated_data)
+
+        self.assertTrue(serializer.is_valid())
+        self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
 
     def test_logout(self):
         logout_url = reverse("users:user_logout")
