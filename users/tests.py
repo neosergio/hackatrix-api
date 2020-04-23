@@ -44,11 +44,15 @@ class UserTestCase(APITestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(email="mobile@hackatrix.com",
-                                             password="password")
+                                             password="password",
+                                             is_staff=True)
         self.user_device = UserDevice.objects.create(user=self.user,
                                                      operating_system="unknown",
                                                      code="unknown")
-        self.token = Token.objects.get_or_create(user=self.user)
+        self.token = Token.objects.get(user=self.user)
+
+    def api_authentication(self):
+        self.client.credentials(HTTP_AUTHORIZATION="Token {}".format(self.token.key))
 
     def test_authentication_mobile_user(self):
         data = {"username": "mobile@hackatrix.com",
@@ -72,4 +76,10 @@ class UserTestCase(APITestCase):
             response = self.client.post(self.authentication_url, serializer.data)
 
         self.assertEqual(serializer.is_valid(raise_exception=True), True)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_user_list(self):
+        self.api_authentication()
+        list_url = reverse("users:user_list")
+        response = self.client.get(list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
