@@ -43,7 +43,13 @@ class CustomAuthToken(ObtainAuthToken):
             "data": {
                 'token': token.key,
                 'user_id': user.pk,
-                'email': user.email
+                'email': user.email,
+                'full_name': user.full_name,
+                'is_staff': user.is_staff,
+                'is_active': user.is_active,
+                'is_jury': user.is_jury,
+                'is_from_evaluation_committee': user.is_from_evaluation_committee,
+                'is_blocked': user.is_blocked
             }
         })
 
