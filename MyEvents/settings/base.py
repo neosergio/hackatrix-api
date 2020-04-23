@@ -43,6 +43,7 @@ THIRD_PARTY_APPS = [
     'rest_framework_swagger',
     'constance',
     'constance.backends.database',
+    'corsheaders',
     'mathfilters',
 ]
 
@@ -59,6 +60,7 @@ INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
