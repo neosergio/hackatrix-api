@@ -7,6 +7,7 @@ from .models import User
 from .models import UserDevice
 from .serializers import UserAuthenticationSerializer
 from .serializers import UserCreationSerializer
+from .serializers import UserUpdatePasswordSerializer
 from .serializers import UserUpdateProfileSerialier
 
 
@@ -97,6 +98,18 @@ class UserTestCase(APITestCase):
         if serializer.is_valid():
             response = self.client.patch(profile_update_url, serializer.validated_data)
 
+        self.assertTrue(serializer.is_valid())
+        self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
+
+    def test_user_password_update(self):
+        password_update_url = reverse("users:user_password_update")
+        data = {"current_password": "password",
+                "new_password": "password"}
+        serializer = UserUpdatePasswordSerializer(data=data)
+        if serializer.is_valid():
+            response = self.client.patch(password_update_url, serializer.validated_data)
+
+        self.assertTrue(self.user.check_password(serializer.validated_data.get("current_password")))
         self.assertTrue(serializer.is_valid())
         self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
 

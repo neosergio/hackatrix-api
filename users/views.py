@@ -28,7 +28,7 @@ class CustomAuthToken(ObtainAuthToken):
         """
         serializer = UserAuthenticationSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
+        user = serializer.validated_data.get('user')
 
         try:
             device_code = serializer.validated_data['device_code']
@@ -56,12 +56,12 @@ def user_create(request):
     """
     serializer = UserCreationSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        email = serializer.validated_data['email']
+        email = serializer.validated_data.get('email')
         registrant_emails = Registrant.objects.filter(email=email)
         if len(registrant_emails) > 0:
             raise PermissionDenied('El email esta registrado como participante, no puede ser usuario')
 
-        password = serializer.validated_data['password']
+        password = serializer.validated_data.get('password')
         try:
             validate_password(password)
             if validate_user_email(email):
@@ -120,7 +120,7 @@ def user_identity_validation(request):
     """
     serializer = UserIdentitySerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        code_to_validate = serializer.validated_data['user_qr_code']
+        code_to_validate = serializer.validated_data.get('user_qr_code')
         user = get_object_or_404(User, pk=code_to_validate[10:])
         serializer = UserSerializer(user)
 
@@ -153,7 +153,7 @@ def user_profile_update(request):
     user = request.user
     serializer = UserUpdateProfileSerialier(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        full_name = serializer.validated_data['full_name']
+        full_name = serializer.validated_data.get('full_name')
         user.full_name = full_name
         user.save()
         serializer = UserSerializer(user)
@@ -186,8 +186,8 @@ def user_password_update(request):
     """
     serializer = UserUpdatePasswordSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        current_password = serializer.validated_data['current_password']
-        new_password = serializer.validated_data['new_password']
+        current_password = serializer.validated_data.get('current_password')
+        new_password = serializer.validated_data.get('new_password')
         user = request.user
         if user.check_password(current_password):
             user.set_password(new_password)
@@ -207,7 +207,7 @@ def user_password_recovery_request(request):
     """
     serializer = UserEmailSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        email = serializer.validated_data['email']
+        email = serializer.validated_data.get('email')
         user = get_object_or_404(User, email=email)
         user.generate_reset_password_code()
 
