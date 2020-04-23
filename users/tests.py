@@ -50,6 +50,7 @@ class UserTestCase(APITestCase):
                                                      operating_system="unknown",
                                                      code="unknown")
         self.token = Token.objects.get(user=self.user)
+        self.api_authentication()
 
     def api_authentication(self):
         self.client.credentials(HTTP_AUTHORIZATION="Token {}".format(self.token.key))
@@ -79,7 +80,11 @@ class UserTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_user_list(self):
-        self.api_authentication()
         list_url = reverse("users:user_list")
         response = self.client.get(list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_logout(self):
+        logout_url = reverse("users:user_logout")
+        response = self.client.post(logout_url)
+        self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)

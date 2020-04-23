@@ -168,8 +168,11 @@ def user_logout(request):
     """
     serializer = UserLogoutSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        code = serializer.validated_data['device_code']
-        device = UserDevice.objects.filter(code=code)
+        try:
+            code = serializer.validated_data['device_code']
+            device = UserDevice.objects.filter(code=code)
+        except Exception:
+            device = UserDevice.objects.filter(user=request.user)
         device.delete()
         logout(request)
         return Response(status=status.HTTP_202_ACCEPTED)
