@@ -18,7 +18,7 @@ from .serializers import UserAuthenticationSerializer, UserSerializer, UserEmail
 from .serializers import UserCreationSerializer, UserUpdatePasswordSerializer, UserUpdateProfileSerialier
 from .serializers import UserIdentitySerializer
 
-from events.models import Registrant
+# from events.models import Registrant
 
 
 class CustomAuthToken(ObtainAuthToken):
@@ -63,9 +63,9 @@ def user_create(request):
     serializer = UserCreationSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         email = serializer.validated_data.get('email')
-        registrant_emails = Registrant.objects.filter(email=email)
-        if len(registrant_emails) > 0:
-            raise PermissionDenied('El email esta registrado como participante, no puede ser usuario')
+        # registrant_emails = Registrant.objects.filter(email=email)
+        # if len(registrant_emails) > 0:
+        #    raise PermissionDenied('El email esta registrado como participante, no puede ser usuario')
 
         password = serializer.validated_data.get('password')
         try:
