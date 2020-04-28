@@ -13,5 +13,5 @@ Events API
 * Run migrations through the following commands:
 	* python manage.py makemigrations
 	* python manage.py migrate
-	* python manage.py load <fixture-name>.json (fixture-name corresponds to json files located in the users folder)
+	* python manage.py loaddata <fixture-name>.json (fixture-name corresponds to json files located in the users folder)
 * run the program: python manage.py runserver
