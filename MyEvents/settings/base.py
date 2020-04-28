@@ -53,6 +53,7 @@ PROJECT_APPS = [
     # 'ideas.apps.IdeasConfig',
     # 'assessments.apps.AssessmentsConfig',
     # 'reports.apps.ReportsConfig',
+    'online.apps.OnlineConfig'
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
