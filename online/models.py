@@ -4,6 +4,7 @@ from django.db import models
 class EvaluationCommittee(models.Model):
     name = models.CharField(max_length=100)
     is_evaluation_closed = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
@@ -12,6 +13,7 @@ class EvaluationCommittee(models.Model):
 class Evaluator(models.Model):
     user = models.OneToOneField('users.User', on_delete=models.CASCADE)
     evaluation_committee = models.ForeignKey(EvaluationCommittee, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.user.email
@@ -23,6 +25,7 @@ class Team(models.Model):
     project = models.CharField(max_length=100)
     total_score = models.FloatField(default=0)
     evaluation_committee = models.ForeignKey(EvaluationCommittee, on_delete=models.CASCADE, null=True, blank=True)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
@@ -33,6 +36,7 @@ class TeamMember(models.Model):
     surname = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.email
@@ -48,6 +52,7 @@ class Evaluation(models.Model):
     comment = models.TextField(blank=True, null=True)
     total_score = models.FloatField(default=0)
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return "f'{self.user.email} {str(self.total_score)}"
