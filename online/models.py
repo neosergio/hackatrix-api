@@ -53,6 +53,7 @@ class Evaluation(models.Model):
     total_score = models.FloatField(default=0)
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
+    last_save = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "f'{self.user.email} {str(self.total_score)}"

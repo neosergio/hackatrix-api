@@ -1,0 +1,41 @@
+[{
+	"model": "online.evaluationcommittee",
+	"pk": 1,
+	"fields": {
+		"name": "Committee 1",
+		"is_evaluation_closed": false,
+		"is_active": true
+	}
+}, {
+	"model": "online.evaluationcommittee",
+	"pk": 2,
+	"fields": {
+		"name": "Committee 2",
+		"is_evaluation_closed": false,
+		"is_active": true
+	}
+}, {
+	"model": "online.evaluationcommittee",
+	"pk": 3,
+	"fields": {
+		"name": "Committee 3",
+		"is_evaluation_closed": false,
+		"is_active": true
+	}
+}, {
+	"model": "online.evaluationcommittee",
+	"pk": 4,
+	"fields": {
+		"name": "Committee 4",
+		"is_evaluation_closed": false,
+		"is_active": true
+	}
+}, {
+	"model": "online.evaluationcommittee",
+	"pk": 5,
+	"fields": {
+		"name": "Committee 5",
+		"is_evaluation_closed": false,
+		"is_active": true
+	}
+}]
