@@ -12,7 +12,9 @@ class EvaluationCommittee(models.Model):
 
 class Evaluator(models.Model):
     user = models.OneToOneField('users.User', on_delete=models.CASCADE)
-    evaluation_committee = models.ForeignKey(EvaluationCommittee, on_delete=models.CASCADE)
+    evaluation_committee = models.ForeignKey(EvaluationCommittee,
+                                             on_delete=models.CASCADE,
+                                             related_name='evaluator_committee')
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
