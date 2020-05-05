@@ -127,7 +127,7 @@ def user_list(request):
     else:
         serializer = UserSerializer(users, many=True)
         response = {
-            'data': {'users' : serializer.data}
+            'data': {'users': serializer.data}
         }
         return Response(response, status=status.HTTP_200_OK)
 
