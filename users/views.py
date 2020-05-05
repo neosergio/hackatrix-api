@@ -4,19 +4,33 @@ from django.contrib.sites.models import Site
 from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
-from rest_framework import permissions, status
+from rest_framework import permissions
+from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.decorators import api_view, permission_classes, renderer_classes
-from rest_framework.exceptions import ValidationError, PermissionDenied
-from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework.decorators import permission_classes
+from rest_framework.decorators import renderer_classes
+from rest_framework.exceptions import PermissionDenied
+from rest_framework.exceptions import ValidationError
 from rest_framework.renderers import StaticHTMLRenderer
+from rest_framework.response import Response
 
-from .functions import generate_user_qr_code, validate_user_qr_code, validate_user_email
-from .models import User, UserDevice
-from .serializers import UserAuthenticationSerializer, UserSerializer, UserEmailSerializer, UserLogoutSerializer
-from .serializers import UserCreationSerializer, UserUpdatePasswordSerializer, UserUpdateProfileSerialier
+from utils.pagination import StandardResultsSetPagination
+from .functions import generate_user_qr_code
+from .functions import validate_user_email
+from .functions import validate_user_qr_code
+from .models import User
+from .models import UserDevice
+from .serializers import UserAuthenticationSerializer
+from .serializers import UserCreationSerializer
+from .serializers import UserEmailSerializer
 from .serializers import UserIdentitySerializer
+from .serializers import UserLogoutSerializer
+from .serializers import UserSerializer
+from .serializers import UserUpdatePasswordSerializer
+from .serializers import UserUpdateProfileSerialier
+
 
 # from events.models import Registrant
 
@@ -104,8 +118,18 @@ def user_list(request):
     Returns user list
     """
     users = User.objects.all()
-    serializer = UserSerializer(users, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+
+    if request.GET.get('page') or request.GET.get('per_page'):
+        paginator = StandardResultsSetPagination()
+        results = paginator.paginate_queryset(users, request)
+        serializer = UserSerializer(results, many=True)
+        return paginator.get_paginated_response(serializer.data)
+    else:
+        serializer = UserSerializer(users, many=True)
+        response = {
+            'data': {'users' : serializer.data}
+        }
+        return Response(response, status=status.HTTP_200_OK)
 
 
 @api_view(['GET', ])
