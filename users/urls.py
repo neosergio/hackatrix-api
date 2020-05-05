@@ -8,10 +8,12 @@ from .views import user_logout
 from .views import user_password_update
 from .views import user_profile
 from .views import user_profile_update
+from .views import users_active_summary
 
 app_name = 'users'
 
 urlpatterns = [
+    path('active/', users_active_summary, name='users_active_summary'),
     path('authenticate/', CustomAuthToken.as_view()),
     path('create/', user_create, name='user_create'),
     path('list/', user_list, name='user_list'),

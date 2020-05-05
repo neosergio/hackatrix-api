@@ -294,3 +294,17 @@ def user_validation(request, user_uuid):
     user.save()
     data = "<h1>Email validado, retorne a la aplicación.</h1>"
     return Response(data)
+
+
+@api_view(['GET', ])
+@permission_classes((permissions.IsAdminUser, ))
+def users_active_summary(request):
+    """
+    Returns user active data summary: active users and total users
+    """
+    users = User.objects.all()
+    active_users = users.filter(is_active=True)
+    data = {"active_users": len(active_users),
+            "total": len(users)}
+    response = {"data": data}
+    return Response(response, status=status.HTTP_200_OK)

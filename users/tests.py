@@ -86,6 +86,11 @@ class UserTestCase(APITestCase):
         response = self.client.get(list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_user_active_summary(self):
+        user_active_summary_url = reverse("users:users_active_summary")
+        response = self.client.get(user_active_summary_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
     def test_user_profile(self):
         profile_url = reverse("users:user_profile")
         response = self.client.get(profile_url)
