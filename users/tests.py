@@ -26,7 +26,7 @@ class RegistrationTestCase(APITestCase):
             response = self.client.post(self.creation_url, serializer.data)
 
         self.assertEqual(serializer.is_valid(), True)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_registration_not_using_mobile_client(self):
         data = {"email": "tester@hackatrix.com",
@@ -37,12 +37,13 @@ class RegistrationTestCase(APITestCase):
             response = self.client.post(self.creation_url, serializer.data)
 
         self.assertEqual(serializer.is_valid(), True)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
 class UserTestCase(APITestCase):
 
     authentication_url = ("/users/authenticate/")
+    creation_url = reverse("users:user_create")
 
     def setUp(self):
         self.user = User.objects.create_user(email="mobile@hackatrix.com",
@@ -117,6 +118,32 @@ class UserTestCase(APITestCase):
         self.assertTrue(self.user.check_password(serializer.validated_data.get("current_password")))
         self.assertTrue(serializer.is_valid())
         self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
+
+    def test_registration_using_mobile_client(self):
+        data = {"email": "tester@hackatrix.com",
+                "password": "password",
+                "device_code": "QWERTYASDFG",
+                "device_os": "iOS"}
+
+        serializer = UserCreationSerializer(data=data)
+        if serializer.is_valid():
+            response = self.client.post(self.creation_url, serializer.data)
+
+        self.assertEqual(serializer.is_valid(), True)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_registration_not_using_mobile_client(self):
+        data = {"email": "tester@hackatrix.com",
+                "password": "password",
+                "full_name": "Tester Tester",
+                "is_active": True}
+
+        serializer = UserCreationSerializer(data=data)
+        if serializer.is_valid():
+            response = self.client.post(self.creation_url, serializer.data)
+
+        self.assertEqual(serializer.is_valid(), True)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_logout(self):
         logout_url = reverse("users:user_logout")

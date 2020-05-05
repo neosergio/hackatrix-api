@@ -30,6 +30,11 @@ class UserAuthenticationResponseSerializer(serializers.Serializer):
 class UserCreationSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=100)
     password = serializers.CharField(max_length=100)
+    full_name = serializers.CharField(max_length=200, required=False)
+    is_active = serializers.BooleanField(default=False)
+    is_staff = serializers.BooleanField(default=False)
+    is_jury = serializers.BooleanField(default=False)
+    is_from_evaluation_committee = serializers.BooleanField(default=False)
     device_code = serializers.CharField(max_length=200, required=False)
     device_os = serializers.CharField(max_length=10, required=False)
 

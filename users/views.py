@@ -69,7 +69,7 @@ class CustomAuthToken(ObtainAuthToken):
 
 
 @api_view(['POST', ])
-@permission_classes((permissions.AllowAny, ))
+@permission_classes((permissions.IsAdminUser, ))
 def user_create(request):
     """
     Creates a user account using email and password
@@ -82,10 +82,22 @@ def user_create(request):
         #    raise PermissionDenied('El email esta registrado como participante, no puede ser usuario')
 
         password = serializer.validated_data.get('password')
+        full_name = serializer.validated_data.get('full_name')
+        is_active = serializer.validated_data.get('is_active')
+        is_staff = serializer.validated_data.get('is_staff')
+        is_jury = serializer.validated_data.get('is_jury')
+        is_from_evaluation_committee = serializer.validated_data.get('is_from_evaluation_committee')
         try:
             validate_password(password)
             if validate_user_email(email):
-                user = User.objects.create_user(email=email, password=password)
+                user = User.objects.create_user(
+                    email=email,
+                    password=password,
+                    full_name=full_name,
+                    is_active=is_active,
+                    is_staff=is_staff,
+                    is_jury=is_jury,
+                    is_from_evaluation_committee=is_from_evaluation_committee)
                 user.generate_validation_code()
 
                 try:
@@ -102,7 +114,7 @@ def user_create(request):
                         'token': token.key,
                         'user_id': user.pk,
                         'email': user.email,
-                        'is_validated': user.is_validated
+                        'is_active': user.is_active
                     }
                 })
             else:
