@@ -2,6 +2,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.sites.models import Site
 from django.core.mail import EmailMessage
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from rest_framework import permissions
@@ -129,7 +130,21 @@ def user_list(request):
     """
     Returns user list
     """
-    users = User.objects.all()
+    if request.GET.get('search'):
+        request_terms = request.GET.get('search')
+        search_terms_array = request_terms.split()
+
+        initial_term = search_terms_array[0]
+        users = User.objects.filter(
+            Q(full_name__icontains=initial_term) |
+            Q(email__icontains=initial_term))
+        if len(search_terms_array) > 1:
+            for term in range(1, len(search_terms_array)):
+                users = users.filter(
+                    Q(full_name__icontains=term) |
+                    Q(email__icontains=term))
+    else:
+        users = User.objects.all()
 
     if request.GET.get('page') or request.GET.get('per_page'):
         paginator = StandardResultsSetPagination()
