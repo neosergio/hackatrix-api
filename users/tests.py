@@ -99,7 +99,11 @@ class UserTestCase(APITestCase):
 
     def test_user_profile_update(self):
         profile_update_url = reverse("users:user_profile_update")
-        data = {"full_name": "First Name Last Name"}
+        data = {"full_name": "First Name Last Name",
+                "is_active": True,
+                "is_staff": True,
+                "is_jury": True,
+                "is_from_evaluation_committee": False}
         serializer = UserUpdateProfileSerialier(data=data)
         if serializer.is_valid():
             response = self.client.patch(profile_update_url, serializer.validated_data)

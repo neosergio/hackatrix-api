@@ -193,11 +193,18 @@ def user_profile_update(request):
     """
     Updates user profile
     """
-    user = request.user
+    if request.GET.get('id'):
+        user = get_object_or_404(User, pk=request.GET.get('id'))
+    else:
+        user = request.user
+
     serializer = UserUpdateProfileSerialier(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        full_name = serializer.validated_data.get('full_name')
-        user.full_name = full_name
+        user.full_name = serializer.validated_data.get('full_name')
+        user.is_active = serializer.validated_data.get('is_active')
+        user.is_staff = serializer.validated_data.get('is_staff')
+        user.is_jury = serializer.validated_data.get('is_jury')
+        user.is_from_evaluation_committee = serializer.validated_data.get('is_from_evaluation_committee')
         user.save()
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)

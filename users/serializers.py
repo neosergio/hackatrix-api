@@ -58,3 +58,7 @@ class UserUpdatePasswordSerializer(serializers.Serializer):
 
 class UserUpdateProfileSerialier(serializers.Serializer):
     full_name = serializers.CharField(max_length=60)
+    is_active = serializers.BooleanField()
+    is_staff = serializers.BooleanField()
+    is_jury = serializers.BooleanField()
+    is_from_evaluation_committee = serializers.BooleanField()
