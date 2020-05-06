@@ -328,3 +328,20 @@ def users_active_summary(request):
             "total": len(users)}
     response = {"data": data}
     return Response(response, status=status.HTTP_200_OK)
+
+
+@api_view(['PATCH', ])
+@permission_classes((permissions.IsAdminUser, ))
+def user_activation(request, user_id):
+    """
+    Activates / Deactivates is_active user attribute
+    """
+    user = get_object_or_404(User, pk=user_id)
+    if user.is_active:
+        user.is_active = False
+    else:
+        user.is_active = True
+    user.save()
+    serializer = UserSerializer(user)
+    response = {"data": serializer.data}
+    return Response(response, status=status.HTTP_202_ACCEPTED)

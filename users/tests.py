@@ -123,6 +123,11 @@ class UserTestCase(APITestCase):
         self.assertTrue(serializer.is_valid())
         self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
 
+    def test_user_activation(self):
+        user_activation_url = reverse("users:user_activation", args=[1])
+        response = self.client.patch(user_activation_url)
+        self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
+
     def test_registration_using_mobile_client(self):
         data = {"email": "tester@hackatrix.com",
                 "password": "password",
