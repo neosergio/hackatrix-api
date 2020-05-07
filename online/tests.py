@@ -17,6 +17,7 @@ class EvaluationCommitteeTestCase(APITestCase):
                                              password="password",
                                              is_staff=True)
         self.token = Token.objects.get(user=self.user)
+        self.team = Team.objects.create(name="Team", project="Project", project_description="Description")
         self.api_authentication()
 
     def api_authentication(self):
@@ -26,6 +27,11 @@ class EvaluationCommitteeTestCase(APITestCase):
         response = self.client.get(self.evaluation_committee_list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_team_detail(self):
+        team_detail_url = reverse("online:team_detail", args=[self.team.pk])
+        response = self.client.get(team_detail_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
     def test_team_list(self):
         team_list_url = reverse("online:team_list")
         response = self.client.get(team_list_url)
@@ -33,11 +39,10 @@ class EvaluationCommitteeTestCase(APITestCase):
 
     def test_team_member_creation(self):
         team_member_creation_url = reverse("online:team_member_creation")
-        Team.objects.create(name="Team", project="Project", project_description="Description")
         data = {"name": "Name",
                 "surname": "Surname",
                 "email": "name@email.com",
-                "team": 1}
+                "team": self.team.pk}
         serializer = TeamMemberCreationSerializer(data=data)
         if serializer.is_valid():
             response = self.client.post(team_member_creation_url, serializer.data)

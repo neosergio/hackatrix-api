@@ -1,4 +1,4 @@
-from django.db import Q
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from rest_framework import permissions
 from rest_framework import status
@@ -27,6 +27,34 @@ def evaluation_committee_list(request):
     else:
         serializer = EvaluationCommitteeSerializer(committees, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', ])
+@permission_classes((permissions.IsAuthenticated, ))
+def team_detail(request, team_id):
+    team = get_object_or_404(Team, pk=team_id)
+    team_members = TeamMember.objects.filter(team=team)
+    team_members_serializer = TeamMemberSerializer(team_members, many=True)
+
+    if team.evaluation_committee:
+        evaluation_committee = team.evaluation_committee.name
+    else:
+        evaluation_committee = ""
+
+    committee_scores = list()
+    jury_scores = list()
+    data = {
+        "id": team.pk,
+        "name": team.name,
+        "project": team.project,
+        "project_description": team.project_description,
+        "evaluation_committee": evaluation_committee,
+        "team_members": team_members_serializer.data,
+        "committee_scores": committee_scores,
+        "jury_scores": jury_scores
+    }
+    response = {'data': data}
+    return Response(response, status=status.HTTP_200_OK)
 
 
 @api_view(['GET', ])
