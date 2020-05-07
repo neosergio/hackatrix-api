@@ -23,3 +23,8 @@ class EvaluationCommitteeTestCase(APITestCase):
     def test_committee_list(self):
         response = self.client.get(self.evaluation_committee_list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_team_list(self):
+        team_list_url = reverse("online:team_list")
+        response = self.client.get(team_list_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

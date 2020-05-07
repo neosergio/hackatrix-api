@@ -3,6 +3,7 @@ from rest_framework import serializers
 from users.models import User
 from .models import EvaluationCommittee
 from .models import Evaluator
+from .models import Team
 
 
 class UserEvaluatorSerializer(serializers.ModelSerializer):
@@ -26,3 +27,10 @@ class EvaluationCommitteeSerializer(serializers.ModelSerializer):
     class Meta(object):
         model = EvaluationCommittee
         fields = ('id', 'name', 'is_evaluation_closed', 'is_active', 'evaluator_committee')
+
+
+class TeamSerializer(serializers.ModelSerializer):
+
+    class Meta(object):
+        model = Team
+        fields = "__all__"
