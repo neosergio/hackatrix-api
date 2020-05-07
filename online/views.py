@@ -41,13 +41,16 @@ def team_list(request):
         else:
             evaluation_committee = ""
 
+        jury_score = 0
+        committee_score = 0
+
         teams_response.append(
             {"id": team.pk,
              "name": team.name,
              "team_members": team_members,
              "evaluation_committee": evaluation_committee,
-             "jury_score": team.jury_score,
-             "committee_score": team.committee_score}
+             "jury_score": jury_score,
+             "committee_score": committee_score}
         )
     response = {
         "data": {"teams": teams_response}

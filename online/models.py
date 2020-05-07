@@ -25,8 +25,6 @@ class Team(models.Model):
     name = models.CharField(max_length=100)
     project_description = models.TextField()
     project = models.CharField(max_length=100)
-    jury_score = models.FloatField(default=0)
-    committee_score = models.FloatField(default=0)
     evaluation_committee = models.ForeignKey(EvaluationCommittee, on_delete=models.CASCADE, null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
