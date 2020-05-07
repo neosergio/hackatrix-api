@@ -38,7 +38,7 @@ class TeamMember(models.Model):
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
-    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="member")
     is_active = models.BooleanField(default=True)
 
     def __str__(self):

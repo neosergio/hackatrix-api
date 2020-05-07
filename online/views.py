@@ -29,14 +29,24 @@ def evaluation_committee_list(request):
 @permission_classes((permissions.IsAuthenticated, ))
 def team_list(request):
     teams = Team.objects.all()
-    if request.GET.get('page') or request.GET.get('per_page'):
-        paginator = StandardResultsSetPagination()
-        results = paginator.paginate_queryset(teams, request)
-        serializer = TeamSerializer(results, many=True)
-        return paginator.get_paginated_response(serializer.data)
-    else:
-        serializer = TeamSerializer(teams, many=True)
-        response = {
-            "data": {"teams": serializer.data}
-        }
-        return Response(response, status=status.HTTP_200_OK)
+    teams_response = list()
+    for team in teams:
+        team_members = len(Team.objects.filter(member__team=team))
+
+        if team.evaluation_committee:
+            evaluation_committee = team.evaluation_committee.name
+        else:
+            evaluation_committee = ""
+
+        teams_response.append(
+            {"id": team.pk,
+             "name": team.name,
+             "team_members": team_members,
+             "evaluation_committee": evaluation_committee,
+             "jury_score": team.jury_score,
+             "committee_score": team.committee_score}
+        )
+    response = {
+        "data": {"teams": teams_response}
+    }
+    return Response(response, status=status.HTTP_200_OK)
