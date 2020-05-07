@@ -1,3 +1,4 @@
+from django.db import Q
 from django.shortcuts import get_object_or_404
 from rest_framework import permissions
 from rest_framework import status
@@ -31,7 +32,24 @@ def evaluation_committee_list(request):
 @api_view(['GET', ])
 @permission_classes((permissions.IsAuthenticated, ))
 def team_list(request):
-    teams = Team.objects.all()
+    if request.GET.get('search'):
+        request_terms = request.GET.get('search')
+        search_terms_array = request_terms.split()
+
+        initial_term = search_terms_array[0]
+        teams = Team.objects.filter(
+            Q(name__icontains=initial_term) |
+            Q(project__icontains=initial_term) |
+            Q(project_description__icontains=initial_term))
+        if len(search_terms_array) > 1:
+            for term in range(1, len(search_terms_array)):
+                teams = teams.filter(
+                    Q(name__icontains=term) |
+                    Q(project__icontains=term) |
+                    Q(project_description__icontains=term))
+    else:
+        teams = Team.objects.all()
+
     teams_response = list()
     for team in teams:
         team_members = len(Team.objects.filter(member__team=team))
