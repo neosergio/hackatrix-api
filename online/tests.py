@@ -4,6 +4,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
 from users.models import User
+from .models import Team
+from .serializers import TeamMemberCreationSerializer
 
 
 class EvaluationCommitteeTestCase(APITestCase):
@@ -28,3 +30,17 @@ class EvaluationCommitteeTestCase(APITestCase):
         team_list_url = reverse("online:team_list")
         response = self.client.get(team_list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_team_member_creation(self):
+        team_member_creation_url = reverse("online:team_member_creation")
+        Team.objects.create(name="Team", project="Project", project_description="Description")
+        data = {"name": "Name",
+                "surname": "Surname",
+                "email": "name@email.com",
+                "team": 1}
+        serializer = TeamMemberCreationSerializer(data=data)
+        if serializer.is_valid():
+            response = self.client.post(team_member_creation_url, serializer.data)
+
+        self.assertTrue(serializer.is_valid())
+        self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)

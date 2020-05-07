@@ -4,6 +4,7 @@ from users.models import User
 from .models import EvaluationCommittee
 from .models import Evaluator
 from .models import Team
+from .models import TeamMember
 
 
 class UserEvaluatorSerializer(serializers.ModelSerializer):
@@ -33,4 +34,18 @@ class TeamSerializer(serializers.ModelSerializer):
 
     class Meta(object):
         model = Team
+        fields = "__all__"
+
+
+class TeamMemberCreationSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    surname = serializers.CharField()
+    email = serializers.EmailField()
+    team = serializers.IntegerField()
+
+
+class TeamMemberSerializer(serializers.ModelSerializer):
+
+    class Meta(object):
+        model = TeamMember
         fields = "__all__"
