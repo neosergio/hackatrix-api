@@ -18,7 +18,8 @@ class TeamAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('name',
                     'project',
                     'project_description',
-                    'total_score',
+                    'jury_score',
+                    'committee_score',
                     'evaluation_committee',
                     'is_active')
 
