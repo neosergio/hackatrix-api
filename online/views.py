@@ -7,10 +7,15 @@ from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
 
 from utils.pagination import StandardResultsSetPagination
+from .models import CategoryScore
+from .models import Evaluation
 from .models import EvaluationCommittee
+from .models import Evaluator
 from .models import Team
 from .models import TeamMember
+from .permissions import IsEvaluator
 from .serializers import EvaluationCommitteeSerializer
+from .serializers import EvaluationSaveSerializer
 from .serializers import TeamMemberCreationSerializer
 from .serializers import TeamMemberSerializer
 
@@ -28,6 +33,33 @@ def evaluation_committee_list(request):
         serializer = EvaluationCommitteeSerializer(committees, many=True)
         response = {"data": {"committees": serializer.data}}
         return Response(response, status=status.HTTP_200_OK)
+
+
+@api_view(['POST', ])
+@permission_classes((IsEvaluator, ))
+def evaluation_save(request):
+    serializer = EvaluationSaveSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        evaluator = get_object_or_404(Evaluator, user=request.user)
+        if evaluator.user.is_jury:
+            is_committee_score = False
+        else:
+            is_committee_score = True
+        team_id = serializer.validated_data.get('team_id')
+        team = get_object_or_404(Team, pk=team_id)
+        scores = serializer.validated_data.get('score')
+        evaluation, created = Evaluation.objects.get_or_create(user=evaluator, team=team)
+        for score in scores:
+            score_name = score.get('name')
+            score_percentage = score.get('percentage')
+            score_value = score.get('score')
+            CategoryScore.objects.create(
+                name=score_name,
+                percentage=score_percentage,
+                is_committee_score=is_committee_score,
+                score=score_value,
+                evaluation=evaluation)
+        return Response(status=status.HTTP_201_CREATED)
 
 
 @api_view(['GET', ])
@@ -122,4 +154,4 @@ def team_member_creation(request):
         )
         response_serializer = TeamMemberSerializer(team_member)
         response = {'data': response_serializer.data}
-        return Response(response, status=status.HTTP_202_ACCEPTED)
+        return Response(response, status=status.HTTP_201_CREATED)

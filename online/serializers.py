@@ -30,6 +30,17 @@ class EvaluationCommitteeSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'is_active', 'evaluator_committee')
 
 
+class ScoreSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    percentage = serializers.FloatField()
+    score = serializers.FloatField()
+
+
+class EvaluationSaveSerializer(serializers.Serializer):
+    team_id = serializers.IntegerField()
+    score = ScoreSerializer(many=True)
+
+
 class TeamSerializer(serializers.ModelSerializer):
 
     class Meta(object):

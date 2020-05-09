@@ -56,8 +56,11 @@ class Evaluation(models.Model):
     is_active = models.BooleanField(default=True)
     last_save = models.DateTimeField(auto_now=True)
 
+    class Meta(object):
+        unique_together = ('user', 'team')
+
     def __str__(self):
-        return "f'{self.user.email} {str(self.total_score)}"
+        return f"{self.user.user.email} {str(self.team)}"
 
 
 class CategoryScore(models.Model):
@@ -68,7 +71,7 @@ class CategoryScore(models.Model):
     evaluation = models.ForeignKey(Evaluation, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return str(self.pk)
 
 
 class Comment(models.Model):
