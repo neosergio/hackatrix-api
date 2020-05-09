@@ -26,7 +26,8 @@ def evaluation_committee_list(request):
         return paginator.get_paginated_response(serializer.data)
     else:
         serializer = EvaluationCommitteeSerializer(committees, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        response = {"data": {"committees": serializer.data}}
+        return Response(response, status=status.HTTP_200_OK)
 
 
 @api_view(['GET', ])

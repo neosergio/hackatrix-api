@@ -9,9 +9,6 @@ from .serializers import TeamMemberCreationSerializer
 
 
 class EvaluationCommitteeTestCase(APITestCase):
-
-    evaluation_committee_list_url = reverse("online:evaluation_committee_list")
-
     def setUp(self):
         self.user = User.objects.create_user(email="test@hackatrix.com",
                                              password="password",
@@ -24,7 +21,8 @@ class EvaluationCommitteeTestCase(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION="Token {}".format(self.token.key))
 
     def test_committee_list(self):
-        response = self.client.get(self.evaluation_committee_list_url)
+        evaluation_committee_list_url = reverse("online:evaluation_committee_list")
+        response = self.client.get(evaluation_committee_list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_team_detail(self):

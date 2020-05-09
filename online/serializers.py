@@ -27,7 +27,7 @@ class EvaluationCommitteeSerializer(serializers.ModelSerializer):
 
     class Meta(object):
         model = EvaluationCommittee
-        fields = ('id', 'name', 'is_evaluation_closed', 'is_active', 'evaluator_committee')
+        fields = ('id', 'name', 'is_active', 'evaluator_committee')
 
 
 class TeamSerializer(serializers.ModelSerializer):
