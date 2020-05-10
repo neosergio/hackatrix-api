@@ -6,6 +6,7 @@ from rest_framework.test import APITestCase
 from users.models import User
 from .models import Team, Evaluator, EvaluationCommittee
 from .serializers import EvaluationSaveSerializer
+from .serializers import TeamMemberSaveSerializer
 from .serializers import TeamMemberCreationSerializer
 
 
@@ -24,16 +25,16 @@ class EvaluationCommitteeTestCase(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION="Token {}".format(self.token.key))
 
     def test_evaluation_save(self):
-        Evaluator.objects.create(user=self.user,evaluation_committee=self.evaluation_committee)
+        Evaluator.objects.create(user=self.user, evaluation_committee=self.evaluation_committee)
         evaluation_save_url = reverse("online:evaluation_save")
         data = {"team_id": self.team.pk,
-                "score": [{"name": "score 01",
-                           "percentage": 10,
-                           "score": 5
-                           },
-                          {"name": "score 02",
-                           "percentage": 20,
-                           "score": 10}]}
+                "scores": [{"name": "score 01",
+                            "percentage": 10,
+                            "score": 5
+                            },
+                           {"name": "score 02",
+                            "percentage": 20,
+                            "score": 10}]}
         serializer = EvaluationSaveSerializer(data=data)
         if serializer.is_valid():
             response = self.client.post(evaluation_save_url, serializer.data, format='json')
@@ -56,6 +57,23 @@ class EvaluationCommitteeTestCase(APITestCase):
         response = self.client.get(team_list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_team_member(self):
+        team_member_url = reverse("online:team_member")
+        data = {"team_id": self.team.pk,
+                "members": [{"name": "Team member name 01",
+                             "surname": "Team member surname 01",
+                             "email": "teammember01@email.com"
+                             },
+                            {"name": "Team member name 01",
+                             "surname": "Team member surname 02",
+                             "email": "teammember02@email.com"}]}
+        serializer = TeamMemberSaveSerializer(data=data)
+        if serializer.is_valid():
+            response = self.client.post(team_member_url, serializer.data, format='json')
+
+        self.assertTrue(serializer.is_valid())
+        self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
+
     def test_team_member_creation(self):
         team_member_creation_url = reverse("online:team_member_creation")
         data = {"name": "Name",
@@ -64,7 +82,7 @@ class EvaluationCommitteeTestCase(APITestCase):
                 "team": self.team.pk}
         serializer = TeamMemberCreationSerializer(data=data)
         if serializer.is_valid():
-            response = self.client.post(team_member_creation_url, serializer.data)
+            response = self.client.post(team_member_creation_url, serializer.data, format='json')
 
         self.assertTrue(serializer.is_valid())
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)

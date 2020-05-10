@@ -38,7 +38,7 @@ class ScoreSerializer(serializers.Serializer):
 
 class EvaluationSaveSerializer(serializers.Serializer):
     team_id = serializers.IntegerField()
-    score = ScoreSerializer(many=True)
+    scores = ScoreSerializer(many=True)
 
 
 class TeamSerializer(serializers.ModelSerializer):
@@ -53,6 +53,17 @@ class TeamMemberCreationSerializer(serializers.Serializer):
     surname = serializers.CharField()
     email = serializers.EmailField()
     team = serializers.IntegerField()
+
+
+class TeamMemberSimpleSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    surname = serializers.CharField()
+    email = serializers.EmailField()
+
+
+class TeamMemberSaveSerializer(serializers.Serializer):
+    team_id = serializers.IntegerField()
+    members = TeamMemberSimpleSerializer(many=True)
 
 
 class TeamMemberSerializer(serializers.ModelSerializer):

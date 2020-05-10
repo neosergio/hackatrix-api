@@ -18,6 +18,7 @@ from .serializers import EvaluationCommitteeSerializer
 from .serializers import EvaluationSaveSerializer
 from .serializers import TeamMemberCreationSerializer
 from .serializers import TeamMemberSerializer
+from .serializers import TeamMemberSaveSerializer
 
 
 @api_view(['GET', ])
@@ -47,7 +48,7 @@ def evaluation_save(request):
             is_committee_score = True
         team_id = serializer.validated_data.get('team_id')
         team = get_object_or_404(Team, pk=team_id)
-        scores = serializer.validated_data.get('score')
+        scores = serializer.validated_data.get('scores')
         evaluation, created = Evaluation.objects.get_or_create(user=evaluator, team=team)
         for score in scores:
             score_name = score.get('name')
@@ -135,6 +136,29 @@ def team_list(request):
         "data": {"teams": teams_response}
     }
     return Response(response, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@permission_classes((permissions.IsAdminUser, ))
+def team_member(request):
+    if request.method == 'POST':
+        serializer = TeamMemberSaveSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            team = get_object_or_404(Team, pk=serializer.validated_data.get('team_id'))
+            team_members = TeamMember.objects.filter(team=team)
+            team_members.delete()
+            members = serializer.validated_data.get('members')
+            if len(members) > 0:
+                for member in members:
+                    name = member.get('name')
+                    surname = member.get('surname')
+                    email = member.get('email')
+                    TeamMember.objects.create(
+                        name=name,
+                        surname=surname,
+                        email=email,
+                        team=team)
+            return Response(status=status.HTTP_202_ACCEPTED)
 
 
 @api_view(['POST', ])
