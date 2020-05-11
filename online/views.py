@@ -202,3 +202,30 @@ def team_list_to_evaluate(request):
         "data": {"Teams": teams_response}
     }
     return Response(response, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', ])
+@permission_classes((IsEvaluator, ))
+def team_to_evaluate(request, team_id):
+    evaluator = get_object_or_404(Evaluator, user=request.user)
+    team = get_object_or_404(Team, pk=team_id)
+    team_members = TeamMember.objects.filter(team=team)
+    team_members_serializer = TeamMemberSerializer(team_members, many=True)
+    evaluation = Evaluation.objects.filter(user=evaluator, team=team)
+    if len(evaluation) > 0:
+        evaluation = evaluation[0]
+        scores = CategoryScore.objects.filter(evaluation=evaluation)
+        scores_serializer = ScoreSerializer(scores, many=True)
+        scores_data = scores_serializer.data
+    else:
+        scores_data = None
+    data = {
+        "id": team.pk,
+        "name": team.name,
+        "project": team.project,
+        "project_description": team.project_description,
+        "team_members": team_members_serializer.data,
+        "scores": scores_data
+    }
+    response = {'data': data}
+    return Response(response, status=status.HTTP_200_OK)

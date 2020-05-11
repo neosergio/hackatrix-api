@@ -91,3 +91,8 @@ class EvaluationCommitteeTestCase(APITestCase):
         team_list_to_evaluate_url = reverse("online:team_list_to_evaluate")
         response = self.client.get(team_list_to_evaluate_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_team_to_evaluate(self):
+        team_to_evaluate_url = reverse("online:team_to_evaluate", args=[self.team.pk])
+        response = self.client.get(team_to_evaluate_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
