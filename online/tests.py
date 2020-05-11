@@ -19,13 +19,13 @@ class EvaluationCommitteeTestCase(APITestCase):
         self.token = Token.objects.get(user=self.user)
         self.team = Team.objects.create(name="Team", project="Project", project_description="Description")
         self.evaluation_committee = EvaluationCommittee.objects.create(name="Committee 01")
+        self.evaluator = Evaluator.objects.create(user=self.user, evaluation_committee=self.evaluation_committee)
         self.api_authentication()
 
     def api_authentication(self):
         self.client.credentials(HTTP_AUTHORIZATION="Token {}".format(self.token.key))
 
     def test_evaluation_save(self):
-        Evaluator.objects.create(user=self.user, evaluation_committee=self.evaluation_committee)
         evaluation_save_url = reverse("online:evaluation_save")
         data = {"team_id": self.team.pk,
                 "scores": [{"name": "score 01",
@@ -86,3 +86,8 @@ class EvaluationCommitteeTestCase(APITestCase):
 
         self.assertTrue(serializer.is_valid())
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_team_list_to_evaluate(self):
+        team_list_to_evaluate_url = reverse("online:team_list_to_evaluate")
+        response = self.client.get(team_list_to_evaluate_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

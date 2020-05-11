@@ -182,3 +182,23 @@ def team_member_creation(request):
         response_serializer = TeamMemberSerializer(team_member)
         response = {'data': response_serializer.data}
         return Response(response, status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET', ])
+@permission_classes((IsEvaluator, ))
+def team_list_to_evaluate(request):
+    evaluator = get_object_or_404(Evaluator, user=request.user)
+    committee = evaluator.evaluation_committee
+    teams_response = list()
+    teams = Team.objects.filter(evaluation_committee=committee)
+    for team in teams:
+        team_member_list_count = len(TeamMember.objects.filter(team=team))
+        teams_response.append(
+            {"id": team.pk,
+             "name": team.name,
+             "team_members": team_member_list_count}
+        )
+    response = {
+        "data": {"Teams": teams_response}
+    }
+    return Response(response, status=status.HTTP_200_OK)
