@@ -16,6 +16,7 @@ from .models import TeamMember
 from .permissions import IsEvaluator
 from .serializers import EvaluationCommitteeSerializer
 from .serializers import EvaluationSaveSerializer
+from .serializers import ScoreSerializer
 from .serializers import TeamMemberCreationSerializer
 from .serializers import TeamMemberSerializer
 from .serializers import TeamMemberSaveSerializer
@@ -75,8 +76,10 @@ def team_detail(request, team_id):
     else:
         evaluation_committee = ""
 
-    committee_scores = list()
-    jury_scores = list()
+    committee_scores = CategoryScore.objects.filter(is_committee_score=True)
+    committee_scores_serializer = ScoreSerializer(committee_scores, many=True)
+    jury_scores = CategoryScore.objects.filter(is_committee_score=False)
+    jury_scores_serializer = ScoreSerializer(jury_scores, many=True)
     data = {
         "id": team.pk,
         "name": team.name,
@@ -84,8 +87,8 @@ def team_detail(request, team_id):
         "project_description": team.project_description,
         "evaluation_committee": evaluation_committee,
         "team_members": team_members_serializer.data,
-        "committee_scores": committee_scores,
-        "jury_scores": jury_scores
+        "committee_scores": committee_scores_serializer.data,
+        "jury_scores": jury_scores_serializer.data
     }
     response = {'data': data}
     return Response(response, status=status.HTTP_200_OK)
@@ -121,8 +124,8 @@ def team_list(request):
         else:
             evaluation_committee = ""
 
-        jury_score = 0
-        committee_score = 0
+        jury_score = len(CategoryScore.objects.filter(is_committee_score=False, evaluation__team=team))
+        committee_score = len(CategoryScore.objects.filter(is_committee_score=True, evaluation__team=team))
 
         teams_response.append(
             {"id": team.pk,
