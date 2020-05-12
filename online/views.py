@@ -193,10 +193,21 @@ def team_list_to_evaluate(request):
     teams = Team.objects.filter(evaluation_committee=committee)
     for team in teams:
         team_member_list_count = len(TeamMember.objects.filter(team=team))
+        scores = list()
+        total_score = 0
+        if evaluator.user.is_from_evaluation_committee:
+            scores = CategoryScore.objects.filter(is_committee_score=True, evaluation__team=team)
+        if evaluator.user.is_jury:
+            scores = CategoryScore.objects.filter(is_committee_score=False, evaluation__team=team)
+        if len(scores) > 0:
+            for score in scores:
+                total_score += (score.score * score.percentage)
+
         teams_response.append(
             {"id": team.pk,
              "name": team.name,
-             "team_members": team_member_list_count}
+             "team_members": team_member_list_count,
+             "score": total_score}
         )
     response = {
         "data": {"Teams": teams_response}
