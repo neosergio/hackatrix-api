@@ -68,7 +68,7 @@ class CategoryScore(models.Model):
     percentage = models.FloatField()
     is_committee_score = models.BooleanField(default=False)
     score = models.FloatField(default=0)
-    evaluation = models.ForeignKey(Evaluation, on_delete=models.CASCADE)
+    evaluation = models.ForeignKey(Evaluation, on_delete=models.CASCADE, related_name='category_score')
 
     def __str__(self):
         return str(self.pk)

@@ -4,12 +4,14 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
 from users.models import User
-from .models import Team, Evaluator, EvaluationCommittee
+from .models import EvaluationCommittee
+from .models import Evaluator
+from .models import Team
 from .serializers import EvaluationSaveSerializer
 from .serializers import EvaluatorCommitteeSerializer
 from .serializers import TeamCreationSerializer
-from .serializers import TeamMemberSaveSerializer
 from .serializers import TeamMemberCreationSerializer
+from .serializers import TeamMemberSaveSerializer
 from .serializers import TeamUpdateSerializer
 
 
@@ -28,6 +30,11 @@ class EvaluationCommitteeTestCase(APITestCase):
 
     def api_authentication(self):
         self.client.credentials(HTTP_AUTHORIZATION="Token {}".format(self.token.key))
+
+    def test_evaluated_teams(self):
+        evaluated_teams_url = reverse("online:evaluated_teams")
+        response = self.client.get(evaluated_teams_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_evaluator_committee_get(self):
         evaluator_committee_url = reverse("online:evaluator_committee", args=[self.user.pk])

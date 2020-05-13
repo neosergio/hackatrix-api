@@ -5,9 +5,13 @@ from .models import CategoryScore
 from .models import Comment
 from .models import Evaluation
 from .models import EvaluationCommittee
+from .models import Evaluator
 from .models import Team
 from .models import TeamMember
-from .models import Evaluator
+
+
+class CategoryScoreAdmin(ImportExportMixin, admin.ModelAdmin):
+    list_display = ('name', 'percentage', 'score', 'is_committee_score', 'evaluation')
 
 
 class EvaluationCommitteeAdmin(ImportExportMixin, admin.ModelAdmin):
@@ -22,7 +26,7 @@ class TeamAdmin(ImportExportMixin, admin.ModelAdmin):
                     'is_active')
 
 
-admin.site.register(CategoryScore)
+admin.site.register(CategoryScore, CategoryScoreAdmin)
 admin.site.register(Comment)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(TeamMember)

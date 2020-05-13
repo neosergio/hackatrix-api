@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from rest_framework import permissions
@@ -14,15 +15,29 @@ from .models import Evaluator
 from .models import Team
 from .models import TeamMember
 from .permissions import IsEvaluator
-from .serializers import EvaluatorCommitteeSerializer
 from .serializers import EvaluationCommitteeSerializer
 from .serializers import EvaluationSaveSerializer
+from .serializers import EvaluatorCommitteeSerializer
 from .serializers import ScoreSerializer
 from .serializers import TeamCreationSerializer
 from .serializers import TeamMemberCreationSerializer
-from .serializers import TeamMemberSerializer
 from .serializers import TeamMemberSaveSerializer
+from .serializers import TeamMemberSerializer
 from .serializers import TeamUpdateSerializer
+
+
+@api_view(['GET', ])
+@permission_classes((permissions.IsAuthenticated, ))
+def evaluated_teams(request):
+    total_teams = Team.objects.all().count()
+    committee_evaluations_grouped_by_teams = Team.objects.filter(
+        evaluation__category_score__is_committee_score=True).annotate(num_evaluations=Count('evaluation')).count()
+    jury_evaluations_grouped_by_teams = Team.objects.filter(
+        evaluation__category_score__is_committee_score=False).annotate(num_evaluations=Count('evaluation')).count()
+    response = {"data": {"evaluated_by_committee": committee_evaluations_grouped_by_teams,
+                         "evaluated_by_jury": jury_evaluations_grouped_by_teams,
+                         "total": total_teams}}
+    return Response(response, status=status.HTTP_200_OK)
 
 
 @api_view(['GET', 'PATCH'])
