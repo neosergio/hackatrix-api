@@ -8,6 +8,7 @@ from .views import team_list
 from .views import team_list_to_evaluate
 from .views import team_member
 from .views import team_member_creation
+from .views import team_update
 from .views import team_to_evaluate
 
 app_name = "online"
@@ -21,5 +22,6 @@ urlpatterns = [
     path('team/list/', team_list, name="team_list"),
     path('team/list/evaluate/', team_list_to_evaluate, name="team_list_to_evaluate"),
     path('team/member/', team_member, name="team_member"),
-    path('team/member/creation/', team_member_creation, name="team_member_creation")
+    path('team/member/creation/', team_member_creation, name="team_member_creation"),
+    path('team/update/', team_update, name="team_update"),
 ]

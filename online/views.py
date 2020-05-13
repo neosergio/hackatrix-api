@@ -21,6 +21,7 @@ from .serializers import TeamCreationSerializer
 from .serializers import TeamMemberCreationSerializer
 from .serializers import TeamMemberSerializer
 from .serializers import TeamMemberSaveSerializer
+from .serializers import TeamUpdateSerializer
 
 
 @api_view(['GET', ])
@@ -226,6 +227,19 @@ def team_list_to_evaluate(request):
         "data": {"Teams": teams_response}
     }
     return Response(response, status=status.HTTP_200_OK)
+
+
+@api_view(['PATCH', ])
+@permission_classes((permissions.IsAdminUser, ))
+def team_update(request):
+    serializer = TeamUpdateSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        team = get_object_or_404(Team, pk=serializer.validated_data.get('id'))
+        team.name = serializer.validated_data.get('name')
+        team.project = serializer.validated_data.get('project')
+        team.project_description = serializer.validated_data.get('project_description')
+        team.save()
+        return Response(status=status.HTTP_202_ACCEPTED)
 
 
 @api_view(['GET', ])

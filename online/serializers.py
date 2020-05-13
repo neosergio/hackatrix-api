@@ -77,3 +77,10 @@ class TeamMemberSerializer(serializers.ModelSerializer):
     class Meta(object):
         model = TeamMember
         fields = "__all__"
+
+
+class TeamUpdateSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    name = serializers.CharField()
+    project = serializers.CharField()
+    project_description = serializers.CharField()
