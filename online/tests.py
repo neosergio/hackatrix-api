@@ -6,6 +6,7 @@ from rest_framework.test import APITestCase
 from users.models import User
 from .models import Team, Evaluator, EvaluationCommittee
 from .serializers import EvaluationSaveSerializer
+from .serializers import TeamCreationSerializer
 from .serializers import TeamMemberSaveSerializer
 from .serializers import TeamMemberCreationSerializer
 
@@ -46,6 +47,18 @@ class EvaluationCommitteeTestCase(APITestCase):
         evaluation_committee_list_url = reverse("online:evaluation_committee_list")
         response = self.client.get(evaluation_committee_list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_team_creation(self):
+        team_creation_url = reverse("online:team_creation")
+        data = {"name": "Team 02",
+                "project": "Project 02",
+                "project_description": "Project Description 02"}
+        serializer = TeamCreationSerializer(data=data)
+        if serializer.is_valid():
+            response = self.client.post(team_creation_url, serializer.data, format='json')
+
+        self.assertTrue(serializer.is_valid())
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_team_detail(self):
         team_detail_url = reverse("online:team_detail", args=[self.team.pk])

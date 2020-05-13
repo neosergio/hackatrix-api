@@ -48,6 +48,12 @@ class TeamSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class TeamCreationSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    project = serializers.CharField()
+    project_description = serializers.CharField()
+
+
 class TeamMemberCreationSerializer(serializers.Serializer):
     name = serializers.CharField()
     surname = serializers.CharField()

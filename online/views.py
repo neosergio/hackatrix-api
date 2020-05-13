@@ -17,6 +17,7 @@ from .permissions import IsEvaluator
 from .serializers import EvaluationCommitteeSerializer
 from .serializers import EvaluationSaveSerializer
 from .serializers import ScoreSerializer
+from .serializers import TeamCreationSerializer
 from .serializers import TeamMemberCreationSerializer
 from .serializers import TeamMemberSerializer
 from .serializers import TeamMemberSaveSerializer
@@ -61,6 +62,18 @@ def evaluation_save(request):
                 is_committee_score=is_committee_score,
                 score=score_value,
                 evaluation=evaluation)
+        return Response(status=status.HTTP_201_CREATED)
+
+
+@api_view(['POST', ])
+@permission_classes((permissions.IsAdminUser, ))
+def team_creation(request):
+    serializer = TeamCreationSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        name = serializer.validated_data.get('name')
+        project = serializer.validated_data.get('project')
+        project_description = serializer.validated_data.get('project_description')
+        Team.objects.create(name=name, project=project, project_description=project_description)
         return Response(status=status.HTTP_201_CREATED)
 
 

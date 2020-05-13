@@ -2,6 +2,7 @@ from django.urls import path
 
 from .views import evaluation_committee_list
 from .views import evaluation_save
+from .views import team_creation
 from .views import team_detail
 from .views import team_list
 from .views import team_list_to_evaluate
@@ -16,6 +17,7 @@ urlpatterns = [
     path('evaluation/committee/list/', evaluation_committee_list, name="evaluation_committee_list"),
     path('team/<int:team_id>/', team_detail, name="team_detail"),
     path('team/<int:team_id>/evaluate/', team_to_evaluate, name="team_to_evaluate"),
+    path('team/create/', team_creation, name="team_creation"),
     path('team/list/', team_list, name="team_list"),
     path('team/list/evaluate/', team_list_to_evaluate, name="team_list_to_evaluate"),
     path('team/member/', team_member, name="team_member"),
