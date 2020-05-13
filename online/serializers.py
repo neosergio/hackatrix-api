@@ -22,6 +22,10 @@ class EvaluatorSerializer(serializers.ModelSerializer):
         fields = ('user', 'is_active')
 
 
+class EvaluatorCommitteeSerializer(serializers.Serializer):
+    committee_id = serializers.IntegerField()
+
+
 class EvaluationCommitteeSerializer(serializers.ModelSerializer):
     evaluator_committee = EvaluatorSerializer(many=True)
 

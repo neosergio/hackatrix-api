@@ -6,6 +6,7 @@ from rest_framework.test import APITestCase
 from users.models import User
 from .models import Team, Evaluator, EvaluationCommittee
 from .serializers import EvaluationSaveSerializer
+from .serializers import EvaluatorCommitteeSerializer
 from .serializers import TeamCreationSerializer
 from .serializers import TeamMemberSaveSerializer
 from .serializers import TeamMemberCreationSerializer
@@ -21,11 +22,27 @@ class EvaluationCommitteeTestCase(APITestCase):
         self.token = Token.objects.get(user=self.user)
         self.team = Team.objects.create(name="Team", project="Project", project_description="Description")
         self.evaluation_committee = EvaluationCommittee.objects.create(name="Committee 01")
+        self.second_evaluation_committee = EvaluationCommittee.objects.create(name="Committee 02")
         self.evaluator = Evaluator.objects.create(user=self.user, evaluation_committee=self.evaluation_committee)
         self.api_authentication()
 
     def api_authentication(self):
         self.client.credentials(HTTP_AUTHORIZATION="Token {}".format(self.token.key))
+
+    def test_evaluator_committee_get(self):
+        evaluator_committee_url = reverse("online:evaluator_committee", args=[self.user.pk])
+        response = self.client.get(evaluator_committee_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_evaluator_committee_patch(self):
+        evaluator_committee_url = reverse("online:evaluator_committee", args=[self.user.pk])
+        data = {"committee_id": self.second_evaluation_committee.pk}
+        serializer = EvaluatorCommitteeSerializer(data=data)
+        if serializer.is_valid():
+            response = self.client.patch(evaluator_committee_url, serializer.data, format='json')
+
+        self.assertTrue(serializer.is_valid())
+        self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
 
     def test_evaluation_save(self):
         evaluation_save_url = reverse("online:evaluation_save")
