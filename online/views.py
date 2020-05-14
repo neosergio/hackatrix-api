@@ -317,6 +317,9 @@ def set_users_committees(request):
         if len(users) > 0:
             for user in users:
                 user = get_object_or_404(User, pk=user.get('user_id'))
+                evaluator = Evaluator.objects.filter(user=user)
+                if evaluator:
+                    evaluator[0].delete()
                 Evaluator.objects.create(user=user, evaluation_committee=committee)
         return Response(status=status.HTTP_202_ACCEPTED)
 
