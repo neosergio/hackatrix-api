@@ -16,6 +16,7 @@ from .models import Evaluator
 from .models import Team
 from .models import TeamMember
 from .permissions import IsEvaluator
+from .serializers import EvaluationCommitteeCreationSerializer
 from .serializers import EvaluationCommitteeSerializer
 from .serializers import EvaluationSaveSerializer
 from .serializers import EvaluatorCommitteeSerializer
@@ -58,6 +59,15 @@ def evaluator_committee(request, user_id):
             evaluator.evaluation_committee = evaluation_committee
             evaluator.save()
             return Response(status=status.HTTP_202_ACCEPTED)
+
+
+@api_view(['POST', ])
+@permission_classes((permissions.IsAuthenticated, ))
+def evaluation_committee_creation(request):
+    serializer = EvaluationCommitteeCreationSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        EvaluationCommittee.objects.create(name=serializer.validated_data.get('name'))
+        return Response(status=status.HTTP_201_CREATED)
 
 
 @api_view(['GET', ])

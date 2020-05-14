@@ -7,6 +7,7 @@ from users.models import User
 from .models import EvaluationCommittee
 from .models import Evaluator
 from .models import Team
+from .serializers import EvaluationCommitteeCreationSerializer
 from .serializers import EvaluationSaveSerializer
 from .serializers import EvaluatorCommitteeSerializer
 from .serializers import TeamCommitteesSerializer
@@ -66,6 +67,16 @@ class EvaluationCommitteeTestCase(APITestCase):
         serializer = EvaluationSaveSerializer(data=data)
         if serializer.is_valid():
             response = self.client.post(evaluation_save_url, serializer.data, format='json')
+
+        self.assertTrue(serializer.is_valid())
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_evaluation_committee_creation(self):
+        evaluation_committee_creation_url = reverse("online:evaluation_committee_creation")
+        data = {"name": "New Committee created by test"}
+        serializer = EvaluationCommitteeCreationSerializer(data=data)
+        if serializer.is_valid():
+            response = self.client.post(evaluation_committee_creation_url, serializer.data, format='json')
 
         self.assertTrue(serializer.is_valid())
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)

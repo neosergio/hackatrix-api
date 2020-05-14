@@ -42,6 +42,10 @@ class EvaluationCommitteeSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'is_active', 'evaluator_committee', 'team_committee')
 
 
+class EvaluationCommitteeCreationSerializer(serializers.Serializer):
+    name = serializers.CharField()
+
+
 class ScoreSerializer(serializers.Serializer):
     name = serializers.CharField()
     percentage = serializers.FloatField()
