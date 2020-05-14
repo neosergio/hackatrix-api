@@ -7,6 +7,7 @@ from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
 
+from users.models import User
 from utils.pagination import StandardResultsSetPagination
 from .models import CategoryScore
 from .models import Evaluation
@@ -24,6 +25,7 @@ from .serializers import TeamMemberCreationSerializer
 from .serializers import TeamMemberSaveSerializer
 from .serializers import TeamMemberSerializer
 from .serializers import TeamUpdateSerializer
+from .serializers import UserCommitteesSerializer
 
 
 @api_view(['GET', ])
@@ -300,3 +302,19 @@ def team_to_evaluate(request, team_id):
     }
     response = {'data': data}
     return Response(response, status=status.HTTP_200_OK)
+
+
+@api_view(['PATCH', ])
+@permission_classes((permissions.IsAdminUser, ))
+def set_users_committees(request):
+    serializer = UserCommitteesSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        committee = get_object_or_404(EvaluationCommittee, pk=serializer.validated_data.get('committee_id'))
+        evaluators = Evaluator.objects.filter(evaluation_committee=committee)
+        evaluators.delete()
+        users = serializer.validated_data.get('users')
+        if len(users) > 0:
+            for user in users:
+                user = get_object_or_404(User, pk=user.get('user_id'))
+                Evaluator.objects.create(user=user, evaluation_committee=committee)
+        return Response(status=status.HTTP_202_ACCEPTED)

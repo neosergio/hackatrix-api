@@ -89,3 +89,12 @@ class TeamUpdateSerializer(serializers.Serializer):
     name = serializers.CharField()
     project = serializers.CharField()
     project_description = serializers.CharField()
+
+
+class UserListSerializer(serializers.Serializer):
+    user_id = serializers.CharField()
+
+
+class UserCommitteesSerializer(serializers.Serializer):
+    committee_id = serializers.IntegerField()
+    users = UserListSerializer(many=True)
