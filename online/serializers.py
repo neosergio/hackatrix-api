@@ -92,9 +92,18 @@ class TeamUpdateSerializer(serializers.Serializer):
 
 
 class UserListSerializer(serializers.Serializer):
-    user_id = serializers.CharField()
+    user_id = serializers.IntegerField()
 
 
 class UserCommitteesSerializer(serializers.Serializer):
     committee_id = serializers.IntegerField()
     users = UserListSerializer(many=True)
+
+
+class TeamListSerializer(serializers.Serializer):
+    team_id = serializers.IntegerField()
+
+
+class TeamCommitteesSerializer(serializers.Serializer):
+    committee_id = serializers.IntegerField()
+    teams = TeamListSerializer(many=True)

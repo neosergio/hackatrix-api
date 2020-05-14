@@ -9,6 +9,7 @@ from .models import Evaluator
 from .models import Team
 from .serializers import EvaluationSaveSerializer
 from .serializers import EvaluatorCommitteeSerializer
+from .serializers import TeamCommitteesSerializer
 from .serializers import TeamCreationSerializer
 from .serializers import TeamMemberCreationSerializer
 from .serializers import TeamMemberSaveSerializer
@@ -148,6 +149,17 @@ class EvaluationCommitteeTestCase(APITestCase):
         team_to_evaluate_url = reverse("online:team_to_evaluate", args=[self.team.pk])
         response = self.client.get(team_to_evaluate_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_set_teams_committees(self):
+        set_teams_committees_url = reverse("online:set_teams_committees")
+        data = {"committee_id": self.evaluation_committee.pk,
+                "teams": [{"team_id": self.team.pk}]}
+        serializer = TeamCommitteesSerializer(data=data)
+        if serializer.is_valid():
+            response = self.client.patch(set_teams_committees_url, serializer.data, format='json')
+
+        self.assertTrue(serializer.is_valid())
+        self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
 
     def test_set_users_committees(self):
         set_users_committees_url = reverse("online:set_users_committees")

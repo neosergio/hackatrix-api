@@ -20,6 +20,7 @@ from .serializers import EvaluationCommitteeSerializer
 from .serializers import EvaluationSaveSerializer
 from .serializers import EvaluatorCommitteeSerializer
 from .serializers import ScoreSerializer
+from .serializers import TeamCommitteesSerializer
 from .serializers import TeamCreationSerializer
 from .serializers import TeamMemberCreationSerializer
 from .serializers import TeamMemberSaveSerializer
@@ -317,4 +318,24 @@ def set_users_committees(request):
             for user in users:
                 user = get_object_or_404(User, pk=user.get('user_id'))
                 Evaluator.objects.create(user=user, evaluation_committee=committee)
+        return Response(status=status.HTTP_202_ACCEPTED)
+
+
+@api_view(['PATCH', ])
+@permission_classes((permissions.IsAdminUser, ))
+def set_teams_committees(request):
+    serializer = TeamCommitteesSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        committee = get_object_or_404(EvaluationCommittee, pk=serializer.validated_data.get('committee_id'))
+        teams = Team.objects.filter(evaluation_committee=committee)
+        if len(teams) > 0:
+            for team in teams:
+                team.evaluation_committee = None
+                team.save()
+        new_teams = serializer.validated_data.get('teams')
+        if len(new_teams) > 0:
+            for new_team in new_teams:
+                new_team = get_object_or_404(Team, pk=new_team.get('team_id'))
+                new_team.evaluation_committee = committee
+                new_team.save()
         return Response(status=status.HTTP_202_ACCEPTED)
