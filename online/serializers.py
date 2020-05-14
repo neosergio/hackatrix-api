@@ -14,6 +14,13 @@ class UserEvaluatorSerializer(serializers.ModelSerializer):
         fields = ('id', 'email')
 
 
+class TeamSerializer(serializers.ModelSerializer):
+
+    class Meta(object):
+        model = Team
+        fields = "__all__"
+
+
 class EvaluatorSerializer(serializers.ModelSerializer):
     user = UserEvaluatorSerializer()
 
@@ -28,10 +35,11 @@ class EvaluatorCommitteeSerializer(serializers.Serializer):
 
 class EvaluationCommitteeSerializer(serializers.ModelSerializer):
     evaluator_committee = EvaluatorSerializer(many=True)
+    team_committee = TeamSerializer(many=True)
 
     class Meta(object):
         model = EvaluationCommittee
-        fields = ('id', 'name', 'is_active', 'evaluator_committee')
+        fields = ('id', 'name', 'is_active', 'evaluator_committee', 'team_committee')
 
 
 class ScoreSerializer(serializers.Serializer):
@@ -43,13 +51,6 @@ class ScoreSerializer(serializers.Serializer):
 class EvaluationSaveSerializer(serializers.Serializer):
     team_id = serializers.IntegerField()
     scores = ScoreSerializer(many=True)
-
-
-class TeamSerializer(serializers.ModelSerializer):
-
-    class Meta(object):
-        model = Team
-        fields = "__all__"
 
 
 class TeamCreationSerializer(serializers.Serializer):

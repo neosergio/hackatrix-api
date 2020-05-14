@@ -25,7 +25,11 @@ class Team(models.Model):
     name = models.CharField(max_length=100)
     project_description = models.TextField()
     project = models.CharField(max_length=100)
-    evaluation_committee = models.ForeignKey(EvaluationCommittee, on_delete=models.CASCADE, null=True, blank=True)
+    evaluation_committee = models.ForeignKey(EvaluationCommittee,
+                                             on_delete=models.CASCADE,
+                                             null=True,
+                                             blank=True,
+                                             related_name='team_committee')
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
