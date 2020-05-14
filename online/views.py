@@ -18,6 +18,7 @@ from .models import TeamMember
 from .permissions import IsEvaluator
 from .serializers import EvaluationCommitteeCreationSerializer
 from .serializers import EvaluationCommitteeSerializer
+from .serializers import EvaluationCommitteeUpdateSerializer
 from .serializers import EvaluationSaveSerializer
 from .serializers import EvaluatorCommitteeSerializer
 from .serializers import ScoreSerializer
@@ -62,12 +63,23 @@ def evaluator_committee(request, user_id):
 
 
 @api_view(['POST', ])
-@permission_classes((permissions.IsAuthenticated, ))
+@permission_classes((permissions.IsAdminUser, ))
 def evaluation_committee_creation(request):
     serializer = EvaluationCommitteeCreationSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         EvaluationCommittee.objects.create(name=serializer.validated_data.get('name'))
         return Response(status=status.HTTP_201_CREATED)
+
+
+@api_view(['PATCH', ])
+@permission_classes((permissions.IsAdminUser, ))
+def evaluation_committee_update(request):
+    serializer = EvaluationCommitteeUpdateSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        committee = get_object_or_404(EvaluationCommittee, pk=serializer.validated_data.get('id'))
+        committee.name = serializer.validated_data.get('name')
+        committee.save()
+        return Response(status=status.HTTP_202_ACCEPTED)
 
 
 @api_view(['GET', ])

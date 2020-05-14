@@ -8,6 +8,7 @@ from .models import EvaluationCommittee
 from .models import Evaluator
 from .models import Team
 from .serializers import EvaluationCommitteeCreationSerializer
+from .serializers import EvaluationCommitteeUpdateSerializer
 from .serializers import EvaluationSaveSerializer
 from .serializers import EvaluatorCommitteeSerializer
 from .serializers import TeamCommitteesSerializer
@@ -80,6 +81,17 @@ class EvaluationCommitteeTestCase(APITestCase):
 
         self.assertTrue(serializer.is_valid())
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_evaluation_committee_update(self):
+        evaluation_committee_update_url = reverse("online:evaluation_committee_update")
+        data = {"id": self.evaluation_committee.pk,
+                "name": "New name for evaluation committee"}
+        serializer = EvaluationCommitteeUpdateSerializer(data=data)
+        if serializer.is_valid():
+            response = self.client.patch(evaluation_committee_update_url, serializer.data, format='json')
+
+        self.assertTrue(serializer.is_valid())
+        self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
 
     def test_committee_list(self):
         evaluation_committee_list_url = reverse("online:evaluation_committee_list")

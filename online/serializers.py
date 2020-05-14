@@ -46,6 +46,11 @@ class EvaluationCommitteeCreationSerializer(serializers.Serializer):
     name = serializers.CharField()
 
 
+class EvaluationCommitteeUpdateSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    name = serializers.CharField()
+
+
 class ScoreSerializer(serializers.Serializer):
     name = serializers.CharField()
     percentage = serializers.FloatField()
