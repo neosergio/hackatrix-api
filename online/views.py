@@ -5,6 +5,7 @@ from rest_framework import permissions
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes
+from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
 from users.models import User
@@ -245,12 +246,15 @@ def team_member_creation(request):
         surname = serializer.validated_data.get('surname')
         email = serializer.validated_data.get('email')
         team = get_object_or_404(Team, pk=serializer.validated_data.get('team'))
-        team_member = TeamMember.objects.create(
-            name=name,
-            surname=surname,
-            email=email,
-            team=team
-        )
+        try:
+            team_member = TeamMember.objects.create(
+                name=name,
+                surname=surname,
+                email=email,
+                team=team
+            )
+        except Exception as e:
+            raise ValidationError(e)
         response_serializer = TeamMemberSerializer(team_member)
         response = {'data': response_serializer.data}
         return Response(response, status=status.HTTP_201_CREATED)
