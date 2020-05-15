@@ -7,7 +7,7 @@ from .base import *  # noqa: F403
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'o^1*t5#saem!j3#ipc$zgmmwsg*#3n1ee$$h*zorr^j7@7ef!b'
+SECRET_KEY = 'o^1*t5#saem!j3#ipc$zgmmwsg*#3n1ee$$h*zorr^j7@7ef!b'  # noqa
 
 
 # SECURITY WARNING: don't run with debug turned on in production!

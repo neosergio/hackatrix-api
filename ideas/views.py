@@ -1,17 +1,17 @@
-from django.shortcuts import get_object_or_404
 from constance import config
+from django.shortcuts import get_object_or_404
 from rest_framework import permissions, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.exceptions import ValidationError, PermissionDenied
 from rest_framework.response import Response
 
-from .models import Idea, IdeaTeamMember
-from .serializers import IdeaSerializer, IdeaCreationSerializer, IdeaTeamMemberBulkSerializer
 from assessments.models import ProjectAssessment
 from events.models import Event, Registrant
 from events.serializers import RegistrantIdentitySerializer
 from users.permissions import IsModerator
 from utils.pagination import StandardResultsSetPagination
+from .models import Idea, IdeaTeamMember
+from .serializers import IdeaSerializer, IdeaCreationSerializer, IdeaTeamMemberBulkSerializer
 
 
 @api_view(['POST', ])
@@ -36,6 +36,7 @@ def idea_creation(request):
             raise ValidationError(e)
         serializer = IdeaSerializer(idea)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PATCH', ])
@@ -53,6 +54,7 @@ def idea_update(request, idea_id):
         idea.save()
         serializer = IdeaSerializer(idea)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PATCH', ])
@@ -89,10 +91,8 @@ def idea_add_team_member(request, idea_id):
                 raise ValidationError(e)
             serializer = IdeaSerializer(idea)
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
-        else:
-            raise ValidationError(config.TEAM_MAX_SIZE_MESSAGE)
-    else:
-        raise ValidationError("Invalid code.")
+        raise ValidationError(config.TEAM_MAX_SIZE_MESSAGE)
+    raise ValidationError("Invalid code.")
 
 
 @api_view(['POST', ])
@@ -119,8 +119,7 @@ def idea_add_team_member_list(request, idea_id):
                 raise ValidationError(config.TEAM_MAX_SIZE_MESSAGE)
         serializer = IdeaSerializer(idea)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    else:
-        raise ValidationError("Invalid codes.")
+    raise ValidationError("Invalid codes.")
 
 
 @api_view(['DELETE', ])
@@ -137,6 +136,7 @@ def idea_remove_team_member(request, idea_id):
         IdeaTeamMember.objects.get(idea=idea, member=registrant).delete()
         serializer = IdeaSerializer(idea)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['DELETE', ])
@@ -155,11 +155,9 @@ def idea_remove_team_member_list(request, idea_id):
                 IdeaTeamMember.objects.get(idea=idea, member=registrant).delete()
             except Exception as e:
                 print(e)
-                pass
         serializer = IdeaSerializer(idea)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
-    else:
-        raise ValidationError("Invalid codes.")
+    raise ValidationError("Invalid codes.")
 
 
 @api_view(['GET', ])
@@ -206,9 +204,8 @@ def idea_list_complete(request):
         results = paginator.paginate_queryset(ideas, request)
         serializer = IdeaSerializer(results, many=True)
         return paginator.get_paginated_response(serializer.data)
-    else:
-        serializer = IdeaSerializer(ideas, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    serializer = IdeaSerializer(ideas, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(['GET', ])
@@ -224,9 +221,8 @@ def idea_list_validated(request):
         results = paginator.paginate_queryset(ideas, request)
         serializer = IdeaSerializer(results, many=True)
         return paginator.get_paginated_response(serializer.data)
-    else:
-        serializer = IdeaSerializer(ideas, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    serializer = IdeaSerializer(ideas, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(['PATCH', ])

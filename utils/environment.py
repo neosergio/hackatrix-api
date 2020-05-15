@@ -5,5 +5,4 @@ from os import environ
 def env(e, d):
     if e in environ:
         return environ[e]
-    else:
-        return d
+    return d

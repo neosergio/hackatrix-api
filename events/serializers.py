@@ -5,23 +5,23 @@ from .models import Event, Track, TrackItemAgenda, Location, Registrant, Attenda
 
 class LocationSerializer(serializers.ModelSerializer):
 
-    class Meta(object):
+    class Meta():
         model = Location
         fields = "__all__"
 
 
-class TrackItemAgenda(serializers.ModelSerializer):
+class TrackItemAgendaSerializer(serializers.ModelSerializer):
 
-    class Meta(object):
+    class Meta():
         model = TrackItemAgenda
         fields = "__all__"
 
 
 class TrackSerializer(serializers.ModelSerializer):
     location = LocationSerializer()
-    track_item = TrackItemAgenda(many=True)
+    track_item = TrackItemAgendaSerializer(many=True)
 
-    class Meta(object):
+    class Meta():
         model = Track
         fields = "__all__"
 
@@ -29,7 +29,7 @@ class TrackSerializer(serializers.ModelSerializer):
 class EventSerializer(serializers.ModelSerializer):
     event_track = TrackSerializer(many=True)
 
-    class Meta(object):
+    class Meta():
         model = Event
         fields = ('id', 'title', 'image', 'dates', 'address', 'register_link', 'is_featured', 'event_track')
 
@@ -40,7 +40,7 @@ class EventFeaturedNotificationSerializer(serializers.Serializer):
 
 class RegistrantSerializer(serializers.ModelSerializer):
 
-    class Meta(object):
+    class Meta():
         model = Registrant
         fields = "__all__"
 
@@ -51,14 +51,14 @@ class RegistrantIdentitySerializer(serializers.Serializer):
 
 class AttendaceSerializer(serializers.ModelSerializer):
 
-    class Meta(object):
+    class Meta():
         model = Attendance
         fields = "__all__"
 
 
 class TeamMemberSerializer(serializers.ModelSerializer):
 
-    class Meta(object):
+    class Meta():
         model = TeamMember
         fields = "__all__"
 
@@ -66,7 +66,7 @@ class TeamMemberSerializer(serializers.ModelSerializer):
 class TeamSerializer(serializers.ModelSerializer):
     team_member = TeamMemberSerializer(many=True)
 
-    class Meta(object):
+    class Meta():
         model = Team
         fields = "__all__"
 

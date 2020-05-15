@@ -46,7 +46,7 @@ class TeamMember(models.Model):
     def __str__(self):
         return self.email
 
-    class Meta(object):
+    class Meta():
         ordering = ['email']
         verbose_name = 'team member'
         verbose_name_plural = 'team members'
@@ -60,7 +60,7 @@ class Evaluation(models.Model):
     is_active = models.BooleanField(default=True)
     last_save = models.DateTimeField(auto_now=True)
 
-    class Meta(object):
+    class Meta():
         unique_together = ('user', 'team')
 
     def __str__(self):

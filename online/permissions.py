@@ -9,11 +9,8 @@ class IsEvaluator(permissions.BasePermission):
         user = request.user
         if user.is_anonymous:
             return False
-        else:
-            evaluator = Evaluator.objects.filter(user=user)
-            if len(evaluator) > 0:
-                evaluator_flag = True
-            else:
-                evaluator_flag = False
-
-            return request.user and evaluator_flag
+        evaluator = Evaluator.objects.filter(user=user)
+        evaluator_flag = False
+        if len(evaluator) > 0:
+            evaluator_flag = True
+        return request.user and evaluator_flag

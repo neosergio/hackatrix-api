@@ -25,7 +25,7 @@ class Idea(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
 
-    class Meta(object):
+    class Meta():
         ordering = ['-created_at', '-id']
 
     def __str__(self):
@@ -36,7 +36,7 @@ class IdeaTeamMember(models.Model):
     idea = models.ForeignKey(Idea, related_name='idea_team_member', on_delete=models.CASCADE)
     member = models.OneToOneField('events.Registrant', related_name='member_idea', on_delete=models.CASCADE)
 
-    class Meta(object):
+    class Meta():
         ordering = ['idea']
         unique_together = ('idea', 'member')
         verbose_name = 'Team Member'

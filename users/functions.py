@@ -1,4 +1,5 @@
 import time
+
 from constance import config
 from django.conf import settings
 from django.shortcuts import get_object_or_404
@@ -20,10 +21,8 @@ def validate_user_qr_code(code, user):
     if code_extracted >= min_value:
         if code == user.one_time_use_code:
             return True
-        else:
-            return False
-    else:
         return False
+    return False
 
 
 def validate_user_email(email):
@@ -32,7 +31,5 @@ def validate_user_email(email):
         email_domain = email.split('@')[1]
         if email_domain in domains:
             return True
-        else:
-            return False
-    else:
-        return True
+        return False
+    return True

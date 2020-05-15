@@ -61,6 +61,7 @@ def evaluator_committee(request, user_id):
             evaluator.evaluation_committee = evaluation_committee
             evaluator.save()
             return Response(status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST', ])
@@ -70,6 +71,7 @@ def evaluation_committee_creation(request):
     if serializer.is_valid(raise_exception=True):
         EvaluationCommittee.objects.create(name=serializer.validated_data.get('name'))
         return Response(status=status.HTTP_201_CREATED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PATCH', ])
@@ -81,6 +83,7 @@ def evaluation_committee_update(request):
         committee.name = serializer.validated_data.get('name')
         committee.save()
         return Response(status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', ])
@@ -92,10 +95,9 @@ def evaluation_committee_list(request):
         results = paginator.paginate_queryset(committees, request)
         serializer = EvaluationCommitteeSerializer(results, many=True)
         return paginator.get_paginated_response(serializer.data)
-    else:
-        serializer = EvaluationCommitteeSerializer(committees, many=True)
-        response = {"data": {"committees": serializer.data}}
-        return Response(response, status=status.HTTP_200_OK)
+    serializer = EvaluationCommitteeSerializer(committees, many=True)
+    response = {"data": {"committees": serializer.data}}
+    return Response(response, status=status.HTTP_200_OK)
 
 
 @api_view(['POST', ])
@@ -127,6 +129,7 @@ def evaluation_save(request):
                 score=score_value,
                 evaluation=evaluation)
         return Response(status=status.HTTP_201_CREATED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST', ])
@@ -139,6 +142,7 @@ def team_creation(request):
         project_description = serializer.validated_data.get('project_description')
         Team.objects.create(name=name, project=project, project_description=project_description)
         return Response(status=status.HTTP_201_CREATED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', ])
@@ -221,24 +225,24 @@ def team_list(request):
 @api_view(['POST'])
 @permission_classes((permissions.IsAdminUser, ))
 def team_member(request):
-    if request.method == 'POST':
-        serializer = TeamMemberSaveSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            team = get_object_or_404(Team, pk=serializer.validated_data.get('team_id'))
-            team_members = TeamMember.objects.filter(team=team)
-            team_members.delete()
-            members = serializer.validated_data.get('members')
-            if len(members) > 0:
-                for member in members:
-                    name = member.get('name')
-                    surname = member.get('surname')
-                    email = member.get('email')
-                    TeamMember.objects.create(
-                        name=name,
-                        surname=surname,
-                        email=email,
-                        team=team)
-            return Response(status=status.HTTP_202_ACCEPTED)
+    serializer = TeamMemberSaveSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        team = get_object_or_404(Team, pk=serializer.validated_data.get('team_id'))
+        team_members = TeamMember.objects.filter(team=team)
+        team_members.delete()
+        members = serializer.validated_data.get('members')
+        if len(members) > 0:
+            for member in members:
+                name = member.get('name')
+                surname = member.get('surname')
+                email = member.get('email')
+                TeamMember.objects.create(
+                    name=name,
+                    surname=surname,
+                    email=email,
+                    team=team)
+        return Response(status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST', ])
@@ -262,6 +266,7 @@ def team_member_creation(request):
         response_serializer = TeamMemberSerializer(team_member)
         response = {'data': response_serializer.data}
         return Response(response, status=status.HTTP_201_CREATED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', ])
@@ -306,6 +311,7 @@ def team_update(request):
         team.project_description = serializer.validated_data.get('project_description')
         team.save()
         return Response(status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', ])
@@ -352,6 +358,7 @@ def set_users_committees(request):
                     evaluator[0].delete()
                 Evaluator.objects.create(user=user, evaluation_committee=committee)
         return Response(status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PATCH', ])
@@ -372,6 +379,7 @@ def set_teams_committees(request):
                 new_team.evaluation_committee = committee
                 new_team.save()
         return Response(status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PATCH', ])

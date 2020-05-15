@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-<form action="{% url 'reports:get_QR_code_by_email' %}" method="post">
+<form action="{% url 'reports:get_qr_code_by_email' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <p><input type="submit" value="Submit"></p>
     <p>
-        <a href="{% url 'reports:get_QR_code_by_email' %}">
+        <a href="{% url 'reports:get_qr_code_by_email' %}">
             <input type="button" value="Reload form">
         </a>
     </p>

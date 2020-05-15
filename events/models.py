@@ -27,7 +27,7 @@ class Event(models.Model):
     def __str__(self):
         return self.title
 
-    class Meta(object):
+    class Meta():
         ordering = ['-is_upcoming']
         verbose_name_plural = 'events'
 
@@ -48,7 +48,7 @@ class Track(models.Model):
     def __str__(self):
         return self.title
 
-    class Meta(object):
+    class Meta():
         ordering = ['-datetime']
         verbose_name_plural = 'event tracks'
 
@@ -58,7 +58,7 @@ class TrackItemAgenda(models.Model):
     time = models.CharField(max_length=25)
     text = models.CharField(max_length=255)
 
-    class Meta(object):
+    class Meta():
         ordering = ['time']
         verbose_name = 'Agenda item'
         verbose_name_plural = 'Agenda items'
@@ -76,14 +76,14 @@ class Registrant(models.Model):
     is_supplier = models.BooleanField(default=False)
     is_participant = models.BooleanField(default=False)
 
-    class Meta(object):
+    class Meta():
         unique_together = ('email', 'event')
 
     def generate_code(self):
         code = get_random_string(10, "abcdefghkmnpqrstuvwxyz023456789")
         return code
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs):  # pylint: disable=arguments-differ
         if (self.code is None) or (self.code == ""):
             self.code = self.generate_code()
         super(Registrant, self).save(*args, **kwargs)
@@ -111,7 +111,7 @@ class RegistrantAttendance(models.Model):
     registered_by = models.ForeignKey('users.User', on_delete=models.CASCADE)
     registered_at = models.DateTimeField(auto_now_add=True)
 
-    class Meta(object):
+    class Meta():
         ordering = ['attendance']
         unique_together = ('registrant', 'attendance')
 
@@ -126,7 +126,7 @@ class Team(models.Model):
     is_active = models.BooleanField(default=True)
     is_valid = models.BooleanField(default=True)
 
-    class Meta(object):
+    class Meta():
         ordering = ['-pk']
         unique_together = ('title', 'description')
 
@@ -139,7 +139,7 @@ class TeamMember(models.Model):
     team = models.ForeignKey(Team, related_name='team_member', on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
 
-    class Meta(object):
+    class Meta():
         ordering = ['full_name']
 
     def __str__(self):

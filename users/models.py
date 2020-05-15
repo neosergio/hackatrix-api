@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from django.conf import settings
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
@@ -6,7 +8,6 @@ from django.dispatch import receiver
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 from rest_framework.authtoken.models import Token
-from uuid import uuid4
 
 from .managers import UserManager
 
@@ -92,7 +93,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 @receiver(models.signals.post_save, sender=settings.AUTH_USER_MODEL)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
+def create_auth_token(sender, instance=None, created=False, **kwargs):  # pylint: disable=unused-argument
     if created:
         Token.objects.create(user=instance)
 
@@ -102,5 +103,5 @@ class UserDevice(models.Model):
     operating_system = models.CharField(max_length=10)
     code = models.CharField(max_length=200)
 
-    class Meta(object):
+    class Meta():
         ordering = ['user']

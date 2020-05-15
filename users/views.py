@@ -64,7 +64,8 @@ class CustomAuthToken(ObtainAuthToken):
                 'is_active': user.is_active,
                 'is_jury': user.is_jury,
                 'is_from_evaluation_committee': user.is_from_evaluation_committee,
-                'is_blocked': user.is_blocked
+                'is_blocked': user.is_blocked,
+                'was_created': created
             }
         })
 
@@ -115,13 +116,14 @@ def user_create(request):
                         'token': token.key,
                         'user_id': user.pk,
                         'email': user.email,
-                        'is_active': user.is_active
+                        'is_active': user.is_active,
+                        'was_created': created
                     }
                 })
-            else:
-                raise PermissionDenied('Invalid email.')
+            raise PermissionDenied('Invalid email.')
         except Exception as e:
             raise ValidationError(e)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', ])
@@ -151,12 +153,11 @@ def user_list(request):
         results = paginator.paginate_queryset(users, request)
         serializer = UserSerializer(results, many=True)
         return paginator.get_paginated_response(serializer.data)
-    else:
-        serializer = UserSerializer(users, many=True)
-        response = {
-            'data': {'users': serializer.data}
-        }
-        return Response(response, status=status.HTTP_200_OK)
+    serializer = UserSerializer(users, many=True)
+    response = {
+        'data': {'users': serializer.data}
+    }
+    return Response(response, status=status.HTTP_200_OK)
 
 
 @api_view(['GET', ])
@@ -183,8 +184,8 @@ def user_identity_validation(request):
 
         if validate_user_qr_code(code_to_validate, user):
             return Response(serializer.data, status=status.HTTP_200_OK)
-        else:
-            raise ValidationError("Invalid code.")
+        raise ValidationError("Invalid code.")
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', ])
@@ -223,6 +224,7 @@ def user_profile_update(request):
         user.save()
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST', ])
@@ -241,6 +243,7 @@ def user_logout(request):
         device.delete()
         logout(request)
         return Response(status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PATCH', ])
@@ -260,8 +263,8 @@ def user_password_update(request):
             user.save()
             serializer = UserSerializer(user)
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
-        else:
-            raise ValidationError('Password actual incorrecto.')
+        raise ValidationError('Password actual incorrecto.')
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST', ])
@@ -297,6 +300,7 @@ def user_password_recovery_request(request):
             return Response(content, status=status.HTTP_503_SERVICE_UNAVAILABLE)
 
         return Response(status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', ])
@@ -306,15 +310,14 @@ def user_password_recovery_request_confirmation(request, user_uuid):
     """
     Confirms password recovery action
     """
-    if request.method == 'GET':
-        user = get_object_or_404(User, reset_password_code=user_uuid)
-        user.set_password(user.temporary_password)
-        user.reset_password_code = None
-        user.temporary_password = None
-        user.is_password_reset_required = True
-        user.save()
-        data = "<h1>Solicitud de reestablecimiento de password confirmada.</h1>"
-        return Response(data)
+    user = get_object_or_404(User, reset_password_code=user_uuid)
+    user.set_password(user.temporary_password)
+    user.reset_password_code = None
+    user.temporary_password = None
+    user.is_password_reset_required = True
+    user.save()
+    data = "<h1>Solicitud de reestablecimiento de password confirmada.</h1>"
+    return Response(data)
 
 
 @api_view(['GET', ])

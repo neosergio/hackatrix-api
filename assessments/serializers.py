@@ -5,7 +5,7 @@ from .models import Assessment, FinalResult
 
 class AssessmentSerializer(serializers.ModelSerializer):
 
-    class Meta(object):
+    class Meta():
         model = Assessment
         fields = '__all__'
 
@@ -26,7 +26,7 @@ class ScoreBulkSerializer(serializers.Serializer):
 
 class FinalResultSerializer(serializers.ModelSerializer):
 
-    class Meta(object):
+    class Meta():
         depth = 1
         model = FinalResult
         fields = "__all__"

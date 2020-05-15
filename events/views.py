@@ -1,7 +1,9 @@
 import os
 from ast import literal_eval
-from constance import config
 from datetime import datetime, timezone
+from urllib.request import Request, urlopen
+
+from constance import config
 from django.conf import settings
 from django.core.mail import EmailMessage, send_mail
 from django.shortcuts import get_object_or_404
@@ -12,17 +14,16 @@ from rest_framework.decorators import api_view, permission_classes, renderer_cla
 from rest_framework.exceptions import ValidationError
 from rest_framework.renderers import StaticHTMLRenderer, JSONRenderer
 from rest_framework.response import Response
-from urllib.request import Request, urlopen
+
+from assessments.models import TeamAssessment
+from users.models import UserDevice, User
+from users.permissions import IsModerator, IsStaff
 from utils.pagination import StandardResultsSetPagination
 from utils.send_push_notification import send_message_android, send_message_ios
-
 from .models import Event, Registrant, Attendance, RegistrantAttendance, Team, TeamMember
 from .serializers import EventSerializer, EventFeaturedNotificationSerializer
 from .serializers import RegistrantSerializer, RegistrantIdentitySerializer, AttendaceSerializer
 from .serializers import TeamSerializer, TeamUpdateSerializer, TeamMemberSerializer
-from assessments.models import TeamAssessment
-from users.models import UserDevice, User
-from users.permissions import IsModerator, IsStaff
 
 
 @api_view(['GET', ])
@@ -63,9 +64,8 @@ def event_featured_list(request):
         results = paginator.paginate_queryset(events, request)
         serializer = EventSerializer(results, many=True)
         return paginator.get_paginated_response(serializer.data)
-    else:
-        serializer = EventSerializer(events, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    serializer = EventSerializer(events, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(['POST', ])
@@ -89,6 +89,7 @@ def event_featured_send_notification(request):
                     return ValidationError('SO sin identificar')
 
         return Response(status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST', ])
@@ -132,8 +133,7 @@ def registrant_list(request):
         results = paginator.paginate_queryset(registrants, request)
         serializer = RegistrantSerializer(results, many=True)
         return paginator.get_paginated_response(serializer.data)
-    else:
-        serializer = RegistrantSerializer(registrants, many=True)
+    serializer = RegistrantSerializer(registrants, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -161,8 +161,8 @@ def registrant_identity_validation(request):
         if request.GET.get('data') and (request.GET.get('data') == 'true'):
             response = {"data": serializer.data}
             return Response(response, status=status.HTTP_200_OK)
-        else:
-            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST', ])
@@ -220,8 +220,7 @@ def event_attendance_list(request):
         results = paginator.paginate_queryset(attendances, request)
         serializer = AttendaceSerializer(results, many=True)
         return paginator.get_paginated_response(serializer.data)
-    else:
-        serializer = AttendaceSerializer(attendances, many=True)
+    serializer = AttendaceSerializer(attendances, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -252,6 +251,7 @@ def event_attendance_register(request, attendance_id):
                     'max_capacity': attendance.max_capacity,
                     'counter': attendance_counter}
         return Response(response, status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', ])
@@ -324,8 +324,7 @@ def team_list_event_featured(request):
         paginator = StandardResultsSetPagination()
         results = paginator.paginate_queryset(teams_response, request)
         return paginator.get_paginated_response(results)
-    else:
-        return Response(teams_response, status=status.HTTP_200_OK)
+    return Response(teams_response, status=status.HTTP_200_OK)
 
 
 @api_view(['GET', ])
@@ -349,6 +348,7 @@ def team_update(request, team_id):
         team.save()
         serializer = TeamSerializer(team)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PATCH', ])
@@ -375,16 +375,15 @@ def team_data_from_surveymonkey(request):
 
         try:
             team_raw_data = item['pages'][0]['questions']
-            table = team_raw_data[0]['answers'][0]['text']
-            title = team_raw_data[1]['answers'][0]['text']
-            summary = team_raw_data[3]['answers'][0]['text']
-            description = team_raw_data[3]['answers'][0]['text']
         except Exception as e:
             print(e)
-            pass
 
         try:
-            team = Team.objects.create(title=title, event=event, summary=summary, description=description, table=table)
+            team = Team.objects.create(title=team_raw_data[1]['answers'][0]['text'],
+                                       event=event,
+                                       summary=team_raw_data[3]['answers'][0]['text'],
+                                       description=team_raw_data[3]['answers'][0]['text'],
+                                       table=team_raw_data[0]['answers'][0]['text'])
             participants = team_raw_data[2]['answers']
             for participant in participants:
                 participant_name = participant['text']
@@ -392,9 +391,7 @@ def team_data_from_surveymonkey(request):
                     TeamMember.objects.create(full_name=participant_name, team=team)
                 except Exception as e:
                     print(e)
-                    pass
         except Exception as e:
             print(e)
-            pass
 
     return Response({'message': 'successfull'}, status=status.HTTP_200_OK)

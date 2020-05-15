@@ -7,10 +7,8 @@ class IsParticipant(permissions.BasePermission):
         user = request.user
         if user.is_anonymous:
             return False
-        else:
-            participants = []
-            if len(participants) > 0:
-                participant = True
-            else:
-                participant = False
-            return request.user and participant
+        participants = []
+        participant = False
+        if len(participants) > 0:
+            participant = True
+        return request.user and participant

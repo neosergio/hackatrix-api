@@ -21,7 +21,7 @@ class ProjectAssessment(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
     value = models.PositiveIntegerField(default=0)
 
-    class Meta(object):
+    class Meta():
         unique_together = ('assessment', 'idea', 'evaluator')
 
 
@@ -33,7 +33,7 @@ class RegistrantAssessment(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
     value = models.PositiveIntegerField(default=0)
 
-    class Meta(object):
+    class Meta():
         unique_together = ('assessment', 'registrant', 'evaluator')
 
 
@@ -44,7 +44,7 @@ class RegistrantComment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
-    class Meta(object):
+    class Meta():
         unique_together = ('registrant', 'comment_by')
 
 
@@ -62,11 +62,11 @@ class TeamAssessmentResults(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs):  # pylint: disable=arguments-differ
         self.value = self.value * self.assessment.weight
         super().save(*args, **kwargs)
 
-    class Meta(object):
+    class Meta():
         ordering = ['-pk']
         unique_together = ['assessment', 'team', 'evaluator']
         verbose_name_plural = 'team assessment results'
@@ -77,10 +77,10 @@ class FinalResult(models.Model):
     score = models.PositiveIntegerField(default=0, null=True, blank=True)
     type = models.CharField(max_length=20)
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs):  # pylint: disable=arguments-differ
         if self.score is None:
             self.score = 0
         super().save(*args, **kwargs)
 
-    class Meta(object):
+    class Meta():
         ordering = ["-score"]

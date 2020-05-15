@@ -9,14 +9,14 @@ from .models import TeamMember
 
 class UserEvaluatorSerializer(serializers.ModelSerializer):
 
-    class Meta(object):
+    class Meta():
         model = User
         fields = ('id', 'email')
 
 
 class TeamSerializer(serializers.ModelSerializer):
 
-    class Meta(object):
+    class Meta():
         model = Team
         fields = "__all__"
 
@@ -24,7 +24,7 @@ class TeamSerializer(serializers.ModelSerializer):
 class EvaluatorSerializer(serializers.ModelSerializer):
     user = UserEvaluatorSerializer()
 
-    class Meta(object):
+    class Meta():
         model = Evaluator
         fields = ('user', 'is_active')
 
@@ -37,7 +37,7 @@ class EvaluationCommitteeSerializer(serializers.ModelSerializer):
     evaluator_committee = EvaluatorSerializer(many=True)
     team_committee = TeamSerializer(many=True)
 
-    class Meta(object):
+    class Meta():
         model = EvaluationCommittee
         fields = ('id', 'name', 'is_active', 'evaluator_committee', 'team_committee')
 
@@ -88,7 +88,7 @@ class TeamMemberSaveSerializer(serializers.Serializer):
 
 class TeamMemberSerializer(serializers.ModelSerializer):
 
-    class Meta(object):
+    class Meta():
         model = TeamMember
         fields = "__all__"
 

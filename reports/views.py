@@ -47,7 +47,7 @@ def attendance_list_by_id(request, attendance_id):
 
 
 @login_required()
-def get_QR_code_by_email(request):
+def get_qr_code_by_email(request):
     if request.method == 'POST':
         form = EmailForm(request.POST)
         if form.is_valid():

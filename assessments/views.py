@@ -1,18 +1,19 @@
+from itertools import chain
+
 from django.db.models import Sum, Q
 from django.shortcuts import get_object_or_404
-from itertools import chain
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
-from .models import Assessment, ProjectAssessment, RegistrantAssessment
-from .models import TeamAssessmentResults, TeamAssessment, FinalResult
-from .serializers import AssessmentSerializer, ScoreBulkSerializer, AssessmentResultSerializer
-from .serializers import FinalResultSerializer
 from events.models import Registrant, Team, Event
 from ideas.models import Idea
 from users.models import User
 from users.permissions import IsFromHR, IsProjectEvaluator, IsModerator
+from .models import Assessment, ProjectAssessment, RegistrantAssessment
+from .models import TeamAssessmentResults, TeamAssessment, FinalResult
+from .serializers import AssessmentSerializer, ScoreBulkSerializer, AssessmentResultSerializer
+from .serializers import FinalResultSerializer
 
 
 @api_view(['GET', ])
@@ -58,6 +59,7 @@ def project_assessment(request, idea_id):
             except Exception as e:
                 print(e)
         return Response(status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', ])
@@ -85,6 +87,7 @@ def registrant_assessment_list(request):
         assessments = Assessment.objects.filter(is_for_HR=True)
         serializer = AssessmentSerializer(assessments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST', ])
@@ -106,6 +109,7 @@ def registrant_assessment(request, registrant_id):
             except Exception as e:
                 print(e)
         return Response(status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', ])
@@ -144,6 +148,7 @@ def team_assessment(request, team_id):
                 print(e)
         TeamAssessment.objects.create(team=team, evaluator=evaluator, has_been_assessed=True)
         return Response(status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PATCH', ])
@@ -218,15 +223,11 @@ def team_assessment_results_calculate(request):
         evaluators = User.objects.filter(Q(is_jury=True) | Q(is_from_evaluation_committee=True))
         assessments = TeamAssessmentResults.objects.all()
 
-    assessment_criteria_count = len(assessment_criteria)
-    evaluators_count = len(evaluators)
-    assessments_count = len(assessments)
-    total_expected_assessments = teams_count * assessment_criteria_count * evaluators_count
+    total_expected_assessments = teams_count * len(assessment_criteria) * len(evaluators)
 
-    if assessments_count == total_expected_assessments:
+    is_completed = False
+    if len(assessments) == total_expected_assessments:
         is_completed = True
-    else:
-        is_completed = False
 
     response = {'is_completed': is_completed,
                 'teams': teams_response}

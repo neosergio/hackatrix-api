@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from import_export.admin import ImportExportMixin
+
 from .models import User, UserDevice
 
 
@@ -12,7 +13,7 @@ class UserChangeForm(forms.ModelForm):
                                                     "this user's password, but you can change the password using "
                                                     "<a href=\'../password/\'>this form</a>."))
 
-    class Meta(object):
+    class Meta():
         model = User
         fields = ('email',)
 
