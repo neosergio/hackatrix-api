@@ -43,15 +43,17 @@ THIRD_PARTY_APPS = [
     'rest_framework_swagger',
     'constance',
     'constance.backends.database',
+    'corsheaders',
     'mathfilters',
 ]
 
 PROJECT_APPS = [
-    'events.apps.EventsConfig',
+    # 'events.apps.EventsConfig',
     'users.apps.UsersConfig',
-    'ideas.apps.IdeasConfig',
-    'assessments.apps.AssessmentsConfig',
-    'reports.apps.ReportsConfig',
+    # 'ideas.apps.IdeasConfig',
+    # 'assessments.apps.AssessmentsConfig',
+    # 'reports.apps.ReportsConfig',
+    'online.apps.OnlineConfig'
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -59,6 +61,7 @@ INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -217,3 +220,25 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # QR code API
 QR_CODE_CREATE_API_URL = env('QR_CODE_CREATE_API_URL', '')
+
+# CORS
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = ('DELETE',
+                      'GET',
+                      'OPTIONS',
+                      'PATCH',
+                      'POST',
+                      'PUT',)
+CORS_ALLOW_HEADERS = ('accept',
+                      'accept-encoding',
+                      'accept-language',
+                      'authorization',
+                      'content-type',
+                      'dnt',
+                      'origin',
+                      'user-agent',
+                      'x-csrftoken',
+                      'x-requested-with',)
+CORS_EXPOSE_HEADERS = ('Access-Control-Allow-Origin',
+                       'Access-Control-Allow-Headers')

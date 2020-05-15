@@ -1,0 +1,25 @@
+[{
+	"model": "online.evaluator",
+	"pk": 1,
+	"fields": {
+		"user": 8,
+		"evaluation_committee": 1,
+		"is_active": true
+	}
+}, {
+	"model": "online.evaluator",
+	"pk": 2,
+	"fields": {
+		"user": 9,
+		"evaluation_committee": 2,
+		"is_active": true
+	}
+}, {
+	"model": "online.evaluator",
+	"pk": 3,
+	"fields": {
+		"user": 1,
+		"evaluation_committee": 3,
+		"is_active": true
+	}
+}]

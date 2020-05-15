@@ -2,23 +2,38 @@ from django.contrib.auth import logout
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.sites.models import Site
 from django.core.mail import EmailMessage
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
-from rest_framework import permissions, status
+from rest_framework import permissions
+from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.decorators import api_view, permission_classes, renderer_classes
-from rest_framework.exceptions import ValidationError, PermissionDenied
-from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework.decorators import permission_classes
+from rest_framework.decorators import renderer_classes
+from rest_framework.exceptions import PermissionDenied
+from rest_framework.exceptions import ValidationError
 from rest_framework.renderers import StaticHTMLRenderer
+from rest_framework.response import Response
 
-from .functions import generate_user_qr_code, validate_user_qr_code, validate_user_email
-from .models import User, UserDevice
-from .serializers import UserAuthenticationSerializer, UserSerializer, UserEmailSerializer, UserLogoutSerializer
-from .serializers import UserCreationSerializer, UserUpdatePasswordSerializer, UserUpdateProfileSerialier
+from utils.pagination import StandardResultsSetPagination
+from .functions import generate_user_qr_code
+from .functions import validate_user_email
+from .functions import validate_user_qr_code
+from .models import User
+from .models import UserDevice
+from .serializers import UserAuthenticationSerializer
+from .serializers import UserCreationSerializer
+from .serializers import UserEmailSerializer
 from .serializers import UserIdentitySerializer
+from .serializers import UserLogoutSerializer
+from .serializers import UserSerializer
+from .serializers import UserUpdatePasswordSerializer
+from .serializers import UserUpdateProfileSerialier
 
-from events.models import Registrant
+
+# from events.models import Registrant
 
 
 class CustomAuthToken(ObtainAuthToken):
@@ -28,10 +43,14 @@ class CustomAuthToken(ObtainAuthToken):
         """
         serializer = UserAuthenticationSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
+        user = serializer.validated_data.get('user')
 
-        device_code = serializer.validated_data['device_code']
-        device_os = serializer.validated_data['device_os']
+        try:
+            device_code = serializer.validated_data['device_code']
+            device_os = serializer.validated_data['device_os']
+        except Exception as e:
+            print(e)
+            device_code = device_os = "unknown"
         UserDevice.objects.get_or_create(user=user, operating_system=device_os, code=device_code)
 
         token, created = Token.objects.get_or_create(user=user)
@@ -39,33 +58,55 @@ class CustomAuthToken(ObtainAuthToken):
             "data": {
                 'token': token.key,
                 'user_id': user.pk,
-                'email': user.email
+                'email': user.email,
+                'full_name': user.full_name,
+                'is_staff': user.is_staff,
+                'is_active': user.is_active,
+                'is_jury': user.is_jury,
+                'is_from_evaluation_committee': user.is_from_evaluation_committee,
+                'is_blocked': user.is_blocked
             }
         })
 
 
 @api_view(['POST', ])
-@permission_classes((permissions.AllowAny, ))
+@permission_classes((permissions.IsAdminUser, ))
 def user_create(request):
     """
     Creates a user account using email and password
     """
     serializer = UserCreationSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        email = serializer.validated_data['email']
-        registrant_emails = Registrant.objects.filter(email=email)
-        if len(registrant_emails) > 0:
-            raise PermissionDenied('El email esta registrado como participante, no puede ser usuario')
+        email = serializer.validated_data.get('email')
+        # registrant_emails = Registrant.objects.filter(email=email)
+        # if len(registrant_emails) > 0:
+        #    raise PermissionDenied('El email esta registrado como participante, no puede ser usuario')
 
-        password = serializer.validated_data['password']
+        password = serializer.validated_data.get('password')
+        full_name = serializer.validated_data.get('full_name')
+        is_active = serializer.validated_data.get('is_active')
+        is_staff = serializer.validated_data.get('is_staff')
+        is_jury = serializer.validated_data.get('is_jury')
+        is_from_evaluation_committee = serializer.validated_data.get('is_from_evaluation_committee')
         try:
             validate_password(password)
             if validate_user_email(email):
-                user = User.objects.create_user(email=email, password=password)
+                user = User.objects.create_user(
+                    email=email,
+                    password=password,
+                    full_name=full_name,
+                    is_active=is_active,
+                    is_staff=is_staff,
+                    is_jury=is_jury,
+                    is_from_evaluation_committee=is_from_evaluation_committee)
                 user.generate_validation_code()
 
-                device_code = serializer.validated_data['device_code']
-                device_os = serializer.validated_data['device_os']
+                try:
+                    device_code = serializer.validated_data['device_code']
+                    device_os = serializer.validated_data['device_os']
+                except Exception as e:
+                    print(e)
+                    device_code = device_os = 'unknown'
                 UserDevice.objects.get_or_create(user=user, operating_system=device_os, code=device_code)
 
                 token, created = Token.objects.get_or_create(user=user)
@@ -74,7 +115,7 @@ def user_create(request):
                         'token': token.key,
                         'user_id': user.pk,
                         'email': user.email,
-                        'is_validated': user.is_validated
+                        'is_active': user.is_active
                     }
                 })
             else:
@@ -89,9 +130,33 @@ def user_list(request):
     """
     Returns user list
     """
-    users = User.objects.all()
-    serializer = UserSerializer(users, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    if request.GET.get('search'):
+        request_terms = request.GET.get('search')
+        search_terms_array = request_terms.split()
+
+        initial_term = search_terms_array[0]
+        users = User.objects.filter(
+            Q(full_name__icontains=initial_term) |
+            Q(email__icontains=initial_term))
+        if len(search_terms_array) > 1:
+            for term in range(1, len(search_terms_array)):
+                users = users.filter(
+                    Q(full_name__icontains=term) |
+                    Q(email__icontains=term))
+    else:
+        users = User.objects.all()
+
+    if request.GET.get('page') or request.GET.get('per_page'):
+        paginator = StandardResultsSetPagination()
+        results = paginator.paginate_queryset(users, request)
+        serializer = UserSerializer(results, many=True)
+        return paginator.get_paginated_response(serializer.data)
+    else:
+        serializer = UserSerializer(users, many=True)
+        response = {
+            'data': {'users': serializer.data}
+        }
+        return Response(response, status=status.HTTP_200_OK)
 
 
 @api_view(['GET', ])
@@ -112,7 +177,7 @@ def user_identity_validation(request):
     """
     serializer = UserIdentitySerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        code_to_validate = serializer.validated_data['user_qr_code']
+        code_to_validate = serializer.validated_data.get('user_qr_code')
         user = get_object_or_404(User, pk=code_to_validate[10:])
         serializer = UserSerializer(user)
 
@@ -133,7 +198,8 @@ def user_profile(request):
     else:
         user = request.user
     serializer = UserSerializer(user)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    response = {"data": serializer.data}
+    return Response(response, status=status.HTTP_200_OK)
 
 
 @api_view(['PATCH', ])
@@ -142,11 +208,18 @@ def user_profile_update(request):
     """
     Updates user profile
     """
-    user = request.user
+    if request.GET.get('id'):
+        user = get_object_or_404(User, pk=request.GET.get('id'))
+    else:
+        user = request.user
+
     serializer = UserUpdateProfileSerialier(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        full_name = serializer.validated_data['full_name']
-        user.full_name = full_name
+        user.full_name = serializer.validated_data.get('full_name')
+        user.is_active = serializer.validated_data.get('is_active')
+        user.is_staff = serializer.validated_data.get('is_staff')
+        user.is_jury = serializer.validated_data.get('is_jury')
+        user.is_from_evaluation_committee = serializer.validated_data.get('is_from_evaluation_committee')
         user.save()
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
@@ -160,8 +233,11 @@ def user_logout(request):
     """
     serializer = UserLogoutSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        code = serializer.validated_data['device_code']
-        device = UserDevice.objects.filter(code=code)
+        try:
+            code = serializer.validated_data['device_code']
+            device = UserDevice.objects.filter(code=code)
+        except Exception:
+            device = UserDevice.objects.filter(user=request.user)
         device.delete()
         logout(request)
         return Response(status=status.HTTP_202_ACCEPTED)
@@ -175,8 +251,8 @@ def user_password_update(request):
     """
     serializer = UserUpdatePasswordSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        current_password = serializer.validated_data['current_password']
-        new_password = serializer.validated_data['new_password']
+        current_password = serializer.validated_data.get('current_password')
+        new_password = serializer.validated_data.get('new_password')
         user = request.user
         if user.check_password(current_password):
             user.set_password(new_password)
@@ -196,7 +272,7 @@ def user_password_recovery_request(request):
     """
     serializer = UserEmailSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        email = serializer.validated_data['email']
+        email = serializer.validated_data.get('email')
         user = get_object_or_404(User, email=email)
         user.generate_reset_password_code()
 
@@ -253,3 +329,34 @@ def user_validation(request, user_uuid):
     user.save()
     data = "<h1>Email validado, retorne a la aplicación.</h1>"
     return Response(data)
+
+
+@api_view(['GET', ])
+@permission_classes((permissions.IsAdminUser, ))
+def users_active_summary(request):
+    """
+    Returns user active data summary: active users and total users
+    """
+    users = User.objects.all()
+    active_users = users.filter(is_active=True)
+    data = {"active_users": len(active_users),
+            "total": len(users)}
+    response = {"data": data}
+    return Response(response, status=status.HTTP_200_OK)
+
+
+@api_view(['PATCH', ])
+@permission_classes((permissions.IsAdminUser, ))
+def user_activation(request, user_id):
+    """
+    Activates / Deactivates is_active user attribute
+    """
+    user = get_object_or_404(User, pk=user_id)
+    if user.is_active:
+        user.is_active = False
+    else:
+        user.is_active = True
+    user.save()
+    serializer = UserSerializer(user)
+    response = {"data": serializer.data}
+    return Response(response, status=status.HTTP_202_ACCEPTED)
