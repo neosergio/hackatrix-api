@@ -112,6 +112,12 @@ def evaluation_save(request):
         team = get_object_or_404(Team, pk=team_id)
         scores = serializer.validated_data.get('scores')
         evaluation, created = Evaluation.objects.get_or_create(user=evaluator, team=team)
+        
+        if not created:
+            existing_scores = CategoryScore.objects.filter(evaluation=evaluation)
+            existing_scores.delete()
+            evaluation, created = Evaluation.objects.get_or_create(user=evaluator, team=team)
+        
         for score in scores:
             score_name = score.get('name')
             score_percentage = score.get('percentage')
