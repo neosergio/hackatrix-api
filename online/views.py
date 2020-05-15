@@ -372,3 +372,12 @@ def set_teams_committees(request):
                 new_team.evaluation_committee = committee
                 new_team.save()
         return Response(status=status.HTTP_202_ACCEPTED)
+
+
+@api_view(['PATCH', ])
+@permission_classes((permissions.IsAdminUser, ))
+def team_disqualify(request, team_id):
+    team = get_object_or_404(Team, pk=team_id)
+    scores = CategoryScore.objects.filter(evaluation__team=team)
+    scores.delete()
+    return Response(status=status.HTTP_202_ACCEPTED)

@@ -6,6 +6,8 @@ from rest_framework.test import APITestCase
 from users.models import User
 from .models import EvaluationCommittee
 from .models import Evaluator
+from .models import Evaluation
+from .models import CategoryScore
 from .models import Team
 from .serializers import EvaluationCommitteeCreationSerializer
 from .serializers import EvaluationCommitteeUpdateSerializer
@@ -109,6 +111,13 @@ class EvaluationCommitteeTestCase(APITestCase):
 
         self.assertTrue(serializer.is_valid())
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_team_disqualify(self):
+        team_disqualify_url = reverse("online:team_disqualify", args=[self.team.pk])
+        evaluation = Evaluation.objects.create(user=self.evaluator, team=self.team)
+        CategoryScore.objects.create(name="category name", percentage="20", evaluation=evaluation)
+        response = self.client.patch(team_disqualify_url)
+        self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
 
     def test_team_detail(self):
         team_detail_url = reverse("online:team_detail", args=[self.team.pk])
