@@ -132,6 +132,15 @@ def evaluation_save(request):
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['PATCH', ])
+@permission_classes((permissions.IsAdminUser, ))
+def evaluation_committee_close(request, committee_id):
+    committee = get_object_or_404(EvaluationCommittee, pk=committee_id)
+    committee.is_evaluation_closed = True
+    committee.save()
+    return Response(status=status.HTTP_202_ACCEPTED)
+
+
 @api_view(['POST', ])
 @permission_classes((permissions.IsAdminUser, ))
 def team_creation(request):
