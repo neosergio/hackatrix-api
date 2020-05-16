@@ -134,10 +134,12 @@ def evaluation_save(request):
 
 @api_view(['PATCH', ])
 @permission_classes((permissions.IsAdminUser, ))
-def evaluation_committee_close(request, committee_id):
-    committee = get_object_or_404(EvaluationCommittee, pk=committee_id)
-    committee.is_evaluation_closed = True
-    committee.save()
+def evaluation_committees_close(request):
+    committees = EvaluationCommittee.objects.all()
+    if len(committees) > 0:
+        for committee in committees:
+            committee.is_evaluation_closed = True
+            committee.save()
     return Response(status=status.HTTP_202_ACCEPTED)
 
 

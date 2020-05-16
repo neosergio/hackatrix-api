@@ -95,10 +95,9 @@ class EvaluationCommitteeTestCase(APITestCase):
         self.assertTrue(serializer.is_valid())
         self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
 
-    def test_evaluation_committee_close(self):
-        evaluation_committee_close_url = reverse("online:evaluation_committee_close",
-                                                 args=[self.evaluation_committee.pk])
-        response = self.client.patch(evaluation_committee_close_url)
+    def test_evaluation_committees_close(self):
+        evaluation_committees_close_url = reverse("online:evaluation_committees_close")
+        response = self.client.patch(evaluation_committees_close_url)
         self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
 
     def test_committee_list(self):

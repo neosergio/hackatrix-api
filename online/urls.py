@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import evaluated_teams
-from .views import evaluation_committee_close
+from .views import evaluation_committees_close
 from .views import evaluation_committee_creation
 from .views import evaluation_committee_update
 from .views import evaluation_committee_list
@@ -23,9 +23,7 @@ app_name = "online"
 
 urlpatterns = [
     path('evaluator/<int:user_id>/committee/', evaluator_committee, name="evaluator_committee"),
-    path('evaluation/committee/<int:committee_id>/close/',
-         evaluation_committee_close,
-         name="evaluation_committee_close"),
+    path('evaluation/committee/close/', evaluation_committees_close, name="evaluation_committees_close"),
     path('evaluation/committee/create/', evaluation_committee_creation, name="evaluation_committee_creation"),
     path('evaluation/committee/update/', evaluation_committee_update, name="evaluation_committee_update"),
     path('evaluation/committee/list/', evaluation_committee_list, name="evaluation_committee_list"),
