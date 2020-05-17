@@ -85,3 +85,14 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class TeamFinalist(models.Model):
+    team = models.OneToOneField(Team, on_delete=models.CASCADE)
+    score = models.FloatField(default=0)
+
+    class Meta():
+        ordering = ['-score']
+
+    def __str__(self):
+        return self.team.name

@@ -15,6 +15,7 @@ from .models import Evaluation
 from .models import EvaluationCommittee
 from .models import Evaluator
 from .models import Team
+from .models import TeamFinalist
 from .models import TeamMember
 from .permissions import IsEvaluator
 from .serializers import EvaluationCommitteeCreationSerializer
@@ -140,6 +141,18 @@ def evaluation_committees_close(request):
         for committee in committees:
             committee.is_evaluation_closed = True
             committee.save()
+
+    teams = Team.objects.all()
+    teams_finalist = TeamFinalist.objects.all()
+    teams_finalist.delete()
+    for team in teams:
+        total_score = 0
+        scores = CategoryScore.objects.filter(is_committee_score=True, evaluation__team=team)
+        if len(scores) > 0:
+            for score in scores:
+                total_score += (score.score * score.percentage)
+        TeamFinalist.objects.create(team=team, score=total_score)
+
     return Response(status=status.HTTP_202_ACCEPTED)
 
 
@@ -183,6 +196,20 @@ def team_detail(request, team_id):
         "jury_scores": jury_scores_serializer.data
     }
     response = {'data': data}
+    return Response(response, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', ])
+@permission_classes((permissions.IsAuthenticated, ))
+def team_finalist_list(request):
+    teams_finalist = TeamFinalist.objects.all()
+    teams_response = list()
+    if len(teams_finalist) > 0:
+        for team_finalist in teams_finalist:
+            teams_response.append({"id": team_finalist.team.pk,
+                                   "team": team_finalist.team.name,
+                                   "score": team_finalist.score})
+    response = {"data": {"teams": teams_response}}
     return Response(response, status=status.HTTP_200_OK)
 
 

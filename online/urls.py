@@ -12,6 +12,7 @@ from .views import set_users_committees
 from .views import team_creation
 from .views import team_detail
 from .views import team_disqualify
+from .views import team_finalist_list
 from .views import team_list
 from .views import team_list_to_evaluate
 from .views import team_member
@@ -35,6 +36,7 @@ urlpatterns = [
     path('team/<int:team_id>/disqualify/', team_disqualify, name="team_disqualify"),
     path('team/<int:team_id>/evaluate/', team_to_evaluate, name="team_to_evaluate"),
     path('team/create/', team_creation, name="team_creation"),
+    path('team/finalist/list/', team_finalist_list, name="team_finalist_list"),
     path('team/list/', team_list, name="team_list"),
     path('team/list/evaluate/', team_list_to_evaluate, name="team_list_to_evaluate"),
     path('team/member/', team_member, name="team_member"),

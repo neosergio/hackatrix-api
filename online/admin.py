@@ -7,6 +7,7 @@ from .models import Evaluation
 from .models import EvaluationCommittee
 from .models import Evaluator
 from .models import Team
+from .models import TeamFinalist
 from .models import TeamMember
 
 
@@ -26,6 +27,10 @@ class TeamAdmin(ImportExportMixin, admin.ModelAdmin):
                     'is_active')
 
 
+class TeamFinalistAdmin(admin.ModelAdmin):
+    list_display = ('team', 'score')
+
+
 admin.site.register(CategoryScore, CategoryScoreAdmin)
 admin.site.register(Comment)
 admin.site.register(Team, TeamAdmin)
@@ -33,3 +38,4 @@ admin.site.register(TeamMember)
 admin.site.register(EvaluationCommittee, EvaluationCommitteeAdmin)
 admin.site.register(Evaluation)
 admin.site.register(Evaluator)
+admin.site.register(TeamFinalist, TeamFinalistAdmin)

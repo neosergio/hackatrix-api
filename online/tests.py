@@ -129,6 +129,11 @@ class EvaluationCommitteeTestCase(APITestCase):
         response = self.client.get(team_detail_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_team_finalist_list(self):
+        team_finalist_list_url = reverse("online:team_finalist_list")
+        response = self.client.get(team_finalist_list_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
     def test_team_list(self):
         team_list_url = reverse("online:team_list")
         response = self.client.get(team_list_url)
