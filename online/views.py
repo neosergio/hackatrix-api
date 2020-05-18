@@ -244,16 +244,25 @@ def team_list(request):
         else:
             evaluation_committee = ""
 
-        jury_score = len(CategoryScore.objects.filter(is_committee_score=False, evaluation__team=team))
-        committee_score = len(CategoryScore.objects.filter(is_committee_score=True, evaluation__team=team))
+        jury_scores = CategoryScore.objects.filter(is_committee_score=False, evaluation__team=team)
+        total_jury_score = 0
+        if len(jury_scores) > 0:
+            for score in jury_scores:
+                total_jury_score += (score.score * score.percentage)
+
+        committee_scores = CategoryScore.objects.filter(is_committee_score=True, evaluation__team=team)
+        total_committee_score = 0
+        if len(committee_scores):
+            for score in committee_scores:
+                total_committee_score += (score.score * score.percentage)
 
         teams_response.append(
             {"id": team.pk,
              "name": team.name,
              "team_members": team_members,
              "evaluation_committee": evaluation_committee,
-             "jury_score": jury_score,
-             "committee_score": committee_score}
+             "jury_score": total_jury_score,
+             "committee_score": total_committee_score}
         )
     response = {
         "data": {"teams": teams_response}
