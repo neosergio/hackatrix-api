@@ -144,8 +144,7 @@ def evaluation_committees_close(request):
 
     teams = Team.objects.all()
     teams_finalist = TeamFinalist.objects.all()
-    if len(teams_finalist) > 0:
-        teams_finalist.delete()
+    teams_finalist.delete()
 
     for team in teams:
         total_score = 0
