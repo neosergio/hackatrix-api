@@ -285,7 +285,7 @@ def team_member(request):
                 surname = member.get('surname')
                 email = member.get('email')
                 TeamMember.objects.create(
-                    fullname=fullname
+                    fullname=fullname,
                     name=name,
                     surname=surname,
                     email=email,
