@@ -280,6 +280,7 @@ def team_member(request):
         members = serializer.validated_data.get('members')
         if len(members) > 0:
             for member in members:
+                fullname = member.get('fullname')
                 name = member.get('name')
                 surname = member.get('surname')
                 email = member.get('email')
@@ -297,14 +298,12 @@ def team_member(request):
 def team_member_creation(request):
     serializer = TeamMemberCreationSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        name = serializer.validated_data.get('name')
-        surname = serializer.validated_data.get('surname')
+        fullname = serializer.validated_data.get('fullname')
         email = serializer.validated_data.get('email')
         team = get_object_or_404(Team, pk=serializer.validated_data.get('team'))
         try:
             team_member = TeamMember.objects.create(
-                name=name,
-                surname=surname,
+                fullname=fullname,
                 email=email,
                 team=team
             )

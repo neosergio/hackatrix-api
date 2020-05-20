@@ -84,11 +84,9 @@ class TeamMemberSaveSerializer(serializers.Serializer):
     members = TeamMemberSimpleSerializer(many=True)
 
 
-class TeamMemberSerializer(serializers.ModelSerializer):
-
-    class Meta():
-        model = TeamMember
-        fields = "__all__"
+class TeamMemberSerializer(serializers.Serializer):
+    fullname = serializers.CharField()
+    email = serializers.EmailField()
 
 
 class TeamUpdateSerializer(serializers.Serializer):
