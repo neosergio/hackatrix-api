@@ -4,7 +4,6 @@ from users.models import User
 from .models import EvaluationCommittee
 from .models import Evaluator
 from .models import Team
-from .models import TeamMember
 
 
 class UserEvaluatorSerializer(serializers.ModelSerializer):
