@@ -13,4 +13,4 @@ class IsEvaluator(permissions.BasePermission):
         evaluator_flag = False
         if len(evaluator) > 0:
             evaluator_flag = True
-        return request.user and evaluator_flag
+        return request.user and (evaluator_flag or user.is_jury)
