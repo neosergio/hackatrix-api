@@ -218,8 +218,7 @@ def team_finalist_list(request):
 @permission_classes((permissions.IsAuthenticated, ))
 def team_list(request):
     if request.GET.get('search'):
-        request_terms = request.GET.get('search')
-        search_terms_array = request_terms.split()
+        search_terms_array = request.GET.get('search').split()
 
         initial_term = search_terms_array[0]
         teams = Team.objects.filter(
@@ -252,7 +251,7 @@ def team_list(request):
 
         committee_scores = CategoryScore.objects.filter(is_committee_score=True, evaluation__team=team)
         total_committee_score = 0
-        if len(committee_scores):
+        if len(committee_scores) > 0:
             for score in committee_scores:
                 total_committee_score += (score.score * score.percentage)
 
