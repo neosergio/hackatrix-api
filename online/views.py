@@ -281,13 +281,9 @@ def team_member(request):
         if len(members) > 0:
             for member in members:
                 fullname = member.get('fullname')
-                name = member.get('name')
-                surname = member.get('surname')
                 email = member.get('email')
                 TeamMember.objects.create(
                     fullname=fullname,
-                    name=name,
-                    surname=surname,
                     email=email,
                     team=team)
         return Response(status=status.HTTP_202_ACCEPTED)
