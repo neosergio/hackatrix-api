@@ -69,15 +69,13 @@ class TeamCreationSerializer(serializers.Serializer):
 
 
 class TeamMemberCreationSerializer(serializers.Serializer):
-    name = serializers.CharField()
-    surname = serializers.CharField()
+    fullname = serializers.CharField()
     email = serializers.EmailField()
     team = serializers.IntegerField()
 
 
 class TeamMemberSimpleSerializer(serializers.Serializer):
-    name = serializers.CharField()
-    surname = serializers.CharField()
+    fullname = serializers.CharField()
     email = serializers.EmailField()
 
 

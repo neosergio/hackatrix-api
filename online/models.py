@@ -37,8 +37,9 @@ class Team(models.Model):
 
 
 class TeamMember(models.Model):
-    name = models.CharField(max_length=100)
-    surname = models.CharField(max_length=100)
+    fullname = models.CharField(max_length=200, default='')
+    name = models.CharField(max_length=100, blank=True, null=True)
+    surname = models.CharField(max_length=100, blank=True, null=True)
     email = models.EmailField(unique=True)
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="member")
     is_active = models.BooleanField(default=True)

@@ -142,12 +142,10 @@ class EvaluationCommitteeTestCase(APITestCase):
     def test_team_member(self):
         team_member_url = reverse("online:team_member")
         data = {"team_id": self.team.pk,
-                "members": [{"name": "Team member name 01",
-                             "surname": "Team member surname 01",
+                "members": [{"fullname": "Team member name 01",
                              "email": "teammember01@email.com"
                              },
-                            {"name": "Team member name 01",
-                             "surname": "Team member surname 02",
+                            {"fullname": "Team member name 01",
                              "email": "teammember02@email.com"}]}
         serializer = TeamMemberSaveSerializer(data=data)
         if serializer.is_valid():
@@ -158,8 +156,7 @@ class EvaluationCommitteeTestCase(APITestCase):
 
     def test_team_member_creation(self):
         team_member_creation_url = reverse("online:team_member_creation")
-        data = {"name": "Name",
-                "surname": "Surname",
+        data = {"fullname": "Full Name",
                 "email": "name@email.com",
                 "team": self.team.pk}
         serializer = TeamMemberCreationSerializer(data=data)

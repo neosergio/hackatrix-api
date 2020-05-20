@@ -28,7 +28,7 @@ class TeamAdmin(ImportExportMixin, admin.ModelAdmin):
 
 
 class TeamMemberAdmin(ImportExportMixin, admin.ModelAdmin):
-    list_display = ('name', 'surname', 'email', 'team', 'is_active')
+    list_display = ('name', 'fullname', 'email', 'team', 'is_active')
 
 
 class TeamFinalistAdmin(admin.ModelAdmin):
