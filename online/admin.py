@@ -27,6 +27,10 @@ class TeamAdmin(ImportExportMixin, admin.ModelAdmin):
                     'is_active')
 
 
+class TeamMemberAdmin(ImportExportMixin, admin.ModelAdmin):
+    list_display = ('name', 'surname', 'email', 'team', 'is_active')
+
+
 class TeamFinalistAdmin(admin.ModelAdmin):
     list_display = ('team', 'score')
 
@@ -34,7 +38,7 @@ class TeamFinalistAdmin(admin.ModelAdmin):
 admin.site.register(CategoryScore, CategoryScoreAdmin)
 admin.site.register(Comment)
 admin.site.register(Team, TeamAdmin)
-admin.site.register(TeamMember)
+admin.site.register(TeamMember, TeamMemberAdmin)
 admin.site.register(EvaluationCommittee, EvaluationCommitteeAdmin)
 admin.site.register(Evaluation)
 admin.site.register(Evaluator)
