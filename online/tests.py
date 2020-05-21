@@ -31,11 +31,13 @@ class EvaluationCommitteeTestCase(APITestCase):
         self.team = Team.objects.create(name="Team", project="Project", project_description="Description")
         self.evaluation_committee = EvaluationCommittee.objects.create(name="Committee 01")
         self.second_evaluation_committee = EvaluationCommittee.objects.create(name="Committee 02")
-        self.evaluator = Evaluator.objects.create(user=self.user, evaluation_committee=self.evaluation_committee)
+        self.evaluator = Evaluator.objects.get(user=self.user)
+        self.evaluator.evaluation_committee = self.evaluation_committee
         self.api_authentication()
 
     def api_authentication(self):
         self.client.credentials(HTTP_AUTHORIZATION="Token {}".format(self.token.key))
+
 
     def test_evaluated_teams(self):
         evaluated_teams_url = reverse("online:evaluated_teams")

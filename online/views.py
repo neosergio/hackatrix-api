@@ -52,7 +52,10 @@ def evaluated_teams(request):
 def evaluator_committee(request, user_id):
     evaluator = get_object_or_404(Evaluator, user__pk=user_id)
     if request.method == 'GET':
-        response = {"data": {"committee_id": evaluator.evaluation_committee.pk}}
+        evaluation_committee_id = None
+        if evaluator.evaluation_committee:
+            evaluation_committee_id = evaluator.evaluation_committee.pk
+        response = {"data": {"committee_id": evaluation_committee_id}}
         return Response(response, status=status.HTTP_200_OK)
     if request.method == 'PATCH':
         serializer = EvaluatorCommitteeSerializer(data=request.data)
