@@ -150,12 +150,12 @@ def evaluation_committees_close(request):
     teams_finalist.delete()
 
     for team in teams:
-        total_score = 0
         scores = CategoryScore.objects.filter(is_committee_score=True, evaluation__team=team)
         if len(scores) > 0:
+            total_score = 0
             for score in scores:
                 total_score += (score.score * score.percentage)
-        TeamFinalist.objects.create(team=team, score=total_score)
+            TeamFinalist.objects.create(team=team, score=total_score)
 
     return Response(status=status.HTTP_202_ACCEPTED)
 
