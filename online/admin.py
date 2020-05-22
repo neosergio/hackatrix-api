@@ -19,6 +19,10 @@ class EvaluationCommitteeAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('name', 'is_evaluation_closed', 'is_active')
 
 
+class EvaluatorAdmin(ImportExportMixin, admin.ModelAdmin):
+    list_display = ('user', 'evaluation_committee')
+
+
 class TeamAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('name',
                     'project',

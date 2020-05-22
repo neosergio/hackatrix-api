@@ -38,7 +38,6 @@ class EvaluationCommitteeTestCase(APITestCase):
     def api_authentication(self):
         self.client.credentials(HTTP_AUTHORIZATION="Token {}".format(self.token.key))
 
-
     def test_evaluated_teams(self):
         evaluated_teams_url = reverse("online:evaluated_teams")
         response = self.client.get(evaluated_teams_url)
