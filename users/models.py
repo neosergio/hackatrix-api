@@ -87,6 +87,9 @@ class User(AbstractBaseUser, PermissionsMixin):
             self.is_jury = False
             self.is_from_HR = False
             self.is_from_evaluation_committee = False
+        if not self.is_jury or not self.is_from_evaluation_committee:
+            evaluators = Evaluator.objects.filter(user=self)
+            evaluators.delete()
 
     def save(self, *args, **kwargs):
         self.normalize_user_evaluator_role()
@@ -101,8 +104,8 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):  # pylint
 
 @receiver(models.signals.post_save, sender=settings.AUTH_USER_MODEL)
 def create_evaluator(sender, instance, created=False, **kwargs):  # pylint: disable=unused-argument
-    if created:
-        Evaluator.objects.create(user=instance)
+    if instance.is_jury or instance.is_from_evaluation_committee:
+        Evaluator.objects.get_or_create(user=instance)
 
 
 class UserDevice(models.Model):
