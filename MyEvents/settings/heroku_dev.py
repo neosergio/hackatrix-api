@@ -14,7 +14,7 @@ SECRET_KEY = env('SECRET_KEY', '')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = env('DEBUG_MODE', '')
 
 
 # Quick-start development settings - unsuitable for production
