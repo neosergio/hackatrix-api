@@ -11,7 +11,7 @@ SECRET_KEY = 'o^1*t5#saem!j3#ipc$zgmmwsg*#3n1ee$$h*zorr^j7@7ef!b'  # noqa
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG_MODE', False)  # noqa: F405
 
 
 # Quick-start development settings - unsuitable for production

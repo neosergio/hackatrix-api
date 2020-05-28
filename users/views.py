@@ -303,6 +303,28 @@ def user_password_recovery_request(request):
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['POST', ])
+@permission_classes((permissions.IsAdminUser, ))
+def send_user_evaluator_random_password(request):
+    users = User.objects.all()
+    for user in users:
+        if user.is_jury or user.is_from_evaluation_committee:
+            user.generate_reset_password_code()
+            user.set_password(user.temporary_password)
+            user.is_password_reset_required = True
+            user.save()
+            subject = "[GlobHack] Password aleatorio nuevo"
+            message = f'Su nuevo password temporal es: {user.temporary_password}'
+
+            try:
+                send_email = EmailMessage(subject, message, to=[user.email])
+                send_email.send()
+            except Exception as e:
+                response = {'data': e}
+                return Response(response, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+    return Response(status=status.HTTP_200_OK)
+
+
 @api_view(['GET', ])
 @permission_classes((permissions.AllowAny, ))
 @renderer_classes((StaticHTMLRenderer,))

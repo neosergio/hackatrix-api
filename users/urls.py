@@ -1,6 +1,7 @@
 from django.urls import path
 
 from .views import CustomAuthToken
+from .views import send_user_evaluator_random_password
 from .views import user_create
 from .views import user_list
 from .views import user_logout
@@ -22,6 +23,7 @@ urlpatterns = [
     path('logout/', user_logout, name='user_logout'),
     path('profile/', user_profile, name='user_profile'),
     path('profile/update/', user_profile_update, name='user_profile_update'),
+    path('send/password/evaluators/', send_user_evaluator_random_password, name='send_user_evaluator_random_password'),
     # path('reset/password/',
     #     user_password_recovery_request,
     #     name='user_password_recovery_request'),
