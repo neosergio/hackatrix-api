@@ -314,14 +314,13 @@ def send_user_evaluator_random_password(request):
             user.is_password_reset_required = True
             user.save()
             subject = "[GlobHack] Password aleatorio nuevo"
-            message = f'Su nuevo password temporal es: {user.temporary_password}'
+            message = f'Su nuevo password aleatorio es: {user.temporary_password}'
 
             try:
                 send_email = EmailMessage(subject, message, to=[user.email])
                 send_email.send()
             except Exception as e:
-                response = {'data': e}
-                return Response(response, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+                print(e)
     return Response(status=status.HTTP_200_OK)
 
 
