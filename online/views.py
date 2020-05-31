@@ -36,7 +36,7 @@ from .serializers import UserCommitteesSerializer
 @api_view(['GET', ])
 @permission_classes((permissions.IsAuthenticated, ))
 def evaluated_teams(request):
-    total_teams = Team.objects.all().count()
+    total_teams = Team.objects.filter(is_active=True).count()
     committee_evaluations_grouped_by_teams = Team.objects.filter(
         evaluation__category_score__is_committee_score=True).annotate(num_evaluations=Count('evaluation')).count()
     jury_evaluations_grouped_by_teams = Team.objects.filter(
@@ -145,7 +145,7 @@ def evaluation_committees_close(request):
             committee.is_evaluation_closed = True
             committee.save()
 
-    teams = Team.objects.all()
+    teams = Team.objects.filter(is_active=True)
     teams_finalist = TeamFinalist.objects.all()
     teams_finalist.delete()
 
@@ -235,7 +235,7 @@ def team_list(request):
                     Q(project__icontains=term) |
                     Q(project_description__icontains=term))
     else:
-        teams = Team.objects.all()
+        teams = Team.objects.filter(is_active=True)
 
     teams_response = list()
     for team in teams:
@@ -321,7 +321,7 @@ def team_list_to_evaluate(request):
     evaluator = get_object_or_404(Evaluator, user=request.user)
     committee = evaluator.evaluation_committee
     teams_response = list()
-    teams = Team.objects.filter(evaluation_committee=committee)
+    teams = Team.objects.filter(evaluation_committee=committee, is_active=True)
     for team in teams:
         team_member_list_count = len(TeamMember.objects.filter(team=team))
         scores = list()
@@ -413,7 +413,7 @@ def set_teams_committees(request):
     serializer = TeamCommitteesSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         committee = get_object_or_404(EvaluationCommittee, pk=serializer.validated_data.get('committee_id'))
-        teams = Team.objects.filter(evaluation_committee=committee)
+        teams = Team.objects.filter(evaluation_committee=committee, is_active=True)
         if len(teams) > 0:
             for team in teams:
                 team.evaluation_committee = None
