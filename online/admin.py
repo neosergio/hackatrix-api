@@ -15,6 +15,10 @@ class CategoryScoreAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('name', 'percentage', 'score', 'is_committee_score', 'evaluation')
 
 
+class EvaluationAdmin(ImportExportMixin, admin.ModelAdmin):
+    list_display = ('user', 'team')
+
+
 class EvaluationCommitteeAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('name', 'is_evaluation_closed', 'is_active')
 
@@ -35,7 +39,7 @@ class TeamMemberAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('name', 'fullname', 'email', 'team', 'is_active')
 
 
-class TeamFinalistAdmin(admin.ModelAdmin):
+class TeamFinalistAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('team', 'score')
 
 
@@ -44,6 +48,6 @@ admin.site.register(Comment)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(TeamMember, TeamMemberAdmin)
 admin.site.register(EvaluationCommittee, EvaluationCommitteeAdmin)
-admin.site.register(Evaluation)
+admin.site.register(Evaluation, EvaluationAdmin)
 admin.site.register(Evaluator, EvaluatorAdmin)
 admin.site.register(TeamFinalist, TeamFinalistAdmin)
