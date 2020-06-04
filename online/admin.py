@@ -17,6 +17,7 @@ class CategoryScoreAdmin(ImportExportMixin, admin.ModelAdmin):
 
 class EvaluationAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('user', 'team')
+    search_fields = ['user__user__email']
 
 
 class EvaluationCommitteeAdmin(ImportExportMixin, admin.ModelAdmin):
